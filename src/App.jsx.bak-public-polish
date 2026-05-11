@@ -1,117 +1,29 @@
 ﻿import React, { useMemo, useState } from "react";
 
-function Icon({ name, className = "" }) {
-  const paths = {
-    arrow: (
-      <>
-        <path d="M5 12h14" />
-        <path d="m13 6 6 6-6 6" />
-      </>
-    ),
-    check: <path d="m5 12 4 4L19 6" />,
-    bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />,
-    home: (
-      <>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10" />
-        <path d="M9 20v-6h6v6" />
-      </>
-    ),
-    shield: (
-      <>
-        <path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z" />
-        <path d="m9 12 2 2 4-5" />
-      </>
-    ),
-    comfort: (
-      <>
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-      </>
-    ),
-    light: (
-      <>
-        <path d="M9 18h6" />
-        <path d="M10 22h4" />
-        <path d="M8 14a6 6 0 1 1 8 0c-.8.7-1.2 1.5-1.2 2.5H9.2c0-1-.4-1.8-1.2-2.5Z" />
-      </>
-    ),
-    lock: (
-      <>
-        <rect x="5" y="10" width="14" height="10" rx="2" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-        <path d="M12 14v2" />
-      </>
-    ),
-    sliders: (
-      <>
-        <path d="M4 6h16" />
-        <path d="M4 12h16" />
-        <path d="M4 18h16" />
-        <circle cx="9" cy="6" r="2" />
-        <circle cx="15" cy="12" r="2" />
-        <circle cx="11" cy="18" r="2" />
-      </>
-    ),
-    sparkle: (
-      <>
-        <path d="M12 3 14 9l6 3-6 3-2 6-2-6-6-3 6-3 2-6Z" />
-        <path d="M19 3v4M17 5h4" />
-      </>
-    ),
-    clock: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
-      </>
-    ),
-    building: (
-      <>
-        <path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16" />
-        <path d="M9 21v-5h4v5" />
-        <path d="M8 7h1M12 7h1M8 11h1M12 11h1M19 21V10h-2" />
-      </>
-    ),
-    phone: (
-      <>
-        <path d="M21 15.5v3a2 2 0 0 1-2.2 2 18 18 0 0 1-8-2.8 17.5 17.5 0 0 1-5.5-5.5 18 18 0 0 1-2.8-8A2 2 0 0 1 4.5 2h3A2 2 0 0 1 9.5 3.7l.5 2.7a2 2 0 0 1-.6 1.8L8.2 9.4a14 14 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 1.8-.6l2.7.5a2 2 0 0 1 1.7 2Z" />
-      </>
-    ),
-    menu: (
-      <>
-        <path d="M4 7h16" />
-        <path d="M4 12h16" />
-        <path d="M4 17h16" />
-      </>
-    ),
-    close: (
-      <>
-        <path d="M6 6l12 12" />
-        <path d="M18 6 6 18" />
-      </>
-    ),
-    badge: <path d="m5 12 4 4L19 6" />,
-    plus: (
-      <>
-        <path d="M12 5v14" />
-        <path d="M5 12h14" />
-      </>
-    ),
-  };
+const icons = {
+  arrow: "â†’",
+  check: "âœ“",
+  bolt: "âš¡",
+  home: "âŒ‚",
+  shield: "â—ˆ",
+  comfort: "â˜¼",
+  light: "âœ¦",
+  lock: "â–£",
+  sliders: "â‰‹",
+  sparkle: "âœ§",
+  clock: "â—·",
+  building: "â–¥",
+  phone: "â˜Ž",
+  menu: "â˜°",
+  close: "Ã—",
+  plus: "+",
+};
 
+function Icon({ name, className = "" }) {
   return (
-    <svg
-      className={`inline-flex h-[1em] w-[1em] items-center justify-center ${className}`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {paths[name] || <circle cx="12" cy="12" r="4" />}
-    </svg>
+    <span className={`icon ${className}`} aria-hidden="true">
+      {icons[name] || "â€¢"}
+    </span>
   );
 }
 
@@ -125,18 +37,16 @@ const content = {
     brandSub: "Smart homes for Hong Kong apartments",
     nav: ["Plans", "Builder", "Scenario", "Process", "Contact"],
     quote: "Get a quotation",
-    heroEyebrow: "Hong Kong smart-home installation packages",
-    heroTitle: "Smart home packages for Hong Kong apartments — installed, configured, and ready to use.",
+    heroEyebrow: "Phase 1 smart home packages for domestic apartments",
+    heroTitle: "Make your home smarter without making life complicated.",
     heroText:
-      "Start with lighting scenes, comfort automation, energy-saving routines, or family safety. Choose a package, build an estimate, and request a practical consultation.",
-    heroPrimary: "Build my estimate",
-    heroSecondary: "WhatsApp us",
+      "Boson Smart helps Hong Kong apartment owners start with practical smart home systems: lighting scenes, comfort automation, energy habits, and family safety.",
+    heroPrimary: "Build your plan",
+    heroSecondary: "View 3 plans",
     trust: [
-      "Hong Kong apartment focused",
-      "Installed with electrical service support",
-      "Site assessment before final quotation",
-      "Handover and user training included",
-      "Privacy-conscious setup for cameras and sensors",
+      "Registered electrical service partner",
+      "Package-first, no confusing custom quote at the start",
+      "Designed for real HK apartment routines",
     ],
     dashboardModeLabel: "Todayâ€™s home mode",
     dashboardMode: "Evening Comfort",
@@ -150,16 +60,16 @@ const content = {
     plansEyebrow: "Three Phase 1 Options",
     plansTitle: "Start with a clear package.",
     plansText:
-      "Each package is designed to be simple to understand, practical to install, and expandable later as your home setup grows.",
+      "Each plan is designed to be easy to understand, easy to install, and easy to explain to a household before moving into larger smart-office or building consultancy services later.",
     priceNote:
       "Prices are indicative placeholders and can be adjusted after supplier, labour, and apartment-size costing.",
     selectPlan: "Select plan",
     selectedPlan: "Selected plan",
     idealFor: "Ideal for:",
     builderEyebrow: "Smart Home Package Builder",
-    builderTitle: "Build your smart home estimate.",
+    builderTitle: "Configure a starting estimate, Apple-style.",
     builderText:
-      "Choose a base package, apartment type, and optional upgrades. The estimate updates instantly, then turns into a consultation request before final quotation.",
+      "Choose a base package, apartment type, and optional upgrades. The estimate updates instantly, then turns into an enquiry instead of a risky online checkout.",
     builderStep1: "1. Choose base package",
     builderStep2: "2. Select apartment type",
     builderStep3: "3. Add optional upgrades",
@@ -171,8 +81,8 @@ const content = {
     builderEstimatedTotal: "Estimated total",
     builderDisclaimer:
       "Final quotation depends on wiring condition, switch compatibility, Wi-Fi coverage, device brand, installation difficulty, and site inspection.",
-    builderCta: "Send estimate to WhatsApp",
-    builderSecondaryCta: "Email this estimate",
+    builderCta: "Send this estimate by email",
+    builderSecondaryCta: "Ask for WhatsApp consultation",
     included: "Included in selected package",
     whyEyebrow: "Why Boson Smart",
     whyTitle: "Not just smart devices. A usable home system.",
@@ -244,11 +154,11 @@ const content = {
       ["What if my family does not want to use an app?", "The system should keep simple controls such as wall switches, scene buttons, and basic handover training so daily use stays easy."],
     ],
     contactEyebrow: "Phase 1 launch offer",
-    contactTitle: "Start with one practical smart-home setup, then upgrade when you are ready.",
+    contactTitle: "Start with one apartment. Build the smart-living brand from there.",
     contactText:
-      "Request a short consultation and receive a recommended starting package based on your apartment size, existing wiring, lifestyle habits, and installation readiness.",
-    emailCta: "Email this estimate",
-    phoneCta: "WhatsApp consultation",
+      "Request a short consultation and get a recommended package based on apartment size, existing wiring, lifestyle habits, and installation readiness.",
+    emailCta: "Email for quotation",
+    phoneCta: "Call / WhatsApp",
     footer: "Â© 2026 Boson Smart. Smart home packages for Hong Kong apartments.",
     apartments: [
       { id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 },
@@ -1056,5 +966,4 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
-
 
