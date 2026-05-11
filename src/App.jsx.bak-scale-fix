@@ -101,22 +101,20 @@ function Icon({ name, className = "" }) {
 
   return (
     <svg
-      className={`icon ${className}`}
+      className={`inline-flex h-[1em] w-[1em] items-center justify-center ${className}`}
       viewBox="0 0 24 24"
-      width="1em"
-      height="1em"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.9"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      focusable="false"
     >
       {paths[name] || <circle cx="12" cy="12" r="4" />}
     </svg>
   );
 }
+
 function formatHKD(value) {
   return `HK$${value.toLocaleString("en-HK")}`;
 }
@@ -1058,6 +1056,5 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
-
 
 
