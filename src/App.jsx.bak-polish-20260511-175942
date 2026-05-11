@@ -821,7 +821,7 @@ export default function App() {
               </div>
               <p className="fine-print">{t.builderDisclaimer}</p>
               <a className="pill cyan full" href={mailtoHref}>{t.builderCta} <Icon name="arrow" /></a>
-              <a className="pill ghost full" href={whatsappHref} target="_blank" rel="noreferrer">{t.builderSecondaryCta}</a>
+              <a className="pill ghost full" href="#contact">{t.builderSecondaryCta}</a>
             </aside>
           </div>
         </section>
@@ -1001,7 +1001,7 @@ export default function App() {
             </div>
             <div className="contact-actions">
               <a className="pill dark full" href={mailtoHref}>{t.emailCta} <Icon name="arrow" /></a>
-              <a className="pill outline-dark full" href={whatsappHref} target="_blank" rel="noreferrer"><Icon name="phone" /> {t.phoneCta}</a>
+              <a className="pill outline-dark full" href="tel:+85200000000"><Icon name="phone" /> {t.phoneCta}</a>
             </div>
           </div>
         </section>
@@ -1058,7 +1058,6 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
-
 
 
 
