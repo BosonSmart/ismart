@@ -126,7 +126,7 @@ const content = {
     brand: "Boson Smart",
     brandSub: "Smart homes for Hong Kong apartments",
     nav: ["Plans", "Builder", "Scenario", "Process", "Contact"],
-    quote: "Build estimate",
+    quote: "Get a quotation",
     heroEyebrow: "Hong Kong smart-home installation packages",
     heroTitle: "Smart home packages for Hong Kong apartments — installed, configured, and ready to use.",
     heroText:
@@ -1058,7 +1058,6 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
-
 
 
 
