@@ -3,30 +3,121 @@
 const PLACEHOLDER_EMAIL = "hello@bosonsmart.hk";
 const PLACEHOLDER_WHATSAPP = "85200000000";
 
-const iconMap = {
-  arrow: "â†’",
-  check: "âœ“",
-  bolt: "âš¡",
-  home: "âŒ‚",
-  shield: "â—ˆ",
-  comfort: "â˜¼",
-  light: "âœ¦",
-  lock: "â–£",
-  sliders: "â‰‹",
-  sparkle: "âœ§",
-  clock: "â—·",
-  building: "â–¥",
-  phone: "â˜Ž",
-  menu: "â˜°",
-  close: "Ã—",
-  plus: "+",
-};
-
 function Icon({ name, className = "" }) {
+  const paths = {
+    arrow: (
+      <>
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </>
+    ),
+    check: <path d="m5 12 4 4L19 6" />,
+    badge: <path d="m5 12 4 4L19 6" />,
+    plus: (
+      <>
+        <path d="M12 5v14" />
+        <path d="M5 12h14" />
+      </>
+    ),
+    bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />,
+    home: (
+      <>
+        <path d="m3 11 9-8 9 8" />
+        <path d="M5 10v10h14V10" />
+        <path d="M9 20v-6h6v6" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z" />
+        <path d="m9 12 2 2 4-5" />
+      </>
+    ),
+    comfort: (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+      </>
+    ),
+    light: (
+      <>
+        <path d="M9 18h6" />
+        <path d="M10 22h4" />
+        <path d="M8 14a6 6 0 1 1 8 0c-.8.7-1.2 1.5-1.2 2.5H9.2c0-1-.4-1.8-1.2-2.5Z" />
+      </>
+    ),
+    lock: (
+      <>
+        <rect x="5" y="10" width="14" height="10" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+        <path d="M12 14v2" />
+      </>
+    ),
+    sliders: (
+      <>
+        <path d="M4 6h16" />
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+        <circle cx="9" cy="6" r="2" />
+        <circle cx="15" cy="12" r="2" />
+        <circle cx="11" cy="18" r="2" />
+      </>
+    ),
+    sparkle: (
+      <>
+        <path d="M12 3 14 9l6 3-6 3-2 6-2-6-6-3 6-3 2-6Z" />
+        <path d="M19 3v4M17 5h4" />
+      </>
+    ),
+    clock: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </>
+    ),
+    building: (
+      <>
+        <path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16" />
+        <path d="M9 21v-5h4v5" />
+        <path d="M8 7h1M12 7h1M8 11h1M12 11h1M19 21V10h-2" />
+      </>
+    ),
+    phone: (
+      <>
+        <path d="M21 15.5v3a2 2 0 0 1-2.2 2 18 18 0 0 1-8-2.8 17.5 17.5 0 0 1-5.5-5.5 18 18 0 0 1-2.8-8A2 2 0 0 1 4.5 2h3A2 2 0 0 1 9.5 3.7l.5 2.7a2 2 0 0 1-.6 1.8L8.2 9.4a14 14 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 1.8-.6l2.7.5a2 2 0 0 1 1.7 2Z" />
+      </>
+    ),
+    menu: (
+      <>
+        <path d="M4 7h16" />
+        <path d="M4 12h16" />
+        <path d="M4 17h16" />
+      </>
+    ),
+    close: (
+      <>
+        <path d="M6 6l12 12" />
+        <path d="M18 6 6 18" />
+      </>
+    ),
+  };
+
   return (
-    <span className={`icon ${className}`} aria-hidden="true">
-      {iconMap[name] || "â€¢"}
-    </span>
+    <svg
+      className={`icon-svg ${className}`}
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {paths[name] || <circle cx="12" cy="12" r="4" />}
+    </svg>
   );
 }
 
@@ -1350,4 +1441,5 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
+
 
