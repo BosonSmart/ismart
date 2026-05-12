@@ -514,126 +514,39 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
 }
 
 function HomePage(props) {
-  const { t, language, go, activeMode, setActiveMode } = props;
-  const homeSteps = language === "zh"
-    ? [
-        ["01", "選擇生活情境", "先由 Morning、Night、Gathering 或 Pet Mode 代入你的日常。"],
-        ["02", "理解可能設定", "再看背後可能涉及的燈光、冷氣、窗簾、感應器及控制方式。"],
-        ["03", "到方案頁估算", "最後才進入起步方案、加選項目及初步預算。"],
-      ]
-    : [
-        ["01", "Choose a life routine", "Start with Morning, Night, Gathering, or Pet Mode instead of a device list."],
-        ["02", "Understand the setup", "See how lighting, AC, curtains, sensors, and simple controls may work together."],
-        ["03", "Move to packages", "Only then go to starting packages, add-ons, and the estimate builder."],
-      ];
-
+  const { t, go, setActiveMode } = props;
   return (
     <>
-      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[0.9fr_1fr] lg:px-6">
+      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_0.9fr] lg:px-6">
         <div className="flex flex-col justify-center">
           <Eyebrow icon="bolt">{t.home.eyebrow}</Eyebrow>
           <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">{t.home.title}</h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{t.home.body}</p>
-
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button onClick={() => go("scenarios")} className="btn-primary">{t.home.primary}<Icon name="arrow" className="h-4 w-4" /></button>
-            <button onClick={() => go("solutions")} className="btn-secondary">{t.nav.solutions}</button>
+            <button onClick={() => go("estimate")} className="btn-secondary">{t.home.secondary}</button>
           </div>
-
           <TrustStrip t={t} />
         </div>
-
-        <HomeModeShowcase t={t} activeMode={activeMode} setActiveMode={setActiveMode} go={go} />
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <div className="mb-8">
-          <SectionHeader eyebrow={t.scenariosPage.eyebrow} title={t.home.introTitle} text={t.home.introBody} noMargin />
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {homeSteps.map(([num, title, body]) => (
-            <Card key={num} className="p-5">
-              <p className="mb-4 text-sm font-bold text-cyan-300">{num}</p>
-              <h3 className="text-xl font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{body}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <SectionHeader
-            eyebrow={t.solutionsPage.eyebrow}
-            title={language === "zh" ? "由一句「我想屋企可以……」開始。" : "Start with “I want my home to…”"}
-            text={language === "zh" ? "不用先記住產品名稱。先講你想改善甚麼生活片段，再由我們把它轉成可行設定。" : "You do not need to remember product names first. Start with the life moment you want to improve, then we translate it into a practical setup."}
-          />
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            {t.solutionTasks.slice(0, 4).map(([task, setup], index) => (
-              <button key={task} onClick={() => go("solutions")} className="group rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-5 text-left transition hover:border-cyan-300/40 hover:bg-cyan-300/10">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
-                    <Icon name={["sparkle", "sun", "lock", "shield"][index % 4]} className="h-5 w-5" />
-                  </span>
-                  <Icon name="arrow" className="h-4 w-4 text-cyan-200 transition group-hover:translate-x-1" />
-                </div>
-                <h3 className="text-lg font-semibold">{task}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{setup}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <FinalCta {...props} noMoney />
-    </>
-  );
-}
-
-function HomeModeShowcase({ t, activeMode, setActiveMode, go }) {
-  const mode = t.modes.find((item) => item.id === activeMode) || t.modes[1];
-  const firstStep = mode.steps[0];
-
-  return (
-    <Card className={`overflow-hidden p-0 ${mode.visual}`}>
-      <div className="relative min-h-[34rem] overflow-hidden bg-slate-950/35 p-4 backdrop-blur-sm md:p-5">
-        <SceneBackdrop modeId={mode.id} step={firstStep} index={0} />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-
-        <div className="relative z-20 flex flex-wrap gap-1.5">
-          {t.modes.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveMode(item.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-semibold backdrop-blur-2xl transition ${
-                activeMode === item.id
-                  ? "border-cyan-100/85 bg-cyan-200/90 text-slate-950"
-                  : "border-white/15 bg-slate-950/20 text-white/80 hover:bg-slate-950/40"
-              }`}
-            >
-              <Icon name={item.icon} className="h-4 w-4" />
-              {item.label.replace(" Mode", "")}
+        <div className="grid gap-3">
+          {t.modes.map((mode) => (
+            <button key={mode.id} onClick={() => { setActiveMode(mode.id); go("scenarios"); }} className="group rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-4 text-left transition hover:border-cyan-300/40 hover:bg-cyan-300/10">
+              <div className="flex items-start justify-between gap-4">
+                <div><Icon name={mode.icon} className="mb-3 h-6 w-6 text-cyan-200" /><h3 className="text-xl font-semibold">{mode.title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{mode.headline}</p></div>
+                <Icon name="arrow" className="mt-2 h-4 w-4 text-cyan-200 transition group-hover:translate-x-1" />
+              </div>
             </button>
           ))}
         </div>
-
-        <div className="relative z-20 flex min-h-[28rem] flex-col justify-end">
-          <p className="mb-3 inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-cyan-100">{mode.label}</p>
-          <h2 className="max-w-xl text-3xl font-semibold tracking-tight md:text-5xl">{mode.headline}</h2>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-slate-200 md:text-base">{mode.subtitle}</p>
-
-          <div className="mt-5 flex flex-wrap gap-2">
-            {mode.chips.map((chip) => (
-              <span key={chip} className="rounded-full border border-white/15 bg-slate-950/35 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">{chip}</span>
-            ))}
-          </div>
-
-          <button onClick={() => go("scenarios")} className="btn-primary mt-6 w-fit">{t.home.primary}<Icon name="arrow" className="h-4 w-4" /></button>
-        </div>
-      </div>
-    </Card>
+      </section>
+      <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+        <Card className="grid gap-6 p-6 lg:grid-cols-[1fr_0.45fr] lg:items-center">
+          <SectionHeader eyebrow={t.solutionsPage.eyebrow} title={t.home.introTitle} text={t.home.introBody} noMargin />
+          <button onClick={() => go("scenarios")} className="btn-primary w-full justify-center">{t.nav.scenarios}<Icon name="arrow" className="h-4 w-4" /></button>
+        </Card>
+      </section>
+      <FinalCta {...props} noMoney />
+    </>
   );
 }
 
@@ -932,106 +845,23 @@ function SmartThingChip({ label }) {
   );
 }
 
-function SolutionsPage({ t, language, go }) {
-  const intro = language === "zh"
-    ? {
-        title: "先講需求，再決定設備。",
-        body: "智能家居不應該由產品清單開始。這一頁把常見生活需求轉成可能設定，讓客戶理解「做到這件事」背後通常要檢查甚麼。",
-        note: "這裡不顯示價錢，因為是否可行要看線路、Wi‑Fi、門窗、窗簾路軌及家庭習慣。"
-      }
-    : {
-        title: "Start with the task, then decide the device.",
-        body: "A smart home should not begin with a shopping list. This page turns common life needs into possible setups, so customers understand what usually needs checking.",
-        note: "No pricing is shown here because feasibility depends on wiring, Wi‑Fi, doors, windows, curtain rails, and household habits."
-      };
-
+function SolutionsPage({ t, go }) {
   return (
     <>
       <PageHero eyebrow={t.solutionsPage.eyebrow} title={t.solutionsPage.title} body={t.solutionsPage.body} primary={t.common.continuePackages} secondary={t.nav.scenarios} onPrimary={() => go("estimate")} onSecondary={() => go("scenarios")} />
-
-      <section className="mx-auto max-w-6xl px-4 pb-6 lg:px-6">
-        <Card className="grid gap-6 p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{t.solutionsPage.eyebrow}</p>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">{intro.title}</h2>
-            <p className="mt-4 leading-7 text-slate-300">{intro.body}</p>
-          </div>
-          <div className="rounded-[1.3rem] border border-amber-300/20 bg-amber-300/10 p-5 text-sm leading-6 text-amber-50">
-            {intro.note}
-          </div>
-        </Card>
-      </section>
-
       <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4">
           {t.solutionTasks.map(([task, setup, check, pkg], index) => (
-            <SolutionTaskCard
-              key={task}
-              t={t}
-              index={index}
-              task={task}
-              setup={setup}
-              check={check}
-              pkg={pkg}
-            />
+            <Card key={task} className="grid gap-4 p-5 lg:grid-cols-[0.8fr_1fr_1fr_0.5fr] lg:items-start">
+              <div><p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{String(index + 1).padStart(2, "0")} · {t.solutionsPage.task}</p><h3 className="text-xl font-semibold">{task}</h3></div>
+              <InfoMini label={t.solutionsPage.setup} text={setup} />
+              <InfoMini label={t.solutionsPage.check} text={check} amber />
+              <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm text-cyan-100"><span className="text-slate-300">{t.solutionsPage.package}</span><br /><strong className="text-white">{pkg}</strong></div>
+            </Card>
           ))}
         </div>
       </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <Card className="grid gap-6 p-6 lg:grid-cols-[1fr_0.35fr] lg:items-center">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-              {language === "zh" ? "看完需求，再選起步方案。" : "After the tasks, choose a starting package."}
-            </h2>
-            <p className="mt-4 max-w-2xl leading-7 text-slate-300">
-              {language === "zh" ? "當你大概知道想改善的生活片段，就可以到方案頁建立初步估算。" : "Once the life moments are clear, move to the package page to build a starting estimate."}
-            </p>
-          </div>
-          <button onClick={() => go("estimate")} className="btn-primary justify-center">{t.common.continuePackages}<Icon name="arrow" className="h-4 w-4" /></button>
-        </Card>
-      </section>
     </>
-  );
-}
-
-function SolutionTaskCard({ t, index, task, setup, check, pkg }) {
-  const icons = ["sparkle", "sun", "lock", "moon", "shield", "home", "clock", "eye"];
-  const setupParts = setup.split("+").map((item) => item.trim()).filter(Boolean);
-
-  return (
-    <Card className="overflow-hidden p-0">
-      <div className="p-5">
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
-            <Icon name={icons[index % icons.length]} className="h-5 w-5" />
-          </span>
-          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300">{String(index + 1).padStart(2, "0")}</span>
-        </div>
-
-        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{t.solutionsPage.task}</p>
-        <h3 className="text-xl font-semibold leading-snug">{task}</h3>
-
-        <div className="mt-5 grid gap-3">
-          <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">{t.solutionsPage.setup}</p>
-            <div className="flex flex-wrap gap-2">
-              {setupParts.map((item) => <SmartThingChip key={item} label={item} />)}
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-200">{t.solutionsPage.check}</p>
-            {check}
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10 bg-white/[0.025] px-5 py-4">
-        <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">{t.solutionsPage.package}</span>
-        <span className="ml-3 text-sm font-semibold text-cyan-100">{pkg}</span>
-      </div>
-    </Card>
   );
 }
 

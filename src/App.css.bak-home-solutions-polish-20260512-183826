@@ -479,9 +479,3 @@ a:focus-visible {
     filter: none;
   }
 }
-
-
-/* v2.3 home + solutions polish */
-.home-showcase-glow {
-  box-shadow: 0 24px 90px rgba(8, 145, 178, 0.12);
-}
