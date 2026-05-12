@@ -2104,3 +2104,173 @@ button:focus-visible {
   height: 1em;
 }
 /* end v1.7 icon cleanup */
+
+/* v1.8 sticky live total and desktop estimate dock */
+.desktop-estimate-dock,
+.mobile-sticky-cta {
+  display: none;
+}
+
+/* Desktop: subtle live estimate dock */
+@media (min-width: 761px) {
+  .desktop-estimate-dock {
+    position: fixed;
+    right: 1.1rem;
+    bottom: 1.1rem;
+    z-index: 58;
+    display: flex;
+    align-items: center;
+    gap: 0.72rem;
+    max-width: min(92vw, 420px);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 1.25rem;
+    background: rgba(2, 6, 23, 0.82);
+    padding: 0.62rem;
+    box-shadow: 0 22px 70px rgba(0,0,0,0.38);
+    backdrop-filter: blur(18px);
+  }
+
+  .dock-total {
+    display: grid;
+    gap: 0.08rem;
+    min-width: 155px;
+    border-radius: 0.9rem;
+    padding: 0.55rem 0.75rem;
+    background: rgba(103,232,249,0.1);
+    color: #ffffff;
+  }
+
+  .dock-total span {
+    color: #94a3b8;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .dock-total strong {
+    color: #cffafe;
+    font-size: 1.05rem;
+    line-height: 1.15;
+  }
+
+  .dock-actions {
+    display: flex;
+    gap: 0.45rem;
+  }
+
+  .dock-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2.35rem;
+    border-radius: 999px;
+    padding: 0.45rem 0.7rem;
+    font-weight: 850;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .dock-actions a:first-child {
+    border: 1px solid rgba(255,255,255,0.16);
+    color: #ffffff;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .dock-actions a:last-child {
+    background: #67e8f9;
+    color: #020617;
+  }
+}
+
+/* Mobile: live total sticky bottom bar */
+@media (max-width: 760px) {
+  .site {
+    padding-bottom: 5.4rem;
+  }
+
+  .mobile-sticky-cta {
+    position: fixed;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    z-index: 60;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(7.5rem, 0.75fr);
+    gap: 0.62rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 1.35rem;
+    background: rgba(2, 6, 23, 0.86);
+    padding: 0.58rem;
+    box-shadow: 0 22px 70px rgba(0,0,0,0.42);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-sticky-cta a {
+    min-height: 2.9rem;
+    border-radius: 999px;
+    font-weight: 850;
+  }
+
+  .sticky-total {
+    display: grid;
+    align-items: center;
+    gap: 0.05rem;
+    background: #67e8f9;
+    color: #020617;
+    padding: 0.48rem 0.9rem;
+  }
+
+  .sticky-total span {
+    font-size: 0.68rem;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.78;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sticky-total strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
+
+  .sticky-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+    padding: 0.48rem 0.72rem;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    padding-bottom: 5.9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-sticky-cta {
+    left: 0.55rem;
+    right: 0.55rem;
+    bottom: 0.55rem;
+    grid-template-columns: 1fr 6.8rem;
+  }
+
+  .sticky-total strong {
+    font-size: 0.96rem;
+  }
+
+  .sticky-action {
+    font-size: 0.82rem;
+  }
+}
+/* end v1.8 sticky live total and desktop estimate dock */

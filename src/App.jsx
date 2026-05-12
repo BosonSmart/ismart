@@ -1401,18 +1401,32 @@ export default function App() {
           </div>
         </section>
       </main>
-      <div className="mobile-sticky-cta" aria-label={language === "zh" ? "快速操作" : "Quick actions"}>
-        <a href="#builder">
-          {language === "zh" ? "建立估算" : "Build estimate"}
+      <div className="desktop-estimate-dock" aria-label={language === "zh" ? "即時估算快捷操作" : "Live estimate quick actions"}>
+        <a className="dock-total" href="#builder">
+          <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
+          <strong>{formatHKD(total, language)}</strong>
         </a>
-        <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
+        <div className="dock-actions">
+          <a href="#builder">{language === "zh" ? "調整" : "Review"}</a>
+          <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
+            <Icon name="phone" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div className="mobile-sticky-cta" aria-label={language === "zh" ? "快速估算與查詢" : "Quick estimate and enquiry"}>
+        <a className="sticky-total" href="#builder">
+          <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
+          <strong>{formatHKD(total, language)}</strong>
+        </a>
+        <a className="sticky-action" href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
           <Icon name="phone" />
-          {language === "zh" ? "WhatsApp" : "WhatsApp"}
+          <span>WhatsApp</span>
         </a>
       </div>
 
-
-      <footer>
+<footer>
         <span>{t.footer}</span>
         <nav>
           <a href="#plans">{t.nav[0]}</a>
@@ -1441,5 +1455,6 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
+
 
 
