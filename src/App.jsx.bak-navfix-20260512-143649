@@ -439,8 +439,7 @@ const data = {
 const pageList = ["home", "services", "about", "contact"];
 
 function getInitialPage() {
-  const raw = window.location.hash.replace("#", "");
-  const hash = raw.split("?")[0].split("/")[0];
+  const hash = window.location.hash.replace("#", "");
   return pageList.includes(hash) ? hash : "home";
 }
 
@@ -496,16 +495,9 @@ export default function App() {
   function go(nextPage, anchor) {
     setMenuOpen(false);
     setPage(nextPage);
-
-    const nextHash = `#${nextPage}`;
-    if (window.location.hash !== nextHash) {
-      window.history.pushState(null, "", nextHash);
-    }
-
+    window.location.hash = nextPage;
     if (anchor) {
-      setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
-    } else {
-      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 60);
+      setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
     }
   }
 
@@ -597,18 +589,14 @@ function Header({ t, page, go, language, setLanguage, menuOpen, setMenuOpen }) {
 
         <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex" aria-label="Main navigation">
           {links.map(([id, label]) => (
-            <a
+            <button
               key={id}
-              href={`#${id}`}
-              onClick={(event) => {
-                event.preventDefault();
-                go(id);
-              }}
+              onClick={() => go(id)}
               className={`transition hover:text-white ${page === id ? "text-white" : ""}`}
               aria-current={page === id ? "page" : undefined}
             >
               {label}
-            </a>
+            </button>
           ))}
         </nav>
 
@@ -628,29 +616,8 @@ function Header({ t, page, go, language, setLanguage, menuOpen, setMenuOpen }) {
 
       {menuOpen && (
         <nav id="mobile-menu" className="grid gap-3 border-t border-white/10 px-4 py-4 text-sm text-slate-300 md:hidden" aria-label="Mobile navigation">
-          {links.map(([id, label]) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className="text-left"
-              onClick={(event) => {
-                event.preventDefault();
-                go(id);
-              }}
-            >
-              {label}
-            </a>
-          ))}
-          <a
-            href="#home"
-            className="text-left font-semibold text-cyan-100"
-            onClick={(event) => {
-              event.preventDefault();
-              go("home", "builder");
-            }}
-          >
-            {t.buildEstimate}
-          </a>
+          {links.map(([id, label]) => <button key={id} className="text-left" onClick={() => go(id)}>{label}</button>)}
+          <button className="text-left font-semibold text-cyan-100" onClick={() => go("home", "builder")}>{t.buildEstimate}</button>
         </nav>
       )}
     </header>
@@ -1213,9 +1180,9 @@ function Footer({ t, go }) {
       <div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p>{t.footer}</p>
         <div className="flex gap-4">
-          <a href="#home" onClick={(event) => { event.preventDefault(); go("home"); }} className="hover:text-white">{t.nav.home}</a>
-          <a href="#services" onClick={(event) => { event.preventDefault(); go("services"); }} className="hover:text-white">{t.nav.services}</a>
-          <a href="#contact" onClick={(event) => { event.preventDefault(); go("contact"); }} className="hover:text-white">{t.nav.contact}</a>
+          <button onClick={() => go("home")} className="hover:text-white">{t.nav.home}</button>
+          <button onClick={() => go("services")} className="hover:text-white">{t.nav.services}</button>
+          <button onClick={() => go("contact")} className="hover:text-white">{t.nav.contact}</button>
         </div>
       </div>
     </footer>
