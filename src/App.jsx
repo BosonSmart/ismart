@@ -1382,6 +1382,58 @@ export default function App() {
             ))}
           </div>
         </section>
+        <section className="section estimate-brief-section">
+          <div className="estimate-brief-card">
+            <div className="estimate-brief-copy">
+              <div className="eyebrow">{language === "zh" ? "估算摘要" : "Estimate brief"}</div>
+              <h2>
+                {language === "zh"
+                  ? "你的智能家居估算已整理好，可以直接傳送查詢。"
+                  : "Your smart-home estimate is ready to send as an enquiry."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "這個摘要會幫客戶和安裝方快速對齊方案、單位類型、升級項目及初步估算，減少來回溝通。"
+                  : "This brief helps the customer and installer align quickly on package, apartment type, add-ons, and the initial estimate."}
+              </p>
+            </div>
+
+            <div className="estimate-brief-summary">
+              <div>
+                <span>{language === "zh" ? "方案" : "Package"}</span>
+                <strong>{selectedPackage.name}</strong>
+              </div>
+              <div>
+                <span>{language === "zh" ? "單位類型" : "Apartment"}</span>
+                <strong>{selectedApartment.label}</strong>
+              </div>
+              <div>
+                <span>{language === "zh" ? "升級項目" : "Add-ons"}</span>
+                <strong>
+                  {activeAddons.length
+                    ? activeAddons.map((item) => item.label).join(", ")
+                    : t.builderNoAddons}
+                </strong>
+              </div>
+              <div className="estimate-brief-total">
+                <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
+                <strong>{formatHKD(total, language)}</strong>
+              </div>
+            </div>
+
+            <div className="estimate-brief-actions">
+              <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
+                <Icon name="phone" />
+                {language === "zh" ? "WhatsApp 傳送摘要" : "WhatsApp this brief"}
+              </a>
+              <a href={mailtoHref}>
+                {language === "zh" ? "電郵傳送摘要" : "Email this brief"}
+                <Icon name="arrow" />
+              </a>
+            </div>
+          </div>
+        </section>
+
 
         <section id="contact" className="section">
           <div className="contact-card">
@@ -1455,6 +1507,7 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
+
 
 
 

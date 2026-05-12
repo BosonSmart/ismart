@@ -2274,3 +2274,133 @@ button:focus-visible {
   }
 }
 /* end v1.8 sticky live total and desktop estimate dock */
+
+/* v1.9 estimate brief section */
+.estimate-brief-section {
+  padding-top: 2.6rem;
+}
+
+.estimate-brief-card {
+  display: grid;
+  grid-template-columns: 0.85fr 1.05fr 0.72fr;
+  gap: 1rem;
+  align-items: stretch;
+  border: 1px solid rgba(103,232,249,0.2);
+  background:
+    radial-gradient(circle at top left, rgba(103,232,249,0.11), transparent 30rem),
+    radial-gradient(circle at bottom right, rgba(251,191,36,0.08), transparent 26rem),
+    rgba(255,255,255,0.04);
+  border-radius: 2rem;
+  padding: 1.25rem;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+}
+
+.estimate-brief-copy,
+.estimate-brief-summary,
+.estimate-brief-actions {
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15,23,42,0.62);
+  border-radius: 1.4rem;
+  padding: 1rem;
+}
+
+.estimate-brief-copy h2 {
+  font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+}
+
+.estimate-brief-copy p {
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+
+.estimate-brief-summary {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.estimate-brief-summary > div {
+  display: grid;
+  gap: 0.18rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.68rem;
+}
+
+.estimate-brief-summary > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.estimate-brief-summary span {
+  color: #94a3b8;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.estimate-brief-summary strong {
+  color: #ffffff;
+  font-size: 0.94rem;
+  line-height: 1.38;
+}
+
+.estimate-brief-total {
+  border-radius: 1rem;
+  background: rgba(103,232,249,0.1);
+  padding: 0.72rem;
+  margin-top: 0.1rem;
+}
+
+.estimate-brief-total strong {
+  color: #cffafe;
+  font-size: 1.35rem;
+}
+
+.estimate-brief-actions {
+  display: grid;
+  gap: 0.75rem;
+  align-content: center;
+}
+
+.estimate-brief-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  min-height: 2.8rem;
+  border-radius: 999px;
+  font-weight: 850;
+  padding: 0.7rem 0.85rem;
+  text-align: center;
+}
+
+.estimate-brief-actions a:first-child {
+  background: #67e8f9;
+  color: #020617;
+}
+
+.estimate-brief-actions a:last-child {
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #ffffff;
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 980px) {
+  .estimate-brief-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .estimate-brief-card {
+    padding: 1rem;
+  }
+
+  .estimate-brief-copy,
+  .estimate-brief-summary,
+  .estimate-brief-actions {
+    border-radius: 1.1rem;
+    padding: 0.9rem;
+  }
+}
+/* end v1.9 estimate brief section */
