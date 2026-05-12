@@ -584,13 +584,16 @@ export default function App() {
           <a className="pill white" href="#builder">{t.quote}</a>
         </div>
 
+        <div className="mobile-language-toggle">
+          <LanguageToggle language={language} setLanguage={setLanguage} />
+        </div>
+
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <Icon name={menuOpen ? "close" : "menu"} />
         </button>
 
         {menuOpen && (
           <div className="mobile-menu">
-            <LanguageToggle language={language} setLanguage={setLanguage} />
             <a href="#plans" onClick={() => setMenuOpen(false)}>{t.nav[0]}</a>
             <a href="#builder" onClick={() => setMenuOpen(false)}>{t.nav[1]}</a>
             <a href="#scope" onClick={() => setMenuOpen(false)}>{t.nav[2]}</a>
@@ -790,6 +793,66 @@ export default function App() {
           </div>
         </section>
 
+        <section className="section assumptions-section">
+          <SectionHeader
+            eyebrow={language === "zh" ? "價格假設" : "Package assumptions"}
+            title={language === "zh" ? "「起」價應該清楚，而不是令人估估下。" : "Make the “from” price clear, not vague."}
+            text={
+              language === "zh"
+                ? "以下假設令客戶更容易理解估算價錢的基礎。最終範圍仍會按現場線路、設備品牌及安裝條件確認。"
+                : "These assumptions help customers understand what the starting prices are based on. Final scope is still confirmed after checking wiring, device brand, and installation condition."
+            }
+          />
+
+          <div className="assumption-grid">
+            {(language === "zh"
+              ? [
+                  ["Starter 起價假設", "適合一個核心區域，例如玄關或客廳，包含基本智能控制、App 設定、簡單情境及使用教學。"],
+                  ["Comfort & Energy 起價假設", "適合客廳及主要生活區域，重點是燈光、冷氣習慣、時間排程及舒適節能場景。"],
+                  ["Family Safety 起價假設", "適合出入口及主要門窗監察，重點是出入安全、提醒通知、夜間安全燈光及基本交付。"],
+                ]
+              : [
+                  ["Starter starting assumption", "Suitable for one core area such as entry or living room, including basic smart control, app setup, simple scenes, and user training."],
+                  ["Comfort & Energy starting assumption", "Suitable for living and key daily areas, focusing on lighting, air-con habits, schedules, and comfort/energy scenes."],
+                  ["Family Safety starting assumption", "Suitable for entry and key door/window awareness, focusing on access safety, alerts, night lighting, and basic handover."],
+                ]).map(([title, text]) => (
+              <div className="assumption-card" key={title}>
+                <div className="assumption-icon"><Icon name="check" /></div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="sample-setup-card">
+            <div>
+              <div className="eyebrow">{language === "zh" ? "示例設定" : "Example setup"}</div>
+              <h2>
+                {language === "zh"
+                  ? "兩房單位可先由客廳、玄關及夜間安全開始。"
+                  : "A 2-bedroom flat can start with living room, entry, and night safety."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "這不是固定方案，而是讓客戶理解如何由實用範圍開始，再逐步加入睡房、窗簾、冷氣或更多感應器。"
+                  : "This is not a fixed package. It shows how a customer can start from practical areas, then add bedrooms, curtains, air-con, or more sensors later."}
+              </p>
+            </div>
+
+            <div className="sample-list">
+              {(language === "zh"
+                ? ["玄關回家燈光", "客廳晚間情境", "冷氣時間設定", "夜間低亮度路徑燈", "基本 App 及使用教學"]
+                : ["Entry welcome lighting", "Living room evening scene", "Air-con schedule setup", "Low-level night path lighting", "Basic app and user training"]
+              ).map((item) => (
+                <div className="sample-line" key={item}>
+                  <Icon name="check" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="scope" className="section split-section">
           <div className="why-card">
             <div className="eyebrow">{t.whyEyebrow}</div>
@@ -805,6 +868,88 @@ export default function App() {
             <div className="panel">
               <h3>{t.excludedTitle}</h3>
               <FeatureGrid items={t.excludedItems} warn />
+            </div>
+          </div>
+        </section>
+
+        <section className="section privacy-section">
+          <div className="privacy-card">
+            <div>
+              <div className="eyebrow">{language === "zh" ? "私隱與安全" : "Privacy and safety"}</div>
+              <h2>
+                {language === "zh"
+                  ? "門鎖、鏡頭、感應器和帳戶設定，必須交代清楚。"
+                  : "Door locks, cameras, sensors, and accounts must be handled clearly."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "智能家居不只是方便，也涉及家庭私隱及安全。網站應清楚說明設定原則，讓客戶知道系統屬於自己，而不是依賴不清楚的第三方控制。"
+                  : "Smart homes are not only about convenience. They also involve household privacy and security. The site should explain how setup is handled so customers know the system belongs to them, not an unclear third-party controller."}
+              </p>
+            </div>
+
+            <div className="privacy-points">
+              {(language === "zh"
+                ? [
+                    ["帳戶由客戶擁有", "主要 App、門鎖、鏡頭及語音助理帳戶應以客戶資料建立或交還客戶管理。"],
+                    ["鏡頭位置先確認", "如涉及鏡頭或視像門鈴，應先確認使用目的、角度及私隱考慮。"],
+                    ["保留日常手動控制", "智能設定不應令家人失去基本牆掣或簡單控制方式。"],
+                    ["交付時說明權限", "完成後應說明主要權限、通知、家庭成員加入方式及日後更改方法。"],
+                  ]
+                : [
+                    ["Customer-owned accounts", "Main app, lock, camera, and voice assistant accounts should be created for or handed over to the customer."],
+                    ["Camera placement confirmed", "For cameras or video doorbells, purpose, viewing angle, and privacy considerations should be confirmed first."],
+                    ["Manual control preserved", "Smart setup should not remove basic wall-switch or simple-control options for family members."],
+                    ["Permissions explained", "Handover should explain key permissions, alerts, family member access, and future adjustment methods."],
+                  ]).map(([title, text]) => (
+                <div className="privacy-point" key={title}>
+                  <Icon name="shield" />
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section quote-clarity-section">
+          <div className="quote-clarity-card">
+            <div>
+              <div className="eyebrow">{language === "zh" ? "報價如何確認" : "How quotation is confirmed"}</div>
+              <h2>
+                {language === "zh"
+                  ? "網上估算先幫你開始，最終報價要看現場條件。"
+                  : "The online estimate helps you start. The final quotation depends on the actual home."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "這樣可以保持價格透明，同時避免因線路、品牌、安裝難度或裝修狀態不同而低估成本。"
+                  : "This keeps the pricing transparent while avoiding underquoting caused by wiring, device brand, installation complexity, or renovation stage."}
+              </p>
+            </div>
+
+            <div className="quote-steps">
+              {(language === "zh"
+                ? [
+                    ["01", "建立估算", "先用組合器選方案、單位類型及升級項目。"],
+                    ["02", "了解現場", "確認線路、開關、Wi‑Fi、門窗及安裝可行性。"],
+                    ["03", "確認範圍", "列明包括項目、另報項目、產品選擇及安裝條件。"],
+                    ["04", "安排安裝", "完成設定、測試、交付清單及基本使用教學。"],
+                  ]
+                : [
+                    ["01", "Build estimate", "Choose package, apartment type, and optional upgrades."],
+                    ["02", "Check site condition", "Review wiring, switches, Wi‑Fi, doors/windows, and installation feasibility."],
+                    ["03", "Confirm scope", "Clarify included items, separately quoted items, device choices, and installation conditions."],
+                    ["04", "Install and hand over", "Complete setup, testing, handover checklist, and basic user training."],
+                  ]).map(([number, title, text]) => (
+                <div className="quote-step" key={title}>
+                  <span>{number}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -897,6 +1042,48 @@ export default function App() {
                 <p>{text}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="section aftercare-section">
+          <div className="aftercare-card">
+            <div>
+              <div className="eyebrow">{language === "zh" ? "交付與後續" : "Handover and aftercare"}</div>
+              <h2>
+                {language === "zh"
+                  ? "裝完不是終點，真正重要是家人會用。"
+                  : "Installation is not the end. The real goal is that the household can use it."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "智能家居最常見失敗位，是裝置很多但家人不懂用，或者日後沒有人知道怎樣調整。交付時要清楚說明操作、權限及後續升級方向。"
+                  : "A common smart-home failure is installing many devices without making them easy for the household to use or adjust later. Handover should explain controls, permissions, and future upgrade direction."}
+              </p>
+            </div>
+
+            <div className="aftercare-grid">
+              {(language === "zh"
+                ? [
+                    ["交付清單", "整理已安裝設備、控制方式、App、帳戶及主要情境。"],
+                    ["基本教學", "示範日常操作，例如回家、離家、夜間、手動控制及通知。"],
+                    ["微調期", "按實際使用感受，作基本情境或設定調整。"],
+                    ["升級路線", "由一個區域開始，日後再加房間、感應器、窗簾或能源管理。"],
+                  ]
+                : [
+                    ["Handover checklist", "Summarise installed devices, controls, apps, accounts, and key scenes."],
+                    ["Basic user training", "Demonstrate daily use: home, away, night, manual control, and alerts."],
+                    ["Adjustment period", "Fine-tune basic scenes or settings based on real usage."],
+                    ["Upgrade path", "Start from one area, then add rooms, sensors, curtains, or energy management later."],
+                  ]).map(([title, text]) => (
+                <div className="aftercare-item" key={title}>
+                  <Icon name="check" />
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
