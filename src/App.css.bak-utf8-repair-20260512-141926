@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
@@ -8,6 +8,11 @@ body {
   margin: 0;
   min-width: 320px;
   background: #020617;
+  color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 * {
@@ -17,6 +22,10 @@ body {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
 }
 
 button:focus-visible,
