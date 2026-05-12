@@ -1,1513 +1,414 @@
 ﻿import React, { useMemo, useState } from "react";
 
-const PLACEHOLDER_EMAIL = "hello@bosonsmart.hk";
-const PLACEHOLDER_WHATSAPP = "85200000000";
+const CONTACT_EMAIL = "hello@bosonsmart.hk";
+const WHATSAPP_NUMBER = "85200000000";
 
 function Icon({ name, className = "" }) {
   const paths = {
-    arrow: (
-      <>
-        <path d="M5 12h14" />
-        <path d="m13 6 6 6-6 6" />
-      </>
-    ),
+    arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
     check: <path d="m5 12 4 4L19 6" />,
-    badge: <path d="m5 12 4 4L19 6" />,
-    plus: (
-      <>
-        <path d="M12 5v14" />
-        <path d="M5 12h14" />
-      </>
-    ),
     bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />,
-    home: (
-      <>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10" />
-        <path d="M9 20v-6h6v6" />
-      </>
-    ),
-    shield: (
-      <>
-        <path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z" />
-        <path d="m9 12 2 2 4-5" />
-      </>
-    ),
-    comfort: (
-      <>
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-      </>
-    ),
-    light: (
-      <>
-        <path d="M9 18h6" />
-        <path d="M10 22h4" />
-        <path d="M8 14a6 6 0 1 1 8 0c-.8.7-1.2 1.5-1.2 2.5H9.2c0-1-.4-1.8-1.2-2.5Z" />
-      </>
-    ),
-    lock: (
-      <>
-        <rect x="5" y="10" width="14" height="10" rx="2" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-        <path d="M12 14v2" />
-      </>
-    ),
-    sliders: (
-      <>
-        <path d="M4 6h16" />
-        <path d="M4 12h16" />
-        <path d="M4 18h16" />
-        <circle cx="9" cy="6" r="2" />
-        <circle cx="15" cy="12" r="2" />
-        <circle cx="11" cy="18" r="2" />
-      </>
-    ),
-    sparkle: (
-      <>
-        <path d="M12 3 14 9l6 3-6 3-2 6-2-6-6-3 6-3 2-6Z" />
-        <path d="M19 3v4M17 5h4" />
-      </>
-    ),
-    clock: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
-      </>
-    ),
-    building: (
-      <>
-        <path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16" />
-        <path d="M9 21v-5h4v5" />
-        <path d="M8 7h1M12 7h1M8 11h1M12 11h1M19 21V10h-2" />
-      </>
-    ),
-    phone: (
-      <>
-        <path d="M21 15.5v3a2 2 0 0 1-2.2 2 18 18 0 0 1-8-2.8 17.5 17.5 0 0 1-5.5-5.5 18 18 0 0 1-2.8-8A2 2 0 0 1 4.5 2h3A2 2 0 0 1 9.5 3.7l.5 2.7a2 2 0 0 1-.6 1.8L8.2 9.4a14 14 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 1.8-.6l2.7.5a2 2 0 0 1 1.7 2Z" />
-      </>
-    ),
-    menu: (
-      <>
-        <path d="M4 7h16" />
-        <path d="M4 12h16" />
-        <path d="M4 17h16" />
-      </>
-    ),
-    close: (
-      <>
-        <path d="M6 6l12 12" />
-        <path d="M18 6 6 18" />
-      </>
-    ),
+    home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></>,
+    shield: <><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z" /><path d="m9 12 2 2 4-5" /></>,
+    sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,
+    light: <><path d="M9 18h6" /><path d="M10 22h4" /><path d="M8 14a6 6 0 1 1 8 0c-.8.7-1.2 1.5-1.2 2.5H9.2c0-1-.4-1.8-1.2-2.5Z" /></>,
+    lock: <><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14v2" /></>,
+    sliders: <><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /><circle cx="9" cy="6" r="2" /><circle cx="15" cy="12" r="2" /><circle cx="11" cy="18" r="2" /></>,
+    phone: <path d="M21 15.5v3a2 2 0 0 1-2.2 2 18 18 0 0 1-8-2.8 17.5 17.5 0 0 1-5.5-5.5 18 18 0 0 1-2.8-8A2 2 0 0 1 4.5 2h3A2 2 0 0 1 9.5 3.7l.5 2.7a2 2 0 0 1-.6 1.8L8.2 9.4a14 14 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 1.8-.6l2.7.5a2 2 0 0 1 1.7 2Z" />,
+    menu: <><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>,
+    close: <><path d="M6 6l12 12" /><path d="M18 6 6 18" /></>,
   };
-
-  return (
-    <svg
-      className={`icon-svg ${className}`}
-      viewBox="0 0 24 24"
-      width="1em"
-      height="1em"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {paths[name] || <circle cx="12" cy="12" r="4" />}
-    </svg>
-  );
+  return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{paths[name] || paths.check}</svg>;
 }
 
-function formatHKD(value) {
-  return `HK$${value.toLocaleString("en-HK")}`;
-}
+const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 
 const content = {
   en: {
-    brand: "Boson Smart",
-    brandSub: "Smart homes for Hong Kong apartments",
-    nav: ["Packages", "Builder", "Scope", "Process", "Contact"],
-    quote: "Build estimate",
-    heroEyebrow: "Hong Kong smart-home installation packages",
-    heroTitle: "Smart home packages for Hong Kong apartments â€” installed, configured, and ready to use.",
-    heroText:
-      "Start with lighting scenes, comfort automation, energy-saving routines, or family safety. Choose a package, build an estimate, and request a practical consultation.",
-    heroPrimary: "Build my estimate",
-    heroSecondary: "View packages",
-    trust: [
-      "Hong Kong apartment focused",
-      "Electrical service partner support",
-      "Site assessment before final quotation",
-      "Handover and user training included",
+    brandSub: "Smart-home installation for Hong Kong flats",
+    nav: ["Packages", "Estimate", "Example", "Process", "Contact"],
+    heroEyebrow: "Smart-home installation for Hong Kong flats",
+    heroTitle: "Smart lighting, comfort, and safety packages installed for Hong Kong homes.",
+    heroText: "Boson Smart helps flat owners start with practical smart-home upgrades: easier lighting control, air-con routines, curtain options, door/window awareness, and clear handover training.",
+    heroPrimary: "Build a quick estimate",
+    heroSecondary: "View starting packages",
+    trust: ["Installation and setup included", "Final quote after home check", "Family-friendly controls", "Handover training included"],
+    scenarioLabel: "Scenario preview",
+    suggestedPackage: "Suggested package",
+    scenarios: [
+      { id: "home", label: "Coming home", title: "Home is ready", status: "Active", package: "Comfort & Energy Package", rows: [["Before arrival", "Living room pre-cools", "18:45"], ["Door opens", "Entry lights rise softly", "18:50"], ["Dinner mode", "Warm lighting scene", "19:10"], ["Night safety", "Path lighting ready", "23:30"]] },
+      { id: "energy", label: "Energy saving", title: "Comfort without waste", status: "Scheduled", package: "Comfort & Energy Package", rows: [["Cooling", "Avoids unnecessary runtime", "Auto"], ["Lighting", "Uses motion or schedule control", "On"], ["Curtains", "Helps reduce afternoon heat", "Optional"], ["Away mode", "Turns off selected devices", "Ready"]] },
+      { id: "safety", label: "Family safety", title: "Home stays aware", status: "Monitoring", package: "Family Safety Package", rows: [["Entrance", "Door status awareness", "On"], ["Windows", "Selected sensors ready", "Ready"], ["Night path", "Soft lighting for movement", "Auto"], ["Alerts", "Phone notifications enabled", "On"]] },
     ],
-    dashboardModeLabel: "Scenario preview",
-    dashboardScenarios: [
-      {
-        id: "home",
-        label: "Coming home",
-        title: "Home is ready",
-        status: "Active",
-        package: "Comfort & Energy Package",
-        rows: [
-          ["Before arrival", "Living room pre-cools", "18:45"],
-          ["Door opens", "Entry lights rise softly", "18:50"],
-          ["Dinner mode", "Warm lighting scene", "19:10"],
-          ["Night safety", "Path lighting ready", "23:30"],
-        ],
-      },
-      {
-        id: "energy",
-        label: "Energy saving",
-        title: "Comfort without waste",
-        status: "Scheduled",
-        package: "Comfort & Energy Package",
-        rows: [
-          ["Cooling", "Avoids unnecessary runtime", "Auto"],
-          ["Lighting", "Motion-based low usage", "On"],
-          ["Curtains", "Reduces afternoon heat", "Optional"],
-          ["Away mode", "Turns off selected loads", "Ready"],
-        ],
-      },
-      {
-        id: "safety",
-        label: "Family safety",
-        title: "Home stays aware",
-        status: "Monitoring",
-        package: "Family Safety Package",
-        rows: [
-          ["Entrance", "Door status awareness", "On"],
-          ["Windows", "Selected sensors armed", "Ready"],
-          ["Night path", "Soft lighting for movement", "Auto"],
-          ["Alerts", "Phone notification enabled", "On"],
-        ],
-      },
-    ],
+    finderEyebrow: "20-second package finder",
+    finderTitle: "Not sure where to start? Answer three quick questions.",
+    finderText: "Choose your main goal, home stage, and control scope. We will suggest a starting package and send you to the estimate builder.",
+    finderLabels: ["Main goal", "Home stage", "Control scope"],
+    finderOptions: { goals: [["comfort", "Comfort"], ["energy", "Energy"], ["safety", "Safety"], ["starter", "Easy start"]], stages: [["livedIn", "Lived-in"], ["renovating", "Renovating"]], scopes: [["core", "Core areas"], ["multi", "Multi-room"]] },
+    finderResult: "Recommended starting package",
+    finderCta: "Apply to estimate builder",
     packagesEyebrow: "Three starting packages",
-    packagesTitle: "Choose by what you want your home to do.",
-    packagesText:
-      "Each package is designed to be simple to understand, practical to install, and expandable later as your home setup grows.",
-    priceNote:
-      "Online prices are planning estimates. Final quotation is confirmed after checking wiring, device compatibility, selected brands, and site condition.",
+    packagesTitle: "Choose the package that matches what you want your home to do.",
+    packagesText: "Start with a clear package, then adjust the estimate by flat size and useful add-ons. Final pricing is confirmed after checking your home.",
+    priceNote: "Online prices are starting estimates only. Final quotation depends on wiring, device choice, Wi-Fi coverage, installation difficulty, and site condition.",
     selectPlan: "Select package",
-    selectedPlan: "Selected package",
-    idealFor: "Ideal for:",
-    builderEyebrow: "Smart home estimate builder",
-    builderTitle: "Build your smart home estimate.",
-    builderText:
-      "Choose a base package, apartment type, and optional upgrades. The estimate updates instantly, then turns into a consultation request before final quotation.",
-    builderStep1: "1. Choose base package",
-    builderStep2: "2. Select apartment type",
-    builderStep3: "3. Add optional upgrades",
+    selectedPackage: "Your selected package",
+    selectedCopy: "This package gives you a practical starting point. We will confirm the exact scope after checking your flat, wiring, device choices, and installation condition.",
+    includedSelected: "Included in this starting package",
+    idealFor: "Ideal for",
+    builderEyebrow: "Estimate builder",
+    builderTitle: "Build a starting estimate before you WhatsApp us.",
+    builderText: "Choose a package, flat type, and useful add-ons. The estimate updates instantly, then you can send it for checking before any final quote.",
+    builderSteps: ["1. Choose package", "2. Select flat type", "3. Add useful upgrades"],
     builderSummary: "Live estimate",
     builderBase: "Base package",
-    builderApartment: "Apartment adjustment",
+    builderApartment: "Flat adjustment",
     builderAddons: "Selected add-ons",
     builderNoAddons: "No add-ons selected",
-    builderEstimatedTotal: "Estimated total",
-    builderDisclaimer:
-      "This is an initial estimate, not a final quotation. Final pricing depends on wiring condition, switch compatibility, Wi-Fi coverage, device brand, installation difficulty, and site inspection.",
-    builderCta: "Send estimate by WhatsApp",
+    builderTotal: "Estimated total",
+    builderDisclaimer: "This is an initial estimate, not a final quotation. Final pricing depends on wiring, switch compatibility, Wi-Fi coverage, device choice, installation difficulty, and site condition. No payment is taken online.",
+    builderCta: "WhatsApp this estimate for checking",
     builderSecondaryCta: "Email this estimate",
-    included: "Included in selected package",
-    whyEyebrow: "Why Boson Smart",
-    whyTitle: "Not just smart devices. A usable home system.",
-    whyText:
-      "A smart home should still feel simple for everyday living. We focus on practical scenes, clean handover, and upgrades that make sense for Hong Kong apartments.",
-    whyPoints: [
-      "Designed around Hong Kong apartment routines",
-      "Clear packages before detailed custom work",
-      "Site assessment before confirming final price",
-      "Simple controls for family members who do not want to use an app",
-      "Privacy-conscious setup for cameras, sensors, and accounts",
-      "Expandable from one room to more zones later",
-    ],
+    scopeEyebrow: "Scope clarity",
+    scopeTitle: "Know what is included before you commit.",
+    scopeText: "Smart-home pricing can vary because every flat is different. We separate the usual included items from work that normally needs a separate quote.",
     includedTitle: "Usually included",
     excludedTitle: "Usually quoted separately",
-    includedItems: [
-      "Initial package recommendation",
-      "Basic device setup",
-      "App and scene configuration",
-      "Post-installation testing",
-      "Basic user training",
-      "Simple handover checklist",
-    ],
-    excludedItems: [
-      "Major rewiring or new cable routing",
-      "False ceiling, carpentry, or renovation works",
-      "Premium specified-brand upgrades",
-      "Complex network improvement works",
-      "Non-standard wall or door modification",
-      "Long-term support after warranty period",
-    ],
-    scenarioEyebrow: "Scenario-first design",
-    scenarioTitle: "Sell the feeling, not only the devices.",
-    scenarioText:
-      "Smart-home value is easiest to understand through daily life: arriving home, relaxing after dinner, and moving safely at night.",
-    comparisonTitle: "Simple comparison",
-    comparisonHeaders: ["Feature", "Starter", "Comfort & Energy", "Family Safety"],
-    comparisonRows: [
-      ["Main focus", "Convenience", "Comfort + savings", "Safety + monitoring"],
-      ["Lighting scenes", "Core areas", "Multiple rooms", "Safety-focused areas"],
-      ["Air-con automation", "Optional", "Included option", "Optional"],
-      ["Sensors", "Basic option", "Comfort / motion", "Door / window / safety"],
-      ["Best stage", "Anytime", "Before / during renovation", "Anytime"],
-    ],
-    launchEyebrow: "Phase 1 launch offer",
-    launchTitle: "Accepting a limited number of early smart-home projects.",
-    launchText:
-      "We are starting with a small number of Hong Kong apartment projects to refine installation workflow, handover quality, and real household scene design.",
-    launchBadge: "Ideal early customer",
-    launchSide:
-      "You want to start with practical areas such as entry, living room, air-con, curtains, or family safety â€” not a full-home project immediately.",
-    launchPoints: [
-      ["01", "Initial package review", "Recommend a starting package based on apartment status, habits, and goals."],
-      ["02", "Scene tuning", "Basic scene and setting adjustments after installation based on real usage."],
-      ["03", "Handover checklist", "Summarise installed devices, controls, operation, and upgrade direction."],
-      ["04", "Early-user feedback", "Use real feedback to improve the next version of the service."],
-    ],
-    processEyebrow: "Installation path",
-    processTitle: "Professional enough to trust. Simple enough to start.",
-    processText:
-      "The first step should not feel like a major engineering project. Choose a package, assess the home, install cleanly, then hand over properly.",
-    process: [
-      "Choose a starting package",
-      "Short home assessment",
-      "Installation with electrical service support",
-      "Testing, handover, and user training",
-    ],
-    preVisitEyebrow: "Before we visit",
-    preVisitTitle: "Four questions to qualify the right starting package.",
-    preVisitText:
-      "These questions help make the quotation and site assessment more efficient.",
-    preVisitCards: [
-      ["Apartment status", "Already moved in, planning renovation, under renovation, or new handover?"],
-      ["Main goal", "Convenience, comfort and energy, family safety, or all three?"],
-      ["Control scope", "Entry and living room only, or bedrooms, curtains, air-con, and door lock too?"],
-      ["Existing setup", "Any smart lock, voice assistant, Wi-Fi mesh, or smart lights already installed?"],
-    ],
+    includedItems: ["Initial package recommendation", "Basic device setup", "App and scene configuration", "Post-installation testing", "Basic user training", "Simple handover checklist"],
+    excludedItems: ["Major rewiring or new cable routing", "False ceiling, carpentry, or renovation work", "Premium specified-brand upgrades", "Complex Wi-Fi or network improvement", "Non-standard wall or door modification", "Long-term support after the agreed handover period"],
+    exampleEyebrow: "Example setup",
+    exampleTitle: "A 2-bedroom flat can start with entry, living room, and night safety.",
+    exampleText: "You do not need to automate the whole home on day one. Start with the areas you use every day, then add bedrooms, curtains, air-con, or more sensors later.",
+    exampleZones: [["Entry", ["Welcome lighting", "Door status awareness"]], ["Living room", ["Evening lighting preset", "Air-con schedule option", "Curtain option"]], ["Night", ["Low-level path lighting", "Selected safety alerts"]]],
+    privacyEyebrow: "Privacy and safety",
+    privacyTitle: "Your smart-home accounts should stay under your control.",
+    privacyText: "Smart homes involve locks, cameras, sensors, apps, and family access. We make the handover clear so you know who controls what.",
+    privacyPoints: [["Customer-owned accounts", "Main app, lock, camera, and voice assistant accounts should be created for or handed over to the customer."], ["Camera placement confirmed first", "For cameras or video doorbells, purpose, angle, and privacy considerations are confirmed before installation."], ["Manual control preserved", "The home should not depend only on an app. Simple switch or button controls should remain available where practical."], ["Permissions explained during handover", "We explain alerts, app access, family member permissions, and future adjustment options."]],
+    quoteEyebrow: "How quotation is confirmed",
+    quoteTitle: "The estimate starts the conversation. The final quote follows the home check.",
+    quoteText: "This keeps pricing transparent without guessing over wiring, device choice, Wi-Fi coverage, or installation difficulty.",
+    quoteSteps: [["Build estimate", "Choose package, flat type, and optional upgrades."], ["Check home condition", "Review wiring, switches, Wi-Fi, doors/windows, and installation feasibility."], ["Confirm scope", "Clarify included items, separately quoted items, device choices, and installation conditions."], ["Install and hand over", "Complete setup, testing, handover checklist, and basic user training."]],
+    processEyebrow: "Installation process",
+    processTitle: "Simple enough to start. Careful enough to trust.",
+    processText: "Start with an estimate, check the home, confirm the scope, install cleanly, then hand over the system clearly.",
+    process: ["Choose a starting package", "Build and send your estimate", "Check home condition and confirm scope", "Install, test, and hand over"],
+    aftercareEyebrow: "Handover and aftercare",
+    aftercareTitle: "Installation is not the finish line. Your household still needs to use it easily.",
+    aftercareText: "A smart-home setup only works if the family understands the controls, accounts, alerts, and daily routines. That is why handover matters.",
+    aftercareItems: [["Handover checklist", "Installed devices, controls, apps, accounts, and key settings are summarised."], ["Basic user training", "Daily actions such as home, away, night mode, manual control, and alerts are explained."], ["Adjustment period", "Basic scene or setting adjustments can be made based on real use."], ["Upgrade path", "Start with one area, then add rooms, sensors, curtains, or energy management later."]],
     faqEyebrow: "Common questions",
-    faqTitle: "Answer the worries before the enquiry.",
-    faqs: [
-      ["Do I need to be renovating first?", "Not always. Some packages can be installed in a lived-in apartment, but larger switch, curtain, or wiring work is easier before or during renovation."],
-      ["Is the online estimate the final quotation?", "No. The estimate is for early planning only. Final pricing depends on wiring, device brand, installation difficulty, and site condition."],
-      ["Can I start small and upgrade later?", "Yes. Start with core areas, then add more rooms, sensors, scenes, and automations later."],
-      ["What if my family does not want to use an app?", "The system should keep simple controls such as wall switches, scene buttons, and basic handover training so daily use stays easy."],
-    ],
-    contactEyebrow: "Ready to plan your first setup?",
-    contactTitle: "Start with one practical smart-home setup, then upgrade when you are ready.",
-    contactText:
-      "Send your estimate by WhatsApp or email. We will recommend a starting package based on your apartment size, wiring condition, lifestyle habits, and installation readiness.",
-    whatsappCta: "WhatsApp consultation",
-    emailCta: "Email this estimate",
-    footer: "Â© 2026 Boson Smart. Smart home packages for Hong Kong apartments.",
-    apartments: [
-      { id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 },
-      { id: "twoBed", label: "2-bedroom apartment", description: "Typical Hong Kong family flat", adjustment: 1800 },
-      { id: "threeBed", label: "3-bedroom apartment", description: "More rooms and scene control points", adjustment: 3600 },
-      { id: "large", label: "Larger / duplex / custom", description: "Requires site assessment", adjustment: 6800 },
-    ],
-    addons: [
-      { id: "extraSwitch", label: "Extra smart switch point", description: "For one additional lighting/control point", price: 850 },
-      { id: "motion", label: "Extra motion sensor", description: "For hallway, bathroom, entry, or utility areas", price: 650 },
-      { id: "curtain", label: "Smart curtain motor", description: "Motorized curtain or blind control", price: 2200 },
-      { id: "doorlock", label: "Smart door lock upgrade", description: "Entry convenience and access management", price: 2800 },
-      { id: "doorbell", label: "Video doorbell / entry camera", description: "Visitor awareness and remote viewing", price: 1600 },
-      { id: "support", label: "Annual support plan", description: "Remote support and minor scene adjustment", price: 1200 },
-    ],
+    faqTitle: "Questions people ask before starting.",
+    faqs: [["Do I need to renovate first?", "Not always. Some setups can be installed in a lived-in flat. Larger switch, curtain, or wiring work is easier before or during renovation."], ["Is the online estimate the final quotation?", "No. The estimate is for early planning only. Final pricing depends on wiring, device choice, Wi-Fi coverage, installation difficulty, and site condition."], ["Can I start small and upgrade later?", "Yes. Start with one area, then add more rooms, sensors, curtains, air-con routines, or safety features later."], ["What if my family does not want to use an app?", "The system should remain easy to use. Where practical, we keep simple controls such as wall switches, buttons, or basic scene controls."], ["What if my Wi-Fi is weak?", "We check Wi-Fi coverage during assessment. If network improvement is needed, we will explain the options before final quotation."]],
+    briefEyebrow: "Estimate brief",
+    briefTitle: "Your smart-home estimate is ready to send.",
+    briefText: "Send your selected package, flat type, add-ons, and live estimate so we can check what is practical for your home.",
+    briefLabels: ["Package", "Flat type", "Selected add-ons", "Live estimate"],
+    contactEyebrow: "Ready to check your flat?",
+    contactTitle: "Send your estimate and check what is practical for your home.",
+    contactText: "Share your estimate by WhatsApp or email. We will review your flat size, wiring condition, device needs, and installation readiness before confirming the next step.",
+    whatsappCta: "WhatsApp my estimate",
+    emailCta: "Email my estimate",
+    reassurance: "No online payment. Final quote only after checking your home.",
+    stickyReview: "Review",
+    footer: "© 2026 Boson Smart. Smart-home installation packages for Hong Kong flats.",
+    apartments: [{ id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 }, { id: "twoBed", label: "2-bedroom flat", description: "Typical Hong Kong family flat", adjustment: 1800 }, { id: "threeBed", label: "3-bedroom flat", description: "More rooms and scene control points", adjustment: 3600 }, { id: "large", label: "Larger / duplex / custom", description: "Requires site assessment", adjustment: 6800 }],
+    addons: [{ id: "extraSwitch", label: "Extra smart switch point", description: "For one additional lighting/control point", price: 850 }, { id: "motion", label: "Extra motion sensor", description: "For hallway, bathroom, entry, or utility areas", price: 650 }, { id: "curtain", label: "Smart curtain motor", description: "Motorized curtain or blind control", price: 2200 }, { id: "doorlock", label: "Smart door lock upgrade", description: "Entry convenience and access management", price: 2800 }, { id: "doorbell", label: "Video doorbell / entry camera", description: "Visitor awareness and remote viewing", price: 1600 }, { id: "support", label: "Annual support plan", description: "Remote support and minor scene adjustment", price: 1200 }],
     packages: [
-      {
-        id: "starter",
-        name: "Smart Home Starter",
-        subtitle: "A clean first step into smart living.",
-        icon: "home",
-        tag: "Best for first-time users",
-        basePrice: 3800,
-        description: "Essential smart lighting and scene control for apartments that want convenience without overcomplication.",
-        includes: [
-          "Smart lighting control for selected areas",
-          "Welcome home / leaving home scenes",
-          "App and voice assistant setup",
-          "Simple wall-switch or remote control options",
-          "Basic user training after installation",
-        ],
-        idealFor: "Studio, 1-bedroom, rental flats, or first smart home trial",
-      },
-      {
-        id: "comfort",
-        name: "Comfort & Energy Package",
-        subtitle: "Comfort automation with practical energy awareness.",
-        icon: "comfort",
-        tag: "Most balanced",
-        basePrice: 8800,
-        description: "Designed for daily comfort: lighting, air-conditioning habits, curtains, schedules, and energy-saving routines.",
-        includes: [
-          "Lighting scenes for living, dining, work, and sleep",
-          "Air-con or climate control scheduling",
-          "Optional curtain / blind automation",
-          "Motion-based lighting for selected zones",
-          "Energy-saving automation logic",
-        ],
-        idealFor: "Couples, small families, homeowners, and renovation-stage flats",
-      },
-      {
-        id: "safety",
-        name: "Family Safety Package",
-        subtitle: "Security, awareness, and peace of mind at home.",
-        icon: "shield",
-        tag: "Best for families",
-        basePrice: 7800,
-        description: "Focuses on safer entry, family awareness, door/window monitoring, and useful alerts for daily household routines.",
-        includes: [
-          "Smart door lock or entry control integration",
-          "Door / window sensors for key areas",
-          "Video doorbell or entry camera option",
-          "Night safety lighting automation",
-          "Phone alerts for selected safety events",
-        ],
-        idealFor: "Families, elderly care, children at home, and security-conscious owners",
-      },
-    ],
-    scenarios: [
-      ["18:45", "Approaching home", "Your home prepares the right entry scene before you arrive.", "bolt"],
-      ["18:50", "Door opens", "Hallway and living lights rise softly without a harsh brightness jump.", "light"],
-      ["19:10", "Dinner / relax mode", "The living room turns warm while comfort settings match your evening routine.", "sliders"],
-      ["23:30", "Night safety", "Low-level pathway lighting and entry monitoring help the home wind down.", "lock"],
+      { id: "starter", name: "Smart Home Starter", subtitle: "A simple first step into smart-home living.", icon: "home", tag: "Best first step", basePrice: 3800, description: "For flats that want easier lighting control and simple home/away settings without starting a large project.", includes: ["Smart lighting control for selected areas", "Home / away preset settings", "App setup and basic configuration", "Simple switch or remote-control options", "Basic handover training"], assumption: "Starting price assumes one core area, basic compatible smart-control setup, app configuration, testing, and handover. Major rewiring and premium brand upgrades are quoted separately.", idealFor: "Studio, 1-bedroom flats, rental flats, or first smart-home trial" },
+      { id: "comfort", name: "Comfort & Energy Package", subtitle: "For a home that feels ready when you need it.", icon: "sun", tag: "Most balanced", basePrice: 8800, description: "For daily comfort: lighting presets, air-con routines, curtain options, motion-based lighting, and energy-saving settings.", includes: ["Lighting presets for living, dining, work, and sleep", "Air-con or climate schedule setup", "Curtain or blind automation option", "Motion lighting for selected zones", "Energy-saving settings for daily routines"], assumption: "Starting price assumes key daily areas such as living room and entry, with practical comfort settings. Extra rooms, curtain motors, and complex wiring are quoted separately.", idealFor: "Couples, small families, homeowners, and renovation-stage flats" },
+      { id: "safety", name: "Family Safety Package", subtitle: "Know what is happening at home when it matters.", icon: "shield", tag: "Best for families", basePrice: 7800, description: "For families who want better entry awareness, door/window status, night movement support, and selected phone alerts.", includes: ["Smart door lock or entry setup option", "Door / window sensors for key areas", "Video doorbell or entry camera option", "Night safety lighting", "Phone alerts for selected events"], assumption: "Starting price assumes selected entry and safety points. Camera placement, smart lock model, extra sensors, and door modifications are confirmed before quotation.", idealFor: "Families, elderly care, children at home, and security-conscious owners" },
     ],
   },
   zh: {
-    brand: "Boson Smart",
-    brandSub: "ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆ",
-    nav: ["æ–¹æ¡ˆ", "çµ„åˆå™¨", "ç¯„åœ", "æµç¨‹", "è¯çµ¡"],
-    quote: "å»ºç«‹ä¼°ç®—",
-    heroEyebrow: "é¦™æ¸¯ä½å®…æ™ºèƒ½å®¶å±…å®‰è£æ–¹æ¡ˆ",
-    heroTitle: "ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆ â€” å®‰è£ã€è¨­å®šã€äº¤ä»˜ä¸€æ¬¡å®Œæˆã€‚",
-    heroText:
-      "ç”±ç‡ˆå…‰æƒ…å¢ƒã€èˆ’é©è‡ªå‹•åŒ–ã€ç¯€èƒ½ç¿’æ…£æˆ–å®¶åº­å®‰å…¨é–‹å§‹ã€‚é¸æ“‡æ–¹æ¡ˆã€å»ºç«‹ä¼°ç®—ï¼Œå†å®‰æŽ’å¯¦ç”¨è«®è©¢ã€‚",
-    heroPrimary: "å»ºç«‹æˆ‘çš„ä¼°ç®—",
-    heroSecondary: "æŸ¥çœ‹æ–¹æ¡ˆ",
-    trust: [
-      "å°ˆç‚ºé¦™æ¸¯ä½å®…å ´æ™¯è¨­è¨ˆ",
-      "é…åˆé›»æ¥­å·¥ç¨‹æœå‹™æ”¯æ´å®‰è£",
-      "ç¾å ´è©•ä¼°å¾Œæ‰ç¢ºèªæœ€çµ‚å ±åƒ¹",
-      "åŒ…æ‹¬äº¤ä»˜æ¸¬è©¦åŠåŸºæœ¬ä½¿ç”¨æ•™å­¸",
-    ],
-    dashboardModeLabel: "æƒ…å¢ƒé è¦½",
-    dashboardScenarios: [
-      {
-        id: "home",
-        label: "å›žå®¶",
-        title: "å±‹ä¼å·²æº–å‚™å¥½",
-        status: "å•Ÿç”¨ä¸­",
-        package: "Comfort & Energy Package",
-        rows: [
-          ["åˆ°å®¶å‰", "å®¢å»³é å…ˆèª¿ç¯€èˆ’é©æº«åº¦", "18:45"],
-          ["é–‹é–€æ™‚", "çŽ„é—œç‡ˆå…‰æŸ”å’Œäº®èµ·", "18:50"],
-          ["æ™šé£¯æ™‚", "å®¢å»³è½‰ç‚ºæš–å…‰æƒ…å¢ƒ", "19:10"],
-          ["å¤œæ™šæ™‚", "ä½Žäº®åº¦è·¯å¾‘ç‡ˆæº–å‚™å¥½", "23:30"],
-        ],
-      },
-      {
-        id: "energy",
-        label: "ç¯€èƒ½",
-        title: "èˆ’é©ä½†ä¸æµªè²»",
-        status: "å·²æŽ’ç¨‹",
-        package: "Comfort & Energy Package",
-        rows: [
-          ["å†·æ°£", "é¿å…ä¸å¿…è¦é•·é–‹", "è‡ªå‹•"],
-          ["ç‡ˆå…‰", "æŒ‰æ´»å‹•æƒ…æ³ä½Žè€—é›»ä½¿ç”¨", "é–‹å•Ÿ"],
-          ["çª—ç°¾", "æ¸›å°‘ä¸‹åˆç†±åŠ›é€²å…¥", "å¯é¸"],
-          ["é›¢å®¶æ¨¡å¼", "é—œé–‰æŒ‡å®šç”¨é›»è¨­å‚™", "æº–å‚™å¥½"],
-        ],
-      },
-      {
-        id: "safety",
-        label: "å®‰å…¨",
-        title: "å®¶ä¸­ç‹€æ…‹æ›´æ¸…æ¥š",
-        status: "ç›£å¯Ÿä¸­",
-        package: "Family Safety Package",
-        rows: [
-          ["çŽ„é—œ", "æŽŒæ¡å¤§é–€ç‹€æ…‹", "é–‹å•Ÿ"],
-          ["é–€çª—", "æŒ‡å®šæ„Ÿæ‡‰å™¨å·²æº–å‚™", "æº–å‚™å¥½"],
-          ["å¤œé–“è·¯å¾‘", "èµ°å‹•æ™‚æŸ”å’Œäº®ç‡ˆ", "è‡ªå‹•"],
-          ["é€šçŸ¥", "æ‰‹æ©Ÿæç¤ºå·²å•Ÿç”¨", "é–‹å•Ÿ"],
-        ],
-      },
-    ],
-    packagesEyebrow: "ä¸‰å€‹èµ·æ­¥æ–¹æ¡ˆ",
-    packagesTitle: "æŒ‰ä½ æƒ³å±‹ä¼åšåˆ°ç”šéº¼ä¾†é¸æ“‡ã€‚",
-    packagesText:
-      "æ¯å€‹æ–¹æ¡ˆéƒ½ä»¥å®¹æ˜“ç†è§£ã€å¯¦éš›å¯å®‰è£ã€æ—¥å¾Œå¯å‡ç´šç‚ºåŽŸå‰‡ï¼Œå…ˆç”±æœ€æœ‰ç”¨çš„å®¶å±…ç¯„åœé–‹å§‹ã€‚",
-    priceNote:
-      "ç¶²ä¸Šé‡‘é¡åªä½œåˆæ­¥ä¼°ç®—ã€‚æœ€çµ‚å ±åƒ¹æœƒæŒ‰ç¾å ´ç·šè·¯ã€è¨­å‚™å…¼å®¹æ€§ã€æŒ‡å®šå“ç‰ŒåŠå®‰è£æ¢ä»¶ç¢ºèªã€‚",
-    selectPlan: "é¸æ“‡æ–¹æ¡ˆ",
-    selectedPlan: "å·²é¸æ–¹æ¡ˆ",
-    idealFor: "é©åˆï¼š",
-    builderEyebrow: "æ™ºèƒ½å®¶å±…ä¼°ç®—çµ„åˆå™¨",
-    builderTitle: "å»ºç«‹ä½ çš„æ™ºèƒ½å®¶å±…ä¼°ç®—ã€‚",
-    builderText:
-      "é¸æ“‡åŸºæœ¬æ–¹æ¡ˆã€å–®ä½é¡žåž‹åŠå‡ç´šé …ç›®ï¼Œä¼°ç®—é‡‘é¡æœƒå³æ™‚æ›´æ–°ã€‚ä¹‹å¾Œå…ˆå®‰æŽ’è«®è©¢åŠç¾å ´è©•ä¼°ï¼Œå†ç¢ºèªæœ€çµ‚å ±åƒ¹ã€‚",
-    builderStep1: "1. é¸æ“‡åŸºæœ¬æ–¹æ¡ˆ",
-    builderStep2: "2. é¸æ“‡å–®ä½é¡žåž‹",
-    builderStep3: "3. åŠ é¸å‡ç´šé …ç›®",
-    builderSummary: "å³æ™‚ä¼°ç®—",
-    builderBase: "åŸºæœ¬æ–¹æ¡ˆ",
-    builderApartment: "å–®ä½èª¿æ•´",
-    builderAddons: "å·²é¸å‡ç´šé …ç›®",
-    builderNoAddons: "æœªé¸æ“‡å‡ç´šé …ç›®",
-    builderEstimatedTotal: "ä¼°ç®—ç¸½é¡",
-    builderDisclaimer:
-      "æ­¤ç‚ºåˆæ­¥ä¼°ç®—ï¼Œä¸¦éžæœ€çµ‚å ±åƒ¹ã€‚æœ€çµ‚åƒ¹æ ¼éœ€è¦–ä¹Žç¾å ´ç·šè·¯ã€é–‹é—œå…¼å®¹æ€§ã€Wi-Fi è¦†è“‹ã€ç”¢å“å“ç‰Œã€å®‰è£é›£åº¦åŠç¾å ´è©•ä¼°è€Œå®šã€‚",
-    builderCta: "ç”¨ WhatsApp å‚³é€ä¼°ç®—",
-    builderSecondaryCta: "é›»éƒµå‚³é€ä¼°ç®—",
-    included: "å·²é¸æ–¹æ¡ˆåŒ…æ‹¬",
-    whyEyebrow: "ç‚ºä»€éº¼é¸ Boson Smart",
-    whyTitle: "ä¸æ˜¯åªè³£æ™ºèƒ½ç”¢å“ï¼Œè€Œæ˜¯äº¤ä»˜ä¸€å€‹å¯ä½¿ç”¨çš„å®¶å±…ç³»çµ±ã€‚",
-    whyText:
-      "æ™ºèƒ½å®¶å±…ä¸æ‡‰ä»¤æ—¥å¸¸ç”Ÿæ´»è®Šå¾—æ›´éº»ç…©ã€‚æˆ‘å€‘é‡è¦–å¯¦ç”¨å ´æ™¯ã€æ¸…æ™°äº¤ä»˜ï¼Œä»¥åŠé©åˆé¦™æ¸¯ä½å®…çš„é€æ­¥å‡ç´šæ–¹å¼ã€‚",
-    whyPoints: [
-      "æŒ‰é¦™æ¸¯ä½å®…ç”Ÿæ´»ç¿’æ…£è¨­è¨ˆ",
-      "å…ˆç”¨æ¸…æ™°å¥—é¤ï¼Œå†è™•ç†ç´°ç¯€å®¢è£½",
-      "ç¾å ´è©•ä¼°å¾Œæ‰ç¢ºèªæœ€çµ‚åƒ¹æ ¼",
-      "ä¿ç•™ç°¡å–®æŽ§åˆ¶æ–¹å¼ï¼Œå®¶äººä¸ä¸€å®šè¦ç”¨ App",
-      "é¡é ­ã€æ„Ÿæ‡‰å™¨åŠå¸³æˆ¶è¨­å®šæ³¨é‡ç§éš±",
-      "å¯ç”±ä¸€å€‹å€åŸŸé–‹å§‹ï¼Œä¹‹å¾Œå†æ“´å±•æ›´å¤šæˆ¿é–“",
-    ],
-    includedTitle: "ä¸€èˆ¬åŒ…æ‹¬",
-    excludedTitle: "é€šå¸¸éœ€å¦è¡Œå ±åƒ¹",
-    includedItems: [
-      "åˆæ­¥æ–¹æ¡ˆå»ºè­°",
-      "åŸºæœ¬è¨­å‚™å®‰è£åŠè¨­å®š",
-      "App / æƒ…å¢ƒæ¨¡å¼é…ç½®",
-      "å®‰è£å¾Œæ¸¬è©¦",
-      "åŸºæœ¬ä½¿ç”¨æ•™å­¸",
-      "ç°¡å–®äº¤ä»˜æ¸…å–®",
-    ],
-    excludedItems: [
-      "å¤§åž‹æ”¹ç·šæˆ–é‡æ–°æ‹‰ç·š",
-      "å‡å¤©èŠ±ã€æœ¨å·¥æˆ–è£ä¿®å·¥ç¨‹",
-      "é«˜ç«¯æŒ‡å®šå“ç‰Œè¨­å‚™å·®åƒ¹",
-      "è¤‡é›œç¶²çµ¡æ”¹å–„å·¥ç¨‹",
-      "éžå¸¸è¦ç‰†èº«æˆ–é–€èº«æ”¹è£",
-      "ä¿é¤ŠæœŸå¾Œçš„é•·æœŸæ”¯æ´",
-    ],
-    scenarioEyebrow: "å…ˆè¬›ç”Ÿæ´»æƒ…å¢ƒ",
-    scenarioTitle: "è³£çš„ä¸æ˜¯å™¨æï¼Œè€Œæ˜¯ç”Ÿæ´»æ„Ÿå—ã€‚",
-    scenarioText:
-      "æ™ºèƒ½å®¶å±…æœ€å®¹æ˜“ç†è§£çš„åƒ¹å€¼ï¼Œæ˜¯ä½ å›žå®¶ã€æ™šé£¯å¾Œæ”¾é¬†ï¼Œä»¥åŠå¤œæ™šèµ°å‹•æ™‚çš„æ—¥å¸¸æ„Ÿå—ã€‚",
-    comparisonTitle: "ç°¡å–®æ¯”è¼ƒ",
-    comparisonHeaders: ["é …ç›®", "Starter", "Comfort & Energy", "Family Safety"],
-    comparisonRows: [
-      ["ä¸»è¦é‡é»ž", "æ–¹ä¾¿å…¥é–€", "èˆ’é© + ç¯€èƒ½", "å®‰å…¨ + ç›£å¯Ÿ"],
-      ["ç‡ˆå…‰æƒ…å¢ƒ", "æ ¸å¿ƒå€åŸŸ", "å¤šå€‹æˆ¿é–“", "å®‰å…¨ç›¸é—œå€åŸŸ"],
-      ["å†·æ°£è‡ªå‹•åŒ–", "å¯é¸é…", "å¯åŒ…å«", "å¯é¸é…"],
-      ["æ„Ÿæ‡‰å™¨", "åŸºæœ¬é¸é…", "èˆ’é© / äººé«”æ„Ÿæ‡‰", "é–€çª— / å®‰å…¨æ„Ÿæ‡‰"],
-      ["æœ€é©åˆéšŽæ®µ", "ä»»ä½•æ™‚é–“", "è£ä¿®å‰ / è£ä¿®ä¸­", "ä»»ä½•æ™‚é–“"],
-    ],
-    launchEyebrow: "ç¬¬ä¸€éšŽæ®µå•Ÿå‹•åé¡",
-    launchTitle: "ç¾æ­£æŽ¥å—å°‘é‡æ—©æœŸé¦™æ¸¯ä½å®…æ™ºèƒ½å®¶å±…é …ç›®ã€‚",
-    launchText:
-      "æˆ‘å€‘æœƒä»¥å°‘é‡é …ç›®é–‹å§‹ï¼Œé›†ä¸­æ‰“ç£¨å®‰è£æµç¨‹ã€äº¤ä»˜é«”é©—åŠçœŸå¯¦å®¶åº­ä½¿ç”¨æƒ…å¢ƒã€‚",
-    launchBadge: "é©åˆé¦–æ‰¹å®¢æˆ¶",
-    launchSide:
-      "ä½ æƒ³å…ˆç”±çŽ„é—œã€å®¢å»³ã€å†·æ°£ã€çª—ç°¾æˆ–å®¶åº­å®‰å…¨ç­‰å¯¦ç”¨ç¯„åœé–‹å§‹ï¼Œè€Œä¸æ˜¯ä¸€æ¬¡éŽåšå…¨å±‹å¤§åž‹å·¥ç¨‹ã€‚",
-    launchPoints: [
-      ["01", "åˆæ­¥æ–¹æ¡ˆæª¢è¦–", "æ ¹æ“šå–®ä½ç‹€æ…‹ã€ç”Ÿæ´»ç¿’æ…£åŠä¸»è¦ç›®æ¨™ï¼Œå»ºè­°ç”±å“ªå€‹æ–¹æ¡ˆé–‹å§‹ã€‚"],
-      ["02", "å®‰è£å¾Œæƒ…å¢ƒå¾®èª¿", "å®Œæˆå®‰è£å¾Œï¼Œå¯æŒ‰å¯¦éš›ä½¿ç”¨æ„Ÿå—ä½œåŸºæœ¬å ´æ™¯åŠè¨­å®šèª¿æ•´ã€‚"],
-      ["03", "äº¤ä»˜æ¸…å–®", "æ•´ç†å·²å®‰è£è¨­å‚™ã€æŽ§åˆ¶æ–¹å¼ã€åŸºæœ¬æ“ä½œåŠå¾ŒçºŒå‡ç´šæ–¹å‘ã€‚"],
-      ["04", "æ—©æœŸç”¨æˆ¶å›žé¥‹", "æ”¶é›†çœŸå¯¦ä½¿ç”¨æ„è¦‹ï¼Œç”¨æ–¼æ”¹å–„ä¸‹ä¸€ç‰ˆæœ¬æœå‹™æµç¨‹ã€‚"],
-    ],
-    processEyebrow: "å®‰è£æµç¨‹",
-    processTitle: "è¶³å¤ å°ˆæ¥­ä»¤äººä¿¡ä»»ï¼Œäº¦è¶³å¤ ç°¡å–®å¯ä»¥ç«‹å³é–‹å§‹ã€‚",
-    processText:
-      "ç¬¬ä¸€æ­¥ä¸æ‡‰åƒå¤§åž‹å·¥ç¨‹é¡§å•ã€‚é¸æ–¹æ¡ˆã€äº†è§£å–®ä½ã€ä¹¾æ·¨å®‰è£ï¼Œç„¶å¾Œæ¸¬è©¦åŠæ•™è­˜ä½¿ç”¨ã€‚",
-    process: [
-      "é¸æ“‡ä¸€å€‹èµ·æ­¥æ–¹æ¡ˆ",
-      "ç°¡çŸ­å®¶å±…è©•ä¼°",
-      "é…åˆé›»æ¥­å·¥ç¨‹æœå‹™æ”¯æ´å®‰è£",
-      "äº¤ä»˜æ¸¬è©¦åŠä½¿ç”¨æ•™å­¸",
-    ],
-    preVisitEyebrow: "æŸ¥è©¢å‰æº–å‚™",
-    preVisitTitle: "ç”¨å››æ¢å•é¡Œï¼Œå¿«é€Ÿåˆ¤æ–·æœ€åˆé©æ–¹æ¡ˆã€‚",
-    preVisitText:
-      "é€™äº›è³‡æ–™å¯ä»¥ä»¤å ±åƒ¹åŠç¾å ´è©•ä¼°æ›´æœ‰æ•ˆçŽ‡ã€‚",
-    preVisitCards: [
-      ["å–®ä½ç‹€æ…‹", "å·²å…¥ä½ã€æº–å‚™è£ä¿®ã€æ­£åœ¨è£ä¿®ï¼Œé‚„æ˜¯æ–°æ¨“äº¤æ”¶ï¼Ÿ"],
-      ["ä¸»è¦ç›®æ¨™", "æ–¹ä¾¿ã€èˆ’é©ç¯€èƒ½ã€å®¶åº­å®‰å…¨ï¼Œé‚„æ˜¯ä¸‰è€…éƒ½éœ€è¦ï¼Ÿ"],
-      ["æŽ§åˆ¶ç¯„åœ", "åªåšå®¢å»³çŽ„é—œï¼Œé‚„æ˜¯åŒ…æ‹¬ç¡æˆ¿ã€çª—ç°¾ã€å†·æ°£åŠé–€éŽ–ï¼Ÿ"],
-      ["ç¾æœ‰è¨­å‚™", "æœ‰æ²’æœ‰æ™ºèƒ½é–€éŽ–ã€èªžéŸ³åŠ©ç†ã€Wi-Fi mesh æˆ–å·²è£æ™ºèƒ½ç‡ˆï¼Ÿ"],
-    ],
-    faqEyebrow: "å¸¸è¦‹å•é¡Œ",
-    faqTitle: "å…ˆè§£ç­”å®¢æˆ¶æœ€æ“”å¿ƒçš„äº‹ã€‚",
-    faqs: [
-      ["ä¸€å®šè¦è£ä¿®æ™‚å…ˆå¯ä»¥åšå—Žï¼Ÿ", "ä¸ä¸€å®šã€‚éƒ¨åˆ†æ–¹æ¡ˆå¯ä»¥åœ¨å·²å…¥ä½å–®ä½å®‰è£ï¼›ä½†å¦‚æžœæ¶‰åŠæ›´å¤šé–‹é—œã€çª—ç°¾æˆ–æ”¹ç·šï¼Œè£ä¿®å‰æˆ–è£ä¿®ä¸­æœƒæ›´ç†æƒ³ã€‚"],
-      ["ä¼°ç®—åƒ¹æ˜¯å¦ç­‰æ–¼æœ€çµ‚å ±åƒ¹ï¼Ÿ", "ä¸æ˜¯ã€‚ç¶²ç«™ä¼°ç®—åªä½œåˆæ­¥åƒè€ƒï¼Œæœ€çµ‚å ±åƒ¹éœ€è¦–ä¹Žç¾å ´ç·šè·¯ã€ç”¢å“å“ç‰Œã€å®‰è£é›£åº¦åŠå–®ä½æƒ…æ³ã€‚"],
-      ["å¯ä»¥å…ˆåšä¸€éƒ¨åˆ†ï¼Œä¹‹å¾Œå†åŠ å—Žï¼Ÿ", "å¯ä»¥ã€‚å…ˆç”±æ ¸å¿ƒå€åŸŸé–‹å§‹ï¼Œä¹‹å¾Œå†åŠ å…¥æ›´å¤šæˆ¿é–“ã€æ„Ÿæ‡‰å™¨åŠè‡ªå‹•åŒ–æƒ…å¢ƒã€‚"],
-      ["å¦‚æžœå®¶äººä¸æ‡‚ç”¨ App æ€Žéº¼è¾¦ï¼Ÿ", "æ–¹æ¡ˆæœƒä¿ç•™ç°¡å–®æŽ§åˆ¶æ–¹å¼ï¼Œä¾‹å¦‚ç‰†æŽ£ã€æƒ…å¢ƒæŒ‰éˆ•æˆ–åŸºæœ¬æ•™å­¸ï¼Œä¸æ‡‰ä»¤æ—¥å¸¸ä½¿ç”¨è®Šå¾—æ›´éº»ç…©ã€‚"],
-    ],
-    contactEyebrow: "æº–å‚™è¦åŠƒç¬¬ä¸€å€‹è¨­å®šï¼Ÿ",
-    contactTitle: "å…ˆç”±ä¸€å€‹å¯¦ç”¨æ™ºèƒ½å®¶å±…è¨­å®šé–‹å§‹ï¼Œä¹‹å¾Œå†é€æ­¥å‡ç´šã€‚",
-    contactText:
-      "å¯ç”¨ WhatsApp æˆ–é›»éƒµå‚³é€ä¼°ç®—ã€‚æˆ‘å€‘æœƒæŒ‰å–®ä½å¤§å°ã€ç¾æœ‰ç·šè·¯ã€ç”Ÿæ´»ç¿’æ…£åŠå®‰è£æ¢ä»¶å»ºè­°æœ€åˆé©çš„èµ·æ­¥æ–¹æ¡ˆã€‚",
-    whatsappCta: "WhatsApp è«®è©¢",
-    emailCta: "é›»éƒµå‚³é€ä¼°ç®—",
-    footer: "Â© 2026 Boson Smartã€‚ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆã€‚",
-    apartments: [
-      { id: "studio", label: "é–‹æ”¾å¼ / ä¸€æˆ¿å–®ä½", description: "è¼ƒå°‘æŽ§åˆ¶é»žï¼Œé©åˆè¼•é‡å…¥é–€", adjustment: 0 },
-      { id: "twoBed", label: "å…©æˆ¿å–®ä½", description: "å¸¸è¦‹é¦™æ¸¯å®¶åº­å–®ä½", adjustment: 1800 },
-      { id: "threeBed", label: "ä¸‰æˆ¿å–®ä½", description: "æ›´å¤šæˆ¿é–“åŠæƒ…å¢ƒæŽ§åˆ¶é»ž", adjustment: 3600 },
-      { id: "large", label: "å¤§åž‹ / è¤‡å¼ / è‡ªè¨‚", description: "éœ€è¦å…ˆä½œç¾å ´è©•ä¼°", adjustment: 6800 },
-    ],
-    addons: [
-      { id: "extraSwitch", label: "é¡å¤–æ™ºèƒ½é–‹é—œé»ž", description: "å¢žåŠ ä¸€å€‹ç‡ˆå…‰æˆ–æŽ§åˆ¶é»ž", price: 850 },
-      { id: "motion", label: "é¡å¤–äººé«”æ„Ÿæ‡‰å™¨", description: "é©åˆèµ°å»Šã€æµ´å®¤ã€çŽ„é—œæˆ–é›œç‰©æˆ¿", price: 650 },
-      { id: "curtain", label: "æ™ºèƒ½çª—ç°¾æ‘©æ‰“", description: "çª—ç°¾æˆ–ç™¾è‘‰ç°¾è‡ªå‹•æŽ§åˆ¶", price: 2200 },
-      { id: "doorlock", label: "æ™ºèƒ½é–€éŽ–å‡ç´š", description: "æå‡å‡ºå…¥æ–¹ä¾¿åŠæ¬Šé™ç®¡ç†", price: 2800 },
-      { id: "doorbell", label: "è¦–åƒé–€éˆ´ / å…¥å£é¡é ­", description: "è¨ªå®¢æç¤ºåŠé™è·æŸ¥çœ‹", price: 1600 },
-      { id: "support", label: "å¹´åº¦æ”¯æ´è¨ˆåŠƒ", description: "é™è·æ”¯æ´åŠå°åž‹æƒ…å¢ƒèª¿æ•´", price: 1200 },
-    ],
-    packages: [
-      {
-        id: "starter",
-        name: "Smart Home Starter",
-        subtitle: "æ™ºèƒ½å®¶å±…çš„ä¹¾æ·¨å…¥é–€ç¬¬ä¸€æ­¥ã€‚",
-        icon: "home",
-        tag: "æœ€é©åˆé¦–æ¬¡ä½¿ç”¨",
-        basePrice: 3800,
-        description: "ä»¥åŸºæœ¬æ™ºèƒ½ç‡ˆå…‰åŠæƒ…å¢ƒæŽ§åˆ¶ç‚ºæ ¸å¿ƒï¼Œé©åˆæƒ³æå‡æ–¹ä¾¿åº¦ï¼Œä½†ä¸æƒ³ä¸€é–‹å§‹å¤ªè¤‡é›œçš„ä½å®…ã€‚",
-        includes: [
-          "æŒ‡å®šå€åŸŸæ™ºèƒ½ç‡ˆå…‰æŽ§åˆ¶",
-          "å›žå®¶ / é›¢å®¶æƒ…å¢ƒæ¨¡å¼",
-          "æ‰‹æ©Ÿ App åŠèªžéŸ³åŠ©ç†è¨­å®š",
-          "ç°¡å–®ç‰†æŽ£æˆ–é™æŽ§æŽ§åˆ¶é¸é …",
-          "å®‰è£å¾ŒåŸºæœ¬ä½¿ç”¨æ•™å­¸",
-        ],
-        idealFor: "é–‹æ”¾å¼å–®ä½ã€ä¸€æˆ¿å–®ä½ã€ç§Ÿä½å–®ä½ï¼Œæˆ–ç¬¬ä¸€æ¬¡è©¦ç”¨æ™ºèƒ½å®¶å±…çš„ç”¨æˆ¶",
-      },
-      {
-        id: "comfort",
-        name: "Comfort & Energy Package",
-        subtitle: "èˆ’é©è‡ªå‹•åŒ–ï¼ŒåŒæ™‚å»ºç«‹ç¯€èƒ½ç¿’æ…£ã€‚",
-        icon: "comfort",
-        tag: "æœ€å¹³è¡¡é¸æ“‡",
-        basePrice: 8800,
-        description: "ç‚ºæ—¥å¸¸èˆ’é©è€Œè¨­ï¼šç‡ˆå…‰ã€å†·æ°£ç¿’æ…£ã€çª—ç°¾ã€æ™‚é–“æŽ’ç¨‹ï¼Œä»¥åŠç¯€èƒ½è‡ªå‹•åŒ–é‚è¼¯ã€‚",
-        includes: [
-          "å®¢å»³ã€é£¯å»³ã€å·¥ä½œåŠç¡çœ ç‡ˆå…‰æƒ…å¢ƒ",
-          "å†·æ°£æˆ–æº«åº¦æŽ§åˆ¶æŽ’ç¨‹",
-          "å¯é¸é…çª—ç°¾ / ç™¾è‘‰ç°¾è‡ªå‹•åŒ–",
-          "æŒ‡å®šå€åŸŸäººé«”æ„Ÿæ‡‰ç‡ˆå…‰",
-          "ç¯€èƒ½è‡ªå‹•åŒ–é‚è¼¯",
-        ],
-        idealFor: "æƒ…ä¾¶ã€å°å®¶åº­ã€è‡ªä½æ¥­ä¸»ï¼Œæˆ–æº–å‚™è£ä¿®çš„å–®ä½",
-      },
-      {
-        id: "safety",
-        name: "Family Safety Package",
-        subtitle: "æå‡å®¶åº­å®‰å…¨æ„Ÿã€æŽŒæ¡å®¶ä¸­ç‹€æ…‹ã€‚",
-        icon: "shield",
-        tag: "æœ€é©åˆå®¶åº­",
-        basePrice: 7800,
-        description: "é›†ä¸­è™•ç†å‡ºå…¥å®‰å…¨ã€å®¶äººç‹€æ…‹ã€é–€çª—ç›£å¯ŸåŠé‡è¦é€šçŸ¥ï¼Œç‚ºæ—¥å¸¸å®¶åº­ç”Ÿæ´»æä¾›å¯¦ç”¨å®‰å¿ƒæ„Ÿã€‚",
-        includes: [
-          "æ™ºèƒ½é–€éŽ–æˆ–å‡ºå…¥æŽ§åˆ¶æ•´åˆ",
-          "ä¸»è¦é–€çª—æ„Ÿæ‡‰å™¨",
-          "å¯é¸é…è¦–åƒé–€éˆ´æˆ–å…¥å£é¡é ­",
-          "å¤œé–“å®‰å…¨ç‡ˆå…‰è‡ªå‹•åŒ–",
-          "æŒ‡å®šå®‰å…¨äº‹ä»¶æ‰‹æ©Ÿé€šçŸ¥",
-        ],
-        idealFor: "æœ‰å°æœ‹å‹ã€é•·è€…åŒä½ã€é‡è¦–å®¶å±…å®‰å…¨ï¼Œæˆ–å¸Œæœ›æŽŒæ¡å®¶ä¸­ç‹€æ…‹çš„å®¶åº­",
-      },
-    ],
+    brandSub: "香港住宅智能家居安裝",
+    nav: ["方案", "估算", "示例", "流程", "聯絡"],
+    heroEyebrow: "香港住宅智能家居安裝",
+    heroTitle: "為香港住宅安裝智能燈光、舒適及安全方案。",
+    heroText: "Boson Smart 幫住戶由實用升級開始：燈光控制、冷氣時間設定、窗簾選配、門窗狀態提醒，以及安裝後基本教學。",
+    heroPrimary: "建立快速估算",
+    heroSecondary: "查看起步方案",
+    trust: ["包括安裝及設定", "上門了解後確認報價", "保留家人易用控制", "交付時提供基本教學"],
+    scenarioLabel: "情境預覽",
+    suggestedPackage: "建議方案",
     scenarios: [
-      ["18:45", "æº–å‚™å›žå®¶", "æŒ‰ç…§ä½ é¸æ“‡çš„æ–¹æ¡ˆï¼Œå±‹ä¼å¯åœ¨ä½ å›žåˆ°å‰æº–å‚™åˆé©æƒ…å¢ƒã€‚", "bolt"],
-      ["18:50", "æ‰“é–‹å¤§é–€", "çŽ„é—œåŠå®¢å»³ç‡ˆå…‰æŸ”å’Œäº®èµ·ï¼Œä¸æœƒçªç„¶åˆºçœ¼ã€‚", "light"],
-      ["19:10", "æ™šé¤ / æ”¾é¬†æ¨¡å¼", "å®¢å»³è½‰ç‚ºæš–è‰²æƒ…å¢ƒï¼Œå†·æ°£åŠç‡ˆå…‰é…åˆæ™šä¸Šçš„ç”Ÿæ´»ç¯€å¥ã€‚", "sliders"],
-      ["23:30", "å¤œé–“å®‰å…¨", "ä½Žäº®åº¦è·¯å¾‘ç‡ˆåŠå‡ºå…¥å£ç›£å¯Ÿï¼Œå¹«å±‹ä¼æ…¢æ…¢é€²å…¥ä¼‘æ¯ç‹€æ…‹ã€‚", "lock"],
+      { id: "home", label: "回家", title: "屋企已準備好", status: "啟用中", package: "Comfort & Energy Package", rows: [["到家前", "客廳預先調節舒適溫度", "18:45"], ["開門時", "玄關燈光柔和亮起", "18:50"], ["晚飯時", "客廳轉為暖光情境", "19:10"], ["夜晚時", "低亮度路徑燈準備好", "23:30"]] },
+      { id: "energy", label: "節能", title: "舒適但不浪費", status: "已排程", package: "Comfort & Energy Package", rows: [["冷氣", "避免不必要長開", "自動"], ["燈光", "按活動或時間自動控制", "開啟"], ["窗簾", "減少下午熱力進入", "可選"], ["離家模式", "關閉指定設備", "準備好"]] },
+      { id: "safety", label: "安全", title: "家中狀態更清楚", status: "監察中", package: "Family Safety Package", rows: [["玄關", "掌握大門狀態", "開啟"], ["門窗", "指定感應器已準備", "準備好"], ["夜間路徑", "走動時柔和亮燈", "自動"], ["通知", "手機提示已啟用", "開啟"]] },
+    ],
+    finderEyebrow: "20 秒方案建議",
+    finderTitle: "唔肯定由邊個方案開始？先答三條問題。",
+    finderText: "選擇你的主要目標、單位狀態及控制範圍，我們會建議一個起步方案，再帶你去建立估算。",
+    finderLabels: ["主要目標", "單位狀態", "控制範圍"],
+    finderOptions: { goals: [["comfort", "舒適"], ["energy", "節能"], ["safety", "安全"], ["starter", "方便入門"]], stages: [["livedIn", "已入住"], ["renovating", "裝修中"]], scopes: [["core", "核心區域"], ["multi", "多房間"]] },
+    finderResult: "建議起步方案",
+    finderCta: "套用到估算組合器",
+    packagesEyebrow: "三個起步方案",
+    packagesTitle: "按你想屋企做到甚麼，選擇合適起步方案。",
+    packagesText: "先選一個清晰起步方案，再按單位大小及實用升級項目調整估算。最終報價會在了解單位後確認。",
+    priceNote: "網上價錢只作初步估算。最終報價會按線路、設備選擇、Wi‑Fi 覆蓋、安裝難度及現場情況確認。",
+    selectPlan: "選擇方案",
+    selectedPackage: "你已選擇的方案",
+    selectedCopy: "此方案可作為實用起步點。我們會在了解單位、線路、設備選擇及安裝條件後，再確認實際範圍。",
+    includedSelected: "此起步方案一般包括",
+    idealFor: "適合",
+    builderEyebrow: "估算組合器",
+    builderTitle: "先建立起步估算，再用 WhatsApp 查詢。",
+    builderText: "選擇方案、單位類型及實用升級項目，估算金額會即時更新。之後可傳送查詢，再確認最終報價。",
+    builderSteps: ["1. 選擇方案", "2. 選擇單位類型", "3. 加選實用升級項目"],
+    builderSummary: "即時估算",
+    builderBase: "基本方案",
+    builderApartment: "單位調整",
+    builderAddons: "已選升級項目",
+    builderNoAddons: "未選擇升級項目",
+    builderTotal: "估算總額",
+    builderDisclaimer: "此為初步估算，並非最終報價。最終價格需視乎線路、開關兼容性、Wi‑Fi 覆蓋、設備選擇、安裝難度及現場情況而定。網站不會直接收取付款。",
+    builderCta: "用 WhatsApp 傳送估算作初步確認",
+    builderSecondaryCta: "電郵傳送估算",
+    scopeEyebrow: "範圍清晰",
+    scopeTitle: "決定前，先清楚知道包括甚麼。",
+    scopeText: "智能家居報價會因每個單位情況不同而有差異。我們會將一般包括項目與需要另行報價的項目分開列明。",
+    includedTitle: "一般包括",
+    excludedTitle: "通常需另行報價",
+    includedItems: ["初步方案建議", "基本設備安裝及設定", "App 及情境配置", "安裝後測試", "基本使用教學", "簡單交付清單"],
+    excludedItems: ["大型改線或重新拉線", "假天花、木工或裝修工程", "高端指定品牌升級", "複雜 Wi‑Fi 或網絡改善", "非常規牆身或門身改裝", "交付期後的長期支援"],
+    exampleEyebrow: "示例設定",
+    exampleTitle: "兩房單位可以先由玄關、客廳及夜間安全開始。",
+    exampleText: "不需要第一日就全屋自動化。可以先由每日最常用的範圍開始，之後再加入睡房、窗簾、冷氣或更多感應器。",
+    exampleZones: [["玄關", ["回家燈光", "大門狀態提醒"]], ["客廳", ["晚間燈光模式", "冷氣時間設定選項", "窗簾選項"]], ["夜間", ["低亮度路徑燈", "指定安全提醒"]]],
+    privacyEyebrow: "私隱與安全",
+    privacyTitle: "智能家居帳戶，應該由你自己掌握。",
+    privacyText: "智能家居涉及門鎖、鏡頭、感應器、App 及家人權限。我們會在交付時清楚說明，讓你知道每項設定由誰管理。",
+    privacyPoints: [["帳戶由客戶持有", "主要 App、門鎖、鏡頭及語音助理帳戶，應以客戶資料建立或清楚交由客戶管理。"], ["鏡頭位置先確認", "如涉及鏡頭或視像門鈴，會先確認用途、角度及私隱考慮。"], ["保留手動控制", "智能家居不應只靠 App 操作。可行情況下，應保留牆掣或簡單按鈕控制。"], ["交付時說明權限", "完成後會說明提醒、App 存取、家庭成員權限及日後調整方法。"]],
+    quoteEyebrow: "報價如何確認",
+    quoteTitle: "估算先幫你開始，最終報價要按單位情況確認。",
+    quoteText: "這樣可以保持價格透明，同時避免因線路、設備選擇、Wi‑Fi 覆蓋或安裝難度不同而報錯價。",
+    quoteSteps: [["建立估算", "選擇方案、單位類型及升級項目。"], ["了解單位情況", "確認線路、開關、Wi‑Fi、門窗及安裝可行性。"], ["確認範圍", "列明包括項目、另行報價項目、設備選擇及安裝條件。"], ["安裝及交付", "完成設定、測試、交付清單及基本使用教學。"]],
+    processEyebrow: "安裝流程",
+    processTitle: "簡單到可以開始，謹慎到值得信任。",
+    processText: "先建立估算，再了解單位、確認範圍、乾淨安裝，最後清楚交付。",
+    process: ["選擇起步方案", "建立並傳送估算", "了解單位情況及確認範圍", "安裝、測試及交付"],
+    aftercareEyebrow: "交付與後續",
+    aftercareTitle: "裝完不是終點，真正重要是家人會用。",
+    aftercareText: "智能家居真正有用，是家人清楚控制方式、帳戶、提醒及日常操作。所以交付不是形式，而是重點。",
+    aftercareItems: [["交付清單", "整理已安裝設備、控制方式、App、帳戶及主要設定。"], ["基本使用教學", "說明回家、離家、夜間模式、手動控制及提醒等日常操作。"], ["微調期", "可按實際使用感受，作基本情境或設定調整。"], ["升級路線", "先由一個區域開始，之後再加入房間、感應器、窗簾或能源管理。"]],
+    faqEyebrow: "常見問題",
+    faqTitle: "開始前，很多人都會問這些問題。",
+    faqs: [["一定要裝修時先可以做嗎？", "不一定。部分設定可以在已入住單位安裝；但如果涉及更多開關、窗簾或改線，裝修前或裝修中會更理想。"], ["網上估算是否等於最終報價？", "不是。網站估算只作初步參考。最終報價需視乎線路、設備選擇、Wi‑Fi 覆蓋、安裝難度及單位情況。"], ["可以先做一部分，之後再加嗎？", "可以。先由一個區域開始，之後再加入更多房間、感應器、窗簾、冷氣設定或安全功能。"], ["如果家人不想用 App 怎麼辦？", "系統應該保持易用。可行情況下，我們會保留牆掣、按鈕或基本情境控制方式。"], ["如果屋企 Wi‑Fi 唔夠穩定點算？", "我們會在評估時了解 Wi‑Fi 覆蓋。如果需要改善網絡，會在最終報價前清楚說明選項。"]],
+    briefEyebrow: "估算摘要",
+    briefTitle: "你的智能家居估算已準備好，可以傳送查詢。",
+    briefText: "傳送你已選的方案、單位類型、升級項目及估算金額，我們可以初步了解你的單位適合怎樣開始。",
+    briefLabels: ["方案", "單位類型", "已選升級項目", "即時估算"],
+    contactEyebrow: "準備了解你的單位適合怎樣開始？",
+    contactTitle: "傳送估算，了解你的單位適合怎樣開始。",
+    contactText: "可用 WhatsApp 或電郵傳送估算。我們會按單位大小、現有線路、設備需要及安裝條件，再建議下一步。",
+    whatsappCta: "WhatsApp 傳送我的估算",
+    emailCta: "電郵傳送我的估算",
+    reassurance: "網站不會直接收款。最終報價會在了解單位後確認。",
+    stickyReview: "調整估算",
+    footer: "© 2026 Boson Smart。為香港住宅而設的智能家居安裝方案。",
+    apartments: [{ id: "studio", label: "開放式 / 一房單位", description: "較少控制點，適合輕量入門", adjustment: 0 }, { id: "twoBed", label: "兩房單位", description: "常見香港家庭單位", adjustment: 1800 }, { id: "threeBed", label: "三房單位", description: "更多房間及情境控制點", adjustment: 3600 }, { id: "large", label: "大型 / 複式 / 自訂", description: "需要先作現場評估", adjustment: 6800 }],
+    addons: [{ id: "extraSwitch", label: "額外智能開關點", description: "增加一個燈光或控制點", price: 850 }, { id: "motion", label: "額外人體感應器", description: "適合走廊、浴室、玄關或雜物房", price: 650 }, { id: "curtain", label: "智能窗簾摩打", description: "窗簾或百葉簾自動控制", price: 2200 }, { id: "doorlock", label: "智能門鎖升級", description: "提升出入方便及權限管理", price: 2800 }, { id: "doorbell", label: "視像門鈴 / 入口鏡頭", description: "訪客提示及遙距查看", price: 1600 }, { id: "support", label: "年度支援計劃", description: "遙距支援及小型情境調整", price: 1200 }],
+    packages: [
+      { id: "starter", name: "Smart Home Starter", subtitle: "智能家居的簡單入門第一步。", icon: "home", tag: "最適合首次使用", basePrice: 3800, description: "適合想先改善燈光控制、回家及離家設定，但暫時不想做大型工程的單位。", includes: ["指定區域智能燈光控制", "回家 / 離家預設模式", "App 設定及基本配置", "簡單牆掣或遙控控制選項", "基本交付教學"], assumption: "起價假設為一個核心區域、基本兼容智能控制、App 設定、測試及交付。大型改線及高端品牌升級需另行報價。", idealFor: "開放式單位、一房單位、租住單位，或第一次試用智能家居的用戶" },
+      { id: "comfort", name: "Comfort & Energy Package", subtitle: "令屋企在你需要時已經準備好。", icon: "sun", tag: "最平衡選擇", basePrice: 8800, description: "為日常舒適而設：燈光模式、冷氣時間設定、窗簾選配、感應燈光及節能設定。", includes: ["客廳、飯廳、工作及睡眠燈光模式", "冷氣或溫度時間設定", "窗簾或百葉簾自動化選配", "指定區域人體感應燈光", "日常節能設定"], assumption: "起價假設為客廳及玄關等主要生活區域，並包含實用舒適設定。額外房間、窗簾摩打及複雜線路需另行報價。", idealFor: "情侶、小家庭、自住業主，或準備裝修的單位" },
+      { id: "safety", name: "Family Safety Package", subtitle: "在重要時刻，清楚知道家中狀態。", icon: "shield", tag: "最適合家庭", basePrice: 7800, description: "適合想掌握出入口、門窗狀態、夜間走動及手機提醒的家庭。", includes: ["智能門鎖或出入口設定選配", "主要門窗感應器", "視像門鈴或入口鏡頭選配", "夜間安全燈光", "指定事件手機提醒"], assumption: "起價假設為指定出入口及安全監察點。鏡頭位置、智能門鎖型號、額外感應器及門身改動會在報價前確認。", idealFor: "有小朋友、長者同住、重視家居安全，或希望掌握家中狀態的家庭" },
     ],
   },
 };
 
-function LanguageToggle({ language, setLanguage }) {
+function SectionHeader({ eyebrow, title, text, align = "left" }) {
   return (
-    <div className="language-toggle">
-      <button onClick={() => setLanguage("en")} className={language === "en" ? "active" : ""}>EN</button>
-      <button onClick={() => setLanguage("zh")} className={language === "zh" ? "active" : ""}>ç¹ä¸­</button>
+    <div className={`mb-10 max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
+      <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{eyebrow}</p>
+      <h2 className="text-3xl font-semibold tracking-tight text-white md:text-5xl">{title}</h2>
+      {text && <p className="mt-4 text-base leading-7 text-slate-300">{text}</p>}
     </div>
   );
 }
 
-function SectionHeader({ eyebrow, title, text, note }) {
+function Card({ children, className = "" }) {
+  return <div className={`rounded-[1.6rem] border border-white/10 bg-white/[0.045] shadow-2xl shadow-black/10 ${className}`}>{children}</div>;
+}
+
+function Bullet({ children, warn = false }) {
   return (
-    <div className="section-header">
-      <div>
-        {eyebrow && <div className="eyebrow">{eyebrow}</div>}
-        {title && <h2>{title}</h2>}
-        {text && <p>{text}</p>}
-      </div>
-      {note && <div className="note-box">{note}</div>}
+    <div className="flex gap-3 rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-sm leading-6 text-slate-300">
+      <Icon name={warn ? "shield" : "check"} className={`mt-1 h-4 w-4 shrink-0 ${warn ? "text-amber-300" : "text-cyan-300"}`} />
+      <span>{children}</span>
     </div>
   );
 }
 
-function FeatureGrid({ items, warn = false }) {
-  return (
-    <div className="feature-grid">
-      {items.map((item) => (
-        <div className="mini-card" key={item}>
-          {warn ? <span className="warning-dot">!</span> : <Icon name="check" className="check-icon" />}
-          <span>{item}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function BosonSmartHomepage() {
   const [language, setLanguage] = useState("en");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scenario, setScenario] = useState("home");
   const [selected, setSelected] = useState("comfort");
   const [apartment, setApartment] = useState("twoBed");
-  const [selectedAddons, setSelectedAddons] = useState(["curtain"]);
-  const [activeScenario, setActiveScenario] = useState("home");
-  const [finderGoal, setFinderGoal] = useState("comfort");
-  const [finderStage, setFinderStage] = useState("livedIn");
-  const [finderScope, setFinderScope] = useState("core");
+  const [addons, setAddons] = useState(["curtain"]);
+  const [goal, setGoal] = useState("comfort");
+  const [stage, setStage] = useState("livedIn");
+  const [scope, setScope] = useState("core");
 
   const t = content[language];
-
-  const activePreview = useMemo(
-    () => t.dashboardScenarios.find((item) => item.id === activeScenario) || t.dashboardScenarios[0],
-    [activeScenario, t]
-  );
-
-  const finderRecommendationId = useMemo(() => {
-    if (finderGoal === "safety") return "safety";
-    if (finderGoal === "comfort" || finderGoal === "energy") return "comfort";
-    if (finderStage === "renovating" || finderScope === "multi") return "comfort";
-    return "starter";
-  }, [finderGoal, finderStage, finderScope]);
-
-  const selectedPackage = useMemo(
-    () => t.packages.find((item) => item.id === selected) || t.packages[1],
-    [selected, t]
-  );
-
-  const finderRecommendation = useMemo(
-    () => t.packages.find((item) => item.id === finderRecommendationId) || t.packages[0],
-    [finderRecommendationId, t]
-  );
-
-  const selectedApartment = useMemo(
-    () => t.apartments.find((item) => item.id === apartment) || t.apartments[1],
-    [apartment, t]
-  );
-
-  const activeAddons = useMemo(
-    () => t.addons.filter((item) => selectedAddons.includes(item.id)),
-    [selectedAddons, t]
-  );
-
+  const activeScenario = t.scenarios.find((item) => item.id === scenario) || t.scenarios[0];
+  const selectedPackage = t.packages.find((item) => item.id === selected) || t.packages[1];
+  const selectedApartment = t.apartments.find((item) => item.id === apartment) || t.apartments[1];
+  const activeAddons = t.addons.filter((item) => addons.includes(item.id));
   const total = selectedPackage.basePrice + selectedApartment.adjustment + activeAddons.reduce((sum, item) => sum + item.price, 0);
 
-  const enquirySubject =
-    language === "zh" ? "Boson Smart æ™ºèƒ½å®¶å±…æ–¹æ¡ˆä¼°ç®—æŸ¥è©¢" : "Boson Smart Smart Home Package Estimate";
+  const recommendedId = useMemo(() => {
+    if (goal === "safety") return "safety";
+    if (goal === "comfort" || goal === "energy" || stage === "renovating" || scope === "multi") return "comfort";
+    return "starter";
+  }, [goal, stage, scope]);
+  const recommended = t.packages.find((item) => item.id === recommendedId) || t.packages[0];
 
-  const enquiryBody = [
-    language === "zh" ? "ä½ å¥½ï¼Œæˆ‘æƒ³æŸ¥è©¢ä»¥ä¸‹æ™ºèƒ½å®¶å±…æ–¹æ¡ˆä¼°ç®—ï¼š" : "Hello, I would like to ask about this smart home package estimate:",
+  const enquiry = [
+    language === "zh" ? "你好，我想查詢以下智能家居估算：" : "Hello, I would like to check this smart-home estimate:",
     "",
-    `${language === "zh" ? "åŸºæœ¬æ–¹æ¡ˆ" : "Base package"}: ${selectedPackage.name}`,
-    `${language === "zh" ? "å–®ä½é¡žåž‹" : "Apartment type"}: ${selectedApartment.label}`,
-    `${language === "zh" ? "å‡ç´šé …ç›®" : "Add-ons"}: ${activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : t.builderNoAddons}`,
-    `${language === "zh" ? "ä¼°ç®—ç¸½é¡" : "Estimated total"}: ${formatHKD(total)}`,
-    "",
-    language === "zh" ? "è«‹è¯çµ¡æˆ‘å®‰æŽ’ä¸‹ä¸€æ­¥è©•ä¼°ã€‚" : "Please contact me for the next-step assessment.",
+    `${t.briefLabels[0]}: ${selectedPackage.name}`,
+    `${t.briefLabels[1]}: ${selectedApartment.label}`,
+    `${t.briefLabels[2]}: ${activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : t.builderNoAddons}`,
+    `${t.briefLabels[3]}: ${formatHKD(total)}`,
   ].join("\n");
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Boson Smart Estimate")}&body=${encodeURIComponent(enquiry)}`;
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquiry)}`;
 
-  const mailtoHref = `mailto:${PLACEHOLDER_EMAIL}?subject=${encodeURIComponent(enquirySubject)}&body=${encodeURIComponent(enquiryBody)}`;
-  const whatsappHref = `https://wa.me/${PLACEHOLDER_WHATSAPP}?text=${encodeURIComponent(enquiryBody)}`;
-
-  function toggleAddon(id) {
-    setSelectedAddons((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
-    );
-  }
-
-  function applyFinderRecommendation() {
-    setSelected(finderRecommendationId);
-
-    if (finderRecommendationId === "comfort") {
-      setSelectedAddons((current) => Array.from(new Set([...current, "motion"])));
-    }
-
-    if (finderRecommendationId === "safety") {
-      setSelectedAddons((current) => Array.from(new Set([...current, "doorbell"])));
-    }
-
+  const toggleAddon = (id) => setAddons((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  const applyRecommendation = () => {
+    setSelected(recommendedId);
     document.getElementById("builder")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  };
 
   return (
-    <div className="site">
-      <div className="glow glow-one" />
-      <div className="glow glow-two" />
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-cyan-300 selection:text-slate-950">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-[-14rem] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
+        <div className="absolute bottom-[-10rem] right-[-8rem] h-[30rem] w-[30rem] rounded-full bg-amber-300/15 blur-3xl" />
+      </div>
 
-      <header className="nav">
-        <a href="#top" className="brand">
-          <span className="brand-mark"><Icon name="bolt" /></span>
-          <span>
-            <strong>{t.brand}</strong>
-            <small>{t.brandSub}</small>
-          </span>
-        </a>
-
-        <nav className="desktop-nav">
-          <a href="#plans">{t.nav[0]}</a>
-          <a href="#builder">{t.nav[1]}</a>
-          <a href="#scope">{t.nav[2]}</a>
-          <a href="#process">{t.nav[3]}</a>
-          <a href="#contact">{t.nav[4]}</a>
-        </nav>
-
-        <div className="nav-actions">
-          <LanguageToggle language={language} setLanguage={setLanguage} />
-          <a className="pill white" href="#builder">{t.quote}</a>
-        </div>
-
-        <div className="mobile-language-toggle">
-          <LanguageToggle language={language} setLanguage={setLanguage} />
-        </div>
-
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          <Icon name={menuOpen ? "close" : "menu"} />
-        </button>
-
-        {menuOpen && (
-          <div className="mobile-menu">
-            <a href="#plans" onClick={() => setMenuOpen(false)}>{t.nav[0]}</a>
-            <a href="#builder" onClick={() => setMenuOpen(false)}>{t.nav[1]}</a>
-            <a href="#scope" onClick={() => setMenuOpen(false)}>{t.nav[2]}</a>
-            <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav[3]}</a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav[4]}</a>
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 lg:px-6">
+          <a href="#top" className="flex items-center gap-3" aria-label="Boson Smart home">
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/20"><Icon name="bolt" className="h-5 w-5" /></span>
+            <span>
+              <span className="block text-base font-semibold tracking-tight">Boson Smart</span>
+              <span className="hidden text-xs text-slate-400 sm:block">{t.brandSub}</span>
+            </span>
+          </a>
+          <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex" aria-label="Main navigation">
+            {t.nav.map((item, index) => <a key={item} className="transition hover:text-white" href={["#packages", "#builder", "#example", "#process", "#contact"][index]}>{item}</a>)}
+          </nav>
+          <div className="ml-auto flex items-center gap-2">
+            <div className="flex rounded-full border border-white/10 bg-white/[0.04] p-1 text-xs font-bold text-slate-300" aria-label="Language selector">
+              <button className={`rounded-full px-3 py-1.5 transition ${language === "en" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("en")}>EN</button>
+              <button className={`rounded-full px-3 py-1.5 transition ${language === "zh" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("zh")}>繁中</button>
+            </div>
+            <a href="#builder" className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100 md:inline-flex">{language === "zh" ? "建立估算" : "Build estimate"}</a>
+            <button className="rounded-xl border border-white/10 p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label="Toggle menu"><Icon name={menuOpen ? "close" : "menu"} className="h-5 w-5" /></button>
           </div>
-        )}
+        </div>
+        {menuOpen && <nav id="mobile-menu" className="grid gap-3 border-t border-white/10 px-4 py-4 text-sm text-slate-300 md:hidden" aria-label="Mobile navigation">{t.nav.map((item, index) => <a key={item} href={["#packages", "#builder", "#example", "#process", "#contact"][index]} onClick={() => setMenuOpen(false)}>{item}</a>)}</nav>}
       </header>
 
-      <main id="top">
-        <section className="hero">
-          <div>
-            <div className="eyebrow hero-eyebrow"><Icon name="sparkle" />{t.heroEyebrow}</div>
-            <h1>{t.heroTitle}</h1>
-            <p className="lead">{t.heroText}</p>
-            <div className="hero-actions">
-              <a href="#builder" className="pill cyan">{t.heroPrimary} <Icon name="arrow" /></a>
-              <a href="#plans" className="pill ghost">{t.heroSecondary}</a>
+      <main id="top" className="relative z-10">
+        <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_0.85fr] lg:px-6">
+          <div className="flex flex-col justify-center">
+            <p className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-100"><Icon name="bolt" className="h-4 w-4" />{t.heroEyebrow}</p>
+            <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">{t.heroTitle}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{t.heroText}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#builder" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-slate-950">{t.heroPrimary}<Icon name="arrow" className="h-4 w-4" /></a>
+              <a href="#packages" className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-slate-950">{t.heroSecondary}</a>
             </div>
-            <div className="trust-grid">
-              {t.trust.map((item) => (
-                <div className="trust-card" key={item}>
-                  <Icon name="check" className="check-icon" />
-                  <span>{item}</span>
-                </div>
-              ))}
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {t.trust.map((item) => <div key={item} className="flex gap-2 rounded-2xl border border-white/10 bg-white/[0.035] p-3 text-sm text-slate-300"><Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{item}</div>)}
             </div>
           </div>
-
-          <div className="dashboard-card scenario-preview">
-            <div className="dashboard-inner">
-              <div className="dashboard-head">
-                <div>
-                  <small>{t.dashboardModeLabel}</small>
-                  <strong>{activePreview.title}</strong>
-                </div>
-                <span>{activePreview.status}</span>
-              </div>
-
-              <div className="preview-tabs" role="tablist" aria-label={t.dashboardModeLabel}>
-                {t.dashboardScenarios.map((scenario) => (
-                  <button
-                    key={scenario.id}
-                    type="button"
-                    onClick={() => setActiveScenario(scenario.id)}
-                    className={scenario.id === activeScenario ? "active" : ""}
-                  >
-                    {scenario.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="dashboard-list">
-                {activePreview.rows.map(([zone, mode, value]) => (
-                  <div className="dashboard-row" key={`${activePreview.id}-${zone}`}>
-                    <span><strong>{zone}</strong><small>{mode}</small></span>
-                    <em>{value}</em>
-                  </div>
-                ))}
-              </div>
-
-              <div className="preview-package">
-                <span>{language === "zh" ? "å»ºè­°æ–¹æ¡ˆ" : "Suggested package"}</span>
-                <strong>{activePreview.package}</strong>
-              </div>
+          <Card className="p-4">
+            <div className="rounded-[1.25rem] bg-slate-900 p-4">
+              <div className="mb-4 flex items-start justify-between gap-4"><div><p className="text-sm text-slate-400">{t.scenarioLabel}</p><h2 className="mt-1 text-2xl font-semibold">{activeScenario.title}</h2></div><span className="rounded-full bg-emerald-400/10 px-3 py-1 text-sm text-emerald-200">{activeScenario.status}</span></div>
+              <div className="mb-4 grid grid-cols-3 gap-2" role="tablist" aria-label={t.scenarioLabel}>{t.scenarios.map((item) => <button key={item.id} onClick={() => setScenario(item.id)} className={`rounded-2xl border px-3 py-2 text-xs font-semibold transition ${item.id === scenario ? "border-cyan-300 bg-cyan-300 text-slate-950" : "border-white/10 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08]"}`}>{item.label}</button>)}</div>
+              <div className="grid gap-3">{activeScenario.rows.map(([zone, mode, value]) => <div key={`${activeScenario.id}-${zone}`} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4"><div><p className="font-medium text-white">{zone}</p><p className="text-sm text-slate-400">{mode}</p></div><span className="rounded-xl bg-white/10 px-3 py-2 text-sm text-cyan-100">{value}</span></div>)}</div>
+              <p className="mt-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/10 px-4 py-3 text-sm text-cyan-100">{t.suggestedPackage}: <strong className="text-white">{activeScenario.package}</strong></p>
             </div>
-          </div>
+          </Card>
         </section>
 
-        <section className="section finder-section">
-          <div className="finder-card">
-            <div className="finder-copy">
-              <div className="eyebrow">{language === "zh" ? "20 ç§’æ–¹æ¡ˆå»ºè­°" : "20-second package finder"}</div>
-              <h2>
-                {language === "zh"
-                  ? "å””è‚¯å®šç”±é‚Šå€‹æ–¹æ¡ˆé–‹å§‹ï¼Ÿå…ˆç­”ä¸‰æ¢å•é¡Œã€‚"
-                  : "Not sure which package to start with? Answer three quick questions."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "é€™ä¸æ˜¯ç¡¬æ€§å ±åƒ¹ï¼Œè€Œæ˜¯å¹«å®¢æˆ¶å…ˆæ‰¾åˆ°æœ€æŽ¥è¿‘çš„èµ·æ­¥æ–¹å‘ï¼Œå†å¸¶åˆ°çµ„åˆå™¨èª¿æ•´ã€‚"
-                  : "This is not a hard quotation. It helps customers find the closest starting direction, then continue into the builder."}
-              </p>
+        <section className="mx-auto max-w-6xl px-4 py-10 lg:px-6">
+          <Card className="grid gap-5 p-5 lg:grid-cols-[0.8fr_1.2fr_0.8fr] lg:p-6">
+            <div><p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-amber-300">{t.finderEyebrow}</p><h2 className="text-2xl font-semibold md:text-3xl">{t.finderTitle}</h2><p className="mt-3 text-sm leading-6 text-slate-300">{t.finderText}</p></div>
+            <div className="grid gap-3">
+              {[ [t.finderLabels[0], t.finderOptions.goals, goal, setGoal], [t.finderLabels[1], t.finderOptions.stages, stage, setStage], [t.finderLabels[2], t.finderOptions.scopes, scope, setScope] ].map(([label, options, value, setter]) => <div key={label} className="rounded-2xl border border-white/10 bg-slate-950/35 p-4"><p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{label}</p><div className="flex flex-wrap gap-2">{options.map(([id, text]) => <button key={id} onClick={() => setter(id)} className={`rounded-full border px-3 py-2 text-sm font-semibold transition ${value === id ? "border-amber-300 bg-amber-300 text-slate-950" : "border-white/10 bg-white/[0.04] text-slate-300 hover:bg-white/10"}`}>{text}</button>)}</div></div>)}
             </div>
-
-            <div className="finder-controls">
-              <div className="finder-group">
-                <span>{language === "zh" ? "ä¸»è¦ç›®æ¨™" : "Main goal"}</span>
-                <div>
-                  {[
-                    ["comfort", language === "zh" ? "èˆ’é©" : "Comfort"],
-                    ["energy", language === "zh" ? "ç¯€èƒ½" : "Energy"],
-                    ["safety", language === "zh" ? "å®‰å…¨" : "Safety"],
-                    ["starter", language === "zh" ? "æ–¹ä¾¿å…¥é–€" : "Easy start"],
-                  ].map(([id, label]) => (
-                    <button key={id} onClick={() => setFinderGoal(id)} className={finderGoal === id ? "active" : ""}>
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="finder-group">
-                <span>{language === "zh" ? "å–®ä½ç‹€æ…‹" : "Home stage"}</span>
-                <div>
-                  {[
-                    ["livedIn", language === "zh" ? "å·²å…¥ä½" : "Lived-in"],
-                    ["renovating", language === "zh" ? "è£ä¿®ä¸­/æº–å‚™è£ä¿®" : "Renovating"],
-                  ].map(([id, label]) => (
-                    <button key={id} onClick={() => setFinderStage(id)} className={finderStage === id ? "active" : ""}>
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="finder-group">
-                <span>{language === "zh" ? "æƒ³æŽ§åˆ¶ç¯„åœ" : "Control scope"}</span>
-                <div>
-                  {[
-                    ["core", language === "zh" ? "ä¸€è‡³å…©å€‹æ ¸å¿ƒå€" : "Core areas"],
-                    ["multi", language === "zh" ? "å¤šæˆ¿é–“/å¤šæƒ…å¢ƒ" : "Multi-room"],
-                  ].map(([id, label]) => (
-                    <button key={id} onClick={() => setFinderScope(id)} className={finderScope === id ? "active" : ""}>
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="finder-result">
-              <span>{language === "zh" ? "å»ºè­°èµ·æ­¥æ–¹æ¡ˆ" : "Recommended starting package"}</span>
-              <h3>{finderRecommendation.name}</h3>
-              <p>{finderRecommendation.description}</p>
-              <button onClick={applyFinderRecommendation}>
-                {language === "zh" ? "å¥—ç”¨åˆ°çµ„åˆå™¨" : "Apply to builder"} <Icon name="arrow" />
-              </button>
-            </div>
-          </div>
+            <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-5"><p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-100">{t.finderResult}</p><h3 className="mt-3 text-2xl font-semibold">{recommended.name}</h3><p className="mt-3 text-sm leading-6 text-slate-300">{recommended.description}</p><button onClick={applyRecommendation} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-cyan-300 px-4 py-3 font-semibold text-slate-950 transition hover:bg-cyan-200">{t.finderCta}<Icon name="arrow" className="h-4 w-4" /></button></div>
+          </Card>
         </section>
 
-        <section id="plans" className="section">
-          <SectionHeader eyebrow={t.packagesEyebrow} title={t.packagesTitle} text={t.packagesText} note={t.priceNote} />
-
-          <div className="package-grid">
-            {t.packages.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setSelected(item.id)}
-                className={`package-card ${item.id === selected ? "active" : ""}`}
-              >
-                <div className="card-top">
-                  <span className="large-icon"><Icon name={item.icon} /></span>
-                  <span className="tag">{item.tag}</span>
-                </div>
-                <h3>{item.name}</h3>
-                <p className="cyan-text">{item.subtitle}</p>
-                <p>{item.description}</p>
-                <strong className="price">{language === "zh" ? `${formatHKD(item.basePrice)} èµ·` : `From ${formatHKD(item.basePrice)}`}</strong>
-                <ul>
-                  {item.includes.slice(0, 4).map((feature) => (
-                    <li key={feature}><Icon name="check" />{feature}</li>
-                  ))}
-                </ul>
-                <span className="select-label">{t.selectPlan} <Icon name="arrow" /></span>
-              </button>
-            ))}
-          </div>
+        <section id="packages" className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+          <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end"><SectionHeader eyebrow={t.packagesEyebrow} title={t.packagesTitle} text={t.packagesText} /><div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-slate-300">{t.priceNote}</div></div>
+          <div className="grid gap-5 lg:grid-cols-3">{t.packages.map((pkg) => <button key={pkg.id} onClick={() => setSelected(pkg.id)} className={`group rounded-[1.6rem] border p-5 text-left transition ${selected === pkg.id ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:border-white/25"}`}><div className="mb-5 flex items-start justify-between gap-3"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-cyan-200"><Icon name={pkg.icon} className="h-6 w-6" /></span><span className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">{pkg.tag}</span></div><h3 className="text-2xl font-semibold">{pkg.name}</h3><p className="mt-2 text-sm text-cyan-100">{pkg.subtitle}</p><p className="mt-4 text-sm leading-6 text-slate-300">{pkg.description}</p><p className="mt-5 text-2xl font-semibold">{language === "zh" ? `${formatHKD(pkg.basePrice)} 起` : `From ${formatHKD(pkg.basePrice)}`}</p><div className="mt-5 grid gap-3">{pkg.includes.slice(0, 4).map((item) => <div key={item} className="flex gap-2 text-sm leading-6 text-slate-300"><Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-cyan-300" />{item}</div>)}</div><p className="mt-5 rounded-2xl bg-slate-950/35 p-3 text-xs leading-5 text-slate-400">{pkg.assumption}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-200">{t.selectPlan}<Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" /></span></button>)}</div>
         </section>
 
-        <section id="builder" className="section">
+        <section id="builder" className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
           <SectionHeader eyebrow={t.builderEyebrow} title={t.builderTitle} text={t.builderText} />
-
-          <div className="builder-layout">
-            <div className="builder-main">
-              <BuilderPanel title={t.builderStep1}>
-                <div className="choice-grid three">
-                  {t.packages.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setSelected(item.id)}
-                      className={`choice ${item.id === selected ? "active" : ""}`}
-                    >
-                      <span className="large-icon"><Icon name={item.icon} /></span>
-                      <strong>{item.name}</strong>
-                      <small>{item.subtitle}</small>
-                      <em>{formatHKD(item.basePrice)}</em>
-                    </button>
-                  ))}
-                </div>
-              </BuilderPanel>
-
-              <BuilderPanel title={t.builderStep2}>
-                <div className="choice-grid two">
-                  {t.apartments.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setApartment(item.id)}
-                      className={`choice row-choice ${item.id === apartment ? "active" : ""}`}
-                    >
-                      <span>
-                        <strong>{item.label}</strong>
-                        <small>{item.description}</small>
-                      </span>
-                      <em>{item.adjustment === 0 ? "+HK$0" : `+${formatHKD(item.adjustment)}`}</em>
-                    </button>
-                  ))}
-                </div>
-              </BuilderPanel>
-
-              <BuilderPanel title={t.builderStep3}>
-                <div className="choice-grid two">
-                  {t.addons.map((item) => {
-                    const active = selectedAddons.includes(item.id);
-                    return (
-                      <button
-                        key={item.id}
-                        onClick={() => toggleAddon(item.id)}
-                        className={`choice row-choice ${active ? "active" : ""}`}
-                      >
-                        <span>
-                          <strong><span className="round-select">{active ? "âœ“" : "+"}</span>{item.label}</strong>
-                          <small>{item.description}</small>
-                        </span>
-                        <em>+{formatHKD(item.price)}</em>
-                      </button>
-                    );
-                  })}
-                </div>
-              </BuilderPanel>
+          <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
+            <div className="grid gap-5">
+              <BuilderPanel title={t.builderSteps[0]}>{t.packages.map((pkg) => <Choice key={pkg.id} active={selected === pkg.id} onClick={() => setSelected(pkg.id)} title={pkg.name} desc={pkg.subtitle} price={formatHKD(pkg.basePrice)} icon={pkg.icon} />)}</BuilderPanel>
+              <BuilderPanel title={t.builderSteps[1]}>{t.apartments.map((item) => <Choice key={item.id} active={apartment === item.id} onClick={() => setApartment(item.id)} title={item.label} desc={item.description} price={`+${formatHKD(item.adjustment)}`} />)}</BuilderPanel>
+              <BuilderPanel title={t.builderSteps[2]}>{t.addons.map((item) => <Choice key={item.id} active={addons.includes(item.id)} onClick={() => toggleAddon(item.id)} title={item.label} desc={item.description} price={`+${formatHKD(item.price)}`} />)}</BuilderPanel>
             </div>
-
-            <aside className="estimate-card">
-              <div className="estimate-head">
-                <div>
-                  <small>{t.builderSummary}</small>
-                  <strong>{formatHKD(total)}</strong>
-                </div>
-                <span className="brand-mark"><Icon name="bolt" /></span>
-              </div>
-
-              <div className="estimate-lines">
-                <SummaryLine label={t.builderBase} value={selectedPackage.name} price={formatHKD(selectedPackage.basePrice)} />
-                <SummaryLine label={t.builderApartment} value={selectedApartment.label} price={`+${formatHKD(selectedApartment.adjustment)}`} />
-
-                <div className="summary-block">
-                  <span>{t.builderAddons}</span>
-                  {activeAddons.length ? (
-                    activeAddons.map((item) => (
-                      <div className="addon-line" key={item.id}>
-                        <span>{item.label}</span>
-                        <em>+{formatHKD(item.price)}</em>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="addon-line muted">{t.builderNoAddons}</div>
-                  )}
-                </div>
-              </div>
-
-              <div className="total-box">
-                <small>{t.builderEstimatedTotal}</small>
-                <strong>{formatHKD(total)}</strong>
-              </div>
-
-              <p className="fine-print">{t.builderDisclaimer}</p>
-
-              <a className="pill cyan full" href={whatsappHref} target="_blank" rel="noreferrer">
-                {t.builderCta} <Icon name="arrow" />
-              </a>
-              <a className="pill ghost full" href={mailtoHref}>{t.builderSecondaryCta}</a>
+            <aside className="sticky top-24 rounded-[1.6rem] border border-cyan-300/30 bg-slate-900/95 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">{t.builderSummary}</p><p className="mt-2 text-3xl font-semibold">{formatHKD(total)}</p>
+              <div className="mt-5 grid gap-3 border-t border-white/10 pt-5 text-sm"><Summary label={t.builderBase} value={selectedPackage.name} price={formatHKD(selectedPackage.basePrice)} /><Summary label={t.builderApartment} value={selectedApartment.label} price={`+${formatHKD(selectedApartment.adjustment)}`} /><div><p className="mb-2 text-slate-400">{t.builderAddons}</p>{activeAddons.length ? activeAddons.map((item) => <div key={item.id} className="mb-2 flex justify-between gap-3 rounded-2xl bg-white/[0.04] px-3 py-2"><span>{item.label}</span><span className="text-cyan-100">+{formatHKD(item.price)}</span></div>) : <p className="rounded-2xl bg-white/[0.04] px-3 py-2 text-slate-400">{t.builderNoAddons}</p>}</div></div>
+              <div className="mt-5 rounded-2xl bg-cyan-300/10 p-4"><p className="text-sm text-cyan-100">{t.builderTotal}</p><p className="mt-1 text-4xl font-semibold">{formatHKD(total)}</p></div>
+              <p className="mt-4 text-xs leading-5 text-slate-400">{t.builderDisclaimer}</p>
+              <div className="mt-5 grid gap-3"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-4 py-3 font-semibold text-slate-950 transition hover:bg-cyan-200"><Icon name="phone" className="h-4 w-4" />{t.builderCta}</a><a href={mailtoHref} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-3 font-semibold transition hover:bg-white/10">{t.builderSecondaryCta}<Icon name="arrow" className="h-4 w-4" /></a></div>
             </aside>
           </div>
         </section>
 
-        <section className="section">
-          <div className="selected-layout">
-            <div>
-              <div className="eyebrow">{t.selectedPlan}</div>
-              <h2>{selectedPackage.name}</h2>
-              <p>{selectedPackage.description}</p>
-              <div className="soft-box"><strong>{t.idealFor}</strong> {selectedPackage.idealFor}</div>
-            </div>
-            <div>
-              <h3>{t.included}</h3>
-              <FeatureGrid items={selectedPackage.includes} />
-            </div>
-          </div>
-        </section>
+        <section className="mx-auto max-w-6xl px-4 py-10 lg:px-6"><Card className="grid gap-8 p-6 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{t.selectedPackage}</p><h2 className="mt-3 text-3xl font-semibold">{selectedPackage.name}</h2><p className="mt-4 text-slate-300">{t.selectedCopy}</p><p className="mt-5 rounded-2xl bg-white/[0.05] p-4 text-sm text-slate-300"><strong className="text-white">{t.idealFor}: </strong>{selectedPackage.idealFor}</p></div><div><h3 className="mb-4 text-xl font-semibold">{t.includedSelected}</h3><div className="grid gap-3 sm:grid-cols-2">{selectedPackage.includes.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></div></Card></section>
 
-        <section className="section assumptions-section">
-          <SectionHeader
-            eyebrow={language === "zh" ? "åƒ¹æ ¼å‡è¨­" : "Package assumptions"}
-            title={language === "zh" ? "ã€Œèµ·ã€åƒ¹æ‡‰è©²æ¸…æ¥šï¼Œè€Œä¸æ˜¯ä»¤äººä¼°ä¼°ä¸‹ã€‚" : "Make the â€œfromâ€ price clear, not vague."}
-            text={
-              language === "zh"
-                ? "ä»¥ä¸‹å‡è¨­ä»¤å®¢æˆ¶æ›´å®¹æ˜“ç†è§£ä¼°ç®—åƒ¹éŒ¢çš„åŸºç¤Žã€‚æœ€çµ‚ç¯„åœä»æœƒæŒ‰ç¾å ´ç·šè·¯ã€è¨­å‚™å“ç‰ŒåŠå®‰è£æ¢ä»¶ç¢ºèªã€‚"
-                : "These assumptions help customers understand what the starting prices are based on. Final scope is still confirmed after checking wiring, device brand, and installation condition."
-            }
-          />
+        <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><SectionHeader eyebrow={t.scopeEyebrow} title={t.scopeTitle} text={t.scopeText} /><div className="grid gap-5 lg:grid-cols-2"><Card className="p-6"><h3 className="mb-5 text-2xl font-semibold">{t.includedTitle}</h3><div className="grid gap-3">{t.includedItems.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></Card><Card className="p-6"><h3 className="mb-5 text-2xl font-semibold">{t.excludedTitle}</h3><div className="grid gap-3">{t.excludedItems.map((item) => <Bullet key={item} warn>{item}</Bullet>)}</div></Card></div></section>
 
-          <div className="assumption-grid">
-            {(language === "zh"
-              ? [
-                  ["Starter èµ·åƒ¹å‡è¨­", "é©åˆä¸€å€‹æ ¸å¿ƒå€åŸŸï¼Œä¾‹å¦‚çŽ„é—œæˆ–å®¢å»³ï¼ŒåŒ…å«åŸºæœ¬æ™ºèƒ½æŽ§åˆ¶ã€App è¨­å®šã€ç°¡å–®æƒ…å¢ƒåŠä½¿ç”¨æ•™å­¸ã€‚"],
-                  ["Comfort & Energy èµ·åƒ¹å‡è¨­", "é©åˆå®¢å»³åŠä¸»è¦ç”Ÿæ´»å€åŸŸï¼Œé‡é»žæ˜¯ç‡ˆå…‰ã€å†·æ°£ç¿’æ…£ã€æ™‚é–“æŽ’ç¨‹åŠèˆ’é©ç¯€èƒ½å ´æ™¯ã€‚"],
-                  ["Family Safety èµ·åƒ¹å‡è¨­", "é©åˆå‡ºå…¥å£åŠä¸»è¦é–€çª—ç›£å¯Ÿï¼Œé‡é»žæ˜¯å‡ºå…¥å®‰å…¨ã€æé†’é€šçŸ¥ã€å¤œé–“å®‰å…¨ç‡ˆå…‰åŠåŸºæœ¬äº¤ä»˜ã€‚"],
-                ]
-              : [
-                  ["Starter starting assumption", "Suitable for one core area such as entry or living room, including basic smart control, app setup, simple scenes, and user training."],
-                  ["Comfort & Energy starting assumption", "Suitable for living and key daily areas, focusing on lighting, air-con habits, schedules, and comfort/energy scenes."],
-                  ["Family Safety starting assumption", "Suitable for entry and key door/window awareness, focusing on access safety, alerts, night lighting, and basic handover."],
-                ]).map(([title, text]) => (
-              <div className="assumption-card" key={title}>
-                <div className="assumption-icon"><Icon name="check" /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            ))}
-          </div>
+        <section id="example" className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><Card className="grid gap-8 bg-gradient-to-br from-white/[0.055] to-amber-300/[0.06] p-6 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-amber-300">{t.exampleEyebrow}</p><h2 className="text-3xl font-semibold md:text-5xl">{t.exampleTitle}</h2><p className="mt-4 leading-7 text-slate-300">{t.exampleText}</p></div><div className="grid gap-4 md:grid-cols-3">{t.exampleZones.map(([zone, items]) => <div key={zone} className="rounded-2xl border border-white/10 bg-slate-950/35 p-5"><h3 className="mb-4 text-xl font-semibold">{zone}</h3><div className="grid gap-3">{items.map((item) => <div key={item} className="flex gap-2 text-sm text-slate-300"><Icon name="check" className="h-4 w-4 shrink-0 text-amber-300" />{item}</div>)}</div></div>)}</div></Card></section>
 
-          <div className="sample-setup-card">
-            <div>
-              <div className="eyebrow">{language === "zh" ? "ç¤ºä¾‹è¨­å®š" : "Example setup"}</div>
-              <h2>
-                {language === "zh"
-                  ? "å…©æˆ¿å–®ä½å¯å…ˆç”±å®¢å»³ã€çŽ„é—œåŠå¤œé–“å®‰å…¨é–‹å§‹ã€‚"
-                  : "A 2-bedroom flat can start with living room, entry, and night safety."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "é€™ä¸æ˜¯å›ºå®šæ–¹æ¡ˆï¼Œè€Œæ˜¯è®“å®¢æˆ¶ç†è§£å¦‚ä½•ç”±å¯¦ç”¨ç¯„åœé–‹å§‹ï¼Œå†é€æ­¥åŠ å…¥ç¡æˆ¿ã€çª—ç°¾ã€å†·æ°£æˆ–æ›´å¤šæ„Ÿæ‡‰å™¨ã€‚"
-                  : "This is not a fixed package. It shows how a customer can start from practical areas, then add bedrooms, curtains, air-con, or more sensors later."}
-              </p>
-            </div>
+        <InfoGrid eyebrow={t.privacyEyebrow} title={t.privacyTitle} text={t.privacyText} items={t.privacyPoints} icon="shield" />
+        <InfoGrid eyebrow={t.quoteEyebrow} title={t.quoteTitle} text={t.quoteText} items={t.quoteSteps} numbered />
 
-            <div className="sample-list">
-              {(language === "zh"
-                ? ["çŽ„é—œå›žå®¶ç‡ˆå…‰", "å®¢å»³æ™šé–“æƒ…å¢ƒ", "å†·æ°£æ™‚é–“è¨­å®š", "å¤œé–“ä½Žäº®åº¦è·¯å¾‘ç‡ˆ", "åŸºæœ¬ App åŠä½¿ç”¨æ•™å­¸"]
-                : ["Entry welcome lighting", "Living room evening scene", "Air-con schedule setup", "Low-level night path lighting", "Basic app and user training"]
-              ).map((item) => (
-                <div className="sample-line" key={item}>
-                  <Icon name="check" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <section id="process" className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]"><SectionHeader eyebrow={t.processEyebrow} title={t.processTitle} text={t.processText} /><div className="grid gap-4">{t.process.map((step, index) => <Card key={step} className="flex items-center gap-4 p-5"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-cyan-300 font-bold text-slate-950">{index + 1}</span><strong>{step}</strong></Card>)}</div></div></section>
+        <InfoGrid eyebrow={t.aftercareEyebrow} title={t.aftercareTitle} text={t.aftercareText} items={t.aftercareItems} icon="check" amber />
 
-        <section id="scope" className="section split-section">
-          <div className="why-card">
-            <div className="eyebrow">{t.whyEyebrow}</div>
-            <h2>{t.whyTitle}</h2>
-            <p>{t.whyText}</p>
-            <FeatureGrid items={t.whyPoints} />
-          </div>
-          <div className="stack">
-            <div className="panel highlighted">
-              <h3>{t.includedTitle}</h3>
-              <FeatureGrid items={t.includedItems} />
-            </div>
-            <div className="panel">
-              <h3>{t.excludedTitle}</h3>
-              <FeatureGrid items={t.excludedItems} warn />
-            </div>
-          </div>
-        </section>
+        <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><SectionHeader eyebrow={t.faqEyebrow} title={t.faqTitle} /><div className="grid gap-4 md:grid-cols-2">{t.faqs.map(([q, a]) => <Card key={q} className="p-5"><h3 className="text-lg font-semibold">{q}</h3><p className="mt-3 text-sm leading-6 text-slate-300">{a}</p></Card>)}</div></section>
 
-        <section className="section privacy-section">
-          <div className="privacy-card">
-            <div>
-              <div className="eyebrow">{language === "zh" ? "ç§éš±èˆ‡å®‰å…¨" : "Privacy and safety"}</div>
-              <h2>
-                {language === "zh"
-                  ? "é–€éŽ–ã€é¡é ­ã€æ„Ÿæ‡‰å™¨å’Œå¸³æˆ¶è¨­å®šï¼Œå¿…é ˆäº¤ä»£æ¸…æ¥šã€‚"
-                  : "Door locks, cameras, sensors, and accounts must be handled clearly."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "æ™ºèƒ½å®¶å±…ä¸åªæ˜¯æ–¹ä¾¿ï¼Œä¹Ÿæ¶‰åŠå®¶åº­ç§éš±åŠå®‰å…¨ã€‚ç¶²ç«™æ‡‰æ¸…æ¥šèªªæ˜Žè¨­å®šåŽŸå‰‡ï¼Œè®“å®¢æˆ¶çŸ¥é“ç³»çµ±å±¬æ–¼è‡ªå·±ï¼Œè€Œä¸æ˜¯ä¾è³´ä¸æ¸…æ¥šçš„ç¬¬ä¸‰æ–¹æŽ§åˆ¶ã€‚"
-                  : "Smart homes are not only about convenience. They also involve household privacy and security. The site should explain how setup is handled so customers know the system belongs to them, not an unclear third-party controller."}
-              </p>
-            </div>
+        <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><Card className="grid gap-5 p-6 lg:grid-cols-[0.85fr_1fr_0.75fr]"><div><p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{t.briefEyebrow}</p><h2 className="text-3xl font-semibold">{t.briefTitle}</h2><p className="mt-4 text-sm leading-6 text-slate-300">{t.briefText}</p></div><div className="grid gap-3 rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-sm"><Summary label={t.briefLabels[0]} value={selectedPackage.name} /><Summary label={t.briefLabels[1]} value={selectedApartment.label} /><Summary label={t.briefLabels[2]} value={activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : t.builderNoAddons} /><Summary label={t.briefLabels[3]} value={formatHKD(total)} big /></div><div className="grid content-center gap-3"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-4 py-3 font-semibold text-slate-950 transition hover:bg-cyan-200"><Icon name="phone" className="h-4 w-4" />{t.builderCta}</a><a href={mailtoHref} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-3 font-semibold transition hover:bg-white/10">{t.builderSecondaryCta}<Icon name="arrow" className="h-4 w-4" /></a></div></Card></section>
 
-            <div className="privacy-points">
-              {(language === "zh"
-                ? [
-                    ["å¸³æˆ¶ç”±å®¢æˆ¶æ“æœ‰", "ä¸»è¦ Appã€é–€éŽ–ã€é¡é ­åŠèªžéŸ³åŠ©ç†å¸³æˆ¶æ‡‰ä»¥å®¢æˆ¶è³‡æ–™å»ºç«‹æˆ–äº¤é‚„å®¢æˆ¶ç®¡ç†ã€‚"],
-                    ["é¡é ­ä½ç½®å…ˆç¢ºèª", "å¦‚æ¶‰åŠé¡é ­æˆ–è¦–åƒé–€éˆ´ï¼Œæ‡‰å…ˆç¢ºèªä½¿ç”¨ç›®çš„ã€è§’åº¦åŠç§éš±è€ƒæ…®ã€‚"],
-                    ["ä¿ç•™æ—¥å¸¸æ‰‹å‹•æŽ§åˆ¶", "æ™ºèƒ½è¨­å®šä¸æ‡‰ä»¤å®¶äººå¤±åŽ»åŸºæœ¬ç‰†æŽ£æˆ–ç°¡å–®æŽ§åˆ¶æ–¹å¼ã€‚"],
-                    ["äº¤ä»˜æ™‚èªªæ˜Žæ¬Šé™", "å®Œæˆå¾Œæ‡‰èªªæ˜Žä¸»è¦æ¬Šé™ã€é€šçŸ¥ã€å®¶åº­æˆå“¡åŠ å…¥æ–¹å¼åŠæ—¥å¾Œæ›´æ”¹æ–¹æ³•ã€‚"],
-                  ]
-                : [
-                    ["Customer-owned accounts", "Main app, lock, camera, and voice assistant accounts should be created for or handed over to the customer."],
-                    ["Camera placement confirmed", "For cameras or video doorbells, purpose, viewing angle, and privacy considerations should be confirmed first."],
-                    ["Manual control preserved", "Smart setup should not remove basic wall-switch or simple-control options for family members."],
-                    ["Permissions explained", "Handover should explain key permissions, alerts, family member access, and future adjustment methods."],
-                  ]).map(([title, text]) => (
-                <div className="privacy-point" key={title}>
-                  <Icon name="shield" />
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section quote-clarity-section">
-          <div className="quote-clarity-card">
-            <div>
-              <div className="eyebrow">{language === "zh" ? "å ±åƒ¹å¦‚ä½•ç¢ºèª" : "How quotation is confirmed"}</div>
-              <h2>
-                {language === "zh"
-                  ? "ç¶²ä¸Šä¼°ç®—å…ˆå¹«ä½ é–‹å§‹ï¼Œæœ€çµ‚å ±åƒ¹è¦çœ‹ç¾å ´æ¢ä»¶ã€‚"
-                  : "The online estimate helps you start. The final quotation depends on the actual home."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "é€™æ¨£å¯ä»¥ä¿æŒåƒ¹æ ¼é€æ˜Žï¼ŒåŒæ™‚é¿å…å› ç·šè·¯ã€å“ç‰Œã€å®‰è£é›£åº¦æˆ–è£ä¿®ç‹€æ…‹ä¸åŒè€Œä½Žä¼°æˆæœ¬ã€‚"
-                  : "This keeps the pricing transparent while avoiding underquoting caused by wiring, device brand, installation complexity, or renovation stage."}
-              </p>
-            </div>
-
-            <div className="quote-steps">
-              {(language === "zh"
-                ? [
-                    ["01", "å»ºç«‹ä¼°ç®—", "å…ˆç”¨çµ„åˆå™¨é¸æ–¹æ¡ˆã€å–®ä½é¡žåž‹åŠå‡ç´šé …ç›®ã€‚"],
-                    ["02", "äº†è§£ç¾å ´", "ç¢ºèªç·šè·¯ã€é–‹é—œã€Wiâ€‘Fiã€é–€çª—åŠå®‰è£å¯è¡Œæ€§ã€‚"],
-                    ["03", "ç¢ºèªç¯„åœ", "åˆ—æ˜ŽåŒ…æ‹¬é …ç›®ã€å¦å ±é …ç›®ã€ç”¢å“é¸æ“‡åŠå®‰è£æ¢ä»¶ã€‚"],
-                    ["04", "å®‰æŽ’å®‰è£", "å®Œæˆè¨­å®šã€æ¸¬è©¦ã€äº¤ä»˜æ¸…å–®åŠåŸºæœ¬ä½¿ç”¨æ•™å­¸ã€‚"],
-                  ]
-                : [
-                    ["01", "Build estimate", "Choose package, apartment type, and optional upgrades."],
-                    ["02", "Check site condition", "Review wiring, switches, Wiâ€‘Fi, doors/windows, and installation feasibility."],
-                    ["03", "Confirm scope", "Clarify included items, separately quoted items, device choices, and installation conditions."],
-                    ["04", "Install and hand over", "Complete setup, testing, handover checklist, and basic user training."],
-                  ]).map(([number, title, text]) => (
-                <div className="quote-step" key={title}>
-                  <span>{number}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section launch-section">
-          <div className="launch-card">
-            <div className="launch-layout">
-              <div>
-                <div className="eyebrow">{t.launchEyebrow}</div>
-                <h2>{t.launchTitle}</h2>
-                <p>{t.launchText}</p>
-              </div>
-              <div className="launch-side">
-                <div className="launch-badge">{t.launchBadge}</div>
-                <p>{t.launchSide}</p>
-              </div>
-            </div>
-            <div className="launch-points">
-              {t.launchPoints.map(([number, title, text]) => (
-                <div className="launch-point" key={title}>
-                  <span className="launch-number">{number}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="scenario" className="section">
-          <SectionHeader eyebrow={t.scenarioEyebrow} title={t.scenarioTitle} text={t.scenarioText} />
-          <div className="scenario-row">
-            {t.scenarios.map(([time, title, text, icon]) => (
-              <div className="scenario-card" key={title}>
-                <div><span>{time}</span><Icon name={icon} /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="comparison-card">
-            <h2><Icon name="building" /> {t.comparisonTitle}</h2>
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>{t.comparisonHeaders.map((h) => <th key={h}>{h}</th>)}</tr>
-                </thead>
-                <tbody>
-                  {t.comparisonRows.map((row) => (
-                    <tr key={row[0]}>
-                      {row.map((cell) => <td key={`${row[0]}-${cell}`}>{cell}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <section id="process" className="section process-section">
-          <div>
-            <div className="eyebrow">{t.processEyebrow}</div>
-            <h2>{t.processTitle}</h2>
-            <p>{t.processText}</p>
-          </div>
-          <div className="process-list">
-            {t.process.map((step, index) => (
-              <div className="process-step" key={step}>
-                <span>{index + 1}</span>
-                <strong>{step}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section previsit-section">
-          <div>
-            <div className="eyebrow">{t.preVisitEyebrow}</div>
-            <h2>{t.preVisitTitle}</h2>
-            <p>{t.preVisitText}</p>
-          </div>
-          <div className="card-grid two">
-            {t.preVisitCards.map(([title, text]) => (
-              <div className="info-card" key={title}>
-                <Icon name="check" />
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section aftercare-section">
-          <div className="aftercare-card">
-            <div>
-              <div className="eyebrow">{language === "zh" ? "äº¤ä»˜èˆ‡å¾ŒçºŒ" : "Handover and aftercare"}</div>
-              <h2>
-                {language === "zh"
-                  ? "è£å®Œä¸æ˜¯çµ‚é»žï¼ŒçœŸæ­£é‡è¦æ˜¯å®¶äººæœƒç”¨ã€‚"
-                  : "Installation is not the end. The real goal is that the household can use it."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "æ™ºèƒ½å®¶å±…æœ€å¸¸è¦‹å¤±æ•—ä½ï¼Œæ˜¯è£ç½®å¾ˆå¤šä½†å®¶äººä¸æ‡‚ç”¨ï¼Œæˆ–è€…æ—¥å¾Œæ²’æœ‰äººçŸ¥é“æ€Žæ¨£èª¿æ•´ã€‚äº¤ä»˜æ™‚è¦æ¸…æ¥šèªªæ˜Žæ“ä½œã€æ¬Šé™åŠå¾ŒçºŒå‡ç´šæ–¹å‘ã€‚"
-                  : "A common smart-home failure is installing many devices without making them easy for the household to use or adjust later. Handover should explain controls, permissions, and future upgrade direction."}
-              </p>
-            </div>
-
-            <div className="aftercare-grid">
-              {(language === "zh"
-                ? [
-                    ["äº¤ä»˜æ¸…å–®", "æ•´ç†å·²å®‰è£è¨­å‚™ã€æŽ§åˆ¶æ–¹å¼ã€Appã€å¸³æˆ¶åŠä¸»è¦æƒ…å¢ƒã€‚"],
-                    ["åŸºæœ¬æ•™å­¸", "ç¤ºç¯„æ—¥å¸¸æ“ä½œï¼Œä¾‹å¦‚å›žå®¶ã€é›¢å®¶ã€å¤œé–“ã€æ‰‹å‹•æŽ§åˆ¶åŠé€šçŸ¥ã€‚"],
-                    ["å¾®èª¿æœŸ", "æŒ‰å¯¦éš›ä½¿ç”¨æ„Ÿå—ï¼Œä½œåŸºæœ¬æƒ…å¢ƒæˆ–è¨­å®šèª¿æ•´ã€‚"],
-                    ["å‡ç´šè·¯ç·š", "ç”±ä¸€å€‹å€åŸŸé–‹å§‹ï¼Œæ—¥å¾Œå†åŠ æˆ¿é–“ã€æ„Ÿæ‡‰å™¨ã€çª—ç°¾æˆ–èƒ½æºç®¡ç†ã€‚"],
-                  ]
-                : [
-                    ["Handover checklist", "Summarise installed devices, controls, apps, accounts, and key scenes."],
-                    ["Basic user training", "Demonstrate daily use: home, away, night, manual control, and alerts."],
-                    ["Adjustment period", "Fine-tune basic scenes or settings based on real usage."],
-                    ["Upgrade path", "Start from one area, then add rooms, sensors, curtains, or energy management later."],
-                  ]).map(([title, text]) => (
-                <div className="aftercare-item" key={title}>
-                  <Icon name="check" />
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <SectionHeader eyebrow={t.faqEyebrow} title={t.faqTitle} />
-          <div className="card-grid two">
-            {t.faqs.map(([question, answer]) => (
-              <div className="info-card" key={question}>
-                <h3>{question}</h3>
-                <p>{answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="section estimate-brief-section">
-          <div className="estimate-brief-card">
-            <div className="estimate-brief-copy">
-              <div className="eyebrow">{language === "zh" ? "估算摘要" : "Estimate brief"}</div>
-              <h2>
-                {language === "zh"
-                  ? "你的智能家居估算已整理好，可以直接傳送查詢。"
-                  : "Your smart-home estimate is ready to send as an enquiry."}
-              </h2>
-              <p>
-                {language === "zh"
-                  ? "這個摘要會幫客戶和安裝方快速對齊方案、單位類型、升級項目及初步估算，減少來回溝通。"
-                  : "This brief helps the customer and installer align quickly on package, apartment type, add-ons, and the initial estimate."}
-              </p>
-            </div>
-
-            <div className="estimate-brief-summary">
-              <div>
-                <span>{language === "zh" ? "方案" : "Package"}</span>
-                <strong>{selectedPackage.name}</strong>
-              </div>
-              <div>
-                <span>{language === "zh" ? "單位類型" : "Apartment"}</span>
-                <strong>{selectedApartment.label}</strong>
-              </div>
-              <div>
-                <span>{language === "zh" ? "升級項目" : "Add-ons"}</span>
-                <strong>
-                  {activeAddons.length
-                    ? activeAddons.map((item) => item.label).join(", ")
-                    : t.builderNoAddons}
-                </strong>
-              </div>
-              <div className="estimate-brief-total">
-                <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
-                <strong>{formatHKD(total, language)}</strong>
-              </div>
-            </div>
-
-            <div className="estimate-brief-actions">
-              <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
-                <Icon name="phone" />
-                {language === "zh" ? "WhatsApp 傳送摘要" : "WhatsApp this brief"}
-              </a>
-              <a href={mailtoHref}>
-                {language === "zh" ? "電郵傳送摘要" : "Email this brief"}
-                <Icon name="arrow" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-
-        <section id="contact" className="section">
-          <div className="contact-card">
-            <div>
-              <div className="contact-eyebrow"><Icon name="clock" />{t.contactEyebrow}</div>
-              <h2>{t.contactTitle}</h2>
-              <p>{t.contactText}</p>
-            </div>
-            <div className="contact-actions">
-              <a className="pill dark full" href={whatsappHref} target="_blank" rel="noreferrer">
-                <Icon name="phone" /> {t.whatsappCta}
-              </a>
-              <a className="pill outline-dark full" href={mailtoHref}>
-                {t.emailCta} <Icon name="arrow" />
-              </a>
-            </div>
-          </div>
-        </section>
+        <section id="contact" className="mx-auto max-w-6xl px-4 py-14 pb-32 lg:px-6 lg:pb-16"><div className="rounded-[1.8rem] bg-gradient-to-br from-cyan-300 to-amber-300 p-6 text-slate-950 md:p-8"><div className="grid gap-6 lg:grid-cols-[1fr_0.45fr] lg:items-center"><div><p className="mb-3 inline-flex rounded-full bg-slate-950/10 px-3 py-1 text-sm font-bold">{t.contactEyebrow}</p><h2 className="text-3xl font-semibold tracking-tight md:text-5xl">{t.contactTitle}</h2><p className="mt-4 max-w-2xl leading-7 text-slate-900">{t.contactText}</p><p className="mt-4 text-sm font-semibold">{t.reassurance}</p></div><div className="grid gap-3"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 font-semibold text-white transition hover:bg-slate-800"><Icon name="phone" className="h-4 w-4" />{t.whatsappCta}</a><a href={mailtoHref} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-950/20 px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-950/10">{t.emailCta}<Icon name="arrow" className="h-4 w-4" /></a></div></div></div></section>
       </main>
-      <div className="desktop-estimate-dock" aria-label={language === "zh" ? "即時估算快捷操作" : "Live estimate quick actions"}>
-        <a className="dock-total" href="#builder">
-          <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
-          <strong>{formatHKD(total, language)}</strong>
-        </a>
-        <div className="dock-actions">
-          <a href="#builder">{language === "zh" ? "調整" : "Review"}</a>
-          <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
-            <Icon name="phone" />
-            WhatsApp
-          </a>
-        </div>
-      </div>
 
-      <div className="mobile-sticky-cta" aria-label={language === "zh" ? "快速估算與查詢" : "Quick estimate and enquiry"}>
-        <a className="sticky-total" href="#builder">
-          <span>{language === "zh" ? "即時估算" : "Live estimate"}</span>
-          <strong>{formatHKD(total, language)}</strong>
-        </a>
-        <a className="sticky-action" href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
-          <Icon name="phone" />
-          <span>WhatsApp</span>
-        </a>
-      </div>
+      <div className="fixed bottom-3 left-3 right-3 z-50 rounded-2xl border border-white/15 bg-slate-950/88 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden"><a href="#builder" className="mb-2 grid grid-cols-[auto_1fr] items-center gap-3 rounded-xl bg-cyan-300 px-4 py-3 text-slate-950"><span className="text-xs font-black uppercase tracking-wider opacity-75">{t.builderSummary}</span><strong className="justify-self-end text-lg">{formatHKD(total)}</strong></a><div className="grid grid-cols-2 gap-2"><a href="#builder" className="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-3 text-sm font-semibold">{t.stickyReview}</a><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-3 text-sm font-semibold"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div></div>
+      <div className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/84 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:flex"><a href="#builder" className="grid rounded-xl bg-cyan-300/10 px-4 py-2"><span className="text-xs font-bold uppercase tracking-wider text-slate-400">{t.builderSummary}</span><strong className="text-cyan-100">{formatHKD(total)}</strong></a><a href="#builder" className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">{t.stickyReview}</a><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div>
 
-<footer>
-        <span>{t.footer}</span>
-        <nav>
-          <a href="#plans">{t.nav[0]}</a>
-          <a href="#builder">{t.nav[1]}</a>
-          <a href="#contact">{t.nav[4]}</a>
-        </nav>
-      </footer>
+      <footer className="relative z-10 border-t border-white/10 px-4 py-8 text-sm text-slate-400"><div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between"><p>{t.footer}</p><div className="flex gap-4"><a href="#packages" className="hover:text-white">{t.nav[0]}</a><a href="#builder" className="hover:text-white">{t.nav[1]}</a><a href="#contact" className="hover:text-white">{t.nav[4]}</a></div></div></footer>
     </div>
   );
+}
+
+function Choice({ active, onClick, title, desc, price, icon }) {
+  return <button onClick={onClick} className={`rounded-3xl border p-5 text-left transition ${active ? "border-cyan-300 bg-cyan-300/10" : "border-white/10 bg-slate-950/35 hover:border-white/30"}`}>{icon && <Icon name={icon} className="mb-4 h-6 w-6 text-cyan-200" />}<div className="font-semibold text-white">{title}</div><div className="mt-2 text-sm leading-6 text-slate-400">{desc}</div>{price && <div className="mt-4 text-sm font-semibold text-cyan-100">{price}</div>}</button>;
 }
 
 function BuilderPanel({ title, children }) {
-  return (
-    <div className="builder-panel">
-      <h3>{title}</h3>
-      {children}
-    </div>
-  );
+  return <Card className="p-5"><h3 className="mb-5 text-xl font-semibold">{title}</h3><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{children}</div></Card>;
 }
 
-function SummaryLine({ label, value, price }) {
-  return (
-    <div className="summary-line">
-      <span>{label}</span>
-      <strong>{value}<small>{price}</small></strong>
-    </div>
-  );
+function Summary({ label, value, price, big }) {
+  return <div className="flex justify-between gap-4 border-b border-white/10 pb-3 last:border-b-0 last:pb-0"><span className="text-slate-400">{label}</span><span className={`text-right text-white ${big ? "text-xl font-semibold text-cyan-100" : ""}`}>{value}{price && <><br /><small className="text-slate-400">{price}</small></>}</span></div>;
 }
 
-
-
+function InfoGrid({ eyebrow, title, text, items, icon = "check", numbered = false, amber = false }) {
+  return <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]"><SectionHeader eyebrow={eyebrow} title={title} text={text} /><div className="grid gap-4 sm:grid-cols-2">{items.map(([h, p], index) => <Card key={h} className="p-5"><div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-2xl ${amber ? "bg-amber-300 text-slate-950" : "bg-cyan-300/10 text-cyan-200"}`}>{numbered ? <span className="font-bold">{index + 1}</span> : <Icon name={icon} className="h-5 w-5" />}</div><h3 className="text-lg font-semibold">{h}</h3><p className="mt-3 text-sm leading-6 text-slate-300">{p}</p></Card>)}</div></div></section>;
+}
 
