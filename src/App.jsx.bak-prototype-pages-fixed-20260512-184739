@@ -29,7 +29,7 @@ const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 
 const content = {
   en: {
-    nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
+    nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", diagram: "Diagram", ar: "AR Demo", estimate: "Estimate", contact: "Contact" },
     brandSub: "Scenario-first smart-home installation",
     buildEstimate: "Build Estimate",
     trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
@@ -214,7 +214,7 @@ const content = {
     ],
   },
   zh: {
-    nav: { home: "主頁", scenarios: "情境", solutions: "方案說明", estimate: "估算", contact: "聯絡" },
+    nav: { home: "主頁", scenarios: "情境", solutions: "方案說明", diagram: "圖解", ar: "AR 模擬", estimate: "估算", contact: "聯絡" },
     brandSub: "由生活情境開始的智能家居安裝",
     buildEstimate: "建立估算",
     trust: ["包括安裝及設定", "上門了解後確認報價", "保留家人易用控制", "交付時說明帳戶權限"],
@@ -400,7 +400,7 @@ const content = {
   },
 };
 
-const pageIds = ["home", "scenarios", "solutions", "estimate", "contact"];
+const pageIds = ["home", "scenarios", "solutions", "diagram", "ar", "estimate", "contact"];
 function getPage() {
   const hash = window.location.hash.replace("#", "").split("?")[0].split("/")[0];
   return pageIds.includes(hash) ? hash : "home";
@@ -465,6 +465,8 @@ export default function App() {
         {page === "home" && <HomePage {...shared} />}
         {page === "scenarios" && <ScenariosPage {...shared} />}
         {page === "solutions" && <SolutionsPage {...shared} />}
+        {page === "diagram" && <DiagramPage {...shared} />}
+        {page === "ar" && <ARDemoPage {...shared} />}
         {page === "estimate" && <EstimatePage {...shared} />}
         {page === "contact" && <ContactPage {...shared} />}
       </main>
@@ -488,13 +490,15 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
     ["home", t.nav.home],
     ["scenarios", t.nav.scenarios],
     ["solutions", t.nav.solutions],
+    ["diagram", t.nav.diagram],
+    ["ar", t.nav.ar],
     ["estimate", t.nav.estimate],
     ["contact", t.nav.contact],
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 lg:px-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 lg:px-6">
         <button onClick={() => go("home")} className="flex items-center gap-3 text-left">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/20"><Icon name="bolt" className="h-5 w-5" /></span>
           <span>
@@ -503,7 +507,7 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
           </span>
         </button>
 
-        <nav className="ml-auto hidden items-center gap-6 text-sm text-slate-300 md:flex">
+        <nav className="ml-auto hidden items-center gap-5 text-sm text-slate-300 lg:flex">
           {links.map(([id, label]) => (
             <a
               key={id}
@@ -516,7 +520,7 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 md:ml-0">
+        <div className="ml-auto flex items-center gap-2 lg:ml-0">
           <div className="flex rounded-full border border-white/10 bg-white/[0.04] p-1 text-xs font-bold text-slate-300">
             <button className={`rounded-full px-3 py-1.5 transition ${language === "en" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("en")}>EN</button>
             <button className={`rounded-full px-3 py-1.5 transition ${language === "zh" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("zh")}>繁中</button>
@@ -524,14 +528,14 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
 
           <button onClick={() => go("estimate")} className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100 md:inline-flex">{t.buildEstimate}</button>
 
-          <button className="rounded-xl border border-white/10 p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label="Toggle menu">
+          <button className="rounded-xl border border-white/10 p-2 lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label="Toggle menu">
             <Icon name={menuOpen ? "close" : "menu"} className="h-5 w-5" />
           </button>
         </div>
       </div>
 
       {menuOpen && (
-        <nav id="mobile-menu" className="grid gap-3 border-t border-white/10 px-4 py-4 text-sm text-slate-300 md:hidden">
+        <nav id="mobile-menu" className="grid gap-3 border-t border-white/10 px-4 py-4 text-sm text-slate-300 lg:hidden">
           {links.map(([id, label]) => (
             <a key={id} href={`#${id}`} onClick={(e) => { e.preventDefault(); go(id); }}>
               {label}
@@ -963,51 +967,150 @@ function SmartThingChip({ label }) {
 }
 
 function SolutionsPage({ t, language, go }) {
-  const featureMap = language === "zh"
+  const intro = language === "zh"
+    ? {
+        title: "先講需求，再決定設備。",
+        body: "智能家居不應該由產品清單開始。這一頁把常見生活需求轉成可能設定，讓客戶理解「做到這件事」背後通常要檢查甚麼。",
+        note: "這裡不顯示價錢，因為是否可行要看線路、Wi‑Fi、門窗、窗簾路軌及家庭習慣。"
+      }
+    : {
+        title: "Start with the task, then decide the device.",
+        body: "A smart home should not begin with a shopping list. This page turns common life needs into possible setups, so customers understand what usually needs checking.",
+        note: "No pricing is shown here because feasibility depends on wiring, Wi‑Fi, doors, windows, curtain rails, and household habits."
+      };
+
+  return (
+    <>
+      <PageHero eyebrow={t.solutionsPage.eyebrow} title={t.solutionsPage.title} body={t.solutionsPage.body} primary={t.common.continuePackages} secondary={t.nav.scenarios} onPrimary={() => go("estimate")} onSecondary={() => go("scenarios")} />
+
+      <section className="mx-auto max-w-6xl px-4 pb-6 lg:px-6">
+        <Card className="grid gap-6 p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{t.solutionsPage.eyebrow}</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">{intro.title}</h2>
+            <p className="mt-4 leading-7 text-slate-300">{intro.body}</p>
+          </div>
+          <div className="rounded-[1.3rem] border border-amber-300/20 bg-amber-300/10 p-5 text-sm leading-6 text-amber-50">
+            {intro.note}
+          </div>
+        </Card>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
+        <div className="grid gap-5 md:grid-cols-2">
+          {t.solutionTasks.map(([task, setup, check, pkg], index) => (
+            <SolutionTaskCard
+              key={task}
+              t={t}
+              index={index}
+              task={task}
+              setup={setup}
+              check={check}
+              pkg={pkg}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
+        <Card className="grid gap-6 p-6 lg:grid-cols-[1fr_0.35fr] lg:items-center">
+          <div>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
+              {language === "zh" ? "看完需求，再選起步方案。" : "After the tasks, choose a starting package."}
+            </h2>
+            <p className="mt-4 max-w-2xl leading-7 text-slate-300">
+              {language === "zh" ? "當你大概知道想改善的生活片段，就可以到方案頁建立初步估算。" : "Once the life moments are clear, move to the package page to build a starting estimate."}
+            </p>
+          </div>
+          <button onClick={() => go("estimate")} className="btn-primary justify-center">{t.common.continuePackages}<Icon name="arrow" className="h-4 w-4" /></button>
+        </Card>
+      </section>
+    </>
+  );
+}
+
+function SolutionTaskCard({ t, index, task, setup, check, pkg }) {
+  const icons = ["sparkle", "sun", "lock", "moon", "shield", "home", "clock", "eye"];
+  const setupParts = setup.split("+").map((item) => item.trim()).filter(Boolean);
+
+  return (
+    <Card className="overflow-hidden p-0">
+      <div className="p-5">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
+            <Icon name={icons[index % icons.length]} className="h-5 w-5" />
+          </span>
+          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300">{String(index + 1).padStart(2, "0")}</span>
+        </div>
+
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{t.solutionsPage.task}</p>
+        <h3 className="text-xl font-semibold leading-snug">{task}</h3>
+
+        <div className="mt-5 grid gap-3">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">{t.solutionsPage.setup}</p>
+            <div className="flex flex-wrap gap-2">
+              {setupParts.map((item) => <SmartThingChip key={item} label={item} />)}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-200">{t.solutionsPage.check}</p>
+            {check}
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10 bg-white/[0.025] px-5 py-4">
+        <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">{t.solutionsPage.package}</span>
+        <span className="ml-3 text-sm font-semibold text-cyan-100">{pkg}</span>
+      </div>
+    </Card>
+  );
+}
+
+
+function DiagramPage({ t, language, go }) {
+  const features = language === "zh"
     ? [
-        { id: "entry", title: "智能門鎖及玄關", task: "我想回家、離家、訪客進入都更順。", room: "玄關", icon: "lock", setup: ["智能門鎖", "門磁", "迎賓燈光", "離家模式"], check: "門身、鎖體、電源、出入權限、家人使用習慣。", pos: { top: "18%", left: "18%" } },
-        { id: "living", title: "客廳情境燈光", task: "我想一按轉換睇戲、晚飯、聚會或放鬆模式。", room: "客廳", icon: "sparkle", setup: ["燈光情境", "情境按鈕", "氣氛燈"], check: "現有開關、零線、燈具類型、是否需要保留傳統牆掣。", pos: { top: "36%", left: "44%" } },
-        { id: "climate", title: "冷氣與舒適控制", task: "我想回家前或睡前，溫度已經準備好。", room: "客廳 / 睡房", icon: "sun", setup: ["冷氣控制", "時間設定", "舒適模式"], check: "冷氣型號、遙控兼容、Wi‑Fi 覆蓋、日常使用時間。", pos: { top: "23%", left: "60%" } },
-        { id: "curtain", title: "窗簾自動化", task: "我想窗簾配合早上、黃昏、睇戲或私隱需要。", room: "窗邊", icon: "home", setup: ["窗簾摩打", "日程", "電影模式"], check: "窗簾路軌、窗簾重量、電源位、安裝空間。", pos: { top: "14%", left: "74%" } },
-        { id: "bedroom", title: "睡房睡眠模式", task: "我想睡前降燈、冷氣、窗簾及夜燈一併準備。", room: "睡房", icon: "moon", setup: ["睡房情境", "睡眠模式", "夜燈"], check: "睡眠習慣、冷氣設定、床邊控制、夜間走動路線。", pos: { top: "58%", left: "70%" } },
-        { id: "bath", title: "浴室感應與抽氣", task: "我想夜晚去洗手間更安全，也少一點忘記關抽氣。", room: "浴室 / 走廊", icon: "clock", setup: ["感應燈", "抽氣時間", "夜間輔助"], check: "浴室開關、抽氣扇線路、感應角度、夜燈亮度。", pos: { top: "60%", left: "25%" } },
-        { id: "safety", title: "感應與通知", task: "我想知道指定門窗或活動狀態。", room: "全屋重點位", icon: "shield", setup: ["門窗感應", "手機通知", "安全模式"], check: "通知頻率、私隱期望、感應器位置、家人接受程度。", pos: { top: "76%", left: "46%" } },
+        { id: "entry", title: "智能門鎖及玄關", room: "玄關", icon: "lock", blurb: "把回家、離家及訪客進入的第一步整合起來。", detail: "可配合門鎖、門磁、迎賓燈光及通知，令出入更順。", tags: ["智能門鎖", "門磁", "迎賓燈光"], pos: { top: "18%", left: "18%" } },
+        { id: "living", title: "客廳燈光情境", room: "客廳", icon: "sparkle", blurb: "把日常、睇戲、聚會及放鬆場景變成一按即用。", detail: "由燈光主場景開始，是大多數智能家居最容易感受到的部分。", tags: ["燈光情境", "情境按鈕", "氣氛燈"], pos: { top: "36%", left: "44%" } },
+        { id: "climate", title: "冷氣及舒適控制", room: "客廳 / 睡房", icon: "sun", blurb: "配合日常作息，提早準備溫度與舒適度。", detail: "可作時間設定，或與回家模式、睡前模式結合。", tags: ["冷氣控制", "時間設定", "舒適模式"], pos: { top: "23%", left: "60%" } },
+        { id: "curtain", title: "窗簾自動化", room: "客廳 / 睡房", icon: "home", blurb: "令採光、私隱及作息配合得更自然。", detail: "常見用途包括晨早打開、黃昏關上，或配合電影模式。", tags: ["窗簾摩打", "日程", "電影模式"], pos: { top: "14%", left: "74%" } },
+        { id: "bedroom", title: "睡房睡眠模式", room: "睡房", icon: "moon", blurb: "把睡前降燈、溫度及夜間輔助整合。", detail: "適合與 Pre‑Sleep / Sleep Mode 連在一起，形成完整夜晚流程。", tags: ["睡房情境", "睡眠模式", "夜燈"], pos: { top: "58%", left: "70%" } },
+        { id: "bath", title: "浴室感應與輔助", room: "浴室", icon: "clock", blurb: "減少夜間摸黑、忘記抽氣或開關。", detail: "常見於半夜去洗手間、洗澡後抽氣延時，以及低亮度走道輔助。", tags: ["感應燈", "抽氣時間", "夜間輔助"], pos: { top: "60%", left: "25%" } },
+        { id: "security", title: "感應與通知", room: "全屋重點位", icon: "shield", blurb: "留意門窗、移動或指定活動，強化基本安心感。", detail: "適合與家庭安全方案結合，加入手機提醒及重點監察。", tags: ["門窗感應", "通知", "安全"], pos: { top: "76%", left: "46%" } },
       ]
     : [
-        { id: "entry", title: "Smart lock and entry", task: "I want arrival, leaving, and visitor entry to feel smoother.", room: "Entry", icon: "lock", setup: ["Smart lock", "Door sensor", "Welcome lighting", "Away mode"], check: "Door type, lock body, power, access permissions, and family habits.", pos: { top: "18%", left: "18%" } },
-        { id: "living", title: "Living-room lighting scenes", task: "I want one-tap scenes for TV, dinner, gathering, or relaxing.", room: "Living room", icon: "sparkle", setup: ["Lighting scene", "Scene button", "Ambient light"], check: "Existing switches, neutral wire, light type, and manual wall-control preference.", pos: { top: "36%", left: "44%" } },
-        { id: "climate", title: "Climate and comfort control", task: "I want the temperature ready before arriving home or sleeping.", room: "Living / Bedroom", icon: "sun", setup: ["AC control", "Schedule", "Comfort mode"], check: "AC model, remote compatibility, Wi‑Fi coverage, and daily usage rhythm.", pos: { top: "23%", left: "60%" } },
-        { id: "curtain", title: "Curtain automation", task: "I want curtains to match morning, evening, movie, or privacy needs.", room: "Window side", icon: "home", setup: ["Curtain motor", "Daily schedule", "Movie mode"], check: "Curtain rail, curtain weight, nearby power, and installation clearance.", pos: { top: "14%", left: "74%" } },
-        { id: "bedroom", title: "Bedroom sleep mode", task: "I want lighting, AC, curtains, and night light prepared together.", room: "Bedroom", icon: "moon", setup: ["Bedroom scene", "Sleep mode", "Night light"], check: "Sleep habit, AC setting, bedside control, and late-night route.", pos: { top: "58%", left: "70%" } },
-        { id: "bath", title: "Bathroom sensing and ventilation", task: "I want safer late-night toilet trips and fewer forgotten ventilation fans.", room: "Bathroom / Hallway", icon: "clock", setup: ["Motion light", "Vent timer", "Night assist"], check: "Bathroom switches, fan wiring, sensor angle, and night-light brightness.", pos: { top: "60%", left: "25%" } },
-        { id: "safety", title: "Sensors and alerts", task: "I want to know selected door, window, or movement status.", room: "Key points", icon: "shield", setup: ["Door/window sensor", "Phone alert", "Safety mode"], check: "Alert frequency, privacy expectations, sensor locations, and family acceptance.", pos: { top: "76%", left: "46%" } },
+        { id: "entry", title: "Smart lock and entry", room: "Entry", icon: "lock", blurb: "Combine arrival, leaving, and visitor access into the first moment at home.", detail: "Can connect the lock, door sensor, welcome lighting, and alerts into one cleaner routine.", tags: ["Smart lock", "Door sensor", "Welcome lighting"], pos: { top: "18%", left: "18%" } },
+        { id: "living", title: "Living-room scenes", room: "Living room", icon: "sparkle", blurb: "Turn everyday, TV, gathering, and relax moments into one-tap scenes.", detail: "Lighting scenes are usually the most immediately felt part of a smart-home setup.", tags: ["Lighting scene", "Scene button", "Ambient light"], pos: { top: "36%", left: "44%" } },
+        { id: "climate", title: "Climate and comfort control", room: "Living / Bedroom", icon: "sun", blurb: "Prepare comfort around daily routines instead of adjusting it manually each time.", detail: "Can be scheduled or connected to homecoming, pre-sleep, and other modes.", tags: ["AC control", "Schedule", "Comfort mode"], pos: { top: "23%", left: "60%" } },
+        { id: "curtain", title: "Curtain automation", room: "Living / Bedroom", icon: "home", blurb: "Let daylight, privacy, and routines feel more natural.", detail: "Common uses include morning opening, evening closing, and pairing with movie mode.", tags: ["Curtain motor", "Daily schedule", "Movie mode"], pos: { top: "14%", left: "74%" } },
+        { id: "bedroom", title: "Bedroom sleep mode", room: "Bedroom", icon: "moon", blurb: "Bundle dimming, temperature, and night support into one calmer routine.", detail: "Works well when connected to Pre‑Sleep and Sleep Mode.", tags: ["Bedroom scene", "Sleep mode", "Night light"], pos: { top: "58%", left: "70%" } },
+        { id: "bath", title: "Bathroom sensing and assist", room: "Bathroom", icon: "clock", blurb: "Reduce fumbling in the dark and forgetting ventilation.", detail: "Useful for late-night toilet trips, shower ventilation timing, and low-level path lighting.", tags: ["Motion light", "Vent timer", "Night assist"], pos: { top: "60%", left: "25%" } },
+        { id: "security", title: "Sensors and alerts", room: "Key home points", icon: "shield", blurb: "Watch doors, windows, motion, or selected events for added peace of mind.", detail: "Often paired with the family-safety package and selected phone notifications.", tags: ["Door/window sensor", "Alerts", "Safety"], pos: { top: "76%", left: "46%" } },
       ];
 
-  const [active, setActive] = useState(featureMap[1].id);
-  const current = featureMap.find((item) => item.id === active) || featureMap[0];
+  const [active, setActive] = useState(features[1].id);
+  const current = features.find((item) => item.id === active) || features[0];
 
   return (
     <>
       <PageHero
-        eyebrow={t.solutionsPage.eyebrow}
-        title={language === "zh" ? "在一張圖上看懂：你想屋企做到甚麼。" : "See the smart-home setup on one apartment diagram."}
-        body={language === "zh" ? "這頁把原本的 Solutions 和圖解合併：先點選單位位置，再看對應生活需求、可能設定及安裝前要確認的事項。" : "This merges the old Solutions page and the isometric diagram: select a point in the apartment, then see the related life task, possible setup, and what must be checked before installation."}
-        primary={t.common.continuePackages}
+        eyebrow={language === "zh" ? "原型頁面 · 圖解" : "Prototype page · Diagram"}
+        title={language === "zh" ? "用等角圖快速講清楚：每個智能功能大概放在哪裏。" : "Use one isometric diagram to explain where each smart feature usually lives."}
+        body={language === "zh" ? "這是一個臨時評估頁面方向，用來看看『圖上標點』是否比純文字更容易讓客戶理解。" : "This is a temporary concept page to test whether a point-by-point diagram explains the system more clearly than plain text alone."}
+        primary={t.nav.contact}
         secondary={t.nav.scenarios}
-        onPrimary={() => go("estimate")}
+        onPrimary={() => go("contact")}
         onSecondary={() => go("scenarios")}
       />
 
       <section className="mx-auto max-w-7xl px-4 pb-20 lg:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:items-start">
-          <Card className="overflow-hidden p-0 lg:sticky lg:top-24">
-            <div className="merged-iso-shell">
-              <div className="merged-iso-intro">
-                <p>{language === "zh" ? "Interactive feature map" : "Interactive feature map"}</p>
-                <h2>{language === "zh" ? "點選位置，理解智能功能。" : "Click a point to understand the feature."}</h2>
-              </div>
-
-              <div className="merged-iso-stage">
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+          <Card className="sticky top-24 overflow-hidden p-0">
+            <div className="isometric-shell">
+              <div className="isometric-stage">
                 <div className="iso-floor iso-living" />
                 <div className="iso-floor iso-entry" />
                 <div className="iso-floor iso-bedroom" />
@@ -1024,7 +1127,7 @@ function SolutionsPage({ t, language, go }) {
                 <div className="iso-furniture iso-table" />
                 <div className="iso-furniture iso-cabinet" />
 
-                {featureMap.map((feature) => (
+                {features.map((feature, index) => (
                   <button
                     key={feature.id}
                     onClick={() => setActive(feature.id)}
@@ -1042,53 +1145,230 @@ function SolutionsPage({ t, language, go }) {
 
           <div className="grid gap-4">
             <Card className="p-6">
-              <div className="mb-5 flex items-start gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200"><Icon name={current.icon} className="h-6 w-6" /></span>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-cyan-300">{current.room}</p>
+              <div className="mb-4 flex items-start gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200"><Icon name={current.icon} className="h-6 w-6" /></span>
                 <div>
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{current.room}</p>
                   <h2 className="text-2xl font-semibold md:text-3xl">{current.title}</h2>
-                  <p className="mt-3 text-base leading-7 text-slate-200">{current.task}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{current.blurb}</p>
                 </div>
               </div>
-
-              <div className="grid gap-3">
-                <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">{t.solutionsPage.setup}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {current.setup.map((item) => <SmartThingChip key={item} label={item} />)}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-200">{t.solutionsPage.check}</p>
-                  {current.check}
-                </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-sm leading-6 text-slate-300">{current.detail}</div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {current.tags.map((item) => <SmartThingChip key={item} label={item} />)}
               </div>
             </Card>
 
-            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-1">
-              {featureMap.map((feature) => (
+            <div className="grid gap-3">
+              {features.map((feature) => (
                 <button
                   key={feature.id}
                   onClick={() => setActive(feature.id)}
-                  className={`group rounded-[1.3rem] border p-4 text-left transition ${active === feature.id ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:bg-white/[0.08]"}`}
+                  className={`rounded-[1.3rem] border p-4 text-left transition ${active === feature.id ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:bg-white/[0.08]"}`}
                 >
                   <div className="mb-3 flex items-start justify-between gap-4">
                     <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-cyan-200"><Icon name={feature.icon} className="h-5 w-5" /></span>
                     <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400">{feature.room}</span>
                   </div>
-                  <h3 className="text-lg font-semibold">{feature.task}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">{feature.title}</p>
+                  <h3 className="text-lg font-semibold">{feature.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{feature.blurb}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ARDemoPage({ t, language, go }) {
+  const modeSets = language === "zh"
+    ? {
+        morning: {
+          label: "Morning Mode",
+          steps: [
+            ["睡房", "柔和亮起，窗簾逐步打開。", ["睡房情境", "窗簾", "冷氣"]],
+            ["浴室", "浴室燈及抽氣準備好。", ["感應燈", "抽氣"]],
+            ["玄關", "提醒鎖匙、銀包及雨傘。", ["提醒", "語音", "離家模式"]],
+          ]
+        },
+        night: {
+          label: "Night Mode",
+          steps: [
+            ["玄關", "回家燈光柔和亮起，冷氣已預備。", ["迎賓燈", "冷氣", "門磁"]],
+            ["客廳", "進入 TV / 放鬆情境。", ["燈光情境", "窗簾", "娛樂"]],
+            ["走廊", "夜間偵測走動時，低亮度路徑燈亮起。", ["人體感應", "夜燈"]],
+          ]
+        },
+        gathering: {
+          label: "Gathering Mode",
+          steps: [
+            ["客廳", "聚會前把空間調整到歡迎狀態。", ["歡迎燈光", "冷氣", "音樂"]],
+            ["飯廳", "晚飯及聊天情境準備好。", ["飯廳燈光", "情境按鈕"]],
+            ["玄關", "客人離開時，門口區域變得較亮。", ["玄關燈光", "迎送模式"]],
+          ]
+        },
+        pet: {
+          label: "Pet Mode",
+          steps: [
+            ["客廳", "保留柔和環境，讓寵物日間較安心。", ["柔和燈光", "舒適模式"]],
+            ["寵物區", "按需要維持基本舒適與可見度。", ["冷氣", "低亮度燈"]],
+            ["主人手機", "主人可作簡單查看。", ["鏡頭", "通知"]],
+          ]
+        },
+      }
+    : {
+        morning: {
+          label: "Morning Mode",
+          steps: [
+            ["Bedroom", "Soft light rises and curtains gradually open.", ["Bedroom scene", "Curtains", "AC"]],
+            ["Bathroom", "Bathroom light and ventilation get ready.", ["Motion light", "Ventilation"]],
+            ["Entry", "A reminder cues keys, wallet, and umbrella.", ["Reminder", "Voice", "Away mode"]],
+          ]
+        },
+        night: {
+          label: "Night Mode",
+          steps: [
+            ["Entry", "Welcome lighting rises softly and the room is already cooled.", ["Welcome light", "AC", "Door sensor"]],
+            ["Living room", "The home moves into TV / relax mode.", ["Lighting scene", "Curtains", "Entertainment"]],
+            ["Hallway", "Late-night movement triggers a low-level path light.", ["Motion sensor", "Night light"]],
+          ]
+        },
+        gathering: {
+          label: "Gathering Mode",
+          steps: [
+            ["Living room", "The room shifts into a more guest-ready scene.", ["Welcome scene", "AC", "Music"]],
+            ["Dining", "Dinner and conversation mode are prepared.", ["Dining lights", "Scene button"]],
+            ["Entry", "The entry becomes brighter when guests leave.", ["Entry light", "Exit mode"]],
+          ]
+        },
+        pet: {
+          label: "Pet Mode",
+          steps: [
+            ["Living room", "A calm home setting remains during the day.", ["Soft light", "Comfort mode"]],
+            ["Pet zone", "Comfort and visibility are maintained where needed.", ["AC", "Low light"]],
+            ["Owner phone", "The owner can check in when needed.", ["Camera", "Notifications"]],
+          ]
+        },
+      };
+
+  const [modeId, setModeId] = useState("night");
+  const [stepIndex, setStepIndex] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(false)  # placeholder replaced below
+  const currentSet = modeSets[modeId];
+  const currentStep = currentSet.steps[stepIndex];
+
+  useEffect(() => {
+    if (!autoPlay) return;
+    const timer = setInterval(() => {
+      setStepIndex((prev) => (prev + 1) % currentSet.steps.length);
+    }, 2600);
+    return () => clearInterval(timer);
+  }, [autoPlay, currentSet]);
+
+  useEffect(() => {
+    setStepIndex(0);
+  }, [modeId]);
+
+  const roomKey = String(currentStep[0]).toLowerCase();
+
+  return (
+    <>
+      <PageHero
+        eyebrow={language === "zh" ? "原型頁面 · AR 模擬" : "Prototype page · AR simulation"}
+        title={language === "zh" ? "把單位變成可互動示範場景，模擬智能家居如何運作。" : "Turn an apartment into an interactive simulation of how the smart-home system behaves."}
+        body={language === "zh" ? "這不是正式 AR 技術方案，而是一個『類 AR 示範頁』方向，用來測試客戶會否更容易代入。" : "This is not a final AR implementation yet. It is a prototype page direction to test whether a semi-AR demo helps customers imagine the system more easily."}
+        primary={t.nav.scenarios}
+        secondary={t.nav.contact}
+        onPrimary={() => go("scenarios")}
+        onSecondary={() => go("contact")}
+      />
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 lg:px-6">
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+          <Card className="overflow-hidden p-0">
+            <div className="ar-stage">
+              <div className="ar-stage-topbar">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300"><Icon name="eye" className="h-3.5 w-3.5" /> {language === "zh" ? "AR 示範視角" : "AR demo view"}</span>
+                <span className="text-xs text-slate-400">{currentSet.label}</span>
+              </div>
+
+              <div className="ar-apartment">
+                <div className={`ar-room ar-room-entry ${roomKey.includes("entry") || roomKey.includes("玄關") ? "ar-room-active" : ""}`}><span>{language === "zh" ? "玄關" : "Entry"}</span></div>
+                <div className={`ar-room ar-room-living ${roomKey.includes("living") || roomKey.includes("客廳") ? "ar-room-active" : ""}`}><span>{language === "zh" ? "客廳" : "Living"}</span></div>
+                <div className={`ar-room ar-room-dining ${roomKey.includes("dining") || roomKey.includes("飯") ? "ar-room-active" : ""}`}><span>{language === "zh" ? "飯廳" : "Dining"}</span></div>
+                <div className={`ar-room ar-room-bedroom ${roomKey.includes("bed") || roomKey.includes("sleep") || roomKey.includes("睡") ? "ar-room-active" : ""}`}><span>{language === "zh" ? "睡房" : "Bedroom"}</span></div>
+                <div className={`ar-room ar-room-bath ${roomKey.includes("bath") || roomKey.includes("hall") || roomKey.includes("浴") || roomKey.includes("走廊") ? "ar-room-active" : ""}`}><span>{language === "zh" ? "浴室 / 走廊" : "Bath / Hall"}</span></div>
+
+                <div className="ar-beacon ar-beacon-a" />
+                <div className="ar-beacon ar-beacon-b" />
+                <div className="ar-beacon ar-beacon-c" />
+
+                <div className="ar-overlay-card">
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{currentSet.label}</p>
+                  <h2 className="text-2xl font-semibold">{currentStep[0]}</h2>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">{currentStep[1]}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {currentStep[2].map((item) => <SmartThingChip key={item} label={item} />)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <div className="grid gap-4">
+            <Card className="p-5">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">{language === "zh" ? "示範模式" : "Demo modes"}</p>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(modeSets).map(([id, set]) => (
+                  <button
+                    key={id}
+                    onClick={() => setModeId(id)}
+                    className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${modeId === id ? "border-cyan-300 bg-cyan-300/10 text-cyan-100" : "border-white/10 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08]"}`}
+                  >
+                    {set.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <button onClick={() => setAutoPlay(!autoPlay)} className="btn-primary">
+                  <Icon name={autoPlay ? "close" : "arrow"} className="h-4 w-4" />
+                  {autoPlay ? (language === "zh" ? "停止播放" : "Stop auto-play") : (language === "zh" ? "自動播放示範" : "Auto-play demo")}
+                </button>
+                <button onClick={() => setStepIndex((stepIndex + 1) % currentSet.steps.length)} className="btn-secondary">
+                  {language === "zh" ? "下一步" : "Next step"}
+                </button>
+              </div>
+            </Card>
+
+            <div className="grid gap-3">
+              {currentSet.steps.map((step, index) => (
+                <button
+                  key={`${modeId}-${index}`}
+                  onClick={() => setStepIndex(index)}
+                  className={`rounded-[1.3rem] border p-4 text-left transition ${stepIndex === index ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:bg-white/[0.08]"}`}
+                >
+                  <div className="mb-3 flex items-center justify-between gap-4">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="text-xs text-slate-400">{step[0]}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">{step[1]}</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {step[2].map((item) => <SmartThingChip key={item} label={item} />)}
+                  </div>
                 </button>
               ))}
             </div>
 
-            <Card className="grid gap-5 p-6 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <h3 className="text-2xl font-semibold">{language === "zh" ? "圖上了解後，再查看起步方案。" : "After the map, continue to starting packages."}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{language === "zh" ? "這頁不放價錢，避免客戶未理解範圍就只看價格。估算只放在方案頁。" : "This page avoids pricing so customers understand the scope first. Estimates only appear on the package page."}</p>
-              </div>
-              <button onClick={() => go("estimate")} className="btn-primary justify-center">{t.common.continuePackages}<Icon name="arrow" className="h-4 w-4" /></button>
+            <Card className="p-5">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-cyan-300">{language === "zh" ? "這頁的目的" : "What this page is testing"}</p>
+              <p className="text-sm leading-6 text-slate-300">
+                {language === "zh"
+                  ? "測試『可互動單位示範』是否比純文字或一般功能列表更容易令客戶代入，之後再決定要不要保留或深化。"
+                  : "This page tests whether an interactive apartment simulation helps customers picture the system more easily than plain copy or a standard feature list."}
+              </p>
             </Card>
           </div>
         </div>
@@ -1219,13 +1499,15 @@ function Footer({ t, go }) {
     ["home", t.nav.home],
     ["scenarios", t.nav.scenarios],
     ["solutions", t.nav.solutions],
+    ["diagram", t.nav.diagram],
+    ["ar", t.nav.ar],
     ["estimate", t.nav.estimate],
     ["contact", t.nav.contact],
   ];
 
   return (
     <footer className="relative z-10 border-t border-white/10 px-4 py-8 text-sm text-slate-400">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <p>© 2026 Boson Smart. {t.brandSub}</p>
         <div className="flex flex-wrap gap-4">
           {footerLinks.map(([id, label]) => (

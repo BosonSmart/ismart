@@ -1,0 +1,487 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #020617;
+  color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: #67e8f9;
+  color: #020617;
+  padding: 0.75rem 1.5rem;
+  font-weight: 750;
+  box-shadow: 0 16px 40px rgba(103, 232, 249, 0.16);
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #a5f3fc;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 750;
+  transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* v2.1 simplified scene timeline */
+@supports (backdrop-filter: blur(8px)) {
+  .scene-glass {
+    backdrop-filter: blur(12px);
+  }
+}
+
+
+/* full-page scenario snap scroll */
+.fullpage-scenario-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.fullpage-scenario-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@supports (height: 100dvh) {
+  .fullpage-scenario-scroll {
+    height: calc(100dvh - 4.25rem);
+  }
+}
+
+
+/* v2.2 scenario visual polish */
+.scenario-slide {
+  isolation: isolate;
+}
+
+.scenario-copy {
+  transform: translateY(18px);
+  opacity: 0.52;
+  transition: opacity 520ms ease, transform 520ms ease, filter 520ms ease;
+  filter: blur(0.5px);
+}
+
+.scenario-copy-active {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+.scenario-copy-idle {
+  opacity: 0.68;
+}
+
+.scenario-grid {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 78px 78px;
+  transform: perspective(900px) rotateX(62deg) translateY(18%);
+  transform-origin: 50% 100%;
+}
+
+.scenario-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(28px);
+  opacity: 0.64;
+  animation: scenario-drift 12s ease-in-out infinite alternate;
+}
+
+.scenario-orb-a {
+  width: 22rem;
+  height: 22rem;
+  right: 8%;
+  top: 10%;
+  background: rgba(103, 232, 249, 0.25);
+}
+
+.scenario-orb-b {
+  width: 18rem;
+  height: 18rem;
+  left: 8%;
+  bottom: 10%;
+  background: rgba(251, 191, 36, 0.16);
+  animation-delay: -5s;
+}
+
+.scenario-orb-morning {
+  background: rgba(251, 191, 36, 0.28);
+}
+
+.scenario-orb-night {
+  background: rgba(124, 58, 237, 0.28);
+}
+
+.scenario-orb-gathering {
+  background: rgba(249, 115, 22, 0.28);
+}
+
+.scenario-orb-pet {
+  background: rgba(34, 197, 94, 0.24);
+}
+
+.scenario-room {
+  position: absolute;
+  right: clamp(1rem, 8vw, 7rem);
+  top: clamp(5rem, 15vh, 9rem);
+  width: min(36rem, 62vw);
+  height: min(27rem, 48vh);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 2rem;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.11), rgba(255,255,255,0.025)),
+    linear-gradient(180deg, rgba(2,6,23,0.08), rgba(2,6,23,0.38));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 24px 100px rgba(0,0,0,0.22);
+  transform: rotate(-1.5deg);
+  opacity: 0.9;
+  animation: scenario-room-in 900ms ease both;
+}
+
+.scenario-window {
+  position: absolute;
+  left: 8%;
+  top: 12%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+  width: 8.5rem;
+  height: 6rem;
+  padding: 0.55rem;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 0 34px rgba(103,232,249,0.12);
+}
+
+.scenario-window span {
+  border-radius: 0.55rem;
+  background: rgba(255,255,255,0.12);
+}
+
+.scenario-sun,
+.scenario-moon {
+  position: absolute;
+  right: 14%;
+  top: 15%;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 999px;
+}
+
+.scenario-sun {
+  background: rgba(253, 224, 71, 0.78);
+  box-shadow: 0 0 70px rgba(253, 224, 71, 0.48);
+}
+
+.scenario-moon {
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.92), rgba(255,255,255,0.28));
+  box-shadow: 0 0 70px rgba(147,197,253,0.32);
+}
+
+.scenario-pendant {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 6rem;
+  background: rgba(255,255,255,0.22);
+}
+
+.scenario-pendant::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1.2rem;
+  width: 3.5rem;
+  height: 2rem;
+  transform: translateX(-50%);
+  border-radius: 0 0 3rem 3rem;
+  background: rgba(251, 191, 36, 0.35);
+  box-shadow: 0 0 46px rgba(251,191,36,0.32);
+}
+
+.scenario-pendant-a { left: 48%; }
+.scenario-pendant-b { left: 63%; height: 5rem; }
+
+.scenario-paw {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+}
+
+.scenario-paw-a {
+  right: 17%;
+  top: 18%;
+  width: 4.3rem;
+  height: 3rem;
+  transform: rotate(-18deg);
+}
+
+.scenario-paw-b {
+  right: 28%;
+  top: 28%;
+  width: 2.5rem;
+  height: 1.7rem;
+  transform: rotate(12deg);
+}
+
+.scenario-furniture {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(2,6,23,0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.scenario-furniture-main {
+  left: 14%;
+  bottom: 18%;
+  width: 45%;
+  height: 4.8rem;
+  border-radius: 2rem 2rem 1.2rem 1.2rem;
+}
+
+.scenario-furniture-side {
+  right: 14%;
+  bottom: 19%;
+  width: 19%;
+  height: 6.2rem;
+  border-radius: 1.2rem;
+}
+
+.scenario-lamp {
+  position: absolute;
+  right: 18%;
+  bottom: 42%;
+  width: 0.35rem;
+  height: 5rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.22);
+}
+
+.scenario-lamp::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -2.2rem;
+  width: 3.6rem;
+  height: 2.2rem;
+  transform: translateX(-50%);
+  border-radius: 3rem 3rem 0.8rem 0.8rem;
+  background: rgba(103,232,249,0.22);
+  box-shadow: 0 0 42px rgba(103,232,249,0.22);
+}
+
+.scenario-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28%;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(2,6,23,0.28));
+  border-radius: 0 0 2rem 2rem;
+}
+
+.scenario-room-entry .scenario-furniture-main {
+  width: 26%;
+  height: 7rem;
+  border-radius: 1.1rem;
+}
+
+.scenario-room-dining .scenario-furniture-main {
+  width: 38%;
+  height: 3.2rem;
+  left: 32%;
+  bottom: 27%;
+  border-radius: 999px;
+}
+
+.scenario-room-bath .scenario-window {
+  width: 6rem;
+  height: 5rem;
+}
+
+.scenario-room-bath .scenario-furniture-main {
+  width: 22%;
+  height: 7rem;
+  border-radius: 1.4rem;
+}
+
+.scenario-room-sleep .scenario-furniture-main {
+  width: 50%;
+  height: 5.4rem;
+  border-radius: 1.4rem;
+}
+
+.scenario-room-pet .scenario-furniture-side {
+  width: 14%;
+  height: 3rem;
+  bottom: 22%;
+  border-radius: 999px;
+}
+
+.scenario-device-glow {
+  position: absolute;
+  border-radius: 999px;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: rgba(103,232,249,0.9);
+  box-shadow: 0 0 24px rgba(103,232,249,0.55);
+  animation: scenario-pulse 2.4s ease-in-out infinite;
+}
+
+.scenario-device-glow-a { right: 24%; top: 37%; }
+.scenario-device-glow-b { right: 44%; top: 60%; animation-delay: -0.8s; }
+.scenario-device-glow-c { right: 18%; top: 70%; animation-delay: -1.4s; }
+
+.scenario-floating-chip {
+  position: absolute;
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  background: rgba(2,6,23,0.38);
+  color: rgba(255,255,255,0.86);
+  padding: 0.45rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 42px rgba(0,0,0,0.18);
+  animation: scenario-chip-float 6s ease-in-out infinite;
+}
+
+.scenario-floating-chip-0 { display: inline-flex; right: 8%; top: 48%; }
+.scenario-floating-chip-1 { display: inline-flex; right: 26%; top: 24%; animation-delay: -1.2s; }
+.scenario-floating-chip-2 { display: inline-flex; right: 14%; bottom: 16%; animation-delay: -2.4s; }
+.scenario-floating-chip-3 { display: inline-flex; right: 42%; bottom: 28%; animation-delay: -3.2s; }
+.scenario-floating-chip-4 { display: inline-flex; right: 34%; top: 58%; animation-delay: -4s; }
+
+@keyframes scenario-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(1.5rem, -1rem, 0) scale(1.08); }
+}
+
+@keyframes scenario-room-in {
+  from { transform: translateY(1.2rem) rotate(-1.5deg); opacity: 0; }
+  to { transform: translateY(0) rotate(-1.5deg); opacity: 0.9; }
+}
+
+@keyframes scenario-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.7); opacity: 1; }
+}
+
+@keyframes scenario-chip-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.6rem); }
+}
+
+@media (max-width: 767px) {
+  .scenario-room {
+    right: -3rem;
+    top: 5.8rem;
+    width: 82vw;
+    height: 38vh;
+    opacity: 0.5;
+  }
+
+  .scenario-window {
+    transform: scale(0.82);
+    transform-origin: top left;
+  }
+
+  .scenario-furniture-main {
+    width: 48%;
+  }
+
+  .scenario-floating-chip-0,
+  .scenario-floating-chip-1,
+  .scenario-floating-chip-2 {
+    display: none;
+  }
+
+  .scenario-grid {
+    opacity: 0.08;
+  }
+
+  .scenario-copy-active,
+  .scenario-copy-idle {
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+}
+
+
+/* v2.3 home + solutions polish */
+.home-showcase-glow {
+  box-shadow: 0 24px 90px rgba(8, 145, 178, 0.12);
+}
