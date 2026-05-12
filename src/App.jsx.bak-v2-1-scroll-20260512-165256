@@ -1,0 +1,615 @@
+import React, { useMemo, useState } from "react";
+
+const CONTACT_EMAIL = "hello@bosonsmart.hk";
+const WHATSAPP_NUMBER = "85200000000";
+
+function Icon({ name, className = "" }) {
+  const paths = {
+    arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
+    check: <path d="m5 12 4 4L19 6" />,
+    bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />,
+    home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></>,
+    shield: <><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z" /><path d="m9 12 2 2 4-5" /></>,
+    sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,
+    moon: <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z" />,
+    lock: <><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14v2" /></>,
+    users: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>,
+    sliders: <><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /><circle cx="9" cy="6" r="2" /><circle cx="15" cy="12" r="2" /><circle cx="11" cy="18" r="2" /></>,
+    phone: <path d="M21 15.5v3a2 2 0 0 1-2.2 2 18 18 0 0 1-8-2.8 17.5 17.5 0 0 1-5.5-5.5 18 18 0 0 1-2.8-8A2 2 0 0 1 4.5 2h3A2 2 0 0 1 9.5 3.7l.5 2.7a2 2 0 0 1-.6 1.8L8.2 9.4a14 14 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 1.8-.6l2.7.5a2 2 0 0 1 1.7 2Z" />,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>,
+    menu: <><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>,
+    close: <><path d="M6 6l12 12" /><path d="M18 6 6 18" /></>,
+    clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+    eye: <><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></>,
+  };
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      {paths[name] || paths.check}
+    </svg>
+  );
+}
+
+const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
+
+const content = {
+  en: {
+    nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
+    brandSub: "Scenario-first smart-home installation",
+    buildEstimate: "Build Estimate",
+    common: {
+      whatsapp: "WhatsApp estimate",
+      email: "Email estimate",
+      live: "Live estimate",
+      review: "Review estimate",
+      noPayment: "No online payment. Final quote only after checking your home.",
+      quoteNote: "Online prices are starting estimates only. Final quotation depends on wiring, device choice, Wi‑Fi coverage, installation difficulty, and site condition.",
+    },
+    trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
+    home: {
+      eyebrow: "Smart-home routines for Hong Kong flats",
+      title: "Show your home what to do — then we install the system behind it.",
+      body: "Boson Smart helps flat owners turn daily routines into practical smart-home setups: coming home, leaving home, sleeping, saving energy, and family safety.",
+      primary: "Explore scenarios",
+      secondary: "Build estimate",
+      scenarioTitle: "Start from the life scenario, not the device.",
+      scenarioBody: "Most people do not need to learn product names first. Choose what you want your home to do, then we explain the possible setup and package.",
+      solutionsTitle: "From task to setup",
+      solutionsBody: "Tell us the result you want: softer entry lighting, cooler living room, safer night movement, or fewer things left on. We translate that into a practical installation plan.",
+    },
+    scenariosPage: {
+      eyebrow: "Scenario timelines",
+      title: "Imagine the day. Then choose what your home should handle.",
+      body: "Each routine shows what happens, why it helps, what may be installed, and which package usually fits. This is where customers can 代入 before thinking about devices.",
+      choose: "Choose a routine",
+      whatHappens: "What happens",
+      whyHelps: "Why it helps",
+      possibleSetup: "Possible setup",
+      suggested: "Suggested package",
+      cta: "Continue to package page",
+    },
+    solutionsPage: {
+      eyebrow: "Solutions",
+      title: "I want my home to...",
+      body: "This page connects everyday tasks to possible smart-home setups. You do not need to know the device name first. Start with the outcome.",
+      task: "Customer task",
+      setup: "Possible setup",
+      check: "Things to check",
+      package: "Usually fits",
+    },
+    estimatePage: {
+      eyebrow: "Packages and estimate",
+      title: "Choose a starting package, then add useful items.",
+      body: "The estimate builder turns scenarios and tasks into a rough starting budget. Send it by WhatsApp so we can check what is practical for your flat.",
+    },
+    contactPage: {
+      eyebrow: "Contact Boson Smart",
+      title: "Tell us what you want your home to do.",
+      body: "Share your flat type, main routine, and what you want to improve. We will review your home condition before confirming the next step.",
+      detailsTitle: "A few details help us give better advice.",
+      details: ["Flat type and approximate size", "Current status: lived-in, renovating, or new handover", "Main goal: lighting, comfort, energy saving, safety, or all", "Existing smart lock, Wi‑Fi mesh, smart lights, or voice assistant", "Photos of switch areas, entry door, curtain area, or router location if available"],
+      nextTitle: "What happens after you contact us?",
+      next: [["We review your estimate", "We check the selected package, flat type, and add-ons."], ["We ask for missing details", "If needed, we ask about wiring, Wi‑Fi, doors, curtains, or device preferences."], ["We confirm whether it is practical", "We explain what looks suitable, what may need checking, and what may require separate quotation."], ["We arrange the next step", "If the scope makes sense, we move toward assessment, quotation, and installation planning."]],
+    },
+    scenarioRoutines: [
+      {
+        id: "morning",
+        label: "Morning Mode",
+        icon: "sun",
+        title: "Morning Mode — 由起床到離家",
+        subtitle: "令早上少一點趕急、少一點忘記關掣，離家時更安心。",
+        package: "Smart Home Starter / Comfort & Energy Package",
+        steps: [
+          ["07:00", "Soft Wake", "房間燈光柔和亮起。合適情況下窗簾可以打開，冷氣或風扇調整。", "起床不會太突然，感覺更自然。", "睡房燈光情境、窗簾摩打選配、冷氣 / 風扇設定"],
+          ["07:10", "Bedroom Fresh Start", "睡房由睡眠模式轉成日間模式。", "房間不會一直停留在昏暗睡眠狀態。", "燈光預設、情境按鈕、時間設定"],
+          ["07:25", "Bathroom Ready", "浴室燈及抽氣準備好。", "半醒狀態下不用摸黑找掣。", "人體感應燈、抽氣時間設定"],
+          ["07:45", "Breakfast Assist", "廚房或飯廳燈光亮起。合適安全設備可作預備。", "早上流程更順。", "飯廳情境、安全設備智能插座選配"],
+          ["08:05", "Outfit & Weather Cue", "可提示下雨、濕度或天氣。", "減少忘記雨傘或外套。", "語音助理、顯示屏、天氣提示"],
+          ["08:15", "Bag / Keys Reminder", "玄關附近可提示鎖匙、銀包、雨傘或工作袋。", "減少臨出門才發現漏東西。", "玄關情境、智能喇叭、提醒顯示"],
+          ["08:20", "Leaving Home Check", "檢查指定燈光、冷氣、窗簾及門窗狀態。", "離家時更有信心。", "離家模式、門窗感應、智能開關"],
+          ["08:25", "Energy-Saving Day Mode", "不需要的設備關閉，屋企進入低耗電狀態。", "無人在家時減少不必要用電。", "離家模式、時間設定、指定智能插座"],
+        ],
+      },
+      {
+        id: "night",
+        label: "Night Mode",
+        icon: "moon",
+        title: "Night Mode — 由回家到深度休息",
+        subtitle: "由減壓、晚飯、娛樂、清潔、個人時間、冷靜、睡眠，到夜間安全協助。",
+        package: "Comfort & Energy Package / Family Safety Package",
+        steps: [
+          ["18:45", "Homecoming Mode", "客廳可以預冷，玄關及客廳情境準備好。", "不會一入屋就面對又熱又暗的環境。", "智能冷氣控制、門磁感應、回家燈光情境"],
+          ["18:50", "Entry Decompression", "玄關燈柔和亮起，家中轉入較放鬆情境。", "由外面壓力轉入回家狀態。", "玄關燈光、門磁感應、暖光情境"],
+          ["19:10", "Dinner Assist", "飯廳燈光變暖變集中，窗簾可按需要關上。", "晚飯時不用逐項手動調整。", "飯廳情境、窗簾摩打選配、情境按鈕"],
+          ["20:00", "TV Relax", "客廳燈光調暗，減少反光，進入睇電視模式。", "睇電視時光線更舒服。", "TV 情境、調光選配、窗簾控制"],
+          ["20:45", "Shower / Cleanup", "浴室燈及抽氣可按時間運作，廚房或飯廳清潔燈光變亮。", "清潔更方便，也較少忘記關抽氣。", "浴室感應燈、抽氣時間、清潔情境"],
+          ["21:15", "Branch A: Gaming", "遊戲燈光、枱燈及氣氛燈啟動。", "有沉浸感但不影響全屋。", "氣氛燈、情境按鈕、智能插座選配"],
+          ["21:15", "Branch B: Workout", "運動燈光、風扇及音樂情境準備。", "屋企可以快速轉入運動狀態。", "明亮情境、風扇控制選配、音樂設定"],
+          ["21:15", "Branch C: Light Work", "枱燈及專注情境啟動，其餘空間保持平靜。", "可處理少量工作，又不令全屋變得太精神。", "枱燈、專注情境、時間設定"],
+          ["22:30", "Evening Cooldown", "燈光逐漸變暖變暗，屋企開始離開活動模式。", "晚上自然慢下來。", "漸暗情境、時間設定"],
+          ["23:00", "Pre-Sleep Mode", "睡房溫度、燈光及窗簾準備睡眠。", "睡前少一點手動調整。", "睡房情境、冷氣設定、窗簾選配"],
+          ["23:30", "Sleep Mode", "指定燈光關閉，只保留必要低亮度或安全設定。", "屋企回到安靜簡單狀態。", "睡眠情境、指定待機設定"],
+          ["02:30", "Night Safety / Late-Night Toilet Assist", "偵測到走動時，低亮度路徑燈才柔和亮起。", "半夜去洗手間更安全，又不會強光刺醒家人。", "人體感應、低亮度路徑燈、浴室輔助情境"],
+        ],
+      },
+      {
+        id: "gathering",
+        label: "Gathering Mode",
+        icon: "users",
+        title: "Gathering Mode — 令細單位更適合招待客人",
+        subtitle: "由客人到達前、用餐、聊天、娛樂、浴室、舒適調整、清潔到重設。",
+        package: "Smart Home Starter / Comfort & Energy Package",
+        steps: [
+          ["客人到前", "Pre-Guest Prep", "客廳燈光變亮，冷氣開始準備，窗簾可按需要調整。", "客人到之前，屋企已經有準備好招待的感覺。", "客廳情境、冷氣時間設定、窗簾摩打選配"],
+          ["到達", "Welcome Entry", "客人到達時，玄關燈溫暖亮起。", "入屋第一刻更舒服。", "玄關燈、門磁感應、歡迎情境"],
+          ["晚飯", "Dining Scene", "飯廳燈光變暖更集中，廚房或上菜位置有足夠光。", "細單位招呼客人更順。", "飯廳情境、廚房燈光、情境按鈕"],
+          ["飯後", "Conversation Mode", "客廳燈光變柔和，背景氣氛可準備。", "空間感覺更適合聊天。", "燈光預設、音樂設定選配"],
+          ["娛樂", "Movie / Music Mode", "燈光調暗、窗簾關上，娛樂情境更易開始。", "家中氣氛更有質感。", "TV 情境、窗簾控制、氣氛燈"],
+          ["客人使用", "Guest Bathroom Assist", "浴室燈及抽氣自動反應。", "客人不用摸索每個開關。", "人體感應燈、抽氣時間"],
+          ["夜深", "Late Gathering Dim", "夜深後燈光變得更柔和。", "家中自然轉入較安靜氣氛。", "時間漸暗情境"],
+          ["離開", "Guest Leaving", "玄關區變亮，方便穿鞋、拿袋及道別。", "離開時更順，不會昏暗混亂。", "玄關情境、門口燈光"],
+          ["客人走後", "Cleanup Assist", "廚房及飯廳燈光變亮，抽氣可延續一段時間。", "聚會後清潔更方便。", "清潔情境、抽氣時間"],
+          ["重設", "Reset Home", "屋企回復正常晚間或睡前模式。", "不用逐項把設定改回來。", "重設情境、睡前準備"],
+        ],
+      },
+      {
+        id: "pet",
+        label: "Pet Mode",
+        icon: "eye",
+        title: "Pet Mode — 由寵物角度出發",
+        subtitle: "為主人不在家時的安靜時段而設，重點是舒適、狀態掌握及負責任使用。",
+        package: "Family Safety Package / Comfort & Energy Package",
+        steps: [
+          ["主人離開", "My Human Leaves", "門關上後，家中保持平靜，不會突然全黑全靜。", "環境對寵物更穩定。", "離家情境、指定柔和燈光"],
+          ["日間", "Calm Home Setting", "指定燈光可在選定時段柔和亮起。", "屋企不會像完全空置。", "柔和燈光情境、時間設定"],
+          ["較熱時段", "Comfort Temperature Routine", "可按主人選擇，設定較安全的冷氣或風扇流程。", "主人不在家時仍可更有計劃地照顧舒適度。", "冷氣設定、風扇控制選配、溫度掌握"],
+          ["食水位置", "Food / Water Area Support", "食物或水附近可在指定時段保留低亮度燈。", "熟悉位置保持可見。", "低亮度燈、時間設定"],
+          ["休息", "Rest Zone Comfort", "常用休息位置保持合適光線或溫度。", "日常休息更穩定。", "情境設定、窗簾選配、冷氣 / 風扇設定"],
+          ["聲音 / 訪客", "Doorbell / Noise Softening", "門鈴或入口提醒可傳送給主人。", "主人可知道發生甚麼，不用令家中系統過份複雜。", "視像門鈴、入口鏡頭選配、手機提示"],
+          ["活動", "Pet Movement Awareness", "指定動作或鏡頭選項可讓主人知道寵物有活動。", "可作簡單查看，不一定打擾寵物。", "鏡頭選項、活動感應"],
+          ["查看", "Human Check-In", "主人可按需要查看指定鏡頭或感應狀態。", "離家時更安心。", "客戶持有的鏡頭 / App 帳戶"],
+          ["主人回家", "Evening Welcome Back", "主人回來前，家中轉回歡迎模式。", "寵物與主人回到正常回家節奏。", "回家情境、燈光流程"],
+        ],
+      },
+    ],
+    petDisclaimer: "寵物模式不能取代日常照顧。任何涉及溫度、餵食、飲水或監察的設備，都應先確認安全性及適合性。",
+
+    solutionTasks: [
+      ["入屋時自動開燈。", "人體感應器 + 智能開關或指定燈光情境。", "零線、開關類型、感應器位置、家人習慣。", "Starter / Comfort"],
+      ["回家前客廳先調節溫度。", "智能冷氣控制 + 時間設定或情境觸發。", "冷氣型號、遙控兼容、Wi‑Fi 覆蓋、使用習慣。", "Comfort & Energy"],
+      ["黃昏時窗簾自動關上。", "窗簾摩打 + 時間情境或按鈕控制。", "窗簾路軌、電源位、窗簾重量、安裝空間。", "Comfort & Energy"],
+      ["想知道門窗有沒有被打開。", "門窗感應器 + 手機通知。", "安裝位置、通知偏好、私隱期望。", "Family Safety"],
+      ["夜晚走動更安全。", "人體感應器 + 低亮度路徑燈。", "燈光位置、亮度、誤觸發機會、家庭習慣。", "Safety / Comfort"],
+      ["家人不想只靠 App 控制。", "牆掣、情境按鈕、遙控或簡單手動控制。", "現有開關、家人習慣、控制位置。", "All packages"],
+      ["減少忘記關燈或設備。", "離家模式 + 智能開關或插座控制。", "哪些設備適合控制、時間設定、手動覆蓋。", "Starter / Comfort"],
+      ["想有簡單智能門口設定。", "智能門鎖選配、視像門鈴或入口鏡頭。", "門身類型、鎖型號、電源、私隱、權限。", "Family Safety"],
+    ],
+    packages: [
+      { id: "starter", name: "Smart Home Starter", subtitle: "智能家居的簡單入門第一步。", icon: "home", tag: "最適合首次使用", basePrice: 3800, description: "適合想先改善燈光控制、回家及離家設定，但暫時不想做大型工程的單位。", includes: ["指定區域智能燈光控制", "回家 / 離家預設模式", "App 設定及基本配置", "簡單牆掣或遙控控制選項", "基本交付教學"], assumption: "起價假設為一個核心區域、基本兼容智能控制、App 設定、測試及交付。大型改線及高端品牌升級需另行報價。" },
+      { id: "comfort", name: "Comfort & Energy Package", subtitle: "令屋企在你需要時已經準備好。", icon: "sun", tag: "最平衡選擇", basePrice: 8800, description: "為日常舒適而設：燈光模式、冷氣時間設定、窗簾選配、感應燈光及節能設定。", includes: ["客廳、飯廳、工作及睡眠燈光模式", "冷氣或溫度時間設定", "窗簾或百葉簾自動化選配", "指定區域人體感應燈光", "日常節能設定"], assumption: "起價假設為客廳及玄關等主要生活區域，並包含實用舒適設定。額外房間、窗簾摩打及複雜線路需另行報價。" },
+      { id: "safety", name: "Family Safety Package", subtitle: "在重要時刻，清楚知道家中狀態。", icon: "shield", tag: "最適合家庭", basePrice: 7800, description: "適合想掌握出入口、門窗狀態、夜間走動及手機提醒的家庭。", includes: ["智能門鎖或出入口設定選配", "主要門窗感應器", "視像門鈴或入口鏡頭選配", "夜間安全燈光", "指定事件手機提醒"], assumption: "起價假設為指定出入口及安全監察點。鏡頭位置、智能門鎖型號、額外感應器及門身改動會在報價前確認。" },
+    ],
+    apartments: [
+      { id: "studio", label: "開放式 / 一房單位", description: "較少控制點，適合輕量入門", adjustment: 0 },
+      { id: "twoBed", label: "兩房單位", description: "常見香港家庭單位", adjustment: 1800 },
+      { id: "threeBed", label: "三房單位", description: "更多房間及情境控制點", adjustment: 3600 },
+      { id: "large", label: "大型 / 複式 / 自訂", description: "需要先作現場評估", adjustment: 6800 },
+    ],
+    addons: [
+      { id: "extraSwitch", label: "額外智能開關點", description: "增加一個燈光或控制點", price: 850 },
+      { id: "motion", label: "額外人體感應器", description: "適合走廊、浴室、玄關或雜物房", price: 650 },
+      { id: "curtain", label: "智能窗簾摩打", description: "窗簾或百葉簾自動控制", price: 2200 },
+      { id: "doorlock", label: "智能門鎖升級", description: "提升出入方便及權限管理", price: 2800 },
+      { id: "doorbell", label: "視像門鈴 / 入口鏡頭", description: "訪客提示及遙距查看", price: 1600 },
+      { id: "support", label: "年度支援計劃", description: "遙距支援及小型情境調整", price: 1200 },
+    ],
+  },
+};
+
+const pages = ["home", "scenarios", "solutions", "estimate", "contact"];
+function getPage() {
+  const hash = window.location.hash.replace("#", "").split("?")[0].split("/")[0];
+  return pages.includes(hash) ? hash : "home";
+}
+
+export default function App() {
+  const [language, setLanguage] = useState("en");
+  const [page, setPage] = useState(getPage);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeRoutine, setActiveRoutine] = useState("coming-home");
+  const [selected, setSelected] = useState("comfort");
+  const [apartment, setApartment] = useState("twoBed");
+  const [addons, setAddons] = useState(["curtain"]);
+  const [goal, setGoal] = useState("comfort");
+  const [stage, setStage] = useState("livedIn");
+  const [scope, setScope] = useState("core");
+
+  const t = content[language];
+
+  React.useEffect(() => {
+    const onHash = () => setPage(getPage());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  const selectedPackage = t.packages.find((item) => item.id === selected) || t.packages[1];
+  const selectedApartment = t.apartments.find((item) => item.id === apartment) || t.apartments[1];
+  const activeAddons = t.addons.filter((item) => addons.includes(item.id));
+  const total = selectedPackage.basePrice + selectedApartment.adjustment + activeAddons.reduce((sum, item) => sum + item.price, 0);
+
+  const recommendedId = useMemo(() => {
+    if (goal === "safety") return "safety";
+    if (goal === "comfort" || goal === "energy" || stage === "renovating" || scope === "multi") return "comfort";
+    return "starter";
+  }, [goal, stage, scope]);
+
+  const enquiry = [
+    language === "zh" ? "你好，我想查詢以下智能家居估算：" : "Hello, I would like to check this smart-home estimate:",
+    "",
+    `${language === "zh" ? "方案" : "Package"}: ${selectedPackage.name}`,
+    `${language === "zh" ? "單位類型" : "Flat type"}: ${selectedApartment.label}`,
+    `${language === "zh" ? "已選升級項目" : "Selected add-ons"}: ${activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : "-"}`,
+    `${language === "zh" ? "即時估算" : "Live estimate"}: ${formatHKD(total)}`,
+  ].join("\n");
+
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquiry)}`;
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Boson Smart Estimate")}&body=${encodeURIComponent(enquiry)}`;
+
+  function go(nextPage, anchor) {
+    setMenuOpen(false);
+    setPage(nextPage);
+    const nextHash = `#${nextPage}`;
+    if (window.location.hash !== nextHash) window.history.pushState(null, "", nextHash);
+    setTimeout(() => {
+      if (anchor) document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 80);
+  }
+
+  function toggleAddon(id) {
+    setAddons((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  }
+
+  const shared = {
+    t, language, page, go, activeRoutine, setActiveRoutine, selected, setSelected, apartment, setApartment,
+    addons, toggleAddon, selectedPackage, selectedApartment, activeAddons, total, recommendedId, goal, setGoal,
+    stage, setStage, scope, setScope, whatsappHref, mailtoHref,
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-cyan-300 selection:text-slate-950">
+      <BackgroundGlow />
+      <Header {...shared} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setLanguage={setLanguage} />
+      <main className="relative z-10">
+        {page === "home" && <HomePage {...shared} />}
+        {page === "scenarios" && <ScenariosPage {...shared} />}
+        {page === "solutions" && <SolutionsPage {...shared} />}
+        {page === "estimate" && <EstimatePage {...shared} />}
+        {page === "contact" && <ContactPage {...shared} />}
+      </main>
+      <StickyEstimate {...shared} />
+      <Footer {...shared} />
+    </div>
+  );
+}
+
+function BackgroundGlow() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
+      <div className="absolute left-1/2 top-[-14rem] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
+      <div className="absolute bottom-[-10rem] right-[-8rem] h-[30rem] w-[30rem] rounded-full bg-amber-300/15 blur-3xl" />
+    </div>
+  );
+}
+
+function Header({ t, page, go, language, setLanguage, menuOpen, setMenuOpen }) {
+  const links = [["home", t.nav.home], ["scenarios", t.nav.scenarios], ["solutions", t.nav.solutions], ["estimate", t.nav.estimate], ["contact", t.nav.contact]];
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 lg:px-6">
+        <button onClick={() => go("home")} className="flex items-center gap-3 text-left">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/20"><Icon name="bolt" className="h-5 w-5" /></span>
+          <span><span className="block text-base font-semibold tracking-tight">Boson Smart</span><span className="hidden text-xs text-slate-400 sm:block">{t.brandSub}</span></span>
+        </button>
+        <nav className="ml-auto hidden items-center gap-6 text-sm text-slate-300 md:flex" aria-label="Main navigation">
+          {links.map(([id, label]) => <a key={id} href={`#${id}`} onClick={(e) => { e.preventDefault(); go(id); }} className={`transition hover:text-white ${page === id ? "text-white font-semibold" : ""}`}>{label}</a>)}
+        </nav>
+        <div className="ml-auto flex items-center gap-2 md:ml-0">
+          <div className="flex rounded-full border border-white/10 bg-white/[0.04] p-1 text-xs font-bold text-slate-300">
+            <button className={`rounded-full px-3 py-1.5 transition ${language === "en" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("en")}>EN</button>
+            <button className={`rounded-full px-3 py-1.5 transition ${language === "zh" ? "bg-cyan-300 text-slate-950" : "hover:bg-white/10"}`} onClick={() => setLanguage("zh")}>繁中</button>
+          </div>
+          <button onClick={() => go("estimate")} className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100 md:inline-flex">{t.buildEstimate}</button>
+          <button className="rounded-xl border border-white/10 p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label="Toggle menu">
+            <Icon name={menuOpen ? "close" : "menu"} className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+      {menuOpen && (
+        <nav id="mobile-menu" className="grid gap-3 border-t border-white/10 px-4 py-4 text-sm text-slate-300 md:hidden">
+          {links.map(([id, label]) => <a key={id} href={`#${id}`} onClick={(e) => { e.preventDefault(); go(id); }}>{label}</a>)}
+        </nav>
+      )}
+    </header>
+  );
+}
+
+function HomePage(props) {
+  const { t, go } = props;
+  return (
+    <>
+      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_0.85fr] lg:px-6">
+        <div className="flex flex-col justify-center">
+          <Eyebrow icon="bolt">{t.home.eyebrow}</Eyebrow>
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">{t.home.title}</h1>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{t.home.body}</p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button onClick={() => go("scenarios")} className="btn-primary">{t.home.primary}<Icon name="arrow" className="h-4 w-4" /></button>
+            <button onClick={() => go("estimate")} className="btn-secondary">{t.home.secondary}</button>
+          </div>
+          <TrustStrip t={t} />
+        </div>
+        <FeaturedTimeline {...props} />
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-10 lg:px-6">
+        <SectionHeader eyebrow={t.scenariosPage.eyebrow} title={t.home.scenarioTitle} text={t.home.scenarioBody} />
+        <div className="grid gap-4 md:grid-cols-3">
+          {t.scenarioRoutines.slice(0, 6).map((routine) => <RoutineCard key={routine.id} routine={routine} onClick={() => { props.setActiveRoutine(routine.id); go("scenarios"); }} />)}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+        <Card className="grid gap-6 p-6 lg:grid-cols-[1fr_0.45fr] lg:items-center">
+          <div><SectionHeader eyebrow={t.solutionsPage.eyebrow} title={t.home.solutionsTitle} text={t.home.solutionsBody} noMargin /></div>
+          <button onClick={() => go("solutions")} className="btn-primary w-full justify-center">{t.nav.solutions}<Icon name="arrow" className="h-4 w-4" /></button>
+        </Card>
+      </section>
+
+      <FinalCta {...props} />
+    </>
+  );
+}
+
+function FeaturedTimeline({ t, activeRoutine, setActiveRoutine }) {
+  const routine = t.scenarioRoutines.find((r) => r.id === activeRoutine) || t.scenarioRoutines[0];
+  return (
+    <Card className="p-4">
+      <div className="rounded-[1.25rem] bg-slate-900 p-4">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm text-slate-400">{t.scenariosPage.choose}</p>
+            <h2 className="mt-1 text-2xl font-semibold">{routine.title}</h2>
+          </div>
+          <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-sm text-cyan-100">{routine.package}</span>
+        </div>
+        <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {t.scenarioRoutines.slice(0, 6).map((item) => (
+            <button key={item.id} onClick={() => setActiveRoutine(item.id)} className={`rounded-2xl border px-3 py-2 text-xs font-semibold transition ${item.id === routine.id ? "border-cyan-300 bg-cyan-300 text-slate-950" : "border-white/10 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08]"}`}>{item.label}</button>
+          ))}
+        </div>
+        <Timeline routine={routine} compact />
+      </div>
+    </Card>
+  );
+}
+
+function ScenariosPage(props) {
+  const { t, activeRoutine, setActiveRoutine, go } = props;
+  const routine = t.scenarioRoutines.find((r) => r.id === activeRoutine) || t.scenarioRoutines[0];
+
+  return (
+    <>
+      <PageHero eyebrow={t.scenariosPage.eyebrow} title={t.scenariosPage.title} body={t.scenariosPage.body} primary={t.scenariosPage.cta} secondary={t.nav.solutions} onPrimary={() => go("estimate")} onSecondary={() => go("solutions")} />
+      <section className="mx-auto max-w-6xl px-4 py-10 lg:px-6">
+        <div className="grid gap-6 lg:grid-cols-[0.35fr_1fr]">
+          <Card className="h-fit p-4 lg:sticky lg:top-24">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-cyan-300">{t.scenariosPage.choose}</p>
+            <div className="grid gap-2">
+              {t.scenarioRoutines.map((item) => (
+                <button key={item.id} onClick={() => setActiveRoutine(item.id)} className={`flex items-center gap-3 rounded-2xl border p-3 text-left transition ${item.id === routine.id ? "border-cyan-300 bg-cyan-300/10" : "border-white/10 bg-slate-950/35 hover:bg-white/10"}`}>
+                  <Icon name={item.icon} className="h-5 w-5 text-cyan-200" />
+                  <span className="font-semibold">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </Card>
+          <div>
+            <Card className="mb-6 p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <Eyebrow icon={routine.icon}>{routine.label}</Eyebrow>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">{routine.title}</h2>
+                  <p className="mt-4 max-w-2xl leading-7 text-slate-300">{routine.subtitle}</p>
+                </div>
+                <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm text-cyan-100">
+                  {t.scenariosPage.suggested}<br /><strong className="text-white">{routine.package}</strong>
+                </div>
+              </div>
+            </Card>
+            <Timeline routine={routine} labels={t.scenariosPage} />
+            {routine.id === "pet" && t.petDisclaimer && (
+              <div className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">
+                {t.petDisclaimer}
+              </div>
+            )}
+            <button onClick={() => go("estimate")} className="btn-primary mt-6">{t.scenariosPage.cta}<Icon name="arrow" className="h-4 w-4" /></button>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function Timeline({ routine, labels, compact = false }) {
+  return (
+    <div className="relative grid gap-4">
+      {routine.steps.map(([time, title, happens, helps, setup], index) => (
+        <div key={`${time}-${title}`} className="relative grid gap-4 rounded-[1.4rem] border border-white/10 bg-slate-950/35 p-4 md:grid-cols-[7rem_1fr]">
+          <div className="flex items-center gap-3 md:block">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 font-bold text-slate-950">{index + 1}</span>
+            <p className="font-semibold text-cyan-100 md:mt-3">{time}</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">{title}</h3>
+            <div className={`mt-4 grid gap-3 ${compact ? "" : "md:grid-cols-3"}`}>
+              <InfoMini label={labels?.whatHappens || "What happens"} text={happens} />
+              <InfoMini label={labels?.whyHelps || "Why it helps"} text={helps} amber />
+              <InfoMini label={labels?.possibleSetup || "Possible setup"} text={setup} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SolutionsPage({ t, go }) {
+  return (
+    <>
+      <PageHero eyebrow={t.solutionsPage.eyebrow} title={t.solutionsPage.title} body={t.solutionsPage.body} primary={t.buildEstimate} secondary={t.nav.scenarios} onPrimary={() => go("estimate")} onSecondary={() => go("scenarios")} />
+      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
+        <div className="grid gap-4">
+          {t.solutionTasks.map(([task, setup, check, pkg], index) => (
+            <Card key={task} className="grid gap-4 p-5 lg:grid-cols-[0.8fr_1fr_1fr_0.5fr] lg:items-start">
+              <div><p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{String(index + 1).padStart(2, "0")} · {t.solutionsPage.task}</p><h3 className="text-xl font-semibold">{task}</h3></div>
+              <InfoMini label={t.solutionsPage.setup} text={setup} />
+              <InfoMini label={t.solutionsPage.check} text={check} amber />
+              <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm text-cyan-100"><span className="text-slate-300">{t.solutionsPage.package}</span><br /><strong className="text-white">{pkg}</strong></div>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function EstimatePage(props) {
+  const { t } = props;
+  return (
+    <>
+      <PageHero eyebrow={t.estimatePage.eyebrow} title={t.estimatePage.title} body={t.estimatePage.body} primary={t.common.whatsapp} secondary={t.nav.scenarios} onPrimary={() => document.getElementById("builder")?.scrollIntoView({ behavior: "smooth" })} onSecondary={() => props.go("scenarios")} />
+      <PackagesPreview {...props} full />
+      <BuilderSection {...props} />
+      <FinalCta {...props} />
+    </>
+  );
+}
+
+function ContactPage(props) {
+  const { t, whatsappHref, mailtoHref, go } = props;
+  return (
+    <>
+      <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={t.common.whatsapp} secondary={t.common.email} onPrimary={() => window.open(whatsappHref, "_blank", "noreferrer")} onSecondary={() => window.location.href = mailtoHref} />
+      <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHeader eyebrow={t.nav.contact} title={t.contactPage.detailsTitle} />
+          <Card className="p-6"><div className="grid gap-3 sm:grid-cols-2">{t.contactPage.details.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></Card>
+        </div>
+      </section>
+      <InfoGrid eyebrow={t.nav.contact} title={t.contactPage.nextTitle} items={t.contactPage.next} numbered />
+      <FinalCta {...props} />
+      <section className="mx-auto max-w-6xl px-4 pb-32 lg:px-6">
+        <button onClick={() => go("estimate")} className="btn-primary w-full justify-center">{t.buildEstimate}<Icon name="arrow" className="h-4 w-4" /></button>
+      </section>
+    </>
+  );
+}
+
+function PackagesPreview(props) {
+  const { t, selected, setSelected, language, full = false } = props;
+  return (
+    <section id="packages" className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+      <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
+        <SectionHeader eyebrow={t.estimatePage.eyebrow} title={t.estimatePage.title} text={t.estimatePage.body} noMargin />
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-slate-300">{t.common.quoteNote}</div>
+      </div>
+      <div className="grid gap-5 lg:grid-cols-3">
+        {t.packages.map((pkg) => (
+          <button key={pkg.id} onClick={() => setSelected(pkg.id)} className={`group rounded-[1.6rem] border p-5 text-left transition ${selected === pkg.id ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:border-white/25"}`}>
+            <div className="mb-5 flex items-start justify-between gap-3"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-cyan-200"><Icon name={pkg.icon} className="h-6 w-6" /></span><span className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300">{pkg.tag}</span></div>
+            <h3 className="text-2xl font-semibold">{pkg.name}</h3>
+            <p className="mt-2 text-sm text-cyan-100">{pkg.subtitle}</p>
+            <p className="mt-4 text-sm leading-6 text-slate-300">{pkg.description}</p>
+            <p className="mt-5 text-2xl font-semibold">{language === "zh" ? `${formatHKD(pkg.basePrice)} 起` : `From ${formatHKD(pkg.basePrice)}`}</p>
+            {(full || selected === pkg.id) && <><div className="mt-5 grid gap-3">{pkg.includes.map((item) => <div key={item} className="flex gap-2 text-sm leading-6 text-slate-300"><Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-cyan-300" />{item}</div>)}</div><p className="mt-5 rounded-2xl bg-slate-950/35 p-3 text-xs leading-5 text-slate-400">{pkg.assumption}</p></>}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BuilderSection({ t, selected, setSelected, apartment, setApartment, addons, toggleAddon, selectedPackage, selectedApartment, activeAddons, total, whatsappHref, mailtoHref }) {
+  return (
+    <section id="builder" className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
+      <SectionHeader eyebrow={t.buildEstimate} title={t.estimatePage.title} text={t.estimatePage.body} />
+      <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
+        <div className="grid gap-5">
+          <BuilderPanel title={t.nav.estimate}>{t.packages.map((pkg) => <Choice key={pkg.id} active={selected === pkg.id} onClick={() => setSelected(pkg.id)} title={pkg.name} desc={pkg.subtitle} price={formatHKD(pkg.basePrice)} icon={pkg.icon} />)}</BuilderPanel>
+          <BuilderPanel title={t.common.review}>{t.apartments.map((item) => <Choice key={item.id} active={apartment === item.id} onClick={() => setApartment(item.id)} title={item.label} desc={item.description} price={`+${formatHKD(item.adjustment)}`} />)}</BuilderPanel>
+          <BuilderPanel title={t.solutionsPage.setup}>{t.addons.map((item) => <Choice key={item.id} active={addons.includes(item.id)} onClick={() => toggleAddon(item.id)} title={item.label} desc={item.description} price={`+${formatHKD(item.price)}`} />)}</BuilderPanel>
+        </div>
+        <aside className="sticky top-24 rounded-[1.6rem] border border-cyan-300/30 bg-slate-900/95 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">{t.common.live}</p><p className="mt-2 text-3xl font-semibold">{formatHKD(total)}</p>
+          <div className="mt-5 grid gap-3 border-t border-white/10 pt-5 text-sm">
+            <Summary label={t.solutionsPage.package} value={selectedPackage.name} price={formatHKD(selectedPackage.basePrice)} />
+            <Summary label={t.contactPage.details[0]} value={selectedApartment.label} price={`+${formatHKD(selectedApartment.adjustment)}`} />
+            <div><p className="mb-2 text-slate-400">{t.solutionsPage.setup}</p>{activeAddons.length ? activeAddons.map((item) => <div key={item.id} className="mb-2 flex justify-between gap-3 rounded-2xl bg-white/[0.04] px-3 py-2"><span>{item.label}</span><span className="text-cyan-100">+{formatHKD(item.price)}</span></div>) : <p className="rounded-2xl bg-white/[0.04] px-3 py-2 text-slate-400">-</p>}</div>
+          </div>
+          <p className="mt-4 text-xs leading-5 text-slate-400">{t.common.quoteNote}</p>
+          <div className="mt-5 grid gap-3">
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="btn-primary justify-center"><Icon name="phone" className="h-4 w-4" />{t.common.whatsapp}</a>
+            <a href={mailtoHref} className="btn-secondary justify-center">{t.common.email}<Icon name="arrow" className="h-4 w-4" /></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function FinalCta({ t, whatsappHref, mailtoHref }) {
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-14 pb-32 lg:px-6 lg:pb-16">
+      <div className="rounded-[1.8rem] bg-gradient-to-br from-cyan-300 to-amber-300 p-6 text-slate-950 md:p-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.45fr] lg:items-center">
+          <div><p className="mb-3 inline-flex rounded-full bg-slate-950/10 px-3 py-1 text-sm font-bold">{t.contactPage.eyebrow}</p><h2 className="text-3xl font-semibold tracking-tight md:text-5xl">{t.contactPage.title}</h2><p className="mt-4 max-w-2xl leading-7 text-slate-900">{t.contactPage.body}</p><p className="mt-4 text-sm font-semibold">{t.common.noPayment}</p></div>
+          <div className="grid gap-3"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 font-semibold text-white transition hover:bg-slate-800"><Icon name="phone" className="h-4 w-4" />{t.common.whatsapp}</a><a href={mailtoHref} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-950/20 px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-950/10">{t.common.email}<Icon name="arrow" className="h-4 w-4" /></a></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StickyEstimate({ t, page, total, whatsappHref, go }) {
+  if (page !== "estimate") return null;
+  return (
+    <>
+      <div className="fixed bottom-3 left-3 right-3 z-50 rounded-2xl border border-white/15 bg-slate-950/88 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden">
+        <button onClick={() => go("estimate", "builder")} className="mb-2 grid w-full grid-cols-[auto_1fr] items-center gap-3 rounded-xl bg-cyan-300 px-4 py-3 text-left text-slate-950"><span className="text-xs font-black uppercase tracking-wider opacity-75">{t.common.live}</span><strong className="justify-self-end text-lg">{formatHKD(total)}</strong></button>
+        <div className="grid grid-cols-2 gap-2"><button onClick={() => go("estimate", "builder")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-3 text-sm font-semibold">{t.common.review}</button><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-3 text-sm font-semibold"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div>
+      </div>
+      <div className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/84 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:flex"><button onClick={() => go("estimate", "builder")} className="grid rounded-xl bg-cyan-300/10 px-4 py-2 text-left"><span className="text-xs font-bold uppercase tracking-wider text-slate-400">{t.common.live}</span><strong className="text-cyan-100">{formatHKD(total)}</strong></button><button onClick={() => go("estimate", "builder")} className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">{t.common.review}</button><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div>
+    </>
+  );
+}
+
+function Footer({ t, go }) {
+  return <footer className="relative z-10 border-t border-white/10 px-4 py-8 text-sm text-slate-400"><div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between"><p>© 2026 Boson Smart. {t.brandSub}</p><div className="flex gap-4">{Object.entries(t.nav).slice(0, 4).map(([id, label]) => <button key={id} onClick={() => go(id)} className="hover:text-white">{label}</button>)}</div></div></footer>;
+}
+
+function SectionHeader({ eyebrow, title, text, noMargin = false }) {
+  return <div className={`${noMargin ? "" : "mb-10"} max-w-3xl`}><p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">{eyebrow}</p><h2 className="text-3xl font-semibold tracking-tight text-white md:text-5xl">{title}</h2>{text && <p className="mt-4 text-base leading-7 text-slate-300">{text}</p>}</div>;
+}
+function PageHero({ eyebrow, title, body, primary, secondary, onPrimary, onSecondary }) {
+  return <section className="mx-auto max-w-6xl px-4 py-16 md:py-24 lg:px-6"><Eyebrow icon="bolt">{eyebrow}</Eyebrow><h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">{title}</h1><p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{body}</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><button onClick={onPrimary} className="btn-primary">{primary}<Icon name="arrow" className="h-4 w-4" /></button><button onClick={onSecondary} className="btn-secondary">{secondary}</button></div></section>;
+}
+function Eyebrow({ icon, children }) { return <p className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-100"><Icon name={icon} className="h-4 w-4" />{children}</p>; }
+function Card({ children, className = "" }) { return <div className={`rounded-[1.6rem] border border-white/10 bg-white/[0.045] shadow-2xl shadow-black/10 ${className}`}>{children}</div>; }
+function InfoMini({ label, text, amber = false }) { return <div className={`rounded-2xl border p-4 text-sm leading-6 ${amber ? "border-amber-300/20 bg-amber-300/10 text-amber-50" : "border-white/10 bg-white/[0.04] text-slate-300"}`}><p className={`mb-1 text-xs font-bold uppercase tracking-[0.16em] ${amber ? "text-amber-200" : "text-cyan-200"}`}>{label}</p>{text}</div>; }
+function RoutineCard({ routine, onClick }) { return <button onClick={onClick} className="group rounded-[1.6rem] border border-white/10 bg-white/[0.045] p-5 text-left transition hover:border-cyan-300/40 hover:bg-cyan-300/10"><Icon name={routine.icon} className="mb-5 h-7 w-7 text-cyan-200" /><h3 className="text-xl font-semibold">{routine.label}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{routine.subtitle}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-200">{routine.package}<Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" /></span></button>; }
+function Bullet({ children, warn = false }) { return <div className="flex gap-3 rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-sm leading-6 text-slate-300"><Icon name={warn ? "shield" : "check"} className={`mt-1 h-4 w-4 shrink-0 ${warn ? "text-amber-300" : "text-cyan-300"}`} /><span>{children}</span></div>; }
+function Choice({ active, onClick, title, desc, price, icon }) { return <button onClick={onClick} className={`rounded-3xl border p-5 text-left transition ${active ? "border-cyan-300 bg-cyan-300/10" : "border-white/10 bg-slate-950/35 hover:border-white/30"}`}>{icon && <Icon name={icon} className="mb-4 h-6 w-6 text-cyan-200" />}<div className="font-semibold text-white">{title}</div><div className="mt-2 text-sm leading-6 text-slate-400">{desc}</div>{price && <div className="mt-4 text-sm font-semibold text-cyan-100">{price}</div>}</button>; }
+function BuilderPanel({ title, children }) { return <Card className="p-5"><h3 className="mb-5 text-xl font-semibold">{title}</h3><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{children}</div></Card>; }
+function Summary({ label, value, price }) { return <div className="flex justify-between gap-4 border-b border-white/10 pb-3 last:border-b-0 last:pb-0"><span className="text-slate-400">{label}</span><span className="text-right text-white">{value}{price && <><br /><small className="text-slate-400">{price}</small></>}</span></div>; }
+function TrustStrip({ t }) { return <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{t.trust.map((item) => <div key={item} className="flex gap-2 rounded-2xl border border-white/10 bg-white/[0.035] p-3 text-sm text-slate-300"><Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{item}</div>)}</div>; }
+function InfoGrid({ eyebrow, title, items, numbered = false }) { return <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6"><div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]"><SectionHeader eyebrow={eyebrow} title={title} /><div className="grid gap-4 sm:grid-cols-2">{items.map(([h, p], index) => <Card key={h} className="p-5"><div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">{numbered ? <span className="font-bold">{index + 1}</span> : <Icon name="check" className="h-5 w-5" />}</div><h3 className="text-lg font-semibold">{h}</h3><p className="mt-3 text-sm leading-6 text-slate-300">{p}</p></Card>)}</div></div></section>; }

@@ -91,20 +91,3 @@ a:focus-visible {
     backdrop-filter: blur(12px);
   }
 }
-
-
-/* full-page scenario snap scroll */
-.fullpage-scenario-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.fullpage-scenario-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-@supports (height: 100dvh) {
-  .fullpage-scenario-scroll {
-    height: calc(100dvh - 4.25rem);
-  }
-}
