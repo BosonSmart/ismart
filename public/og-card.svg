@@ -1,0 +1,30 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="0.62" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="cyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(210 120) rotate(42) scale(520 360)">
+      <stop stop-color="#67E8F9" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#67E8F9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1040 520) rotate(42) scale(420 300)">
+      <stop stop-color="#FBBF24" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#cyan)"/>
+  <rect width="1200" height="630" fill="url(#amber)"/>
+  <rect x="72" y="72" width="1056" height="486" rx="44" fill="#020617" fill-opacity="0.36" stroke="#FFFFFF" stroke-opacity="0.12"/>
+  <rect x="96" y="96" width="74" height="74" rx="22" fill="#67E8F9"/>
+  <path d="M139 112 116 149h18l-5 27 28-43h-18l0-21Z" fill="#020617"/>
+  <text x="192" y="126" fill="#FFFFFF" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800">Boson Smart</text>
+  <text x="192" y="164" fill="#CBD5E1" font-size="22" font-family="Inter, Arial, sans-serif">Smart homes for Hong Kong apartments</text>
+  <text x="96" y="284" fill="#FFFFFF" font-size="64" font-family="Inter, Arial, sans-serif" font-weight="850">Smart home packages</text>
+  <text x="96" y="358" fill="#FFFFFF" font-size="64" font-family="Inter, Arial, sans-serif" font-weight="850">installed and ready to use.</text>
+  <text x="96" y="424" fill="#CBD5E1" font-size="26" font-family="Inter, Arial, sans-serif">Lighting scenes · Comfort automation · Energy habits · Family safety</text>
+  <rect x="96" y="474" width="260" height="54" rx="27" fill="#67E8F9"/>
+  <text x="128" y="509" fill="#020617" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="800">Build an estimate</text>
+</svg>

@@ -1,31 +1,31 @@
-import React, { useMemo, useState } from "react";
+﻿import React, { useMemo, useState } from "react";
 
 const PLACEHOLDER_EMAIL = "hello@bosonsmart.hk";
 const PLACEHOLDER_WHATSAPP = "85200000000";
 
 const iconMap = {
-  arrow: "→",
-  check: "✓",
-  bolt: "⚡",
-  home: "⌂",
-  shield: "◈",
-  comfort: "☼",
-  light: "✦",
-  lock: "▣",
-  sliders: "≋",
-  sparkle: "✧",
-  clock: "◷",
-  building: "▥",
-  phone: "☎",
-  menu: "☰",
-  close: "×",
+  arrow: "â†’",
+  check: "âœ“",
+  bolt: "âš¡",
+  home: "âŒ‚",
+  shield: "â—ˆ",
+  comfort: "â˜¼",
+  light: "âœ¦",
+  lock: "â–£",
+  sliders: "â‰‹",
+  sparkle: "âœ§",
+  clock: "â—·",
+  building: "â–¥",
+  phone: "â˜Ž",
+  menu: "â˜°",
+  close: "Ã—",
   plus: "+",
 };
 
 function Icon({ name, className = "" }) {
   return (
     <span className={`icon ${className}`} aria-hidden="true">
-      {iconMap[name] || "•"}
+      {iconMap[name] || "â€¢"}
     </span>
   );
 }
@@ -41,7 +41,7 @@ const content = {
     nav: ["Packages", "Builder", "Scope", "Process", "Contact"],
     quote: "Build estimate",
     heroEyebrow: "Hong Kong smart-home installation packages",
-    heroTitle: "Smart home packages for Hong Kong apartments — installed, configured, and ready to use.",
+    heroTitle: "Smart home packages for Hong Kong apartments â€” installed, configured, and ready to use.",
     heroText:
       "Start with lighting scenes, comfort automation, energy-saving routines, or family safety. Choose a package, build an estimate, and request a practical consultation.",
     heroPrimary: "Build my estimate",
@@ -170,7 +170,7 @@ const content = {
       "We are starting with a small number of Hong Kong apartment projects to refine installation workflow, handover quality, and real household scene design.",
     launchBadge: "Ideal early customer",
     launchSide:
-      "You want to start with practical areas such as entry, living room, air-con, curtains, or family safety — not a full-home project immediately.",
+      "You want to start with practical areas such as entry, living room, air-con, curtains, or family safety â€” not a full-home project immediately.",
     launchPoints: [
       ["01", "Initial package review", "Recommend a starting package based on apartment status, habits, and goals."],
       ["02", "Scene tuning", "Basic scene and setting adjustments after installation based on real usage."],
@@ -211,7 +211,7 @@ const content = {
       "Send your estimate by WhatsApp or email. We will recommend a starting package based on your apartment size, wiring condition, lifestyle habits, and installation readiness.",
     whatsappCta: "WhatsApp consultation",
     emailCta: "Email this estimate",
-    footer: "© 2026 Boson Smart. Smart home packages for Hong Kong apartments.",
+    footer: "Â© 2026 Boson Smart. Smart home packages for Hong Kong apartments.",
     apartments: [
       { id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 },
       { id: "twoBed", label: "2-bedroom apartment", description: "Typical Hong Kong family flat", adjustment: 1800 },
@@ -288,253 +288,253 @@ const content = {
   },
   zh: {
     brand: "Boson Smart",
-    brandSub: "為香港住宅而設的智能家居方案",
-    nav: ["方案", "組合器", "範圍", "流程", "聯絡"],
-    quote: "建立估算",
-    heroEyebrow: "香港住宅智能家居安裝方案",
-    heroTitle: "為香港住宅而設的智能家居方案 — 安裝、設定、交付一次完成。",
+    brandSub: "ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆ",
+    nav: ["æ–¹æ¡ˆ", "çµ„åˆå™¨", "ç¯„åœ", "æµç¨‹", "è¯çµ¡"],
+    quote: "å»ºç«‹ä¼°ç®—",
+    heroEyebrow: "é¦™æ¸¯ä½å®…æ™ºèƒ½å®¶å±…å®‰è£æ–¹æ¡ˆ",
+    heroTitle: "ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆ â€” å®‰è£ã€è¨­å®šã€äº¤ä»˜ä¸€æ¬¡å®Œæˆã€‚",
     heroText:
-      "由燈光情境、舒適自動化、節能習慣或家庭安全開始。選擇方案、建立估算，再安排實用諮詢。",
-    heroPrimary: "建立我的估算",
-    heroSecondary: "查看方案",
+      "ç”±ç‡ˆå…‰æƒ…å¢ƒã€èˆ’é©è‡ªå‹•åŒ–ã€ç¯€èƒ½ç¿’æ…£æˆ–å®¶åº­å®‰å…¨é–‹å§‹ã€‚é¸æ“‡æ–¹æ¡ˆã€å»ºç«‹ä¼°ç®—ï¼Œå†å®‰æŽ’å¯¦ç”¨è«®è©¢ã€‚",
+    heroPrimary: "å»ºç«‹æˆ‘çš„ä¼°ç®—",
+    heroSecondary: "æŸ¥çœ‹æ–¹æ¡ˆ",
     trust: [
-      "專為香港住宅場景設計",
-      "配合電業工程服務支援安裝",
-      "現場評估後才確認最終報價",
-      "包括交付測試及基本使用教學",
+      "å°ˆç‚ºé¦™æ¸¯ä½å®…å ´æ™¯è¨­è¨ˆ",
+      "é…åˆé›»æ¥­å·¥ç¨‹æœå‹™æ”¯æ´å®‰è£",
+      "ç¾å ´è©•ä¼°å¾Œæ‰ç¢ºèªæœ€çµ‚å ±åƒ¹",
+      "åŒ…æ‹¬äº¤ä»˜æ¸¬è©¦åŠåŸºæœ¬ä½¿ç”¨æ•™å­¸",
     ],
-    dashboardModeLabel: "情境預覽",
+    dashboardModeLabel: "æƒ…å¢ƒé è¦½",
     dashboardScenarios: [
       {
         id: "home",
-        label: "回家",
-        title: "屋企已準備好",
-        status: "啟用中",
+        label: "å›žå®¶",
+        title: "å±‹ä¼å·²æº–å‚™å¥½",
+        status: "å•Ÿç”¨ä¸­",
         package: "Comfort & Energy Package",
         rows: [
-          ["到家前", "客廳預先調節舒適溫度", "18:45"],
-          ["開門時", "玄關燈光柔和亮起", "18:50"],
-          ["晚飯時", "客廳轉為暖光情境", "19:10"],
-          ["夜晚時", "低亮度路徑燈準備好", "23:30"],
+          ["åˆ°å®¶å‰", "å®¢å»³é å…ˆèª¿ç¯€èˆ’é©æº«åº¦", "18:45"],
+          ["é–‹é–€æ™‚", "çŽ„é—œç‡ˆå…‰æŸ”å’Œäº®èµ·", "18:50"],
+          ["æ™šé£¯æ™‚", "å®¢å»³è½‰ç‚ºæš–å…‰æƒ…å¢ƒ", "19:10"],
+          ["å¤œæ™šæ™‚", "ä½Žäº®åº¦è·¯å¾‘ç‡ˆæº–å‚™å¥½", "23:30"],
         ],
       },
       {
         id: "energy",
-        label: "節能",
-        title: "舒適但不浪費",
-        status: "已排程",
+        label: "ç¯€èƒ½",
+        title: "èˆ’é©ä½†ä¸æµªè²»",
+        status: "å·²æŽ’ç¨‹",
         package: "Comfort & Energy Package",
         rows: [
-          ["冷氣", "避免不必要長開", "自動"],
-          ["燈光", "按活動情況低耗電使用", "開啟"],
-          ["窗簾", "減少下午熱力進入", "可選"],
-          ["離家模式", "關閉指定用電設備", "準備好"],
+          ["å†·æ°£", "é¿å…ä¸å¿…è¦é•·é–‹", "è‡ªå‹•"],
+          ["ç‡ˆå…‰", "æŒ‰æ´»å‹•æƒ…æ³ä½Žè€—é›»ä½¿ç”¨", "é–‹å•Ÿ"],
+          ["çª—ç°¾", "æ¸›å°‘ä¸‹åˆç†±åŠ›é€²å…¥", "å¯é¸"],
+          ["é›¢å®¶æ¨¡å¼", "é—œé–‰æŒ‡å®šç”¨é›»è¨­å‚™", "æº–å‚™å¥½"],
         ],
       },
       {
         id: "safety",
-        label: "安全",
-        title: "家中狀態更清楚",
-        status: "監察中",
+        label: "å®‰å…¨",
+        title: "å®¶ä¸­ç‹€æ…‹æ›´æ¸…æ¥š",
+        status: "ç›£å¯Ÿä¸­",
         package: "Family Safety Package",
         rows: [
-          ["玄關", "掌握大門狀態", "開啟"],
-          ["門窗", "指定感應器已準備", "準備好"],
-          ["夜間路徑", "走動時柔和亮燈", "自動"],
-          ["通知", "手機提示已啟用", "開啟"],
+          ["çŽ„é—œ", "æŽŒæ¡å¤§é–€ç‹€æ…‹", "é–‹å•Ÿ"],
+          ["é–€çª—", "æŒ‡å®šæ„Ÿæ‡‰å™¨å·²æº–å‚™", "æº–å‚™å¥½"],
+          ["å¤œé–“è·¯å¾‘", "èµ°å‹•æ™‚æŸ”å’Œäº®ç‡ˆ", "è‡ªå‹•"],
+          ["é€šçŸ¥", "æ‰‹æ©Ÿæç¤ºå·²å•Ÿç”¨", "é–‹å•Ÿ"],
         ],
       },
     ],
-    packagesEyebrow: "三個起步方案",
-    packagesTitle: "按你想屋企做到甚麼來選擇。",
+    packagesEyebrow: "ä¸‰å€‹èµ·æ­¥æ–¹æ¡ˆ",
+    packagesTitle: "æŒ‰ä½ æƒ³å±‹ä¼åšåˆ°ç”šéº¼ä¾†é¸æ“‡ã€‚",
     packagesText:
-      "每個方案都以容易理解、實際可安裝、日後可升級為原則，先由最有用的家居範圍開始。",
+      "æ¯å€‹æ–¹æ¡ˆéƒ½ä»¥å®¹æ˜“ç†è§£ã€å¯¦éš›å¯å®‰è£ã€æ—¥å¾Œå¯å‡ç´šç‚ºåŽŸå‰‡ï¼Œå…ˆç”±æœ€æœ‰ç”¨çš„å®¶å±…ç¯„åœé–‹å§‹ã€‚",
     priceNote:
-      "網上金額只作初步估算。最終報價會按現場線路、設備兼容性、指定品牌及安裝條件確認。",
-    selectPlan: "選擇方案",
-    selectedPlan: "已選方案",
-    idealFor: "適合：",
-    builderEyebrow: "智能家居估算組合器",
-    builderTitle: "建立你的智能家居估算。",
+      "ç¶²ä¸Šé‡‘é¡åªä½œåˆæ­¥ä¼°ç®—ã€‚æœ€çµ‚å ±åƒ¹æœƒæŒ‰ç¾å ´ç·šè·¯ã€è¨­å‚™å…¼å®¹æ€§ã€æŒ‡å®šå“ç‰ŒåŠå®‰è£æ¢ä»¶ç¢ºèªã€‚",
+    selectPlan: "é¸æ“‡æ–¹æ¡ˆ",
+    selectedPlan: "å·²é¸æ–¹æ¡ˆ",
+    idealFor: "é©åˆï¼š",
+    builderEyebrow: "æ™ºèƒ½å®¶å±…ä¼°ç®—çµ„åˆå™¨",
+    builderTitle: "å»ºç«‹ä½ çš„æ™ºèƒ½å®¶å±…ä¼°ç®—ã€‚",
     builderText:
-      "選擇基本方案、單位類型及升級項目，估算金額會即時更新。之後先安排諮詢及現場評估，再確認最終報價。",
-    builderStep1: "1. 選擇基本方案",
-    builderStep2: "2. 選擇單位類型",
-    builderStep3: "3. 加選升級項目",
-    builderSummary: "即時估算",
-    builderBase: "基本方案",
-    builderApartment: "單位調整",
-    builderAddons: "已選升級項目",
-    builderNoAddons: "未選擇升級項目",
-    builderEstimatedTotal: "估算總額",
+      "é¸æ“‡åŸºæœ¬æ–¹æ¡ˆã€å–®ä½é¡žåž‹åŠå‡ç´šé …ç›®ï¼Œä¼°ç®—é‡‘é¡æœƒå³æ™‚æ›´æ–°ã€‚ä¹‹å¾Œå…ˆå®‰æŽ’è«®è©¢åŠç¾å ´è©•ä¼°ï¼Œå†ç¢ºèªæœ€çµ‚å ±åƒ¹ã€‚",
+    builderStep1: "1. é¸æ“‡åŸºæœ¬æ–¹æ¡ˆ",
+    builderStep2: "2. é¸æ“‡å–®ä½é¡žåž‹",
+    builderStep3: "3. åŠ é¸å‡ç´šé …ç›®",
+    builderSummary: "å³æ™‚ä¼°ç®—",
+    builderBase: "åŸºæœ¬æ–¹æ¡ˆ",
+    builderApartment: "å–®ä½èª¿æ•´",
+    builderAddons: "å·²é¸å‡ç´šé …ç›®",
+    builderNoAddons: "æœªé¸æ“‡å‡ç´šé …ç›®",
+    builderEstimatedTotal: "ä¼°ç®—ç¸½é¡",
     builderDisclaimer:
-      "此為初步估算，並非最終報價。最終價格需視乎現場線路、開關兼容性、Wi-Fi 覆蓋、產品品牌、安裝難度及現場評估而定。",
-    builderCta: "用 WhatsApp 傳送估算",
-    builderSecondaryCta: "電郵傳送估算",
-    included: "已選方案包括",
-    whyEyebrow: "為什麼選 Boson Smart",
-    whyTitle: "不是只賣智能產品，而是交付一個可使用的家居系統。",
+      "æ­¤ç‚ºåˆæ­¥ä¼°ç®—ï¼Œä¸¦éžæœ€çµ‚å ±åƒ¹ã€‚æœ€çµ‚åƒ¹æ ¼éœ€è¦–ä¹Žç¾å ´ç·šè·¯ã€é–‹é—œå…¼å®¹æ€§ã€Wi-Fi è¦†è“‹ã€ç”¢å“å“ç‰Œã€å®‰è£é›£åº¦åŠç¾å ´è©•ä¼°è€Œå®šã€‚",
+    builderCta: "ç”¨ WhatsApp å‚³é€ä¼°ç®—",
+    builderSecondaryCta: "é›»éƒµå‚³é€ä¼°ç®—",
+    included: "å·²é¸æ–¹æ¡ˆåŒ…æ‹¬",
+    whyEyebrow: "ç‚ºä»€éº¼é¸ Boson Smart",
+    whyTitle: "ä¸æ˜¯åªè³£æ™ºèƒ½ç”¢å“ï¼Œè€Œæ˜¯äº¤ä»˜ä¸€å€‹å¯ä½¿ç”¨çš„å®¶å±…ç³»çµ±ã€‚",
     whyText:
-      "智能家居不應令日常生活變得更麻煩。我們重視實用場景、清晰交付，以及適合香港住宅的逐步升級方式。",
+      "æ™ºèƒ½å®¶å±…ä¸æ‡‰ä»¤æ—¥å¸¸ç”Ÿæ´»è®Šå¾—æ›´éº»ç…©ã€‚æˆ‘å€‘é‡è¦–å¯¦ç”¨å ´æ™¯ã€æ¸…æ™°äº¤ä»˜ï¼Œä»¥åŠé©åˆé¦™æ¸¯ä½å®…çš„é€æ­¥å‡ç´šæ–¹å¼ã€‚",
     whyPoints: [
-      "按香港住宅生活習慣設計",
-      "先用清晰套餐，再處理細節客製",
-      "現場評估後才確認最終價格",
-      "保留簡單控制方式，家人不一定要用 App",
-      "鏡頭、感應器及帳戶設定注重私隱",
-      "可由一個區域開始，之後再擴展更多房間",
+      "æŒ‰é¦™æ¸¯ä½å®…ç”Ÿæ´»ç¿’æ…£è¨­è¨ˆ",
+      "å…ˆç”¨æ¸…æ™°å¥—é¤ï¼Œå†è™•ç†ç´°ç¯€å®¢è£½",
+      "ç¾å ´è©•ä¼°å¾Œæ‰ç¢ºèªæœ€çµ‚åƒ¹æ ¼",
+      "ä¿ç•™ç°¡å–®æŽ§åˆ¶æ–¹å¼ï¼Œå®¶äººä¸ä¸€å®šè¦ç”¨ App",
+      "é¡é ­ã€æ„Ÿæ‡‰å™¨åŠå¸³æˆ¶è¨­å®šæ³¨é‡ç§éš±",
+      "å¯ç”±ä¸€å€‹å€åŸŸé–‹å§‹ï¼Œä¹‹å¾Œå†æ“´å±•æ›´å¤šæˆ¿é–“",
     ],
-    includedTitle: "一般包括",
-    excludedTitle: "通常需另行報價",
+    includedTitle: "ä¸€èˆ¬åŒ…æ‹¬",
+    excludedTitle: "é€šå¸¸éœ€å¦è¡Œå ±åƒ¹",
     includedItems: [
-      "初步方案建議",
-      "基本設備安裝及設定",
-      "App / 情境模式配置",
-      "安裝後測試",
-      "基本使用教學",
-      "簡單交付清單",
+      "åˆæ­¥æ–¹æ¡ˆå»ºè­°",
+      "åŸºæœ¬è¨­å‚™å®‰è£åŠè¨­å®š",
+      "App / æƒ…å¢ƒæ¨¡å¼é…ç½®",
+      "å®‰è£å¾Œæ¸¬è©¦",
+      "åŸºæœ¬ä½¿ç”¨æ•™å­¸",
+      "ç°¡å–®äº¤ä»˜æ¸…å–®",
     ],
     excludedItems: [
-      "大型改線或重新拉線",
-      "假天花、木工或裝修工程",
-      "高端指定品牌設備差價",
-      "複雜網絡改善工程",
-      "非常規牆身或門身改裝",
-      "保養期後的長期支援",
+      "å¤§åž‹æ”¹ç·šæˆ–é‡æ–°æ‹‰ç·š",
+      "å‡å¤©èŠ±ã€æœ¨å·¥æˆ–è£ä¿®å·¥ç¨‹",
+      "é«˜ç«¯æŒ‡å®šå“ç‰Œè¨­å‚™å·®åƒ¹",
+      "è¤‡é›œç¶²çµ¡æ”¹å–„å·¥ç¨‹",
+      "éžå¸¸è¦ç‰†èº«æˆ–é–€èº«æ”¹è£",
+      "ä¿é¤ŠæœŸå¾Œçš„é•·æœŸæ”¯æ´",
     ],
-    scenarioEyebrow: "先講生活情境",
-    scenarioTitle: "賣的不是器材，而是生活感受。",
+    scenarioEyebrow: "å…ˆè¬›ç”Ÿæ´»æƒ…å¢ƒ",
+    scenarioTitle: "è³£çš„ä¸æ˜¯å™¨æï¼Œè€Œæ˜¯ç”Ÿæ´»æ„Ÿå—ã€‚",
     scenarioText:
-      "智能家居最容易理解的價值，是你回家、晚飯後放鬆，以及夜晚走動時的日常感受。",
-    comparisonTitle: "簡單比較",
-    comparisonHeaders: ["項目", "Starter", "Comfort & Energy", "Family Safety"],
+      "æ™ºèƒ½å®¶å±…æœ€å®¹æ˜“ç†è§£çš„åƒ¹å€¼ï¼Œæ˜¯ä½ å›žå®¶ã€æ™šé£¯å¾Œæ”¾é¬†ï¼Œä»¥åŠå¤œæ™šèµ°å‹•æ™‚çš„æ—¥å¸¸æ„Ÿå—ã€‚",
+    comparisonTitle: "ç°¡å–®æ¯”è¼ƒ",
+    comparisonHeaders: ["é …ç›®", "Starter", "Comfort & Energy", "Family Safety"],
     comparisonRows: [
-      ["主要重點", "方便入門", "舒適 + 節能", "安全 + 監察"],
-      ["燈光情境", "核心區域", "多個房間", "安全相關區域"],
-      ["冷氣自動化", "可選配", "可包含", "可選配"],
-      ["感應器", "基本選配", "舒適 / 人體感應", "門窗 / 安全感應"],
-      ["最適合階段", "任何時間", "裝修前 / 裝修中", "任何時間"],
+      ["ä¸»è¦é‡é»ž", "æ–¹ä¾¿å…¥é–€", "èˆ’é© + ç¯€èƒ½", "å®‰å…¨ + ç›£å¯Ÿ"],
+      ["ç‡ˆå…‰æƒ…å¢ƒ", "æ ¸å¿ƒå€åŸŸ", "å¤šå€‹æˆ¿é–“", "å®‰å…¨ç›¸é—œå€åŸŸ"],
+      ["å†·æ°£è‡ªå‹•åŒ–", "å¯é¸é…", "å¯åŒ…å«", "å¯é¸é…"],
+      ["æ„Ÿæ‡‰å™¨", "åŸºæœ¬é¸é…", "èˆ’é© / äººé«”æ„Ÿæ‡‰", "é–€çª— / å®‰å…¨æ„Ÿæ‡‰"],
+      ["æœ€é©åˆéšŽæ®µ", "ä»»ä½•æ™‚é–“", "è£ä¿®å‰ / è£ä¿®ä¸­", "ä»»ä½•æ™‚é–“"],
     ],
-    launchEyebrow: "第一階段啟動名額",
-    launchTitle: "現正接受少量早期香港住宅智能家居項目。",
+    launchEyebrow: "ç¬¬ä¸€éšŽæ®µå•Ÿå‹•åé¡",
+    launchTitle: "ç¾æ­£æŽ¥å—å°‘é‡æ—©æœŸé¦™æ¸¯ä½å®…æ™ºèƒ½å®¶å±…é …ç›®ã€‚",
     launchText:
-      "我們會以少量項目開始，集中打磨安裝流程、交付體驗及真實家庭使用情境。",
-    launchBadge: "適合首批客戶",
+      "æˆ‘å€‘æœƒä»¥å°‘é‡é …ç›®é–‹å§‹ï¼Œé›†ä¸­æ‰“ç£¨å®‰è£æµç¨‹ã€äº¤ä»˜é«”é©—åŠçœŸå¯¦å®¶åº­ä½¿ç”¨æƒ…å¢ƒã€‚",
+    launchBadge: "é©åˆé¦–æ‰¹å®¢æˆ¶",
     launchSide:
-      "你想先由玄關、客廳、冷氣、窗簾或家庭安全等實用範圍開始，而不是一次過做全屋大型工程。",
+      "ä½ æƒ³å…ˆç”±çŽ„é—œã€å®¢å»³ã€å†·æ°£ã€çª—ç°¾æˆ–å®¶åº­å®‰å…¨ç­‰å¯¦ç”¨ç¯„åœé–‹å§‹ï¼Œè€Œä¸æ˜¯ä¸€æ¬¡éŽåšå…¨å±‹å¤§åž‹å·¥ç¨‹ã€‚",
     launchPoints: [
-      ["01", "初步方案檢視", "根據單位狀態、生活習慣及主要目標，建議由哪個方案開始。"],
-      ["02", "安裝後情境微調", "完成安裝後，可按實際使用感受作基本場景及設定調整。"],
-      ["03", "交付清單", "整理已安裝設備、控制方式、基本操作及後續升級方向。"],
-      ["04", "早期用戶回饋", "收集真實使用意見，用於改善下一版本服務流程。"],
+      ["01", "åˆæ­¥æ–¹æ¡ˆæª¢è¦–", "æ ¹æ“šå–®ä½ç‹€æ…‹ã€ç”Ÿæ´»ç¿’æ…£åŠä¸»è¦ç›®æ¨™ï¼Œå»ºè­°ç”±å“ªå€‹æ–¹æ¡ˆé–‹å§‹ã€‚"],
+      ["02", "å®‰è£å¾Œæƒ…å¢ƒå¾®èª¿", "å®Œæˆå®‰è£å¾Œï¼Œå¯æŒ‰å¯¦éš›ä½¿ç”¨æ„Ÿå—ä½œåŸºæœ¬å ´æ™¯åŠè¨­å®šèª¿æ•´ã€‚"],
+      ["03", "äº¤ä»˜æ¸…å–®", "æ•´ç†å·²å®‰è£è¨­å‚™ã€æŽ§åˆ¶æ–¹å¼ã€åŸºæœ¬æ“ä½œåŠå¾ŒçºŒå‡ç´šæ–¹å‘ã€‚"],
+      ["04", "æ—©æœŸç”¨æˆ¶å›žé¥‹", "æ”¶é›†çœŸå¯¦ä½¿ç”¨æ„è¦‹ï¼Œç”¨æ–¼æ”¹å–„ä¸‹ä¸€ç‰ˆæœ¬æœå‹™æµç¨‹ã€‚"],
     ],
-    processEyebrow: "安裝流程",
-    processTitle: "足夠專業令人信任，亦足夠簡單可以立即開始。",
+    processEyebrow: "å®‰è£æµç¨‹",
+    processTitle: "è¶³å¤ å°ˆæ¥­ä»¤äººä¿¡ä»»ï¼Œäº¦è¶³å¤ ç°¡å–®å¯ä»¥ç«‹å³é–‹å§‹ã€‚",
     processText:
-      "第一步不應像大型工程顧問。選方案、了解單位、乾淨安裝，然後測試及教識使用。",
+      "ç¬¬ä¸€æ­¥ä¸æ‡‰åƒå¤§åž‹å·¥ç¨‹é¡§å•ã€‚é¸æ–¹æ¡ˆã€äº†è§£å–®ä½ã€ä¹¾æ·¨å®‰è£ï¼Œç„¶å¾Œæ¸¬è©¦åŠæ•™è­˜ä½¿ç”¨ã€‚",
     process: [
-      "選擇一個起步方案",
-      "簡短家居評估",
-      "配合電業工程服務支援安裝",
-      "交付測試及使用教學",
+      "é¸æ“‡ä¸€å€‹èµ·æ­¥æ–¹æ¡ˆ",
+      "ç°¡çŸ­å®¶å±…è©•ä¼°",
+      "é…åˆé›»æ¥­å·¥ç¨‹æœå‹™æ”¯æ´å®‰è£",
+      "äº¤ä»˜æ¸¬è©¦åŠä½¿ç”¨æ•™å­¸",
     ],
-    preVisitEyebrow: "查詢前準備",
-    preVisitTitle: "用四條問題，快速判斷最合適方案。",
+    preVisitEyebrow: "æŸ¥è©¢å‰æº–å‚™",
+    preVisitTitle: "ç”¨å››æ¢å•é¡Œï¼Œå¿«é€Ÿåˆ¤æ–·æœ€åˆé©æ–¹æ¡ˆã€‚",
     preVisitText:
-      "這些資料可以令報價及現場評估更有效率。",
+      "é€™äº›è³‡æ–™å¯ä»¥ä»¤å ±åƒ¹åŠç¾å ´è©•ä¼°æ›´æœ‰æ•ˆçŽ‡ã€‚",
     preVisitCards: [
-      ["單位狀態", "已入住、準備裝修、正在裝修，還是新樓交收？"],
-      ["主要目標", "方便、舒適節能、家庭安全，還是三者都需要？"],
-      ["控制範圍", "只做客廳玄關，還是包括睡房、窗簾、冷氣及門鎖？"],
-      ["現有設備", "有沒有智能門鎖、語音助理、Wi-Fi mesh 或已裝智能燈？"],
+      ["å–®ä½ç‹€æ…‹", "å·²å…¥ä½ã€æº–å‚™è£ä¿®ã€æ­£åœ¨è£ä¿®ï¼Œé‚„æ˜¯æ–°æ¨“äº¤æ”¶ï¼Ÿ"],
+      ["ä¸»è¦ç›®æ¨™", "æ–¹ä¾¿ã€èˆ’é©ç¯€èƒ½ã€å®¶åº­å®‰å…¨ï¼Œé‚„æ˜¯ä¸‰è€…éƒ½éœ€è¦ï¼Ÿ"],
+      ["æŽ§åˆ¶ç¯„åœ", "åªåšå®¢å»³çŽ„é—œï¼Œé‚„æ˜¯åŒ…æ‹¬ç¡æˆ¿ã€çª—ç°¾ã€å†·æ°£åŠé–€éŽ–ï¼Ÿ"],
+      ["ç¾æœ‰è¨­å‚™", "æœ‰æ²’æœ‰æ™ºèƒ½é–€éŽ–ã€èªžéŸ³åŠ©ç†ã€Wi-Fi mesh æˆ–å·²è£æ™ºèƒ½ç‡ˆï¼Ÿ"],
     ],
-    faqEyebrow: "常見問題",
-    faqTitle: "先解答客戶最擔心的事。",
+    faqEyebrow: "å¸¸è¦‹å•é¡Œ",
+    faqTitle: "å…ˆè§£ç­”å®¢æˆ¶æœ€æ“”å¿ƒçš„äº‹ã€‚",
     faqs: [
-      ["一定要裝修時先可以做嗎？", "不一定。部分方案可以在已入住單位安裝；但如果涉及更多開關、窗簾或改線，裝修前或裝修中會更理想。"],
-      ["估算價是否等於最終報價？", "不是。網站估算只作初步參考，最終報價需視乎現場線路、產品品牌、安裝難度及單位情況。"],
-      ["可以先做一部分，之後再加嗎？", "可以。先由核心區域開始，之後再加入更多房間、感應器及自動化情境。"],
-      ["如果家人不懂用 App 怎麼辦？", "方案會保留簡單控制方式，例如牆掣、情境按鈕或基本教學，不應令日常使用變得更麻煩。"],
+      ["ä¸€å®šè¦è£ä¿®æ™‚å…ˆå¯ä»¥åšå—Žï¼Ÿ", "ä¸ä¸€å®šã€‚éƒ¨åˆ†æ–¹æ¡ˆå¯ä»¥åœ¨å·²å…¥ä½å–®ä½å®‰è£ï¼›ä½†å¦‚æžœæ¶‰åŠæ›´å¤šé–‹é—œã€çª—ç°¾æˆ–æ”¹ç·šï¼Œè£ä¿®å‰æˆ–è£ä¿®ä¸­æœƒæ›´ç†æƒ³ã€‚"],
+      ["ä¼°ç®—åƒ¹æ˜¯å¦ç­‰æ–¼æœ€çµ‚å ±åƒ¹ï¼Ÿ", "ä¸æ˜¯ã€‚ç¶²ç«™ä¼°ç®—åªä½œåˆæ­¥åƒè€ƒï¼Œæœ€çµ‚å ±åƒ¹éœ€è¦–ä¹Žç¾å ´ç·šè·¯ã€ç”¢å“å“ç‰Œã€å®‰è£é›£åº¦åŠå–®ä½æƒ…æ³ã€‚"],
+      ["å¯ä»¥å…ˆåšä¸€éƒ¨åˆ†ï¼Œä¹‹å¾Œå†åŠ å—Žï¼Ÿ", "å¯ä»¥ã€‚å…ˆç”±æ ¸å¿ƒå€åŸŸé–‹å§‹ï¼Œä¹‹å¾Œå†åŠ å…¥æ›´å¤šæˆ¿é–“ã€æ„Ÿæ‡‰å™¨åŠè‡ªå‹•åŒ–æƒ…å¢ƒã€‚"],
+      ["å¦‚æžœå®¶äººä¸æ‡‚ç”¨ App æ€Žéº¼è¾¦ï¼Ÿ", "æ–¹æ¡ˆæœƒä¿ç•™ç°¡å–®æŽ§åˆ¶æ–¹å¼ï¼Œä¾‹å¦‚ç‰†æŽ£ã€æƒ…å¢ƒæŒ‰éˆ•æˆ–åŸºæœ¬æ•™å­¸ï¼Œä¸æ‡‰ä»¤æ—¥å¸¸ä½¿ç”¨è®Šå¾—æ›´éº»ç…©ã€‚"],
     ],
-    contactEyebrow: "準備規劃第一個設定？",
-    contactTitle: "先由一個實用智能家居設定開始，之後再逐步升級。",
+    contactEyebrow: "æº–å‚™è¦åŠƒç¬¬ä¸€å€‹è¨­å®šï¼Ÿ",
+    contactTitle: "å…ˆç”±ä¸€å€‹å¯¦ç”¨æ™ºèƒ½å®¶å±…è¨­å®šé–‹å§‹ï¼Œä¹‹å¾Œå†é€æ­¥å‡ç´šã€‚",
     contactText:
-      "可用 WhatsApp 或電郵傳送估算。我們會按單位大小、現有線路、生活習慣及安裝條件建議最合適的起步方案。",
-    whatsappCta: "WhatsApp 諮詢",
-    emailCta: "電郵傳送估算",
-    footer: "© 2026 Boson Smart。為香港住宅而設的智能家居方案。",
+      "å¯ç”¨ WhatsApp æˆ–é›»éƒµå‚³é€ä¼°ç®—ã€‚æˆ‘å€‘æœƒæŒ‰å–®ä½å¤§å°ã€ç¾æœ‰ç·šè·¯ã€ç”Ÿæ´»ç¿’æ…£åŠå®‰è£æ¢ä»¶å»ºè­°æœ€åˆé©çš„èµ·æ­¥æ–¹æ¡ˆã€‚",
+    whatsappCta: "WhatsApp è«®è©¢",
+    emailCta: "é›»éƒµå‚³é€ä¼°ç®—",
+    footer: "Â© 2026 Boson Smartã€‚ç‚ºé¦™æ¸¯ä½å®…è€Œè¨­çš„æ™ºèƒ½å®¶å±…æ–¹æ¡ˆã€‚",
     apartments: [
-      { id: "studio", label: "開放式 / 一房單位", description: "較少控制點，適合輕量入門", adjustment: 0 },
-      { id: "twoBed", label: "兩房單位", description: "常見香港家庭單位", adjustment: 1800 },
-      { id: "threeBed", label: "三房單位", description: "更多房間及情境控制點", adjustment: 3600 },
-      { id: "large", label: "大型 / 複式 / 自訂", description: "需要先作現場評估", adjustment: 6800 },
+      { id: "studio", label: "é–‹æ”¾å¼ / ä¸€æˆ¿å–®ä½", description: "è¼ƒå°‘æŽ§åˆ¶é»žï¼Œé©åˆè¼•é‡å…¥é–€", adjustment: 0 },
+      { id: "twoBed", label: "å…©æˆ¿å–®ä½", description: "å¸¸è¦‹é¦™æ¸¯å®¶åº­å–®ä½", adjustment: 1800 },
+      { id: "threeBed", label: "ä¸‰æˆ¿å–®ä½", description: "æ›´å¤šæˆ¿é–“åŠæƒ…å¢ƒæŽ§åˆ¶é»ž", adjustment: 3600 },
+      { id: "large", label: "å¤§åž‹ / è¤‡å¼ / è‡ªè¨‚", description: "éœ€è¦å…ˆä½œç¾å ´è©•ä¼°", adjustment: 6800 },
     ],
     addons: [
-      { id: "extraSwitch", label: "額外智能開關點", description: "增加一個燈光或控制點", price: 850 },
-      { id: "motion", label: "額外人體感應器", description: "適合走廊、浴室、玄關或雜物房", price: 650 },
-      { id: "curtain", label: "智能窗簾摩打", description: "窗簾或百葉簾自動控制", price: 2200 },
-      { id: "doorlock", label: "智能門鎖升級", description: "提升出入方便及權限管理", price: 2800 },
-      { id: "doorbell", label: "視像門鈴 / 入口鏡頭", description: "訪客提示及遙距查看", price: 1600 },
-      { id: "support", label: "年度支援計劃", description: "遙距支援及小型情境調整", price: 1200 },
+      { id: "extraSwitch", label: "é¡å¤–æ™ºèƒ½é–‹é—œé»ž", description: "å¢žåŠ ä¸€å€‹ç‡ˆå…‰æˆ–æŽ§åˆ¶é»ž", price: 850 },
+      { id: "motion", label: "é¡å¤–äººé«”æ„Ÿæ‡‰å™¨", description: "é©åˆèµ°å»Šã€æµ´å®¤ã€çŽ„é—œæˆ–é›œç‰©æˆ¿", price: 650 },
+      { id: "curtain", label: "æ™ºèƒ½çª—ç°¾æ‘©æ‰“", description: "çª—ç°¾æˆ–ç™¾è‘‰ç°¾è‡ªå‹•æŽ§åˆ¶", price: 2200 },
+      { id: "doorlock", label: "æ™ºèƒ½é–€éŽ–å‡ç´š", description: "æå‡å‡ºå…¥æ–¹ä¾¿åŠæ¬Šé™ç®¡ç†", price: 2800 },
+      { id: "doorbell", label: "è¦–åƒé–€éˆ´ / å…¥å£é¡é ­", description: "è¨ªå®¢æç¤ºåŠé™è·æŸ¥çœ‹", price: 1600 },
+      { id: "support", label: "å¹´åº¦æ”¯æ´è¨ˆåŠƒ", description: "é™è·æ”¯æ´åŠå°åž‹æƒ…å¢ƒèª¿æ•´", price: 1200 },
     ],
     packages: [
       {
         id: "starter",
         name: "Smart Home Starter",
-        subtitle: "智能家居的乾淨入門第一步。",
+        subtitle: "æ™ºèƒ½å®¶å±…çš„ä¹¾æ·¨å…¥é–€ç¬¬ä¸€æ­¥ã€‚",
         icon: "home",
-        tag: "最適合首次使用",
+        tag: "æœ€é©åˆé¦–æ¬¡ä½¿ç”¨",
         basePrice: 3800,
-        description: "以基本智能燈光及情境控制為核心，適合想提升方便度，但不想一開始太複雜的住宅。",
+        description: "ä»¥åŸºæœ¬æ™ºèƒ½ç‡ˆå…‰åŠæƒ…å¢ƒæŽ§åˆ¶ç‚ºæ ¸å¿ƒï¼Œé©åˆæƒ³æå‡æ–¹ä¾¿åº¦ï¼Œä½†ä¸æƒ³ä¸€é–‹å§‹å¤ªè¤‡é›œçš„ä½å®…ã€‚",
         includes: [
-          "指定區域智能燈光控制",
-          "回家 / 離家情境模式",
-          "手機 App 及語音助理設定",
-          "簡單牆掣或遙控控制選項",
-          "安裝後基本使用教學",
+          "æŒ‡å®šå€åŸŸæ™ºèƒ½ç‡ˆå…‰æŽ§åˆ¶",
+          "å›žå®¶ / é›¢å®¶æƒ…å¢ƒæ¨¡å¼",
+          "æ‰‹æ©Ÿ App åŠèªžéŸ³åŠ©ç†è¨­å®š",
+          "ç°¡å–®ç‰†æŽ£æˆ–é™æŽ§æŽ§åˆ¶é¸é …",
+          "å®‰è£å¾ŒåŸºæœ¬ä½¿ç”¨æ•™å­¸",
         ],
-        idealFor: "開放式單位、一房單位、租住單位，或第一次試用智能家居的用戶",
+        idealFor: "é–‹æ”¾å¼å–®ä½ã€ä¸€æˆ¿å–®ä½ã€ç§Ÿä½å–®ä½ï¼Œæˆ–ç¬¬ä¸€æ¬¡è©¦ç”¨æ™ºèƒ½å®¶å±…çš„ç”¨æˆ¶",
       },
       {
         id: "comfort",
         name: "Comfort & Energy Package",
-        subtitle: "舒適自動化，同時建立節能習慣。",
+        subtitle: "èˆ’é©è‡ªå‹•åŒ–ï¼ŒåŒæ™‚å»ºç«‹ç¯€èƒ½ç¿’æ…£ã€‚",
         icon: "comfort",
-        tag: "最平衡選擇",
+        tag: "æœ€å¹³è¡¡é¸æ“‡",
         basePrice: 8800,
-        description: "為日常舒適而設：燈光、冷氣習慣、窗簾、時間排程，以及節能自動化邏輯。",
+        description: "ç‚ºæ—¥å¸¸èˆ’é©è€Œè¨­ï¼šç‡ˆå…‰ã€å†·æ°£ç¿’æ…£ã€çª—ç°¾ã€æ™‚é–“æŽ’ç¨‹ï¼Œä»¥åŠç¯€èƒ½è‡ªå‹•åŒ–é‚è¼¯ã€‚",
         includes: [
-          "客廳、飯廳、工作及睡眠燈光情境",
-          "冷氣或溫度控制排程",
-          "可選配窗簾 / 百葉簾自動化",
-          "指定區域人體感應燈光",
-          "節能自動化邏輯",
+          "å®¢å»³ã€é£¯å»³ã€å·¥ä½œåŠç¡çœ ç‡ˆå…‰æƒ…å¢ƒ",
+          "å†·æ°£æˆ–æº«åº¦æŽ§åˆ¶æŽ’ç¨‹",
+          "å¯é¸é…çª—ç°¾ / ç™¾è‘‰ç°¾è‡ªå‹•åŒ–",
+          "æŒ‡å®šå€åŸŸäººé«”æ„Ÿæ‡‰ç‡ˆå…‰",
+          "ç¯€èƒ½è‡ªå‹•åŒ–é‚è¼¯",
         ],
-        idealFor: "情侶、小家庭、自住業主，或準備裝修的單位",
+        idealFor: "æƒ…ä¾¶ã€å°å®¶åº­ã€è‡ªä½æ¥­ä¸»ï¼Œæˆ–æº–å‚™è£ä¿®çš„å–®ä½",
       },
       {
         id: "safety",
         name: "Family Safety Package",
-        subtitle: "提升家庭安全感、掌握家中狀態。",
+        subtitle: "æå‡å®¶åº­å®‰å…¨æ„Ÿã€æŽŒæ¡å®¶ä¸­ç‹€æ…‹ã€‚",
         icon: "shield",
-        tag: "最適合家庭",
+        tag: "æœ€é©åˆå®¶åº­",
         basePrice: 7800,
-        description: "集中處理出入安全、家人狀態、門窗監察及重要通知，為日常家庭生活提供實用安心感。",
+        description: "é›†ä¸­è™•ç†å‡ºå…¥å®‰å…¨ã€å®¶äººç‹€æ…‹ã€é–€çª—ç›£å¯ŸåŠé‡è¦é€šçŸ¥ï¼Œç‚ºæ—¥å¸¸å®¶åº­ç”Ÿæ´»æä¾›å¯¦ç”¨å®‰å¿ƒæ„Ÿã€‚",
         includes: [
-          "智能門鎖或出入控制整合",
-          "主要門窗感應器",
-          "可選配視像門鈴或入口鏡頭",
-          "夜間安全燈光自動化",
-          "指定安全事件手機通知",
+          "æ™ºèƒ½é–€éŽ–æˆ–å‡ºå…¥æŽ§åˆ¶æ•´åˆ",
+          "ä¸»è¦é–€çª—æ„Ÿæ‡‰å™¨",
+          "å¯é¸é…è¦–åƒé–€éˆ´æˆ–å…¥å£é¡é ­",
+          "å¤œé–“å®‰å…¨ç‡ˆå…‰è‡ªå‹•åŒ–",
+          "æŒ‡å®šå®‰å…¨äº‹ä»¶æ‰‹æ©Ÿé€šçŸ¥",
         ],
-        idealFor: "有小朋友、長者同住、重視家居安全，或希望掌握家中狀態的家庭",
+        idealFor: "æœ‰å°æœ‹å‹ã€é•·è€…åŒä½ã€é‡è¦–å®¶å±…å®‰å…¨ï¼Œæˆ–å¸Œæœ›æŽŒæ¡å®¶ä¸­ç‹€æ…‹çš„å®¶åº­",
       },
     ],
     scenarios: [
-      ["18:45", "準備回家", "按照你選擇的方案，屋企可在你回到前準備合適情境。", "bolt"],
-      ["18:50", "打開大門", "玄關及客廳燈光柔和亮起，不會突然刺眼。", "light"],
-      ["19:10", "晚餐 / 放鬆模式", "客廳轉為暖色情境，冷氣及燈光配合晚上的生活節奏。", "sliders"],
-      ["23:30", "夜間安全", "低亮度路徑燈及出入口監察，幫屋企慢慢進入休息狀態。", "lock"],
+      ["18:45", "æº–å‚™å›žå®¶", "æŒ‰ç…§ä½ é¸æ“‡çš„æ–¹æ¡ˆï¼Œå±‹ä¼å¯åœ¨ä½ å›žåˆ°å‰æº–å‚™åˆé©æƒ…å¢ƒã€‚", "bolt"],
+      ["18:50", "æ‰“é–‹å¤§é–€", "çŽ„é—œåŠå®¢å»³ç‡ˆå…‰æŸ”å’Œäº®èµ·ï¼Œä¸æœƒçªç„¶åˆºçœ¼ã€‚", "light"],
+      ["19:10", "æ™šé¤ / æ”¾é¬†æ¨¡å¼", "å®¢å»³è½‰ç‚ºæš–è‰²æƒ…å¢ƒï¼Œå†·æ°£åŠç‡ˆå…‰é…åˆæ™šä¸Šçš„ç”Ÿæ´»ç¯€å¥ã€‚", "sliders"],
+      ["23:30", "å¤œé–“å®‰å…¨", "ä½Žäº®åº¦è·¯å¾‘ç‡ˆåŠå‡ºå…¥å£ç›£å¯Ÿï¼Œå¹«å±‹ä¼æ…¢æ…¢é€²å…¥ä¼‘æ¯ç‹€æ…‹ã€‚", "lock"],
     ],
   },
 };
@@ -543,7 +543,7 @@ function LanguageToggle({ language, setLanguage }) {
   return (
     <div className="language-toggle">
       <button onClick={() => setLanguage("en")} className={language === "en" ? "active" : ""}>EN</button>
-      <button onClick={() => setLanguage("zh")} className={language === "zh" ? "active" : ""}>繁中</button>
+      <button onClick={() => setLanguage("zh")} className={language === "zh" ? "active" : ""}>ç¹ä¸­</button>
     </div>
   );
 }
@@ -622,17 +622,17 @@ export default function App() {
   const total = selectedPackage.basePrice + selectedApartment.adjustment + activeAddons.reduce((sum, item) => sum + item.price, 0);
 
   const enquirySubject =
-    language === "zh" ? "Boson Smart 智能家居方案估算查詢" : "Boson Smart Smart Home Package Estimate";
+    language === "zh" ? "Boson Smart æ™ºèƒ½å®¶å±…æ–¹æ¡ˆä¼°ç®—æŸ¥è©¢" : "Boson Smart Smart Home Package Estimate";
 
   const enquiryBody = [
-    language === "zh" ? "你好，我想查詢以下智能家居方案估算：" : "Hello, I would like to ask about this smart home package estimate:",
+    language === "zh" ? "ä½ å¥½ï¼Œæˆ‘æƒ³æŸ¥è©¢ä»¥ä¸‹æ™ºèƒ½å®¶å±…æ–¹æ¡ˆä¼°ç®—ï¼š" : "Hello, I would like to ask about this smart home package estimate:",
     "",
-    `${language === "zh" ? "基本方案" : "Base package"}: ${selectedPackage.name}`,
-    `${language === "zh" ? "單位類型" : "Apartment type"}: ${selectedApartment.label}`,
-    `${language === "zh" ? "升級項目" : "Add-ons"}: ${activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : t.builderNoAddons}`,
-    `${language === "zh" ? "估算總額" : "Estimated total"}: ${formatHKD(total)}`,
+    `${language === "zh" ? "åŸºæœ¬æ–¹æ¡ˆ" : "Base package"}: ${selectedPackage.name}`,
+    `${language === "zh" ? "å–®ä½é¡žåž‹" : "Apartment type"}: ${selectedApartment.label}`,
+    `${language === "zh" ? "å‡ç´šé …ç›®" : "Add-ons"}: ${activeAddons.length ? activeAddons.map((item) => item.label).join(", ") : t.builderNoAddons}`,
+    `${language === "zh" ? "ä¼°ç®—ç¸½é¡" : "Estimated total"}: ${formatHKD(total)}`,
     "",
-    language === "zh" ? "請聯絡我安排下一步評估。" : "Please contact me for the next-step assessment.",
+    language === "zh" ? "è«‹è¯çµ¡æˆ‘å®‰æŽ’ä¸‹ä¸€æ­¥è©•ä¼°ã€‚" : "Please contact me for the next-step assessment.",
   ].join("\n");
 
   const mailtoHref = `mailto:${PLACEHOLDER_EMAIL}?subject=${encodeURIComponent(enquirySubject)}&body=${encodeURIComponent(enquiryBody)}`;
@@ -757,7 +757,7 @@ export default function App() {
               </div>
 
               <div className="preview-package">
-                <span>{language === "zh" ? "建議方案" : "Suggested package"}</span>
+                <span>{language === "zh" ? "å»ºè­°æ–¹æ¡ˆ" : "Suggested package"}</span>
                 <strong>{activePreview.package}</strong>
               </div>
             </div>
@@ -767,28 +767,28 @@ export default function App() {
         <section className="section finder-section">
           <div className="finder-card">
             <div className="finder-copy">
-              <div className="eyebrow">{language === "zh" ? "20 秒方案建議" : "20-second package finder"}</div>
+              <div className="eyebrow">{language === "zh" ? "20 ç§’æ–¹æ¡ˆå»ºè­°" : "20-second package finder"}</div>
               <h2>
                 {language === "zh"
-                  ? "唔肯定由邊個方案開始？先答三條問題。"
+                  ? "å””è‚¯å®šç”±é‚Šå€‹æ–¹æ¡ˆé–‹å§‹ï¼Ÿå…ˆç­”ä¸‰æ¢å•é¡Œã€‚"
                   : "Not sure which package to start with? Answer three quick questions."}
               </h2>
               <p>
                 {language === "zh"
-                  ? "這不是硬性報價，而是幫客戶先找到最接近的起步方向，再帶到組合器調整。"
+                  ? "é€™ä¸æ˜¯ç¡¬æ€§å ±åƒ¹ï¼Œè€Œæ˜¯å¹«å®¢æˆ¶å…ˆæ‰¾åˆ°æœ€æŽ¥è¿‘çš„èµ·æ­¥æ–¹å‘ï¼Œå†å¸¶åˆ°çµ„åˆå™¨èª¿æ•´ã€‚"
                   : "This is not a hard quotation. It helps customers find the closest starting direction, then continue into the builder."}
               </p>
             </div>
 
             <div className="finder-controls">
               <div className="finder-group">
-                <span>{language === "zh" ? "主要目標" : "Main goal"}</span>
+                <span>{language === "zh" ? "ä¸»è¦ç›®æ¨™" : "Main goal"}</span>
                 <div>
                   {[
-                    ["comfort", language === "zh" ? "舒適" : "Comfort"],
-                    ["energy", language === "zh" ? "節能" : "Energy"],
-                    ["safety", language === "zh" ? "安全" : "Safety"],
-                    ["starter", language === "zh" ? "方便入門" : "Easy start"],
+                    ["comfort", language === "zh" ? "èˆ’é©" : "Comfort"],
+                    ["energy", language === "zh" ? "ç¯€èƒ½" : "Energy"],
+                    ["safety", language === "zh" ? "å®‰å…¨" : "Safety"],
+                    ["starter", language === "zh" ? "æ–¹ä¾¿å…¥é–€" : "Easy start"],
                   ].map(([id, label]) => (
                     <button key={id} onClick={() => setFinderGoal(id)} className={finderGoal === id ? "active" : ""}>
                       {label}
@@ -798,11 +798,11 @@ export default function App() {
               </div>
 
               <div className="finder-group">
-                <span>{language === "zh" ? "單位狀態" : "Home stage"}</span>
+                <span>{language === "zh" ? "å–®ä½ç‹€æ…‹" : "Home stage"}</span>
                 <div>
                   {[
-                    ["livedIn", language === "zh" ? "已入住" : "Lived-in"],
-                    ["renovating", language === "zh" ? "裝修中/準備裝修" : "Renovating"],
+                    ["livedIn", language === "zh" ? "å·²å…¥ä½" : "Lived-in"],
+                    ["renovating", language === "zh" ? "è£ä¿®ä¸­/æº–å‚™è£ä¿®" : "Renovating"],
                   ].map(([id, label]) => (
                     <button key={id} onClick={() => setFinderStage(id)} className={finderStage === id ? "active" : ""}>
                       {label}
@@ -812,11 +812,11 @@ export default function App() {
               </div>
 
               <div className="finder-group">
-                <span>{language === "zh" ? "想控制範圍" : "Control scope"}</span>
+                <span>{language === "zh" ? "æƒ³æŽ§åˆ¶ç¯„åœ" : "Control scope"}</span>
                 <div>
                   {[
-                    ["core", language === "zh" ? "一至兩個核心區" : "Core areas"],
-                    ["multi", language === "zh" ? "多房間/多情境" : "Multi-room"],
+                    ["core", language === "zh" ? "ä¸€è‡³å…©å€‹æ ¸å¿ƒå€" : "Core areas"],
+                    ["multi", language === "zh" ? "å¤šæˆ¿é–“/å¤šæƒ…å¢ƒ" : "Multi-room"],
                   ].map(([id, label]) => (
                     <button key={id} onClick={() => setFinderScope(id)} className={finderScope === id ? "active" : ""}>
                       {label}
@@ -827,11 +827,11 @@ export default function App() {
             </div>
 
             <div className="finder-result">
-              <span>{language === "zh" ? "建議起步方案" : "Recommended starting package"}</span>
+              <span>{language === "zh" ? "å»ºè­°èµ·æ­¥æ–¹æ¡ˆ" : "Recommended starting package"}</span>
               <h3>{finderRecommendation.name}</h3>
               <p>{finderRecommendation.description}</p>
               <button onClick={applyFinderRecommendation}>
-                {language === "zh" ? "套用到組合器" : "Apply to builder"} <Icon name="arrow" />
+                {language === "zh" ? "å¥—ç”¨åˆ°çµ„åˆå™¨" : "Apply to builder"} <Icon name="arrow" />
               </button>
             </div>
           </div>
@@ -854,7 +854,7 @@ export default function App() {
                 <h3>{item.name}</h3>
                 <p className="cyan-text">{item.subtitle}</p>
                 <p>{item.description}</p>
-                <strong className="price">{language === "zh" ? `${formatHKD(item.basePrice)} 起` : `From ${formatHKD(item.basePrice)}`}</strong>
+                <strong className="price">{language === "zh" ? `${formatHKD(item.basePrice)} èµ·` : `From ${formatHKD(item.basePrice)}`}</strong>
                 <ul>
                   {item.includes.slice(0, 4).map((feature) => (
                     <li key={feature}><Icon name="check" />{feature}</li>
@@ -917,7 +917,7 @@ export default function App() {
                         className={`choice row-choice ${active ? "active" : ""}`}
                       >
                         <span>
-                          <strong><span className="round-select">{active ? "✓" : "+"}</span>{item.label}</strong>
+                          <strong><span className="round-select">{active ? "âœ“" : "+"}</span>{item.label}</strong>
                           <small>{item.description}</small>
                         </span>
                         <em>+{formatHKD(item.price)}</em>
@@ -988,11 +988,11 @@ export default function App() {
 
         <section className="section assumptions-section">
           <SectionHeader
-            eyebrow={language === "zh" ? "價格假設" : "Package assumptions"}
-            title={language === "zh" ? "「起」價應該清楚，而不是令人估估下。" : "Make the “from” price clear, not vague."}
+            eyebrow={language === "zh" ? "åƒ¹æ ¼å‡è¨­" : "Package assumptions"}
+            title={language === "zh" ? "ã€Œèµ·ã€åƒ¹æ‡‰è©²æ¸…æ¥šï¼Œè€Œä¸æ˜¯ä»¤äººä¼°ä¼°ä¸‹ã€‚" : "Make the â€œfromâ€ price clear, not vague."}
             text={
               language === "zh"
-                ? "以下假設令客戶更容易理解估算價錢的基礎。最終範圍仍會按現場線路、設備品牌及安裝條件確認。"
+                ? "ä»¥ä¸‹å‡è¨­ä»¤å®¢æˆ¶æ›´å®¹æ˜“ç†è§£ä¼°ç®—åƒ¹éŒ¢çš„åŸºç¤Žã€‚æœ€çµ‚ç¯„åœä»æœƒæŒ‰ç¾å ´ç·šè·¯ã€è¨­å‚™å“ç‰ŒåŠå®‰è£æ¢ä»¶ç¢ºèªã€‚"
                 : "These assumptions help customers understand what the starting prices are based on. Final scope is still confirmed after checking wiring, device brand, and installation condition."
             }
           />
@@ -1000,9 +1000,9 @@ export default function App() {
           <div className="assumption-grid">
             {(language === "zh"
               ? [
-                  ["Starter 起價假設", "適合一個核心區域，例如玄關或客廳，包含基本智能控制、App 設定、簡單情境及使用教學。"],
-                  ["Comfort & Energy 起價假設", "適合客廳及主要生活區域，重點是燈光、冷氣習慣、時間排程及舒適節能場景。"],
-                  ["Family Safety 起價假設", "適合出入口及主要門窗監察，重點是出入安全、提醒通知、夜間安全燈光及基本交付。"],
+                  ["Starter èµ·åƒ¹å‡è¨­", "é©åˆä¸€å€‹æ ¸å¿ƒå€åŸŸï¼Œä¾‹å¦‚çŽ„é—œæˆ–å®¢å»³ï¼ŒåŒ…å«åŸºæœ¬æ™ºèƒ½æŽ§åˆ¶ã€App è¨­å®šã€ç°¡å–®æƒ…å¢ƒåŠä½¿ç”¨æ•™å­¸ã€‚"],
+                  ["Comfort & Energy èµ·åƒ¹å‡è¨­", "é©åˆå®¢å»³åŠä¸»è¦ç”Ÿæ´»å€åŸŸï¼Œé‡é»žæ˜¯ç‡ˆå…‰ã€å†·æ°£ç¿’æ…£ã€æ™‚é–“æŽ’ç¨‹åŠèˆ’é©ç¯€èƒ½å ´æ™¯ã€‚"],
+                  ["Family Safety èµ·åƒ¹å‡è¨­", "é©åˆå‡ºå…¥å£åŠä¸»è¦é–€çª—ç›£å¯Ÿï¼Œé‡é»žæ˜¯å‡ºå…¥å®‰å…¨ã€æé†’é€šçŸ¥ã€å¤œé–“å®‰å…¨ç‡ˆå…‰åŠåŸºæœ¬äº¤ä»˜ã€‚"],
                 ]
               : [
                   ["Starter starting assumption", "Suitable for one core area such as entry or living room, including basic smart control, app setup, simple scenes, and user training."],
@@ -1019,22 +1019,22 @@ export default function App() {
 
           <div className="sample-setup-card">
             <div>
-              <div className="eyebrow">{language === "zh" ? "示例設定" : "Example setup"}</div>
+              <div className="eyebrow">{language === "zh" ? "ç¤ºä¾‹è¨­å®š" : "Example setup"}</div>
               <h2>
                 {language === "zh"
-                  ? "兩房單位可先由客廳、玄關及夜間安全開始。"
+                  ? "å…©æˆ¿å–®ä½å¯å…ˆç”±å®¢å»³ã€çŽ„é—œåŠå¤œé–“å®‰å…¨é–‹å§‹ã€‚"
                   : "A 2-bedroom flat can start with living room, entry, and night safety."}
               </h2>
               <p>
                 {language === "zh"
-                  ? "這不是固定方案，而是讓客戶理解如何由實用範圍開始，再逐步加入睡房、窗簾、冷氣或更多感應器。"
+                  ? "é€™ä¸æ˜¯å›ºå®šæ–¹æ¡ˆï¼Œè€Œæ˜¯è®“å®¢æˆ¶ç†è§£å¦‚ä½•ç”±å¯¦ç”¨ç¯„åœé–‹å§‹ï¼Œå†é€æ­¥åŠ å…¥ç¡æˆ¿ã€çª—ç°¾ã€å†·æ°£æˆ–æ›´å¤šæ„Ÿæ‡‰å™¨ã€‚"
                   : "This is not a fixed package. It shows how a customer can start from practical areas, then add bedrooms, curtains, air-con, or more sensors later."}
               </p>
             </div>
 
             <div className="sample-list">
               {(language === "zh"
-                ? ["玄關回家燈光", "客廳晚間情境", "冷氣時間設定", "夜間低亮度路徑燈", "基本 App 及使用教學"]
+                ? ["çŽ„é—œå›žå®¶ç‡ˆå…‰", "å®¢å»³æ™šé–“æƒ…å¢ƒ", "å†·æ°£æ™‚é–“è¨­å®š", "å¤œé–“ä½Žäº®åº¦è·¯å¾‘ç‡ˆ", "åŸºæœ¬ App åŠä½¿ç”¨æ•™å­¸"]
                 : ["Entry welcome lighting", "Living room evening scene", "Air-con schedule setup", "Low-level night path lighting", "Basic app and user training"]
               ).map((item) => (
                 <div className="sample-line" key={item}>
@@ -1068,15 +1068,15 @@ export default function App() {
         <section className="section privacy-section">
           <div className="privacy-card">
             <div>
-              <div className="eyebrow">{language === "zh" ? "私隱與安全" : "Privacy and safety"}</div>
+              <div className="eyebrow">{language === "zh" ? "ç§éš±èˆ‡å®‰å…¨" : "Privacy and safety"}</div>
               <h2>
                 {language === "zh"
-                  ? "門鎖、鏡頭、感應器和帳戶設定，必須交代清楚。"
+                  ? "é–€éŽ–ã€é¡é ­ã€æ„Ÿæ‡‰å™¨å’Œå¸³æˆ¶è¨­å®šï¼Œå¿…é ˆäº¤ä»£æ¸…æ¥šã€‚"
                   : "Door locks, cameras, sensors, and accounts must be handled clearly."}
               </h2>
               <p>
                 {language === "zh"
-                  ? "智能家居不只是方便，也涉及家庭私隱及安全。網站應清楚說明設定原則，讓客戶知道系統屬於自己，而不是依賴不清楚的第三方控制。"
+                  ? "æ™ºèƒ½å®¶å±…ä¸åªæ˜¯æ–¹ä¾¿ï¼Œä¹Ÿæ¶‰åŠå®¶åº­ç§éš±åŠå®‰å…¨ã€‚ç¶²ç«™æ‡‰æ¸…æ¥šèªªæ˜Žè¨­å®šåŽŸå‰‡ï¼Œè®“å®¢æˆ¶çŸ¥é“ç³»çµ±å±¬æ–¼è‡ªå·±ï¼Œè€Œä¸æ˜¯ä¾è³´ä¸æ¸…æ¥šçš„ç¬¬ä¸‰æ–¹æŽ§åˆ¶ã€‚"
                   : "Smart homes are not only about convenience. They also involve household privacy and security. The site should explain how setup is handled so customers know the system belongs to them, not an unclear third-party controller."}
               </p>
             </div>
@@ -1084,10 +1084,10 @@ export default function App() {
             <div className="privacy-points">
               {(language === "zh"
                 ? [
-                    ["帳戶由客戶擁有", "主要 App、門鎖、鏡頭及語音助理帳戶應以客戶資料建立或交還客戶管理。"],
-                    ["鏡頭位置先確認", "如涉及鏡頭或視像門鈴，應先確認使用目的、角度及私隱考慮。"],
-                    ["保留日常手動控制", "智能設定不應令家人失去基本牆掣或簡單控制方式。"],
-                    ["交付時說明權限", "完成後應說明主要權限、通知、家庭成員加入方式及日後更改方法。"],
+                    ["å¸³æˆ¶ç”±å®¢æˆ¶æ“æœ‰", "ä¸»è¦ Appã€é–€éŽ–ã€é¡é ­åŠèªžéŸ³åŠ©ç†å¸³æˆ¶æ‡‰ä»¥å®¢æˆ¶è³‡æ–™å»ºç«‹æˆ–äº¤é‚„å®¢æˆ¶ç®¡ç†ã€‚"],
+                    ["é¡é ­ä½ç½®å…ˆç¢ºèª", "å¦‚æ¶‰åŠé¡é ­æˆ–è¦–åƒé–€éˆ´ï¼Œæ‡‰å…ˆç¢ºèªä½¿ç”¨ç›®çš„ã€è§’åº¦åŠç§éš±è€ƒæ…®ã€‚"],
+                    ["ä¿ç•™æ—¥å¸¸æ‰‹å‹•æŽ§åˆ¶", "æ™ºèƒ½è¨­å®šä¸æ‡‰ä»¤å®¶äººå¤±åŽ»åŸºæœ¬ç‰†æŽ£æˆ–ç°¡å–®æŽ§åˆ¶æ–¹å¼ã€‚"],
+                    ["äº¤ä»˜æ™‚èªªæ˜Žæ¬Šé™", "å®Œæˆå¾Œæ‡‰èªªæ˜Žä¸»è¦æ¬Šé™ã€é€šçŸ¥ã€å®¶åº­æˆå“¡åŠ å…¥æ–¹å¼åŠæ—¥å¾Œæ›´æ”¹æ–¹æ³•ã€‚"],
                   ]
                 : [
                     ["Customer-owned accounts", "Main app, lock, camera, and voice assistant accounts should be created for or handed over to the customer."],
@@ -1110,15 +1110,15 @@ export default function App() {
         <section className="section quote-clarity-section">
           <div className="quote-clarity-card">
             <div>
-              <div className="eyebrow">{language === "zh" ? "報價如何確認" : "How quotation is confirmed"}</div>
+              <div className="eyebrow">{language === "zh" ? "å ±åƒ¹å¦‚ä½•ç¢ºèª" : "How quotation is confirmed"}</div>
               <h2>
                 {language === "zh"
-                  ? "網上估算先幫你開始，最終報價要看現場條件。"
+                  ? "ç¶²ä¸Šä¼°ç®—å…ˆå¹«ä½ é–‹å§‹ï¼Œæœ€çµ‚å ±åƒ¹è¦çœ‹ç¾å ´æ¢ä»¶ã€‚"
                   : "The online estimate helps you start. The final quotation depends on the actual home."}
               </h2>
               <p>
                 {language === "zh"
-                  ? "這樣可以保持價格透明，同時避免因線路、品牌、安裝難度或裝修狀態不同而低估成本。"
+                  ? "é€™æ¨£å¯ä»¥ä¿æŒåƒ¹æ ¼é€æ˜Žï¼ŒåŒæ™‚é¿å…å› ç·šè·¯ã€å“ç‰Œã€å®‰è£é›£åº¦æˆ–è£ä¿®ç‹€æ…‹ä¸åŒè€Œä½Žä¼°æˆæœ¬ã€‚"
                   : "This keeps the pricing transparent while avoiding underquoting caused by wiring, device brand, installation complexity, or renovation stage."}
               </p>
             </div>
@@ -1126,14 +1126,14 @@ export default function App() {
             <div className="quote-steps">
               {(language === "zh"
                 ? [
-                    ["01", "建立估算", "先用組合器選方案、單位類型及升級項目。"],
-                    ["02", "了解現場", "確認線路、開關、Wi‑Fi、門窗及安裝可行性。"],
-                    ["03", "確認範圍", "列明包括項目、另報項目、產品選擇及安裝條件。"],
-                    ["04", "安排安裝", "完成設定、測試、交付清單及基本使用教學。"],
+                    ["01", "å»ºç«‹ä¼°ç®—", "å…ˆç”¨çµ„åˆå™¨é¸æ–¹æ¡ˆã€å–®ä½é¡žåž‹åŠå‡ç´šé …ç›®ã€‚"],
+                    ["02", "äº†è§£ç¾å ´", "ç¢ºèªç·šè·¯ã€é–‹é—œã€Wiâ€‘Fiã€é–€çª—åŠå®‰è£å¯è¡Œæ€§ã€‚"],
+                    ["03", "ç¢ºèªç¯„åœ", "åˆ—æ˜ŽåŒ…æ‹¬é …ç›®ã€å¦å ±é …ç›®ã€ç”¢å“é¸æ“‡åŠå®‰è£æ¢ä»¶ã€‚"],
+                    ["04", "å®‰æŽ’å®‰è£", "å®Œæˆè¨­å®šã€æ¸¬è©¦ã€äº¤ä»˜æ¸…å–®åŠåŸºæœ¬ä½¿ç”¨æ•™å­¸ã€‚"],
                   ]
                 : [
                     ["01", "Build estimate", "Choose package, apartment type, and optional upgrades."],
-                    ["02", "Check site condition", "Review wiring, switches, Wi‑Fi, doors/windows, and installation feasibility."],
+                    ["02", "Check site condition", "Review wiring, switches, Wiâ€‘Fi, doors/windows, and installation feasibility."],
                     ["03", "Confirm scope", "Clarify included items, separately quoted items, device choices, and installation conditions."],
                     ["04", "Install and hand over", "Complete setup, testing, handover checklist, and basic user training."],
                   ]).map(([number, title, text]) => (
@@ -1241,15 +1241,15 @@ export default function App() {
         <section className="section aftercare-section">
           <div className="aftercare-card">
             <div>
-              <div className="eyebrow">{language === "zh" ? "交付與後續" : "Handover and aftercare"}</div>
+              <div className="eyebrow">{language === "zh" ? "äº¤ä»˜èˆ‡å¾ŒçºŒ" : "Handover and aftercare"}</div>
               <h2>
                 {language === "zh"
-                  ? "裝完不是終點，真正重要是家人會用。"
+                  ? "è£å®Œä¸æ˜¯çµ‚é»žï¼ŒçœŸæ­£é‡è¦æ˜¯å®¶äººæœƒç”¨ã€‚"
                   : "Installation is not the end. The real goal is that the household can use it."}
               </h2>
               <p>
                 {language === "zh"
-                  ? "智能家居最常見失敗位，是裝置很多但家人不懂用，或者日後沒有人知道怎樣調整。交付時要清楚說明操作、權限及後續升級方向。"
+                  ? "æ™ºèƒ½å®¶å±…æœ€å¸¸è¦‹å¤±æ•—ä½ï¼Œæ˜¯è£ç½®å¾ˆå¤šä½†å®¶äººä¸æ‡‚ç”¨ï¼Œæˆ–è€…æ—¥å¾Œæ²’æœ‰äººçŸ¥é“æ€Žæ¨£èª¿æ•´ã€‚äº¤ä»˜æ™‚è¦æ¸…æ¥šèªªæ˜Žæ“ä½œã€æ¬Šé™åŠå¾ŒçºŒå‡ç´šæ–¹å‘ã€‚"
                   : "A common smart-home failure is installing many devices without making them easy for the household to use or adjust later. Handover should explain controls, permissions, and future upgrade direction."}
               </p>
             </div>
@@ -1257,10 +1257,10 @@ export default function App() {
             <div className="aftercare-grid">
               {(language === "zh"
                 ? [
-                    ["交付清單", "整理已安裝設備、控制方式、App、帳戶及主要情境。"],
-                    ["基本教學", "示範日常操作，例如回家、離家、夜間、手動控制及通知。"],
-                    ["微調期", "按實際使用感受，作基本情境或設定調整。"],
-                    ["升級路線", "由一個區域開始，日後再加房間、感應器、窗簾或能源管理。"],
+                    ["äº¤ä»˜æ¸…å–®", "æ•´ç†å·²å®‰è£è¨­å‚™ã€æŽ§åˆ¶æ–¹å¼ã€Appã€å¸³æˆ¶åŠä¸»è¦æƒ…å¢ƒã€‚"],
+                    ["åŸºæœ¬æ•™å­¸", "ç¤ºç¯„æ—¥å¸¸æ“ä½œï¼Œä¾‹å¦‚å›žå®¶ã€é›¢å®¶ã€å¤œé–“ã€æ‰‹å‹•æŽ§åˆ¶åŠé€šçŸ¥ã€‚"],
+                    ["å¾®èª¿æœŸ", "æŒ‰å¯¦éš›ä½¿ç”¨æ„Ÿå—ï¼Œä½œåŸºæœ¬æƒ…å¢ƒæˆ–è¨­å®šèª¿æ•´ã€‚"],
+                    ["å‡ç´šè·¯ç·š", "ç”±ä¸€å€‹å€åŸŸé–‹å§‹ï¼Œæ—¥å¾Œå†åŠ æˆ¿é–“ã€æ„Ÿæ‡‰å™¨ã€çª—ç°¾æˆ–èƒ½æºç®¡ç†ã€‚"],
                   ]
                 : [
                     ["Handover checklist", "Summarise installed devices, controls, apps, accounts, and key scenes."],
@@ -1310,6 +1310,16 @@ export default function App() {
           </div>
         </section>
       </main>
+      <div className="mobile-sticky-cta" aria-label={language === "zh" ? "快速操作" : "Quick actions"}>
+        <a href="#builder">
+          {language === "zh" ? "建立估算" : "Build estimate"}
+        </a>
+        <a href={typeof whatsappHref !== "undefined" ? whatsappHref : "#contact"} target="_blank" rel="noreferrer">
+          <Icon name="phone" />
+          {language === "zh" ? "WhatsApp" : "WhatsApp"}
+        </a>
+      </div>
+
 
       <footer>
         <span>{t.footer}</span>
@@ -1340,3 +1350,4 @@ function SummaryLine({ label, value, price }) {
     </div>
   );
 }
+

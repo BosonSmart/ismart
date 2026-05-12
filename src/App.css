@@ -1990,3 +1990,78 @@ footer {
 }
 
 /* end v1.5 scale refinement */
+
+/* v1.6 launch polish: SEO-support UI, sticky CTA, focus states */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+.mobile-sticky-cta {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site {
+    padding-bottom: 5.2rem;
+  }
+
+  .mobile-sticky-cta {
+    position: fixed;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    z-index: 60;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 1.35rem;
+    background: rgba(2, 6, 23, 0.84);
+    padding: 0.6rem;
+    box-shadow: 0 22px 70px rgba(0,0,0,0.42);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-sticky-cta a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    min-height: 2.8rem;
+    border-radius: 999px;
+    font-weight: 850;
+    font-size: 0.88rem;
+  }
+
+  .mobile-sticky-cta a:first-child {
+    background: #67e8f9;
+    color: #020617;
+  }
+
+  .mobile-sticky-cta a:last-child {
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.06);
+    color: #ffffff;
+  }
+
+  footer {
+    padding-bottom: 5.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-sticky-cta {
+    left: 0.65rem;
+    right: 0.65rem;
+    bottom: 0.65rem;
+  }
+
+  .mobile-sticky-cta a {
+    font-size: 0.82rem;
+  }
+}
+
+/* end v1.6 launch polish */
