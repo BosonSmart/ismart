@@ -52,14 +52,47 @@ const content = {
       "Site assessment before final quotation",
       "Handover and user training included",
     ],
-    dashboardModeLabel: "Today’s home mode",
-    dashboardMode: "Evening Comfort",
-    active: "Active",
-    dashboardRows: [
-      ["Living room", "Warm scene", "72%"],
-      ["Air-con", "Comfort routine", "24.5°C"],
-      ["Entrance", "Safety monitoring", "On"],
-      ["Bedroom", "Sleep prep", "22:45"],
+    dashboardModeLabel: "Scenario preview",
+    dashboardScenarios: [
+      {
+        id: "home",
+        label: "Coming home",
+        title: "Home is ready",
+        status: "Active",
+        package: "Comfort & Energy Package",
+        rows: [
+          ["Before arrival", "Living room pre-cools", "18:45"],
+          ["Door opens", "Entry lights rise softly", "18:50"],
+          ["Dinner mode", "Warm lighting scene", "19:10"],
+          ["Night safety", "Path lighting ready", "23:30"],
+        ],
+      },
+      {
+        id: "energy",
+        label: "Energy saving",
+        title: "Comfort without waste",
+        status: "Scheduled",
+        package: "Comfort & Energy Package",
+        rows: [
+          ["Cooling", "Avoids unnecessary runtime", "Auto"],
+          ["Lighting", "Motion-based low usage", "On"],
+          ["Curtains", "Reduces afternoon heat", "Optional"],
+          ["Away mode", "Turns off selected loads", "Ready"],
+        ],
+      },
+      {
+        id: "safety",
+        label: "Family safety",
+        title: "Home stays aware",
+        status: "Monitoring",
+        package: "Family Safety Package",
+        rows: [
+          ["Entrance", "Door status awareness", "On"],
+          ["Windows", "Selected sensors armed", "Ready"],
+          ["Night path", "Soft lighting for movement", "Auto"],
+          ["Alerts", "Phone notification enabled", "On"],
+        ],
+      },
     ],
     packagesEyebrow: "Three starting packages",
     packagesTitle: "Choose by what you want your home to do.",
@@ -270,14 +303,47 @@ const content = {
       "現場評估後才確認最終報價",
       "包括交付測試及基本使用教學",
     ],
-    dashboardModeLabel: "今日家居模式",
-    dashboardMode: "晚間舒適模式",
-    active: "啟用中",
-    dashboardRows: [
-      ["客廳", "暖色燈光情境", "72%"],
-      ["冷氣", "舒適設定", "24.5°C"],
-      ["玄關", "安全監察", "開啟"],
-      ["睡房", "睡眠準備", "22:45"],
+    dashboardModeLabel: "情境預覽",
+    dashboardScenarios: [
+      {
+        id: "home",
+        label: "回家",
+        title: "屋企已準備好",
+        status: "啟用中",
+        package: "Comfort & Energy Package",
+        rows: [
+          ["到家前", "客廳預先調節舒適溫度", "18:45"],
+          ["開門時", "玄關燈光柔和亮起", "18:50"],
+          ["晚飯時", "客廳轉為暖光情境", "19:10"],
+          ["夜晚時", "低亮度路徑燈準備好", "23:30"],
+        ],
+      },
+      {
+        id: "energy",
+        label: "節能",
+        title: "舒適但不浪費",
+        status: "已排程",
+        package: "Comfort & Energy Package",
+        rows: [
+          ["冷氣", "避免不必要長開", "自動"],
+          ["燈光", "按活動情況低耗電使用", "開啟"],
+          ["窗簾", "減少下午熱力進入", "可選"],
+          ["離家模式", "關閉指定用電設備", "準備好"],
+        ],
+      },
+      {
+        id: "safety",
+        label: "安全",
+        title: "家中狀態更清楚",
+        status: "監察中",
+        package: "Family Safety Package",
+        rows: [
+          ["玄關", "掌握大門狀態", "開啟"],
+          ["門窗", "指定感應器已準備", "準備好"],
+          ["夜間路徑", "走動時柔和亮燈", "自動"],
+          ["通知", "手機提示已啟用", "開啟"],
+        ],
+      },
     ],
     packagesEyebrow: "三個起步方案",
     packagesTitle: "按你想屋企做到甚麼來選擇。",
@@ -514,12 +580,33 @@ export default function App() {
   const [selected, setSelected] = useState("comfort");
   const [apartment, setApartment] = useState("twoBed");
   const [selectedAddons, setSelectedAddons] = useState(["curtain"]);
+  const [activeScenario, setActiveScenario] = useState("home");
+  const [finderGoal, setFinderGoal] = useState("comfort");
+  const [finderStage, setFinderStage] = useState("livedIn");
+  const [finderScope, setFinderScope] = useState("core");
 
   const t = content[language];
+
+  const activePreview = useMemo(
+    () => t.dashboardScenarios.find((item) => item.id === activeScenario) || t.dashboardScenarios[0],
+    [activeScenario, t]
+  );
+
+  const finderRecommendationId = useMemo(() => {
+    if (finderGoal === "safety") return "safety";
+    if (finderGoal === "comfort" || finderGoal === "energy") return "comfort";
+    if (finderStage === "renovating" || finderScope === "multi") return "comfort";
+    return "starter";
+  }, [finderGoal, finderStage, finderScope]);
 
   const selectedPackage = useMemo(
     () => t.packages.find((item) => item.id === selected) || t.packages[1],
     [selected, t]
+  );
+
+  const finderRecommendation = useMemo(
+    () => t.packages.find((item) => item.id === finderRecommendationId) || t.packages[0],
+    [finderRecommendationId, t]
   );
 
   const selectedApartment = useMemo(
@@ -555,6 +642,20 @@ export default function App() {
     setSelectedAddons((current) =>
       current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
     );
+  }
+
+  function applyFinderRecommendation() {
+    setSelected(finderRecommendationId);
+
+    if (finderRecommendationId === "comfort") {
+      setSelectedAddons((current) => Array.from(new Set([...current, "motion"])));
+    }
+
+    if (finderRecommendationId === "safety") {
+      setSelectedAddons((current) => Array.from(new Set([...current, "doorbell"])));
+    }
+
+    document.getElementById("builder")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
@@ -623,23 +724,115 @@ export default function App() {
             </div>
           </div>
 
-          <div className="dashboard-card">
+          <div className="dashboard-card scenario-preview">
             <div className="dashboard-inner">
               <div className="dashboard-head">
                 <div>
                   <small>{t.dashboardModeLabel}</small>
-                  <strong>{t.dashboardMode}</strong>
+                  <strong>{activePreview.title}</strong>
                 </div>
-                <span>{t.active}</span>
+                <span>{activePreview.status}</span>
               </div>
+
+              <div className="preview-tabs" role="tablist" aria-label={t.dashboardModeLabel}>
+                {t.dashboardScenarios.map((scenario) => (
+                  <button
+                    key={scenario.id}
+                    type="button"
+                    onClick={() => setActiveScenario(scenario.id)}
+                    className={scenario.id === activeScenario ? "active" : ""}
+                  >
+                    {scenario.label}
+                  </button>
+                ))}
+              </div>
+
               <div className="dashboard-list">
-                {t.dashboardRows.map(([zone, mode, value]) => (
-                  <div className="dashboard-row" key={zone}>
+                {activePreview.rows.map(([zone, mode, value]) => (
+                  <div className="dashboard-row" key={`${activePreview.id}-${zone}`}>
                     <span><strong>{zone}</strong><small>{mode}</small></span>
                     <em>{value}</em>
                   </div>
                 ))}
               </div>
+
+              <div className="preview-package">
+                <span>{language === "zh" ? "建議方案" : "Suggested package"}</span>
+                <strong>{activePreview.package}</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section finder-section">
+          <div className="finder-card">
+            <div className="finder-copy">
+              <div className="eyebrow">{language === "zh" ? "20 秒方案建議" : "20-second package finder"}</div>
+              <h2>
+                {language === "zh"
+                  ? "唔肯定由邊個方案開始？先答三條問題。"
+                  : "Not sure which package to start with? Answer three quick questions."}
+              </h2>
+              <p>
+                {language === "zh"
+                  ? "這不是硬性報價，而是幫客戶先找到最接近的起步方向，再帶到組合器調整。"
+                  : "This is not a hard quotation. It helps customers find the closest starting direction, then continue into the builder."}
+              </p>
+            </div>
+
+            <div className="finder-controls">
+              <div className="finder-group">
+                <span>{language === "zh" ? "主要目標" : "Main goal"}</span>
+                <div>
+                  {[
+                    ["comfort", language === "zh" ? "舒適" : "Comfort"],
+                    ["energy", language === "zh" ? "節能" : "Energy"],
+                    ["safety", language === "zh" ? "安全" : "Safety"],
+                    ["starter", language === "zh" ? "方便入門" : "Easy start"],
+                  ].map(([id, label]) => (
+                    <button key={id} onClick={() => setFinderGoal(id)} className={finderGoal === id ? "active" : ""}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="finder-group">
+                <span>{language === "zh" ? "單位狀態" : "Home stage"}</span>
+                <div>
+                  {[
+                    ["livedIn", language === "zh" ? "已入住" : "Lived-in"],
+                    ["renovating", language === "zh" ? "裝修中/準備裝修" : "Renovating"],
+                  ].map(([id, label]) => (
+                    <button key={id} onClick={() => setFinderStage(id)} className={finderStage === id ? "active" : ""}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="finder-group">
+                <span>{language === "zh" ? "想控制範圍" : "Control scope"}</span>
+                <div>
+                  {[
+                    ["core", language === "zh" ? "一至兩個核心區" : "Core areas"],
+                    ["multi", language === "zh" ? "多房間/多情境" : "Multi-room"],
+                  ].map(([id, label]) => (
+                    <button key={id} onClick={() => setFinderScope(id)} className={finderScope === id ? "active" : ""}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="finder-result">
+              <span>{language === "zh" ? "建議起步方案" : "Recommended starting package"}</span>
+              <h3>{finderRecommendation.name}</h3>
+              <p>{finderRecommendation.description}</p>
+              <button onClick={applyFinderRecommendation}>
+                {language === "zh" ? "套用到組合器" : "Apply to builder"} <Icon name="arrow" />
+              </button>
             </div>
           </div>
         </section>
