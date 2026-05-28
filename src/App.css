@@ -1505,3 +1505,155 @@ body::before {
 
 /* === BOSONSMART CONTACT PHOTO BRIEF v1 END === */
 
+/* === BOSONSMART SOFT SCENARIOS v1 START === */
+
+/*
+  Softer scenario experience:
+  Keep the smart / cinematic feeling, but make it less dark and less distant.
+  Goal: daily-life story, not technical automation demo.
+*/
+
+/* Scenario route / scene canvas */
+#root .scenario-slide {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(241, 198, 109, 0.26), transparent 30rem),
+    radial-gradient(circle at 86% 12%, rgba(95, 212, 208, 0.20), transparent 28rem),
+    linear-gradient(135deg, #182422, #26342f 46%, #172322) !important;
+  color: #fffdf8 !important;
+}
+
+#root .scenario-slide::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.58), transparent 76%);
+}
+
+/* Scenario cards: more home-lounge, less command centre */
+#root .scenario-slide [class*="bg-white/"],
+#root .scenario-slide [class*="bg-white\["],
+#root .scenario-slide [class*="bg-slate-950/"],
+#root .scenario-slide [class*="bg-slate-900/"],
+#root .scenario-slide [class*="border-white/"] {
+  background:
+    linear-gradient(145deg, rgba(255, 253, 248, 0.13), rgba(255, 253, 248, 0.07)) !important;
+  border-color: rgba(255, 253, 248, 0.18) !important;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(20px) saturate(1.12);
+}
+
+/* Scenario text: warm white instead of hard white */
+#root .scenario-slide,
+#root .scenario-slide *,
+#root .scenario-slide h1,
+#root .scenario-slide h2,
+#root .scenario-slide h3 {
+  color: #fffdf8 !important;
+}
+
+#root .scenario-slide p,
+#root .scenario-slide li,
+#root .scenario-slide span {
+  color: rgba(255, 253, 248, 0.78) !important;
+}
+
+#root .scenario-slide h1,
+#root .scenario-slide h2 {
+  text-wrap: balance;
+  letter-spacing: -0.055em;
+}
+
+#root .scenario-slide h3 {
+  letter-spacing: -0.035em;
+}
+
+/* Scenario chips and navigation */
+#root .scenario-slide [class*="rounded-full"][class*="border"] {
+  background: rgba(255, 253, 248, 0.10) !important;
+  border-color: rgba(255, 253, 248, 0.18) !important;
+  color: rgba(255, 253, 248, 0.88) !important;
+}
+
+#root .scenario-slide button,
+#root .scenario-slide a {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+#root .scenario-slide button:hover,
+#root .scenario-slide a:hover {
+  transform: translateY(-1px);
+}
+
+/* Scenario primary buttons should feel warm and premium */
+#root .scenario-slide .btn-primary,
+#root .scenario-slide button[class*="bg-white"],
+#root .scenario-slide a[class*="bg-white"] {
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(241, 232, 209, 0.94)) !important;
+  color: #10211f !important;
+  border-color: rgba(255, 253, 248, 0.46) !important;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
+}
+
+#root .scenario-slide .btn-secondary {
+  background: rgba(255, 253, 248, 0.10) !important;
+  color: #fffdf8 !important;
+  border-color: rgba(255, 253, 248, 0.22) !important;
+}
+
+/* Make timeline/progress elements feel calmer */
+#root .scenario-slide [class*="bg-cyan"],
+#root .scenario-slide [class*="bg-emerald"],
+#root .scenario-slide [class*="bg-teal"] {
+  background:
+    linear-gradient(135deg, rgba(95, 212, 208, 0.92), rgba(207, 232, 180, 0.86)) !important;
+}
+
+#root .scenario-slide [class*="text-cyan"],
+#root .scenario-slide [class*="text-emerald"],
+#root .scenario-slide [class*="text-teal"] {
+  color: #9df0ec !important;
+}
+
+/* Scenario visual blocks: softer glow */
+#root .scenario-slide svg,
+#root .scenario-slide img {
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.18));
+}
+
+/* Mobile: reduce cinematic density */
+@media (max-width: 768px) {
+  #root .scenario-slide {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(241, 198, 109, 0.22), transparent 22rem),
+      radial-gradient(circle at 100% 8%, rgba(95, 212, 208, 0.16), transparent 20rem),
+      linear-gradient(135deg, #1c2a27, #172322) !important;
+  }
+
+  #root .scenario-slide::before {
+    background-size: 48px 48px;
+    opacity: 0.72;
+  }
+
+  #root .scenario-slide [class*="bg-white/"],
+  #root .scenario-slide [class*="bg-white\["],
+  #root .scenario-slide [class*="bg-slate-950/"],
+  #root .scenario-slide [class*="bg-slate-900/"] {
+    backdrop-filter: blur(14px) saturate(1.06);
+  }
+}
+
+/* === BOSONSMART SOFT SCENARIOS v1 END === */
