@@ -1177,13 +1177,56 @@ function EstimatePage(props) {
 
 function ContactPage(props) {
   const { t, go } = props;
+
+  const isZhContact = /[\u3400-\u9fff]/.test(t?.contactPage?.title || "");
+  const contactQuickStart = isZhContact
+    ? {
+        eyebrow: "\u4e0d\u78ba\u5b9a\u9700\u8981\u751a\u9ebc\uff1f",
+        title: "\u5148\u767c\u5e7e\u5f35\u76f8\u7d66\u6211\u5011\uff0c\u6211\u5011\u5e6b\u4f60\u6574\u7406\u7b2c\u4e00\u968e\u6bb5\u65b9\u5411\u3002",
+        body: "\u4f60\u4e0d\u9700\u8981\u5148\u61c2\u667a\u80fd\u8a2d\u5099\u3002\u53ea\u8981\u767c\u9001\u95dc\u9375\u4f4d\u7f6e\uff0c\u6211\u5011\u5c31\u53ef\u4ee5\u5148\u5224\u65b7\u54ea\u4e9b\u60c5\u5883\u6700\u503c\u5f97\u505a\uff0c\u54ea\u4e9b\u9700\u8981\u73fe\u5834\u518d\u78ba\u8a8d\u3002",
+        items: [
+          "\u5ba2\u5ef3\u3001\u98ef\u5ef3\u6216\u60f3\u5148\u6539\u5584\u7684\u4e3b\u8981\u5340\u57df",
+          "\u73fe\u6709\u7246\u63a3\u3001\u71c8\u5177\u3001\u7a97\u7c3e\u8def\u8ecc\u53ca\u5165\u6236\u9580",
+          "Router / Wi-Fi \u4f4d\u7f6e\uff0c\u4ee5\u53ca\u73fe\u6709\u667a\u80fd\u8a2d\u5099\u6216 App",
+          "\u4f60\u60f3\u6539\u5584\u7684\u65e5\u5e38\u554f\u984c\uff1a\u591c\u9593\u3001\u51fa\u9580\u3001\u805a\u6703\u3001\u5bf5\u7269\u6216\u5b89\u5168"
+        ],
+      }
+    : {
+        eyebrow: "Not sure what you need?",
+        title: "Send a few photos first. We will help shape the first practical phase.",
+        body: "You do not need to understand smart-home devices before contacting us. Send the key areas and we can advise which routines are worth doing first, and what needs a site check.",
+        items: [
+          "Living, dining, or the main area you want to improve first",
+          "Existing switches, lights, curtain rail, and entry door",
+          "Router / Wi-Fi location, plus any existing smart devices or apps",
+          "The daily problem you want to fix: night, leaving home, hosting, pets, or safety"
+        ],
+      };
   return (
     <>
       <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={t.nav.scenarios} secondary={t.nav.solutions} onPrimary={() => go("scenarios")} onSecondary={() => go("solutions")} />
       <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader eyebrow={t.nav.contact} title={t.contactPage.detailsTitle} />
-          <Card className="p-6"><div className="grid gap-3 sm:grid-cols-2">{t.contactPage.details.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></Card>
+          <Card className="p-6"><div className="grid gap-3 sm:grid-cols-2">
+      <section className="contact-photo-brief">
+        <div className="contact-photo-brief__copy">
+          <p className="contact-photo-brief__eyebrow">{contactQuickStart.eyebrow}</p>
+          <h2>{contactQuickStart.title}</h2>
+          <p>{contactQuickStart.body}</p>
+        </div>
+
+        <div className="contact-photo-brief__items">
+          {contactQuickStart.items.map((item, index) => (
+            <article key={item} className="contact-photo-brief__item">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {t.contactPage.details.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></Card>
         </div>
       </section>
       <InfoGrid eyebrow={t.nav.contact} title={t.contactPage.nextTitle} items={t.contactPage.next} numbered />
