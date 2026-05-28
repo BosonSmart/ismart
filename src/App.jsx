@@ -43,13 +43,13 @@ const content = {
       continuePackages: "Continue to packages",
     },
     home: {
-      eyebrow: "Smart living system design for Hong Kong homes",
+      eyebrow: "Comfortable smart living for Hong Kong homes",
       title: "Show your home what to do — then we install the system behind it.",
-      body: "Boson Smart designs and installs practical smart living systems for domestic accommodation: lighting, comfort, curtains, entry, sensors, safety routines, and family-friendly controls.",
+      body: "Boson Smart designs and installs calm, practical smart-living systems for Hong Kong flats ? lighting, curtains, comfort, entry, safety and family controls that work together naturally.",
       primary: "Explore scenario timelines",
       secondary: "See packages",
-      introTitle: "Start from how the home should feel and behave ? not from a device list.",
-      introBody: "We translate real home routines into coordinated systems across lighting, air-conditioning, curtain control, entry, safety sensing, and simple manual controls.",
+      introTitle: "Start with the feeling you want at home.",
+      introBody: "Tell us how mornings, evenings, guests, pets, sleep and safety should work. We turn that into a practical smart-home plan you can actually live with.",
     },
     scenariosPage: {
       eyebrow: "Scroll scenarios",
@@ -206,9 +206,30 @@ const content = {
       ["I want a simple smart door entry setup.", "Smart lock option, video doorbell, or entry camera.", "Door type, lock model, power, privacy, access permissions.", "Safety"],
     ],
     packages: [
-      { id: "starter", name: "Smart Home Starter", subtitle: "A simple first step into smart-home living.", icon: "home", tag: "Best first step", basePrice: 3800, description: "For flats that want easier lighting control and simple home/away settings without starting a large project.", includes: ["Smart lighting control for selected areas", "Home / away preset settings", "App setup and basic configuration", "Simple switch or remote-control options", "Basic handover training"], assumption: "Starting price assumes one core area, basic compatible smart-control setup, app configuration, testing, and handover. Major rewiring and premium brand upgrades are quoted separately." },
-      { id: "comfort", name: "Comfort & Energy Package", subtitle: "For a home that feels ready when you need it.", icon: "sun", tag: "Most balanced", basePrice: 8800, description: "For daily comfort: lighting presets, air-con routines, curtain options, motion-based lighting, and energy-saving settings.", includes: ["Lighting presets for living, dining, work, and sleep", "Air-con or climate schedule setup", "Curtain or blind automation option", "Motion lighting for selected zones", "Energy-saving settings for daily routines"], assumption: "Starting price assumes key daily areas such as living room and entry, with practical comfort settings. Extra rooms, curtain motors, and complex wiring are quoted separately." },
-      { id: "safety", name: "Family Safety Package", subtitle: "Know what is happening at home when it matters.", icon: "shield", tag: "Best for families", basePrice: 7800, description: "For families who want better entry awareness, door/window status, night movement support, and selected phone alerts.", includes: ["Smart door lock or entry setup option", "Door / window sensors for key areas", "Video doorbell or entry camera option", "Night safety lighting", "Phone alerts for selected events"], assumption: "Starting price assumes selected entry and safety points. Camera placement, smart lock model, extra sensors, and door modifications are confirmed before quotation." },
+      { id: "starter", name: "Essential Smart Living Plan", subtitle: "A calm first phase for everyday control.", icon: "home", tag: "Best first step", basePrice: 3800, description: "For flats that want a practical first phase: selected lighting scenes, home / away routine, app setup, family-friendly control, and clear handover without overbuilding.", includes: [
+        "Routine design for selected daily areas",
+        "Smart lighting scene setup for key zones",
+        "Home / away preset configuration",
+        "App setup and basic family access guidance",
+        "Simple wall switch, scene button, or remote-control option",
+        "Testing, adjustment, and handover explanation"
+      ], assumption: "Starting price assumes one core area and compatible basic smart-control setup. Major rewiring, premium devices, extra rooms, and special installation conditions are quoted separately." },
+      { id: "comfort", name: "Comfort & Atmosphere Plan", subtitle: "Make the home feel ready at the right moment.", icon: "sun", tag: "Most balanced", basePrice: 8800, description: "For homes that want comfort to feel natural: lighting presets, AC routines, curtain options, motion lighting, and energy-saving behaviour coordinated around real daily use.", includes: [
+        "Morning, evening, dining, TV, and sleep scene planning",
+        "Lighting presets for living, dining, work, and sleep",
+        "AC or comfort schedule setup where compatible",
+        "Curtain or blind automation option",
+        "Motion lighting for selected zones",
+        "Energy-saving daily routine settings"
+      ], assumption: "Starting price assumes key daily areas such as living room and entry, with practical comfort settings. Extra rooms, curtain motors, complex wiring, and brand upgrades are quoted separately." },
+      { id: "safety", name: "Family Safety & Awareness Plan", subtitle: "For entry awareness, night safety, and selected alerts.", icon: "shield", tag: "Best for families", basePrice: 7800, description: "For families who want a more aware home: entry setup, selected door/window status, night movement support, and phone alerts designed around privacy and real habits.", includes: [
+        "Entry awareness design for the main door area",
+        "Smart lock, video doorbell, or entry camera option",
+        "Door / window sensors for selected key points",
+        "Night safety lighting for hallway or bathroom routes",
+        "Selected phone alerts with privacy expectations considered",
+        "Family access and handover explanation"
+      ], assumption: "Starting price assumes selected entry and safety points. Door condition, lock model, camera placement, privacy preference, and additional sensing points affect final quotation." },
     ],
     apartments: [
       { id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 },
@@ -403,9 +424,30 @@ const content = {
       ["想有簡單智能門口設定。", "智能門鎖選配、視像門鈴或入口鏡頭。", "門身類型、鎖型號、電源、私隱、權限。", "Safety"],
     ],
     packages: [
-      { id: "starter", name: "Smart Home Starter", subtitle: "智能家居的簡單入門第一步。", icon: "home", tag: "最適合首次使用", basePrice: 3800, description: "適合想先改善燈光控制、回家及離家設定，但暫時不想做大型工程的單位。", includes: ["指定區域智能燈光控制", "回家 / 離家預設模式", "App 設定及基本配置", "簡單牆掣或遙控控制選項", "基本交付教學"], assumption: "起價假設為一個核心區域、基本兼容智能控制、App 設定、測試及交付。大型改線及高端品牌升級需另行報價。" },
-      { id: "comfort", name: "Comfort & Energy Package", subtitle: "令屋企在你需要時已經準備好。", icon: "sun", tag: "最平衡選擇", basePrice: 8800, description: "為日常舒適而設：燈光模式、冷氣時間設定、窗簾選配、感應燈光及節能設定。", includes: ["客廳、飯廳、工作及睡眠燈光模式", "冷氣或溫度時間設定", "窗簾或百葉簾自動化選配", "指定區域人體感應燈光", "日常節能設定"], assumption: "起價假設為客廳及玄關等主要生活區域，並包含實用舒適設定。額外房間、窗簾摩打及複雜線路需另行報價。" },
-      { id: "safety", name: "Family Safety Package", subtitle: "在重要時刻，清楚知道家中狀態。", icon: "shield", tag: "最適合家庭", basePrice: 7800, description: "適合想掌握出入口、門窗狀態、夜間走動及手機提醒的家庭。", includes: ["智能門鎖或出入口設定選配", "主要門窗感應器", "視像門鈴或入口鏡頭選配", "夜間安全燈光", "指定事件手機提醒"], assumption: "起價假設為指定出入口及安全監察點。鏡頭位置、智能門鎖型號、額外感應器及門身改動會在報價前確認。" },
+      { id: "starter", name: "????????", subtitle: "??????????????????", icon: "home", tag: "??????", basePrice: 3800, description: "???????????????????????Home / Away ???App ????????????????????????", includes: [
+        "?????????????",
+        "????????????",
+        "?? Home / Away ????",
+        "App ???????????",
+        "????????????????",
+        "????????????"
+      ], assumption: "???????????????????????????????????????????????????" },
+      { id: "comfort", name: "???????", subtitle: "??????????????", icon: "sun", tag: "???", basePrice: 8800, description: "?????????????????????????????????????????????????", includes: [
+        "??????????????????",
+        "?????????????????",
+        "????????????",
+        "??????????",
+        "???????",
+        "????????"
+      ], assumption: "??????????????????????????????????????????????????????" },
+      { id: "safety", name: "?????????", subtitle: "?????????????????", icon: "shield", tag: "?????", basePrice: 7800, description: "???????????????????????????????????????????????????", includes: [
+        "????????????",
+        "????????????????",
+        "????????",
+        "???????????",
+        "?????????????",
+        "???????????"
+      ], assumption: "?????????????????????????????????????????????????" },
     ],
     apartments: [
       { id: "studio", label: "開放式 / 一房單位", description: "較少控制點，適合輕量入門", adjustment: 0 },
@@ -576,9 +618,9 @@ function HomePage(props) {
         ["03", "到方案頁估算", "最後才進入起步方案、加選項目及初步預算。"],
       ]
     : [
-        ["01", "Choose a life routine", "Start with Morning, Night, Gathering, or Pet Mode instead of a device list."],
-        ["02", "Understand the setup", "See how lighting, AC, curtains, sensors, and simple controls may work together."],
-        ["03", "Move to packages", "Only then go to starting packages, add-ons, and the estimate builder."],
+        ["01", "Tell us the feeling", "Calmer mornings, easier evenings, safer night walks, smoother hosting, or a better pet-at-home setup."],
+        ["02", "We design the setup", "Lighting, curtains, comfort, entry, sensors and controls are planned around how your family actually uses the home."],
+        ["03", "Install with handover", "After checking site conditions, we configure, test and explain the system so it remains easy to use."],
       ];
 
   return (

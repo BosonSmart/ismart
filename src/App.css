@@ -883,3 +883,508 @@ a:focus-visible {
   .merged-iso-intro h2 { font-size: 0.98rem; }
   .iso-hotspot-label { display: none; }
 }
+
+/* === BOSONSMART WARM INTELLIGENT HOME OVERRIDE v1 START === */
+
+/*
+  BosonSmart visual direction:
+  Warm Intelligent Home
+  - lighter residential background
+  - warmer surfaces
+  - calmer smart accents
+  - less cyber / less distant
+  - keeps scenario slides readable
+*/
+
+:root {
+  color-scheme: light;
+
+  --bs-cream: #fbf7ef;
+  --bs-cream-2: #f5efe4;
+  --bs-paper: rgba(255, 253, 248, 0.82);
+  --bs-paper-solid: #fffdf8;
+  --bs-line: rgba(148, 132, 105, 0.24);
+  --bs-line-strong: rgba(111, 97, 74, 0.34);
+
+  --bs-ink: #172322;
+  --bs-ink-soft: #34413e;
+  --bs-muted: #69736f;
+
+  --bs-cyan: #5fd4d0;
+  --bs-cyan-strong: #20aaa8;
+  --bs-amber: #f1c66d;
+  --bs-lime: #cfe8b4;
+
+  --bs-shadow-soft: 0 22px 70px rgba(74, 63, 45, 0.12);
+  --bs-shadow-card: 0 18px 46px rgba(74, 63, 45, 0.10);
+  --bs-radius-large: 2rem;
+}
+
+/* Page atmosphere */
+html,
+body {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(241, 198, 109, 0.24), transparent 32rem),
+    radial-gradient(circle at 94% 4%, rgba(95, 212, 208, 0.18), transparent 30rem),
+    linear-gradient(135deg, var(--bs-cream), var(--bs-cream-2)) !important;
+  color: var(--bs-ink) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255,255,255,0.36) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.30) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.44), transparent 72%);
+}
+
+#root {
+  background: transparent !important;
+  color: var(--bs-ink) !important;
+}
+
+#root > * {
+  background: transparent !important;
+}
+
+/* Reduce dark SaaS feeling across non-scenario pages */
+#root [class*="bg-slate-950"],
+#root [class*="bg-slate-900"],
+#root [class*="bg-slate-800"] {
+  background-color: transparent !important;
+}
+
+#root [class~="text-white"],
+#root [class*="text-white/"],
+#root [class*="text-slate-100"],
+#root [class*="text-slate-200"],
+#root [class*="text-slate-300"],
+#root [class*="text-slate-400"] {
+  color: var(--bs-ink) !important;
+}
+
+#root p,
+#root li {
+  color: var(--bs-muted);
+}
+
+/* Header: residential studio, not cyber dashboard */
+#root header,
+#root [class*="sticky"][class*="top-0"] {
+  background: rgba(255, 253, 248, 0.78) !important;
+  border-bottom: 1px solid var(--bs-line) !important;
+  box-shadow: 0 12px 34px rgba(74, 63, 45, 0.08);
+  backdrop-filter: blur(22px) saturate(1.12);
+}
+
+#root header a,
+#root header button,
+#root header span,
+#root header [class~="text-white"],
+#root header [class*="text-white/"] {
+  color: var(--bs-ink) !important;
+}
+
+#root header button[class*="bg-white"] {
+  background: var(--bs-ink) !important;
+  color: white !important;
+  box-shadow: 0 12px 24px rgba(23, 35, 34, 0.16);
+}
+
+#root header button[class*="bg-white"]:hover {
+  background: #263634 !important;
+}
+
+/* Cards and glass surfaces */
+#root [class*="border-white/"],
+#root [class*="border-slate-"] {
+  border-color: var(--bs-line) !important;
+}
+
+#root [class*="bg-white/"],
+#root [class*="bg-white\["],
+#root [class*="bg-slate-950/"],
+#root [class*="bg-slate-900/"] {
+  background: var(--bs-paper) !important;
+  border-color: var(--bs-line) !important;
+  box-shadow: var(--bs-shadow-card);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+/* Keep small chips smart but soft */
+#root [class*="rounded-full"][class*="border"] {
+  border-color: rgba(32, 170, 168, 0.22) !important;
+  background: rgba(255, 253, 248, 0.72) !important;
+  color: var(--bs-ink-soft) !important;
+}
+
+#root [class*="border-cyan"],
+#root [class*="bg-cyan"],
+#root [class*="text-cyan"] {
+  border-color: rgba(32, 170, 168, 0.38) !important;
+}
+
+/* Primary / secondary CTAs */
+#root .btn-primary,
+#root button.btn-primary,
+#root a.btn-primary {
+  background:
+    linear-gradient(135deg, rgba(95, 212, 208, 0.96), rgba(207, 232, 180, 0.94)) !important;
+  color: #10211f !important;
+  border: 1px solid rgba(32, 170, 168, 0.28) !important;
+  box-shadow:
+    0 18px 36px rgba(32, 170, 168, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+#root .btn-primary:hover,
+#root button.btn-primary:hover,
+#root a.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 22px 46px rgba(32, 170, 168, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
+}
+
+#root .btn-secondary,
+#root button.btn-secondary,
+#root a.btn-secondary {
+  background: rgba(255, 253, 248, 0.74) !important;
+  color: var(--bs-ink) !important;
+  border: 1px solid var(--bs-line-strong) !important;
+  box-shadow: 0 12px 28px rgba(74, 63, 45, 0.08) !important;
+}
+
+#root .btn-secondary:hover,
+#root button.btn-secondary:hover,
+#root a.btn-secondary:hover {
+  background: #ffffff !important;
+  border-color: rgba(32, 170, 168, 0.38) !important;
+}
+
+/* Hero / main section typography feeling */
+#root h1,
+#root h2,
+#root h3 {
+  color: var(--bs-ink) !important;
+  letter-spacing: -0.045em;
+}
+
+#root h1 {
+  text-wrap: balance;
+}
+
+#root h2,
+#root h3 {
+  text-wrap: balance;
+}
+
+#root main > section:first-child,
+#root section:first-of-type {
+  position: relative;
+}
+
+#root main > section:first-child::before,
+#root section:first-of-type::before {
+  content: "";
+  position: absolute;
+  inset: -2rem -1rem auto auto;
+  width: min(34vw, 360px);
+  height: min(34vw, 360px);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(241, 198, 109, 0.30), transparent 64%);
+  pointer-events: none;
+  filter: blur(4px);
+  opacity: 0.72;
+}
+
+/* Make package / solution panels feel more like interior mood cards */
+#root [class*="rounded-\[1.4rem\]"],
+#root [class*="rounded-\[1.5rem\]"],
+#root [class*="rounded-\[1.75rem\]"],
+#root [class*="rounded-\[2rem\]"],
+#root [class*="rounded-3xl"] {
+  border-color: var(--bs-line) !important;
+}
+
+#root [class*="hover:border-cyan"]:hover,
+#root [class*="hover:bg-cyan"]:hover {
+  border-color: rgba(32, 170, 168, 0.38) !important;
+  background: rgba(255, 255, 255, 0.90) !important;
+}
+
+/* Inputs / estimate controls */
+#root input,
+#root select,
+#root textarea {
+  background: rgba(255, 253, 248, 0.88) !important;
+  color: var(--bs-ink) !important;
+  border-color: var(--bs-line-strong) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.74);
+}
+
+#root input::placeholder,
+#root textarea::placeholder {
+  color: rgba(105, 115, 111, 0.72) !important;
+}
+
+/* Scenario pages remain cinematic and readable */
+#root .scenario-slide {
+  color: white !important;
+  background-color: #0f172a !important;
+}
+
+#root .scenario-slide,
+#root .scenario-slide *,
+#root .scenario-slide [class~="text-white"],
+#root .scenario-slide [class*="text-white/"],
+#root .scenario-slide h1,
+#root .scenario-slide h2,
+#root .scenario-slide h3,
+#root .scenario-slide p,
+#root .scenario-slide li,
+#root .scenario-slide span {
+  color: white !important;
+}
+
+#root .scenario-slide [class*="bg-white/"],
+#root .scenario-slide [class*="bg-white\["],
+#root .scenario-slide [class*="bg-slate-950/"],
+#root .scenario-slide [class*="bg-slate-900/"] {
+  background: rgba(15, 23, 42, 0.48) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.26) !important;
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+#root .scenario-slide .btn-primary {
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #10211f !important;
+  border-color: rgba(255, 255, 255, 0.40) !important;
+}
+
+#root .scenario-slide .btn-secondary {
+  background: rgba(15, 23, 42, 0.46) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+}
+
+/* Better mobile comfort */
+@media (max-width: 768px) {
+  :root {
+    --bs-radius-large: 1.45rem;
+  }
+
+  #root header,
+  #root [class*="sticky"][class*="top-0"] {
+    background: rgba(255, 253, 248, 0.88) !important;
+  }
+
+  #root main > section:first-child::before,
+  #root section:first-of-type::before {
+    width: 260px;
+    height: 260px;
+    opacity: 0.48;
+  }
+}
+
+/* === BOSONSMART WARM INTELLIGENT HOME OVERRIDE v1 END === */
+
+/* === BOSONSMART SOFT SCOPE TILES v1 START === */
+
+/*
+  BosonSmart design refinement:
+  Softer scope tiles + comfortable service cards.
+  Goal: make the service feel residential, calm, and easy to understand.
+*/
+
+/* More breathing room between major sections */
+#root main section {
+  scroll-margin-top: 7rem;
+}
+
+#root main section > div {
+  position: relative;
+}
+
+/* Make information sections feel like interior design boards */
+#root main section:not(:first-child) {
+  position: relative;
+}
+
+#root main section:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  inset: 1.25rem auto auto 50%;
+  width: min(84vw, 980px);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(148, 132, 105, 0.24),
+    rgba(95, 212, 208, 0.22),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* General card refinement */
+#root article,
+#root .group,
+#root [class*="grid"] > [class*="rounded"],
+#root [class*="space-y"] > [class*="rounded"] {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+#root article:hover,
+#root .group:hover,
+#root [class*="grid"] > [class*="rounded"]:hover {
+  transform: translateY(-2px);
+}
+
+/* Service / package cards: soft residential panels */
+#root article[class*="border"],
+#root div[class*="border"][class*="rounded-3xl"],
+#root div[class*="border"][class*="rounded-\[2rem\]"] {
+  background:
+    linear-gradient(145deg, rgba(255, 253, 248, 0.92), rgba(250, 244, 233, 0.76)) !important;
+  border-color: rgba(148, 132, 105, 0.22) !important;
+  box-shadow:
+    0 20px 56px rgba(74, 63, 45, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Scope cards should have a subtle smart-home glow, not dark tech glow */
+#root article[class*="border"]:hover,
+#root div[class*="border"][class*="rounded-3xl"]:hover,
+#root div[class*="border"][class*="rounded-\[2rem\]"]:hover {
+  border-color: rgba(32, 170, 168, 0.34) !important;
+  box-shadow:
+    0 26px 68px rgba(74, 63, 45, 0.12),
+    0 10px 28px rgba(32, 170, 168, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
+}
+
+/* Small labels and tags */
+#root [class*="uppercase"],
+#root [class*="tracking-"] {
+  letter-spacing: 0.12em;
+}
+
+#root [class*="text-xs"][class*="uppercase"],
+#root [class*="text-sm"][class*="uppercase"] {
+  color: rgba(32, 116, 115, 0.92) !important;
+}
+
+/* Price / estimate numbers should feel confident but not aggressive */
+#root [class*="text-3xl"],
+#root [class*="text-4xl"],
+#root [class*="text-5xl"] {
+  text-wrap: balance;
+}
+
+#root [class*="text-cyan"],
+#root [class*="text-emerald"],
+#root [class*="text-teal"] {
+  color: #168f8d !important;
+}
+
+/* Better list readability */
+#root ul {
+  gap: 0.55rem;
+}
+
+#root li {
+  line-height: 1.65;
+}
+
+#root li::marker {
+  color: #20aaa8;
+}
+
+/* Contact / brief sections should feel helpful, not like a form wall */
+#root a[href^="mailto:"],
+#root a[href*="wa.me"],
+#root a[href*="whatsapp"] {
+  text-decoration: none;
+}
+
+#root a[href^="mailto:"]:hover,
+#root a[href*="wa.me"]:hover,
+#root a[href*="whatsapp"]:hover {
+  filter: brightness(1.02);
+}
+
+/* Create softer visual hierarchy for section headers */
+#root main section h2 + p,
+#root main section h1 + p {
+  max-width: 760px;
+  line-height: 1.75;
+}
+
+/* Make the estimate / contact area feel like a guided consultation */
+#root section[id*="estimate"],
+#root section[id*="contact"] {
+  position: relative;
+}
+
+#root section[id*="estimate"]::after,
+#root section[id*="contact"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 6% 3rem auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(95, 212, 208, 0.18), transparent 66%);
+  pointer-events: none;
+  filter: blur(6px);
+}
+
+/* Buttons in content areas: slightly more tactile */
+#root main a,
+#root main button {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+#root main a:hover,
+#root main button:hover {
+  transform: translateY(-1px);
+}
+
+/* Mobile: keep the warmth but reduce visual noise */
+@media (max-width: 768px) {
+  #root main section:not(:first-child)::before {
+    width: 88vw;
+  }
+
+  #root article:hover,
+  #root .group:hover,
+  #root [class*="grid"] > [class*="rounded"]:hover {
+    transform: none;
+  }
+
+  #root section[id*="estimate"]::after,
+  #root section[id*="contact"]::after {
+    opacity: 0.38;
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* === BOSONSMART SOFT SCOPE TILES v1 END === */
