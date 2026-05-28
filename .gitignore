@@ -2,3 +2,7 @@ node_modules
 dist
 .env
 .DS_Store
+
+_backup-before-bosonsmart-update-*/
+src/*.bak-*
+patch-bosonsmart-*.cjs

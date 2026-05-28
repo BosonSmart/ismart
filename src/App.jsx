@@ -30,7 +30,7 @@ const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 const content = {
   en: {
     nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
-    brandSub: "Scenario-first smart-home installation",
+    brandSub: "Smart living system design for Hong Kong homes",
     buildEstimate: "Build Estimate",
     trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
     common: {
@@ -43,13 +43,13 @@ const content = {
       continuePackages: "Continue to packages",
     },
     home: {
-      eyebrow: "Smart-home routines for Hong Kong flats",
+      eyebrow: "Smart living system design for Hong Kong homes",
       title: "Show your home what to do — then we install the system behind it.",
-      body: "Boson Smart helps flat owners turn daily routines into practical smart-home setups: morning, night, gathering, and pet-at-home modes.",
+      body: "Boson Smart designs and installs practical smart living systems for domestic accommodation: lighting, comfort, curtains, entry, sensors, safety routines, and family-friendly controls.",
       primary: "Explore scenario timelines",
       secondary: "See packages",
-      introTitle: "Start from a life routine, not a device list.",
-      introBody: "Scroll through a real routine and see how lighting, comfort, safety, curtains, sensors, and simple controls work together.",
+      introTitle: "Start from how the home should feel and behave ? not from a device list.",
+      introBody: "We translate real home routines into coordinated systems across lighting, air-conditioning, curtain control, entry, safety sensing, and simple manual controls.",
     },
     scenariosPage: {
       eyebrow: "Scroll scenarios",
@@ -66,8 +66,8 @@ const content = {
     },
     solutionsPage: {
       eyebrow: "Solutions",
-      title: "I want my home to...",
-      body: "This page connects everyday tasks to possible smart-home setups. You do not need to know the device name first. Start with the outcome.",
+      title: "What we design for daily smart living.",
+      body: "This page connects daily living needs to practical smart system design across lighting, comfort, curtains, entry, safety, sensors, and family controls. You do not need to know the device name first. Start with the outcome.",
       task: "Customer task",
       setup: "Possible setup",
       check: "Things to check",
@@ -84,11 +84,18 @@ const content = {
     },
     contactPage: {
       eyebrow: "Contact Boson Smart",
-      title: "Tell us what you want your home to do.",
-      body: "Share your flat type, main routine, and what you want to improve. We will review your home condition before confirming the next step.",
+      title: "Tell us how you want your home to support daily living.",
+      body: "Share your flat type, renovation stage, main routine, existing devices, and what you want to improve. We will review your home condition before confirming the next step.",
       detailsTitle: "A few details help us give better advice.",
-      details: ["Flat type and approximate size", "Current status: lived-in, renovating, or new handover", "Main routine: morning, night, gathering, pet, or all", "Existing smart lock, Wi‑Fi mesh, smart lights, or voice assistant", "Photos of switch areas, entry door, curtain area, or router location if available"],
-      nextTitle: "What happens after you contact us?",
+      details: [
+        "Flat type, approximate area, and rooms you want to include",
+        "Renovation stage: lived-in, fitting out, new handover, or pre-renovation planning",
+        "Main routines: morning, night, gathering, pet-at-home, sleep, safety, or comfort",
+        "Existing devices and platforms: smart lock, Wi-Fi mesh, smart lights, voice assistant, cameras, curtain motor, Apple Home / Google / Alexa",
+        "Photos or plan: switch positions, router location, entry door, curtain rail, key rooms, DB box if available",
+        "Preferred control method: wall switch, scene button, app, voice, schedule, or family-friendly manual fallback",
+        "Budget range, must-haves, and nice-to-haves so we can design the first practical phase"
+      ], nextTitle: "What happens after you contact us?",
       next: [["We review your routine", "We check your selected mode, home type, and likely setup."], ["We ask for missing details", "If needed, we ask about wiring, Wi‑Fi, doors, curtains, or device preferences."], ["We confirm whether it is practical", "We explain what looks suitable, what may need checking, and what may require separate quotation."], ["We arrange the next step", "If the scope makes sense, we move toward assessment, quotation, and installation planning."]],
     },
     modes: [
@@ -184,6 +191,11 @@ const content = {
       },
     ],
     solutionTasks: [
+ 
+        ["Whole-home daily routines need a clear system plan.", "Scene design across lighting, comfort, curtain, entry, safety sensors, and manual controls.", "Flat layout, family habits, renovation status, wiring, Wi-Fi coverage, and preferred control method.", "Design scope"],
+        ["I want the home to feel ready at different times of day.", "Morning, night, gathering, away, sleep, and pet-at-home scene planning.", "Who uses the home, daily schedule, room priority, privacy, and manual override needs.", "All packages"],
+        ["I need the system to work for family members, not only app users.", "Wall switches, scene buttons, remotes, schedules, app access, and simple fallback controls.", "Existing switches, elderly/children usage, shared access, and failure-safe behaviour.", "All packages"],
+        ["I want a practical installation plan before buying devices.", "Pre-check of devices, wiring, mounting points, door/curtain conditions, and network reliability.", "Site condition, renovation stage, device compatibility, installation difficulty, and budget range.", "Pre-visit design"],
       ["Lights turn on automatically when I enter.", "Motion sensor + smart switch or selected lighting scene.", "Neutral wire, switch type, sensor placement, family preference.", "Starter / Comfort"],
       ["Air-con prepares the living room before I arrive.", "Smart AC control + schedule or routine trigger.", "AC model, remote compatibility, Wi‑Fi coverage, usage habit.", "Comfort"],
       ["Curtains close in the evening.", "Curtain motor + timed scene or button control.", "Curtain rail type, power point, curtain weight, installation access.", "Comfort"],
@@ -272,8 +284,15 @@ const content = {
       title: "告訴我們你想屋企做到甚麼。",
       body: "分享你的單位類型、主要生活情境及想改善的地方。我們會先了解你的單位情況，再建議下一步。",
       detailsTitle: "幾項資料可以幫我們更準確建議。",
-      details: ["單位類型及大約面積", "現時狀態：已入住、裝修中或新樓交收", "主要情境：Morning、Night、Gathering、Pet，或全部都想了解", "現有智能門鎖、Wi‑Fi mesh、智能燈或語音助理", "如方便，可提供開關位、入門門身、窗簾位或路由器位置照片"],
-      nextTitle: "聯絡後會發生甚麼？",
+      details: [
+        "\u55ae\u4f4d\u985e\u578b\u3001\u7d04\u7565\u9762\u7a4d\uff0c\u4ee5\u53ca\u60f3\u7d0d\u5165\u7684\u623f\u9593",
+        "\u73fe\u6642\u72c0\u614b\uff1a\u5df2\u5165\u4f4f\u3001\u88dd\u4fee\u4e2d\u3001\u65b0\u6a13\u4ea4\u6536\uff0c\u6216\u88dd\u4fee\u524d\u898f\u5283",
+        "\u4e3b\u8981\u751f\u6d3b\u60c5\u5883\uff1a\u65e9\u4e0a\u3001\u591c\u665a\u3001\u805a\u6703\u3001\u5bf5\u7269\u3001\u7761\u7720\u3001\u5b89\u5168\u6216\u8212\u9069",
+        "\u73fe\u6709\u8a2d\u5099\u53ca\u5e73\u53f0\uff1a\u667a\u80fd\u9580\u9396\u3001Wi-Fi mesh\u3001\u667a\u80fd\u71c8\u3001\u8a9e\u97f3\u52a9\u624b\u3001\u93e1\u982d\u3001\u7a97\u7c3e\u6469\u6253\u3001Apple Home / Google / Alexa",
+        "\u76f8\u7247\u6216\u5e73\u9762\u5716\uff1a\u958b\u95dc\u4f4d\u3001Router \u4f4d\u7f6e\u3001\u5165\u6236\u9580\u3001\u7a97\u7c3e\u8def\u8ecc\u3001\u4e3b\u8981\u623f\u9593\uff0c\u5982\u6709\u53ef\u52a0\u96fb\u7bb1\u4f4d\u7f6e",
+        "\u504f\u597d\u63a7\u5236\u65b9\u5f0f\uff1a\u7246\u63a3\u3001\u60c5\u5883\u63a3\u3001App\u3001\u8a9e\u97f3\u3001\u6642\u9593\u8868\uff0c\u6216\u5bb6\u4eba\u6613\u7528\u7684\u624b\u52d5\u5f8c\u5099\u63a7\u5236",
+        "\u9810\u7b97\u7bc4\u570d\u3001\u5fc5\u9808\u9805\u76ee\u53ca\u53ef\u9078\u9805\u76ee\uff0c\u65b9\u4fbf\u5148\u8a2d\u8a08\u6700\u5be6\u969b\u7684\u7b2c\u4e00\u968e\u6bb5"
+      ], nextTitle: "聯絡後會發生甚麼？",
       next: [["我們查看你的生活情境", "先了解你想改善的 Mode、單位類型及可能設定。"], ["補充缺少資料", "如有需要，會再了解線路、Wi‑Fi、門身、窗簾或設備偏好。"], ["確認是否可行", "說明哪些項目合適，哪些需要現場確認，哪些可能另行報價。"], ["安排下一步", "如果範圍合理，再進入評估、報價及安裝安排。"]],
     },
     modes: [
@@ -369,6 +388,11 @@ const content = {
       },
     ],
     solutionTasks: [
+ 
+        ["\u5168\u5c4b\u65e5\u5e38\u60c5\u5883\u9700\u8981\u5148\u6709\u6e05\u6670\u7cfb\u7d71\u8a2d\u8a08\u3002", "\u628a\u71c8\u5149\u3001\u8212\u9069\u3001\u7a97\u7c3e\u3001\u9580\u53e3\u3001\u5b89\u5168\u611f\u61c9\u53ca\u624b\u52d5\u63a7\u5236\u6574\u5408\u6210\u751f\u6d3b\u60c5\u5883\u3002", "\u9700\u8981\u4e86\u89e3\u55ae\u4f4d\u9593\u9694\u3001\u5bb6\u4eba\u7fd2\u6163\u3001\u88dd\u4fee\u72c0\u614b\u3001\u96fb\u7dda\u3001Wi-Fi \u8986\u84cb\u53ca\u63a7\u5236\u65b9\u5f0f\u3002", "\u8a2d\u8a08\u7bc4\u570d"],
+        ["\u6211\u60f3\u5c4b\u4f01\u5728\u4e0d\u540c\u6642\u9593\u81ea\u52d5\u8b8a\u6210\u5408\u9069\u72c0\u614b\u3002", "\u8a2d\u8a08 Morning\u3001Night\u3001Gathering\u3001Away\u3001Sleep \u53ca Pet-at-home \u7b49\u751f\u6d3b\u60c5\u5883\u3002", "\u9700\u8981\u4e86\u89e3\u4f7f\u7528\u8005\u3001\u65e5\u5e38\u6642\u9593\u8868\u3001\u623f\u9593\u512a\u5148\u6b21\u5e8f\u3001\u79c1\u96b1\u53ca\u624b\u52d5\u8986\u84cb\u9700\u8981\u3002", "\u6240\u6709\u65b9\u6848"],
+        ["\u6211\u9700\u8981\u5bb6\u4eba\u90fd\u5bb9\u6613\u4f7f\u7528\uff0c\u4e0d\u53ea\u662f\u9760\u624b\u6a5f App\u3002", "\u914d\u7f6e\u7246\u8eab\u958b\u95dc\u3001\u60c5\u5883\u63a3\u3001\u9059\u63a7\u3001\u6642\u9593\u8868\u3001App \u6b0a\u9650\u53ca\u7c21\u55ae\u5f8c\u5099\u63a7\u5236\u3002", "\u9700\u8981\u4e86\u89e3\u73fe\u6709\u958b\u95dc\u3001\u9577\u8005/\u5c0f\u670b\u53cb\u4f7f\u7528\u65b9\u5f0f\u3001\u5171\u7528\u6b0a\u9650\u53ca\u5931\u6548\u6642\u7684\u64cd\u4f5c\u3002", "\u6240\u6709\u65b9\u6848"],
+        ["\u6211\u60f3\u5148\u6709\u53ef\u843d\u5730\u5b89\u88dd\u8a08\u5283\uff0c\u800c\u4e0d\u662f\u5148\u8cb7\u8a2d\u5099\u3002", "\u9810\u5148\u6aa2\u67e5\u8a2d\u5099\u3001\u96fb\u7dda\u3001\u5b89\u88dd\u9ede\u3001\u9580\u53e3/\u7a97\u7c3e\u689d\u4ef6\u53ca\u7db2\u7d61\u7a69\u5b9a\u6027\u3002", "\u9700\u8981\u4e86\u89e3\u73fe\u5834\u72c0\u6cc1\u3001\u88dd\u4fee\u968e\u6bb5\u3001\u8a2d\u5099\u517c\u5bb9\u3001\u5b89\u88dd\u96e3\u5ea6\u53ca\u9810\u7b97\u7bc4\u570d\u3002", "\u4e0a\u9580\u524d\u8a2d\u8a08"],
       ["入屋時自動開燈。", "人體感應器 + 智能開關或指定燈光情境。", "零線、開關類型、感應器位置、家人習慣。", "Starter / Comfort"],
       ["回家前客廳先調節溫度。", "智能冷氣控制 + 時間設定或情境觸發。", "冷氣型號、遙控兼容、Wi‑Fi 覆蓋、使用習慣。", "Comfort"],
       ["黃昏時窗簾自動關上。", "窗簾摩打 + 時間情境或按鈕控制。", "窗簾路軌、電源位、窗簾重量、安裝空間。", "Comfort"],
