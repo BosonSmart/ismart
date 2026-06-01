@@ -1711,19 +1711,22 @@ function ScenariosPage(props) {
   );
 }
 
-function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep }) {
+function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep, go }) {
   const wheelLockRef = useRef(false);
   const touchStartYRef = useRef(0);
 
-  const safeActiveStep = Math.max(0, Math.min(mode.steps.length - 1, activeStep));
+  const summaryIndex = mode.steps.length;
+  const safePageIndex = Math.max(0, Math.min(summaryIndex, activeStep));
+  const isSummaryPage = safePageIndex === summaryIndex;
+  const safeActiveStep = Math.max(0, Math.min(mode.steps.length - 1, safePageIndex));
   const active = mode.steps[safeActiveStep] || mode.steps[0];
 
-  function clampIndex(index) {
-    return Math.max(0, Math.min(mode.steps.length - 1, index));
+  function clampPageIndex(index) {
+    return Math.max(0, Math.min(summaryIndex, index));
   }
 
   function moveTo(index) {
-    setActiveStep(clampIndex(index));
+    setActiveStep(clampPageIndex(index));
   }
 
   function lockBriefly() {
@@ -1767,7 +1770,7 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
     function moveByDirection(direction) {
       if (wheelLockRef.current) return;
 
-      moveTo(safeActiveStep + direction);
+      moveTo(safePageIndex + direction);
       lockBriefly();
     }
 
@@ -1821,13 +1824,62 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [safeActiveStep, mode.steps.length, setActiveStep]);
+  }, [safePageIndex, summaryIndex, setActiveStep]);
+
+  const activeLanguageText = [
+    activeMode || "",
+    mode?.id || "",
+    mode?.label || "",
+    mode?.headline || "",
+    ...(modes || []).map((item) => item?.label || ""),
+    t?.nav?.home || "",
+    t?.nav?.scenarios || "",
+    t?.scenariosPage?.progress || "",
+  ].join(" ");
+
+  const isZh = /[\u3400-\u9fff]/.test(activeLanguageText);
+
+  const summary = isZh
+    ? {
+        eyebrow: "\u60c5\u5883\u7e3d\u7d50",
+        title: "\u7531\u65e5\u5e38\u751f\u6d3b\u6d41\u7a0b\uff0c\u6574\u7406\u6210\u53ef\u843d\u5730\u7684\u667a\u80fd\u5bb6\u5c45\u898f\u5283\u3002",
+        body: "\u4ee5\u4e0a\u60c5\u5883\u5c55\u793a\u7684\u4e0d\u53ea\u662f\u55ae\u4e00\u8a2d\u5099\uff0c\u800c\u662f\u628a\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u8212\u9069\u5ea6\u3001\u611f\u61c9\u3001\u5b89\u5168\u548c\u624b\u52d5\u5099\u7528\u63a7\u5236\uff0c\u6309\u7167\u771f\u5be6\u751f\u6d3b\u7bc0\u594f\u9023\u63a5\u6210\u4e00\u5957\u8a2d\u8a08\u3002",
+        points: [
+          "\u71c8\u5149\u60c5\u5883",
+          "\u8212\u9069\u63a7\u5236",
+          "\u79c1\u96b1\u8207\u7a97\u7c3e",
+          "\u611f\u61c9\u8207\u5b89\u5168",
+          "\u624b\u52d5\u5099\u7528"
+        ],
+        packageEyebrow: "\u5efa\u8b70\u8d77\u6b65\u65b9\u6848",
+        packageTitle: "\u667a\u80fd\u60c5\u5883\u898f\u5283\u5165\u9580\u65b9\u6848",
+        packageBody: "\u9069\u5408\u60f3\u5148\u91d0\u6e05\u8a2d\u8a08\u65b9\u5411\u3001\u623f\u9593\u908f\u8f2f\u3001\u8a2d\u5099\u9078\u578b\u548c\u9810\u7b97\u7bc4\u570d\u7684\u5bb6\u5ead\uff0c\u5728\u8cfc\u8cb7\u8a2d\u5099\u6216\u88dd\u4fee\u524d\u5efa\u7acb\u6e05\u6670\u85cd\u5716\u3002",
+        packageItems: [
+          "\u751f\u6d3b\u60c5\u5883\u898f\u5283",
+          "\u623f\u9593\u63a7\u5236\u908f\u8f2f",
+          "\u8a2d\u5099\u65b9\u5411\u5efa\u8b70",
+          "\u521d\u6b65\u9810\u7b97\u53c3\u8003"
+        ],
+        cta: "\u67e5\u770b\u9810\u7b97\u65b9\u5411",
+      }
+    : {
+        eyebrow: "Scenario summary",
+        title: "From daily routines to a practical smart-living plan.",
+        body: "These scenes show how lighting, curtains, comfort, sensors, safety and manual fallback controls can be planned around real moments of the day ? not as isolated gadgets.",
+        points: ["Lighting scenes", "Comfort control", "Privacy & curtains", "Sensors & safety", "Manual fallback"],
+        packageEyebrow: "Suggested starter package",
+        packageTitle: "Smart Scene Planning Package",
+        packageBody: "For homes that want a clear design direction before buying devices or starting renovation. We define the room logic, scenario flow, device direction and a first budget reference.",
+        packageItems: ["Scenario planning", "Room-by-room logic", "Device direction", "Initial budget reference"],
+        cta: "View estimate direction",
+      };
+
 
   return (
     <div className="scenario-onepage-shell">
       <FloatingModeSelector modes={modes} activeMode={activeMode} setActiveMode={switchMode} setActiveStep={setActiveStep} />
 
-      <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={safeActiveStep} />
+      {!isSummaryPage && <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={safeActiveStep} />}
 
       <nav className="scenario-onepage-dots" aria-label={t.scenariosPage.progress}>
         {mode.steps.map((step, index) => (
@@ -1835,31 +1887,64 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
             key={step.title + "-" + index}
             type="button"
             onClick={() => moveTo(index)}
-            className={safeActiveStep === index ? "scenario-onepage-dot scenario-onepage-dot-active" : "scenario-onepage-dot"}
+            className={safePageIndex === index ? "scenario-onepage-dot scenario-onepage-dot-active" : "scenario-onepage-dot"}
             aria-label={step.time + " " + step.title}
           />
         ))}
       </nav>
 
-      <section
-        key={mode.id + "-" + active.title + "-" + safeActiveStep}
-        className="scenario-onepage-slide"
-        style={{ backgroundImage: sceneBackground(mode.id, safeActiveStep) }}
-      >
-        <div className="scenario-onepage-shade" />
-        <div className="scenario-onepage-glow" />
+      {!isSummaryPage ? (
+        <section
+          key={mode.id + "-" + active.title + "-" + safeActiveStep}
+          className="scenario-onepage-slide"
+          style={{ backgroundImage: sceneBackground(mode.id, safeActiveStep) }}
+        >
+          <div className="scenario-onepage-shade" />
+          <div className="scenario-onepage-glow" />
 
-        <div className="scenario-onepage-copy">
-          <div className="scenario-onepage-meta">
-            <span>{active.time}</span>
-            <span>{active.room}</span>
-            <span>{safeActiveStep + 1} / {mode.steps.length}</span>
+          <div className="scenario-onepage-copy">
+            <div className="scenario-onepage-meta">
+              <span>{active.time}</span>
+              <span>{active.room}</span>
+              <span>{safeActiveStep + 1} / {mode.steps.length}</span>
+            </div>
+
+            <h1>{active.title}</h1>
+            <p>{active.happens}</p>
           </div>
+        </section>
+      ) : (
+        <section className="scenario-ending-page">
+          <div className="scenario-ending-page__inner">
+            <p className="scenario-ending-page__eyebrow">{summary.eyebrow}</p>
+            <h1>{summary.title}</h1>
+            <p>{summary.body}</p>
 
-          <h1>{active.title}</h1>
-          <p>{active.happens}</p>
-        </div>
-      </section>
+            <div className="scenario-ending-page__points">
+              {summary.points.map((point) => (
+                <span key={point}>{point}</span>
+              ))}
+            </div>
+
+            <article className="scenario-ending-package-card">
+              <p className="scenario-ending-package-card__eyebrow">{summary.packageEyebrow}</p>
+              <h2>{summary.packageTitle}</h2>
+              <p>{summary.packageBody}</p>
+
+              <div className="scenario-ending-package-card__items">
+                {summary.packageItems.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </article>
+
+            <button type="button" className="scenario-ending-page__button" onClick={() => go && go("estimate")}>
+              {summary.cta}
+              <Icon name="arrowRight" className="h-4 w-4" />
+            </button>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
@@ -1887,59 +1972,117 @@ function formatScenarioClockTime(totalMinutes) {
 }
 
 function ScenarioTimeOverlay({ value, modeId, stepIndex }) {
-  const [displayValue, setDisplayValue] = useState(String(value || ""));
-  const previousNumericRef = useRef(null);
+  function toMinutes(timeText) {
+    const match = String(timeText || "").match(/(\d{1,2}):(\d{2})/);
+    if (!match) return 0;
+
+    const hours = Number(match[1]);
+    const minutes = Number(match[2]);
+
+    if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return 0;
+
+    return ((hours * 60 + minutes) % 1440 + 1440) % 1440;
+  }
+
+  function formatMinutes(totalMinutes) {
+    const normalized = ((Math.round(totalMinutes) % 1440) + 1440) % 1440;
+    const hours = Math.floor(normalized / 60);
+    const minutes = normalized % 60;
+
+    return String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0");
+  }
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  const initialMinutes = toMinutes(value);
+
+  const [displayMinutes, setDisplayMinutes] = useState(initialMinutes);
+
+  const displayMinutesRef = useRef(initialMinutes);
+  const previousTargetRef = useRef(initialMinutes);
+  const previousStepRef = useRef(stepIndex);
+  const previousModeRef = useRef(modeId);
   const frameRef = useRef(null);
 
   useEffect(() => {
-    const nextText = String(value || "").trim();
-    const nextNumeric = parseScenarioClockTime(nextText);
+    const target = toMinutes(value);
+    const previousTarget = previousTargetRef.current;
+    const previousStep = previousStepRef.current;
+    const previousMode = previousModeRef.current;
 
     if (frameRef.current) {
       cancelAnimationFrame(frameRef.current);
       frameRef.current = null;
     }
 
-    if (nextNumeric === null) {
-      previousNumericRef.current = null;
-      setDisplayValue(nextText);
+    /*
+      If switching scenario mode, do not animate from the old mode's time.
+      Just land cleanly on the new mode's first time.
+    */
+    if (previousMode !== modeId) {
+      previousModeRef.current = modeId;
+      previousStepRef.current = stepIndex;
+      previousTargetRef.current = target;
+      displayMinutesRef.current = target;
+      setDisplayMinutes(target);
       return undefined;
     }
 
-    const previousNumeric =
-      typeof previousNumericRef.current === "number"
-        ? previousNumericRef.current
-        : nextNumeric;
-
-    let targetNumeric = nextNumeric;
+    let start = displayMinutesRef.current;
 
     /*
-      If the next step crosses midnight, animate forward through midnight.
-      Example: 23:15 -> 02:30 becomes 23:15 -> 26:30 visually,
-      while the displayed value wraps back to 02:30.
+      Important fix:
+      On backward navigation, start from the previous displayed/target time
+      and count down to the new target. Do NOT reset to 00:00.
     */
-    if (targetNumeric < previousNumeric) {
-      targetNumeric += 1440;
+    if (typeof previousStep === "number" && stepIndex < previousStep) {
+      start = previousTarget;
     }
 
-    const distance = Math.abs(targetNumeric - previousNumeric);
-    const duration = Math.min(1150, Math.max(520, distance * 18));
-    const startedAt = performance.now();
+    let delta = target - start;
 
-    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    /*
+      Handle midnight naturally:
+      - Forward from 23:55 to 00:05 counts upward across midnight.
+      - Backward from 00:05 to 23:55 counts downward across midnight.
+    */
+    if (stepIndex > previousStep && delta < -720) {
+      delta += 1440;
+    }
+
+    if (stepIndex < previousStep && delta > 720) {
+      delta -= 1440;
+    }
+
+    if (delta === 0) {
+      previousStepRef.current = stepIndex;
+      previousTargetRef.current = target;
+      displayMinutesRef.current = target;
+      setDisplayMinutes(target);
+      return undefined;
+    }
+
+    const startedAt = performance.now();
+    const duration = 520;
 
     function tick(now) {
-      const t = Math.min(1, (now - startedAt) / duration);
-      const eased = easeOutCubic(t);
-      const current = previousNumeric + (targetNumeric - previousNumeric) * eased;
+      const rawProgress = Math.min(1, (now - startedAt) / duration);
+      const eased = easeOutCubic(rawProgress);
+      const nextValue = start + delta * eased;
 
-      setDisplayValue(formatScenarioClockTime(current));
+      displayMinutesRef.current = nextValue;
+      setDisplayMinutes(nextValue);
 
-      if (t < 1) {
+      if (rawProgress < 1) {
         frameRef.current = requestAnimationFrame(tick);
       } else {
-        previousNumericRef.current = nextNumeric;
-        setDisplayValue(formatScenarioClockTime(nextNumeric));
+        previousStepRef.current = stepIndex;
+        previousTargetRef.current = target;
+        displayMinutesRef.current = target;
+        setDisplayMinutes(target);
+        frameRef.current = null;
       }
     }
 
@@ -1953,14 +2096,9 @@ function ScenarioTimeOverlay({ value, modeId, stepIndex }) {
     };
   }, [value, modeId, stepIndex]);
 
-  const numeric = parseScenarioClockTime(value) !== null;
-
   return (
-    <div
-      className={`scenario-clock-overlay ${numeric ? "scenario-clock-overlay--numeric" : "scenario-clock-overlay--phase"}`}
-      aria-hidden="true"
-    >
-      <span>{displayValue}</span>
+    <div className="scenario-clock-overlay scenario-clock-overlay--numeric" aria-live="polite" aria-label={formatMinutes(displayMinutes)}>
+      <span>{formatMinutes(displayMinutes)}</span>
     </div>
   );
 }

@@ -1920,3 +1920,730 @@ footer {
 }
 
 /* === BOSONSMART SOLID SCENARIO TITLE v1 END === */
+
+/* === BOSONSMART SCENARIO VISUAL POLISH v1 START === */
+
+/*
+  Scenario visual polish only.
+  No scroll logic changes.
+*/
+
+#root .scenario-onepage-copy {
+  bottom: clamp(1.85rem, 7.2dvh, 4.8rem) !important;
+  gap: clamp(0.52rem, 1.35dvh, 0.92rem) !important;
+}
+
+/* Scene title: solid, readable, premium */
+#root .scenario-onepage-copy h1 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  font-weight: 780 !important;
+  text-shadow:
+    0 3px 24px rgba(0, 0, 0, 0.58),
+    0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Description: readable but still softer than the title */
+#root .scenario-onepage-copy p {
+  color: rgba(248, 250, 252, 0.94) !important;
+  opacity: 1 !important;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.48) !important;
+}
+
+/* Meta bubbles: cleaner and less heavy */
+#root .scenario-onepage-meta span {
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+#root .scenario-onepage-meta span:first-child {
+  background: rgba(103, 232, 249, 0.96) !important;
+  color: #072321 !important;
+}
+
+/* Large clock: keep cinematic, but do not fight with title */
+#root .scenario-onepage-shell .scenario-clock-overlay span {
+  color: rgba(255, 255, 255, 0.24) !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Darken lower background slightly for text contrast */
+#root .scenario-onepage-shade {
+  background:
+    linear-gradient(
+      to top,
+      rgba(3, 13, 12, 0.99),
+      rgba(8, 26, 24, 0.78) 42%,
+      rgba(10, 31, 28, 0.34)
+    ) !important;
+}
+
+@media (max-width: 768px) {
+  #root .scenario-onepage-copy {
+    bottom: clamp(1.35rem, 5.5dvh, 2.35rem) !important;
+    gap: 0.42rem !important;
+  }
+
+  #root .scenario-onepage-copy h1 {
+    font-weight: 800 !important;
+    text-shadow:
+      0 3px 18px rgba(0, 0, 0, 0.62),
+      0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  }
+
+  #root .scenario-onepage-copy p {
+    color: rgba(248, 250, 252, 0.92) !important;
+  }
+
+  #root .scenario-onepage-shell .scenario-clock-overlay span {
+    color: rgba(255, 255, 255, 0.20) !important;
+  }
+}
+
+/* === BOSONSMART SCENARIO VISUAL POLISH v1 END === */
+
+/* === BOSONSMART SCENARIO ENDING PAGE v1 START === */
+
+/*
+  Scenario ending page.
+  This replaces the old footer with a designed final scene.
+*/
+
+#root .scenario-ending-page {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  background:
+    radial-gradient(circle at 18% 10%, rgba(103, 232, 249, 0.18), transparent 24rem),
+    radial-gradient(circle at 86% 18%, rgba(250, 204, 21, 0.16), transparent 25rem),
+    linear-gradient(145deg, #0e211f, #101b1a 58%, #071211);
+}
+
+#root .scenario-ending-page__inner {
+  width: min(900px, 100%);
+  display: grid;
+  gap: clamp(0.8rem, 2dvh, 1.25rem);
+  color: #fff;
+}
+
+#root .scenario-ending-page__eyebrow {
+  margin: 0;
+  color: rgba(103, 232, 249, 0.92);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#root .scenario-ending-page h1 {
+  margin: 0;
+  max-width: 850px;
+  color: #fff;
+  font-size: clamp(2.35rem, 5.8vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.52);
+}
+
+#root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+  margin: 0;
+  max-width: 760px;
+  color: rgba(248, 250, 252, 0.88);
+  font-size: clamp(0.98rem, 1.35vw, 1.2rem);
+  line-height: 1.65;
+}
+
+#root .scenario-ending-page__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.4rem;
+}
+
+#root .scenario-ending-page__points span {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  padding: 0.48rem 0.74rem;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.84rem;
+  font-weight: 750;
+  backdrop-filter: blur(14px);
+}
+
+#root .scenario-ending-page__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: fit-content;
+  margin-top: 0.4rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.84rem 1.15rem;
+  background: rgba(103, 232, 249, 0.95);
+  color: #09211f;
+  font-weight: 850;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+}
+
+#root .scenario-ending-page__button:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  #root .scenario-ending-page {
+    place-items: end start;
+    padding: 5rem 1rem 1.25rem;
+  }
+
+  #root .scenario-ending-page h1 {
+    font-size: clamp(2rem, 9vw, 3.35rem);
+  }
+
+  #root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+    font-size: 0.88rem;
+    line-height: 1.52;
+  }
+
+  #root .scenario-ending-page__points span {
+    font-size: 0.72rem;
+    padding: 0.38rem 0.58rem;
+  }
+}
+
+/* === BOSONSMART SCENARIO ENDING PAGE v1 END === */
+
+/* === BOSONSMART SCENARIO SUMMARY SAME PROPORTION v1 START === */
+
+/*
+  Make the scenario summary page use the same proportion as normal scene pages.
+  It should feel like Scene 11 visually, but without adding an extra progress dot.
+*/
+
+#root .scenario-ending-page {
+  display: block !important;
+  place-items: unset !important;
+  padding: 0 !important;
+  background:
+    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.13), transparent 22rem),
+    radial-gradient(circle at 84% 24%, rgba(103,232,249,0.12), transparent 22rem),
+    linear-gradient(to top, rgba(5, 17, 16, 0.99), rgba(10, 31, 28, 0.78) 48%, rgba(10, 31, 28, 0.34)) !important;
+}
+
+/* Same position and width as normal scene copy */
+#root .scenario-ending-page__inner {
+  position: absolute !important;
+  z-index: 10 !important;
+  left: clamp(0.9rem, 4vw, 4rem) !important;
+  right: clamp(0.9rem, 4vw, 4rem) !important;
+  bottom: clamp(1.85rem, 7.2dvh, 4.8rem) !important;
+
+  width: auto !important;
+  max-width: min(780px, calc(100vw - 1.8rem)) !important;
+
+  display: grid !important;
+  gap: clamp(0.52rem, 1.35dvh, 0.92rem) !important;
+  color: #fff !important;
+}
+
+/* Treat eyebrow like the meta row scale, not a separate hero heading */
+#root .scenario-ending-page__eyebrow {
+  width: fit-content !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(153, 246, 228, 0.55) !important;
+  padding: 0.34rem 0.7rem !important;
+  background: rgba(103, 232, 249, 0.96) !important;
+  color: #072321 !important;
+  font-size: 0.74rem !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Same title proportion as scene titles */
+#root .scenario-ending-page h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: min(780px, 92vw) !important;
+  color: #ffffff !important;
+  font-size: clamp(2.35rem, 5.2vw, 5.8rem) !important;
+  line-height: 0.94 !important;
+  letter-spacing: -0.06em !important;
+  font-weight: 780 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-shadow:
+    0 3px 24px rgba(0, 0, 0, 0.58),
+    0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Same description proportion as scene descriptions */
+#root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: min(720px, 92vw) !important;
+  color: rgba(248, 250, 252, 0.94) !important;
+  font-size: clamp(0.95rem, 1.25vw, 1.18rem) !important;
+  line-height: 1.55 !important;
+  font-weight: 520 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.48) !important;
+}
+
+/* Keep summary points compact so they do not change the page proportion too much */
+#root .scenario-ending-page__points {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.45rem !important;
+  margin-top: 0.05rem !important;
+  max-width: min(720px, 92vw) !important;
+}
+
+#root .scenario-ending-page__points span {
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  padding: 0.34rem 0.62rem !important;
+  background: rgba(15, 23, 42, 0.34) !important;
+  color: rgba(255,255,255,0.88) !important;
+  font-size: 0.74rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+/* CTA should be present but visually smaller than the title/description block */
+#root .scenario-ending-page__button {
+  width: fit-content !important;
+  margin-top: 0.1rem !important;
+  border-radius: 999px !important;
+  padding: 0.72rem 1rem !important;
+  font-size: 0.86rem !important;
+}
+
+/* Mobile: same proportion as mobile scene page */
+@media (max-width: 768px) {
+  #root .scenario-ending-page__inner {
+    left: 0.85rem !important;
+    right: 0.85rem !important;
+    bottom: clamp(1.35rem, 5.5dvh, 2.35rem) !important;
+    gap: 0.42rem !important;
+    max-width: calc(100vw - 1.7rem) !important;
+  }
+
+  #root .scenario-ending-page__eyebrow {
+    padding: 0.23rem 0.46rem !important;
+    font-size: 0.56rem !important;
+  }
+
+  #root .scenario-ending-page h1 {
+    font-size: clamp(1.7rem, 7.6vw, 2.55rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  #root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+    font-size: 0.78rem !important;
+    line-height: 1.38 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  #root .scenario-ending-page__points {
+    gap: 0.32rem !important;
+  }
+
+  #root .scenario-ending-page__points span {
+    padding: 0.22rem 0.42rem !important;
+    font-size: 0.56rem !important;
+  }
+
+  #root .scenario-ending-page__button {
+    padding: 0.62rem 0.86rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #root .scenario-ending-page__inner {
+    left: 0.72rem !important;
+    right: 0.72rem !important;
+    bottom: 1rem !important;
+    gap: 0.32rem !important;
+  }
+
+  #root .scenario-ending-page h1 {
+    font-size: clamp(1.52rem, 7.2vw, 2.18rem) !important;
+  }
+
+  #root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+  }
+
+  #root .scenario-ending-page__points span {
+    font-size: 0.51rem !important;
+    padding: 0.19rem 0.36rem !important;
+  }
+}
+
+/* === BOSONSMART SCENARIO SUMMARY SAME PROPORTION v1 END === */
+
+/* === BOSONSMART RESTORE SUMMARY VISIBLE v1 START === */
+
+/*
+  Restore visible summary page content.
+  The summary page should behave like a final scene:
+  same bottom-left content position, same readable title/description.
+*/
+
+#root .scenario-ending-page {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 5 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      to top,
+      rgba(5, 17, 16, 0.99),
+      rgba(10, 31, 28, 0.78) 48%,
+      rgba(10, 31, 28, 0.34)
+    ),
+    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.13), transparent 22rem),
+    radial-gradient(circle at 84% 24%, rgba(103,232,249,0.12), transparent 22rem) !important;
+}
+
+#root .scenario-ending-page__inner {
+  position: absolute !important;
+  z-index: 20 !important;
+
+  left: clamp(0.9rem, 4vw, 4rem) !important;
+  right: clamp(0.9rem, 4vw, 4rem) !important;
+  bottom: clamp(1.85rem, 7.2dvh, 4.8rem) !important;
+  top: auto !important;
+
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: auto !important;
+  max-width: min(780px, calc(100vw - 1.8rem)) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  gap: clamp(0.52rem, 1.35dvh, 0.92rem) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  pointer-events: auto !important;
+  color: #ffffff !important;
+}
+
+#root .scenario-ending-page__inner *,
+#root .scenario-ending-page__inner h1,
+#root .scenario-ending-page__inner p,
+#root .scenario-ending-page__inner span,
+#root .scenario-ending-page__inner button {
+  visibility: visible !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+#root .scenario-ending-page__eyebrow {
+  display: inline-flex !important;
+  width: fit-content !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(153, 246, 228, 0.55) !important;
+  padding: 0.34rem 0.7rem !important;
+  background: rgba(103, 232, 249, 0.96) !important;
+  color: #072321 !important;
+  font-size: 0.74rem !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+}
+
+#root .scenario-ending-page h1 {
+  display: -webkit-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: min(780px, 92vw) !important;
+  color: #ffffff !important;
+  font-size: clamp(2.35rem, 5.2vw, 5.8rem) !important;
+  line-height: 0.94 !important;
+  letter-spacing: -0.06em !important;
+  font-weight: 800 !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-shadow:
+    0 3px 24px rgba(0, 0, 0, 0.58),
+    0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+#root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+  display: -webkit-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: min(720px, 92vw) !important;
+  color: rgba(248, 250, 252, 0.94) !important;
+  font-size: clamp(0.95rem, 1.25vw, 1.18rem) !important;
+  line-height: 1.55 !important;
+  font-weight: 520 !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.48) !important;
+}
+
+#root .scenario-ending-page__points {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.45rem !important;
+  margin: 0 !important;
+  max-width: min(720px, 92vw) !important;
+}
+
+#root .scenario-ending-page__points span {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  padding: 0.34rem 0.62rem !important;
+  background: rgba(15, 23, 42, 0.34) !important;
+  color: rgba(255,255,255,0.88) !important;
+  font-size: 0.74rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+#root .scenario-ending-page__button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  width: fit-content !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 0.72rem 1rem !important;
+  background: rgba(103, 232, 249, 0.96) !important;
+  color: #072321 !important;
+  font-size: 0.86rem !important;
+  font-weight: 850 !important;
+}
+
+@media (max-width: 768px) {
+  #root .scenario-ending-page__inner {
+    left: 0.85rem !important;
+    right: 0.85rem !important;
+    bottom: clamp(1.35rem, 5.5dvh, 2.35rem) !important;
+    gap: 0.42rem !important;
+    max-width: calc(100vw - 1.7rem) !important;
+  }
+
+  #root .scenario-ending-page__eyebrow {
+    padding: 0.23rem 0.46rem !important;
+    font-size: 0.56rem !important;
+  }
+
+  #root .scenario-ending-page h1 {
+    font-size: clamp(1.7rem, 7.6vw, 2.55rem) !important;
+  }
+
+  #root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+    font-size: 0.78rem !important;
+    line-height: 1.38 !important;
+  }
+
+  #root .scenario-ending-page__points {
+    gap: 0.32rem !important;
+  }
+
+  #root .scenario-ending-page__points span {
+    padding: 0.22rem 0.42rem !important;
+    font-size: 0.56rem !important;
+  }
+
+  #root .scenario-ending-page__button {
+    padding: 0.62rem 0.86rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #root .scenario-ending-page__inner {
+    left: 0.72rem !important;
+    right: 0.72rem !important;
+    bottom: 1rem !important;
+    gap: 0.32rem !important;
+  }
+
+  #root .scenario-ending-page h1 {
+    font-size: clamp(1.52rem, 7.2vw, 2.18rem) !important;
+  }
+
+  #root .scenario-ending-page__inner > p:not(.scenario-ending-page__eyebrow) {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+  }
+
+  #root .scenario-ending-page__points span {
+    font-size: 0.51rem !important;
+    padding: 0.19rem 0.36rem !important;
+  }
+}
+
+/* === BOSONSMART RESTORE SUMMARY VISIBLE v1 END === */
+
+/* === BOSONSMART SCENARIO SUMMARY PACKAGE DESIGN v1 START === */
+
+/*
+  Scenario summary page with a soft package introduction.
+  Same bottom-left proportion as scene pages, with one compact package card.
+*/
+
+#root .scenario-ending-package-card {
+  width: min(640px, 92vw) !important;
+  margin-top: 0.15rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 1.35rem !important;
+  padding: clamp(0.85rem, 1.7vw, 1.15rem) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.105), rgba(255,255,255,0.045)) !important;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+}
+
+#root .scenario-ending-package-card__eyebrow {
+  margin: 0 0 0.35rem !important;
+  color: rgba(103, 232, 249, 0.96) !important;
+  font-size: 0.68rem !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+#root .scenario-ending-package-card h2 {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: clamp(1.12rem, 2vw, 1.65rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 800 !important;
+}
+
+#root .scenario-ending-package-card > p:not(.scenario-ending-package-card__eyebrow) {
+  margin: 0.45rem 0 0 !important;
+  max-width: 620px !important;
+  color: rgba(248, 250, 252, 0.82) !important;
+  font-size: clamp(0.78rem, 1.05vw, 0.92rem) !important;
+  line-height: 1.5 !important;
+}
+
+#root .scenario-ending-package-card__items {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.38rem !important;
+  margin-top: 0.7rem !important;
+}
+
+#root .scenario-ending-package-card__items span {
+  display: inline-flex !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(103, 232, 249, 0.18) !important;
+  padding: 0.28rem 0.48rem !important;
+  background: rgba(8, 24, 23, 0.34) !important;
+  color: rgba(255,255,255,0.84) !important;
+  font-size: 0.68rem !important;
+  line-height: 1 !important;
+  font-weight: 760 !important;
+}
+
+@media (max-width: 768px) {
+  #root .scenario-ending-package-card {
+    width: min(100%, calc(100vw - 1.7rem)) !important;
+    border-radius: 1.05rem !important;
+    padding: 0.78rem !important;
+  }
+
+  #root .scenario-ending-package-card__eyebrow {
+    font-size: 0.54rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  #root .scenario-ending-package-card h2 {
+    font-size: 1.08rem !important;
+  }
+
+  #root .scenario-ending-package-card > p:not(.scenario-ending-package-card__eyebrow) {
+    font-size: 0.7rem !important;
+    line-height: 1.34 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  #root .scenario-ending-package-card__items {
+    gap: 0.28rem !important;
+    margin-top: 0.52rem !important;
+  }
+
+  #root .scenario-ending-package-card__items span {
+    font-size: 0.54rem !important;
+    padding: 0.2rem 0.34rem !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #root .scenario-ending-package-card {
+    padding: 0.68rem !important;
+  }
+
+  #root .scenario-ending-package-card h2 {
+    font-size: 0.98rem !important;
+  }
+
+  #root .scenario-ending-package-card > p:not(.scenario-ending-package-card__eyebrow) {
+    font-size: 0.64rem !important;
+  }
+}
+
+/* === BOSONSMART SCENARIO SUMMARY PACKAGE DESIGN v1 END === */
