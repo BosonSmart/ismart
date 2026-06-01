@@ -1495,8 +1495,7 @@ export default function App() {
         {page === "contact" && <ContactPage {...shared} />}
       </main>
       <StickyEstimate {...shared} />
-      <Footer {...shared} />
-    </div>
+</div>
   );
 }
 
@@ -1712,124 +1711,155 @@ function ScenariosPage(props) {
   );
 }
 
-function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep, onContinue, onSolutions }) {
-  const scrollerRef = useRef(null);
-  const slideRefs = useRef([]);
-  const active = mode.steps[activeStep] || mode.steps[0];
-  const progress = mode.steps.length <= 1 ? 100 : Math.round((activeStep / (mode.steps.length - 1)) * 100);
+function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep }) {
+  const wheelLockRef = useRef(false);
+  const touchStartYRef = useRef(0);
 
-  useEffect(() => {
-    slideRefs.current = slideRefs.current.slice(0, mode.steps.length);
-    const root = scrollerRef.current;
-    if (!root) return;
+  const safeActiveStep = Math.max(0, Math.min(mode.steps.length - 1, activeStep));
+  const active = mode.steps[safeActiveStep] || mode.steps[0];
 
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => Math.abs(a.boundingClientRect.top - root.getBoundingClientRect().top) - Math.abs(b.boundingClientRect.top - root.getBoundingClientRect().top))[0];
+  function clampIndex(index) {
+    return Math.max(0, Math.min(mode.steps.length - 1, index));
+  }
 
-      if (visible?.target?.dataset?.index) {
-        setActiveStep(Number(visible.target.dataset.index));
-      }
-    }, { root, rootMargin: "-35% 0px -45% 0px", threshold: [0.1, 0.35, 0.65] });
+  function moveTo(index) {
+    setActiveStep(clampIndex(index));
+  }
 
-    slideRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, [mode.id, mode.steps.length, setActiveStep]);
-
-  function jumpTo(index) {
-    slideRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function lockBriefly() {
+    wheelLockRef.current = true;
+    window.setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 560);
   }
 
   function switchMode(nextMode) {
     setActiveMode(nextMode);
     setActiveStep(0);
-    setTimeout(() => slideRefs.current[0]?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }
 
+  useEffect(() => {
+    document.body.classList.add("boson-onepage-scenario-active");
+
+    function syncHeaderHeight() {
+      const header = document.querySelector("#root header") || document.querySelector("header");
+      const height = header ? Math.ceil(header.getBoundingClientRect().height) : 68;
+      document.documentElement.style.setProperty("--boson-real-header-h", height + "px");
+    }
+
+    syncHeaderHeight();
+
+    window.addEventListener("resize", syncHeaderHeight);
+    window.addEventListener("orientationchange", syncHeaderHeight);
+
+    return () => {
+      document.body.classList.remove("boson-onepage-scenario-active");
+      window.removeEventListener("resize", syncHeaderHeight);
+      window.removeEventListener("orientationchange", syncHeaderHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    setActiveStep(0);
+  }, [mode.id, setActiveStep]);
+
+  useEffect(() => {
+    function moveByDirection(direction) {
+      if (wheelLockRef.current) return;
+
+      moveTo(safeActiveStep + direction);
+      lockBriefly();
+    }
+
+    function handleWheel(event) {
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      if (Math.abs(event.deltaY) < 8) return;
+
+      event.preventDefault();
+      moveByDirection(event.deltaY > 0 ? 1 : -1);
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        moveByDirection(1);
+      }
+
+      if (event.key === "ArrowUp" || event.key === "PageUp") {
+        event.preventDefault();
+        moveByDirection(-1);
+      }
+    }
+
+    function handleTouchStart(event) {
+      touchStartYRef.current = event.touches?.[0]?.clientY || 0;
+    }
+
+    function handleTouchMove(event) {
+      event.preventDefault();
+    }
+
+    function handleTouchEnd(event) {
+      const endY = event.changedTouches?.[0]?.clientY || 0;
+      const delta = touchStartYRef.current - endY;
+
+      if (Math.abs(delta) < 42) return;
+
+      moveByDirection(delta > 0 ? 1 : -1);
+    }
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("keydown", handleKeyDown, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [safeActiveStep, mode.steps.length, setActiveStep]);
+
   return (
-    <div className="relative h-[calc(100dvh-4.25rem)] overflow-hidden">
+    <div className="scenario-onepage-shell">
       <FloatingModeSelector modes={modes} activeMode={activeMode} setActiveMode={switchMode} setActiveStep={setActiveStep} />
 
-      <div className="pointer-events-none absolute left-4 right-4 top-[4.25rem] z-30 hidden items-center justify-between gap-4 md:flex">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-200/80">{mode.label}</p>
-          <p className="mt-1 max-w-xl text-sm text-slate-200/80">{mode.headline}</p>
-        </div>
-        <div className="min-w-44 rounded-full border border-white/10 bg-slate-950/35 p-1 backdrop-blur-xl">
-          <div className="h-1.5 rounded-full bg-white/10">
-            <div className="h-full rounded-full bg-cyan-300 transition-all duration-300" style={{ width: `${progress}%` }} />
-          </div>
-        </div>
-      </div>
+      <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={safeActiveStep} />
 
-      <nav className="absolute right-3 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-2 md:flex" aria-label={t.scenariosPage.progress}>
+      <nav className="scenario-onepage-dots" aria-label={t.scenariosPage.progress}>
         {mode.steps.map((step, index) => (
           <button
-            key={`${step.title}-${index}`}
-            onClick={() => jumpTo(index)}
-            className={`h-2.5 w-2.5 rounded-full border transition-all ${activeStep === index ? "h-7 border-cyan-200 bg-cyan-300" : "border-white/25 bg-white/20 hover:bg-white/45"}`}
-            aria-label={`$<span className="scenario-time-watermark" aria-hidden="true"><span className="scenario-inline-time-hidden">{step.time}</span></span><span className="scenario-time-sr">{step.time}</span> ${step.title}`}
+            key={step.title + "-" + index}
+            type="button"
+            onClick={() => moveTo(index)}
+            className={safeActiveStep === index ? "scenario-onepage-dot scenario-onepage-dot-active" : "scenario-onepage-dot"}
+            aria-label={step.time + " " + step.title}
           />
         ))}
       </nav>
 
-      <div ref={scrollerRef} className="fullpage-scenario-scroll h-full overflow-y-auto scroll-smooth snap-y snap-mandatory">
-        {mode.steps.map((step, index) => (
-          <section
-            key={`${mode.id}-${step.title}-${index}`}
-            data-index={index}
-            ref={(el) => { slideRefs.current[index] = el; }}
-            className={`scenario-slide relative flex min-h-[calc(100dvh-4.25rem)] snap-start snap-always items-end overflow-hidden bg-cover bg-center px-4 py-7 md:px-8 md:py-10 lg:px-14 ${activeStep === index ? "scenario-slide-active" : ""}`}
-            style={{ backgroundImage: sceneBackground(mode.id, index) }}
-          >
-            <SceneBackdrop modeId={mode.id} step={step} index={index} />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/55 to-slate-950/10" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.13),transparent_22%),radial-gradient(circle_at_85%_25%,rgba(103,232,249,0.14),transparent_22%)] opacity-80" />
+      <section
+        key={mode.id + "-" + active.title + "-" + safeActiveStep}
+        className="scenario-onepage-slide"
+        style={{ backgroundImage: sceneBackground(mode.id, safeActiveStep) }}
+      >
+        <div className="scenario-onepage-shade" />
+        <div className="scenario-onepage-glow" />
 
-            <div className={`scenario-copy relative z-10 mb-4 max-w-3xl md:mb-10 ${activeStep === index ? "scenario-copy-active" : "scenario-copy-idle"}`}>
-              <div className="mb-4 flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-cyan-300 px-3 py-1 text-xs font-black text-slate-950 shadow-lg shadow-cyan-950/20">{step.time}</span>
-                <span className="rounded-full border border-white/15 bg-slate-950/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-xl">{step.room}</span>
-                <span className="rounded-full border border-white/15 bg-slate-950/35 px-3 py-1 text-xs font-semibold text-white/80 backdrop-blur-xl">{index + 1} / {mode.steps.length}</span>
-              </div>
+        <div className="scenario-onepage-copy">
+          <div className="scenario-onepage-meta">
+            <span>{active.time}</span>
+            <span>{active.room}</span>
+            <span>{safeActiveStep + 1} / {mode.steps.length}</span>
+          </div>
 
-              <h1 className="text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl">{step.title}</h1>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-100/90 md:text-xl">{step.happens}</p>
-
-              <div className="mt-7 flex flex-wrap gap-2.5">
-                {step.setup.map((item) => <SmartThingChip key={item} label={item} />)}
-              </div>
-
-              {step.branches && (
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  {step.branches.map(([title, text]) => (
-                    <div key={title} className="rounded-2xl border border-amber-200/20 bg-slate-950/35 p-4 backdrop-blur-xl">
-                      <h3 className="font-semibold text-amber-100">{title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-amber-50/85">{text}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {mode.disclaimer && index === mode.steps.length - 1 && (
-                <div className="mt-6 max-w-2xl rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50 backdrop-blur-xl">{mode.disclaimer}</div>
-              )}
-
-              {index === mode.steps.length - 1 && (
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <button onClick={onContinue} className="btn-primary">{t.scenariosPage.cta}<Icon name="arrow" className="h-4 w-4" /></button>
-                  <button onClick={onSolutions} className="btn-secondary">{t.nav.solutions}</button>
-                </div>
-              )}
-            </div>
-
-            <div className="pointer-events-none absolute bottom-4 right-4 z-10 text-xs font-semibold uppercase tracking-[0.18em] text-white/45 md:hidden">
-              <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={activeStep} />
-            </div>
-          </section>
-        ))}
-      </div>
+          <h1>{active.title}</h1>
+          <p>{active.happens}</p>
+        </div>
+      </section>
     </div>
   );
 }
@@ -1985,14 +2015,7 @@ function SceneBackdrop({ modeId, step, index }) {
       <div className="scenario-device-glow scenario-device-glow-a" />
       <div className="scenario-device-glow scenario-device-glow-b" />
       <div className="scenario-device-glow scenario-device-glow-c" />
-
-      {step.setup.slice(0, 5).map((item, chipIndex) => (
-        <div key={`${item}-${chipIndex}`} className={`scenario-floating-chip scenario-floating-chip-${chipIndex % 5}`}>
-          <Icon name={smartThingIcon(item)} className="h-3.5 w-3.5" />
-          <span>{shortSmartThing(item)}</span>
-        </div>
-      ))}
-    </div>
+</div>
   );
 }
 

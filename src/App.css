@@ -1505,159 +1505,6 @@ body::before {
 
 /* === BOSONSMART CONTACT PHOTO BRIEF v1 END === */
 
-/* === BOSONSMART SOFT SCENARIOS v1 START === */
-
-/*
-  Softer scenario experience:
-  Keep the smart / cinematic feeling, but make it less dark and less distant.
-  Goal: daily-life story, not technical automation demo.
-*/
-
-/* Scenario route / scene canvas */
-#root .scenario-slide {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(241, 198, 109, 0.26), transparent 30rem),
-    radial-gradient(circle at 86% 12%, rgba(95, 212, 208, 0.20), transparent 28rem),
-    linear-gradient(135deg, #182422, #26342f 46%, #172322) !important;
-  color: #fffdf8 !important;
-}
-
-#root .scenario-slide::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.58), transparent 76%);
-}
-
-/* Scenario cards: more home-lounge, less command centre */
-#root .scenario-slide [class*="bg-white/"],
-#root .scenario-slide [class*="bg-white\["],
-#root .scenario-slide [class*="bg-slate-950/"],
-#root .scenario-slide [class*="bg-slate-900/"],
-#root .scenario-slide [class*="border-white/"] {
-  background:
-    linear-gradient(145deg, rgba(255, 253, 248, 0.13), rgba(255, 253, 248, 0.07)) !important;
-  border-color: rgba(255, 253, 248, 0.18) !important;
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  backdrop-filter: blur(20px) saturate(1.12);
-}
-
-/* Scenario text: warm white instead of hard white */
-#root .scenario-slide,
-#root .scenario-slide *,
-#root .scenario-slide h1,
-#root .scenario-slide h2,
-#root .scenario-slide h3 {
-  color: #fffdf8 !important;
-}
-
-#root .scenario-slide p,
-#root .scenario-slide li,
-#root .scenario-slide span {
-  color: rgba(255, 253, 248, 0.78) !important;
-}
-
-#root .scenario-slide h1,
-#root .scenario-slide h2 {
-  text-wrap: balance;
-  letter-spacing: -0.055em;
-}
-
-#root .scenario-slide h3 {
-  letter-spacing: -0.035em;
-}
-
-/* Scenario chips and navigation */
-#root .scenario-slide [class*="rounded-full"][class*="border"] {
-  background: rgba(255, 253, 248, 0.10) !important;
-  border-color: rgba(255, 253, 248, 0.18) !important;
-  color: rgba(255, 253, 248, 0.88) !important;
-}
-
-#root .scenario-slide button,
-#root .scenario-slide a {
-  transition:
-    transform 160ms ease,
-    box-shadow 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease;
-}
-
-#root .scenario-slide button:hover,
-#root .scenario-slide a:hover {
-  transform: translateY(-1px);
-}
-
-/* Scenario primary buttons should feel warm and premium */
-#root .scenario-slide .btn-primary,
-#root .scenario-slide button[class*="bg-white"],
-#root .scenario-slide a[class*="bg-white"] {
-  background:
-    linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(241, 232, 209, 0.94)) !important;
-  color: #10211f !important;
-  border-color: rgba(255, 253, 248, 0.46) !important;
-  box-shadow:
-    0 18px 42px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
-}
-
-#root .scenario-slide .btn-secondary {
-  background: rgba(255, 253, 248, 0.10) !important;
-  color: #fffdf8 !important;
-  border-color: rgba(255, 253, 248, 0.22) !important;
-}
-
-/* Make timeline/progress elements feel calmer */
-#root .scenario-slide [class*="bg-cyan"],
-#root .scenario-slide [class*="bg-emerald"],
-#root .scenario-slide [class*="bg-teal"] {
-  background:
-    linear-gradient(135deg, rgba(95, 212, 208, 0.92), rgba(207, 232, 180, 0.86)) !important;
-}
-
-#root .scenario-slide [class*="text-cyan"],
-#root .scenario-slide [class*="text-emerald"],
-#root .scenario-slide [class*="text-teal"] {
-  color: #9df0ec !important;
-}
-
-/* Scenario visual blocks: softer glow */
-#root .scenario-slide svg,
-#root .scenario-slide img {
-  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.18));
-}
-
-/* Mobile: reduce cinematic density */
-@media (max-width: 768px) {
-  #root .scenario-slide {
-    background:
-      radial-gradient(circle at 10% 0%, rgba(241, 198, 109, 0.22), transparent 22rem),
-      radial-gradient(circle at 100% 8%, rgba(95, 212, 208, 0.16), transparent 20rem),
-      linear-gradient(135deg, #1c2a27, #172322) !important;
-  }
-
-  #root .scenario-slide::before {
-    background-size: 48px 48px;
-    opacity: 0.72;
-  }
-
-  #root .scenario-slide [class*="bg-white/"],
-  #root .scenario-slide [class*="bg-white\["],
-  #root .scenario-slide [class*="bg-slate-950/"],
-  #root .scenario-slide [class*="bg-slate-900/"] {
-    backdrop-filter: blur(14px) saturate(1.06);
-  }
-}
-
-/* === BOSONSMART SOFT SCENARIOS v1 END === */
-
 /* === BOSONSMART TYPOGRAPHY HEADING FIX v1 START === */
 
 /*
@@ -1778,479 +1625,298 @@ body::before {
 
 /* === BOSONSMART TYPOGRAPHY HEADING FIX v1 END === */
 
-/* === BOSONSMART SCENARIO TIME WATERMARK v1 START === */
+/* === BOSONSMART LOCKED ONEPAGE SCENARIO v2 START === */
 
-/*
-  Scenario time display:
-  - large
-  - centred in the scenario slide
-  - about half-transparent
-  - behind the main scenario content
-*/
-
-#root .scenario-slide {
-  position: relative;
-  isolation: isolate;
+:root {
+  --boson-real-header-h: 68px;
 }
 
-/* Keep scenario content above the time watermark */
-#root .scenario-slide > * {
-  position: relative;
-  z-index: 2;
-}
-
-#root .scenario-time-watermark {
-  position: absolute !important;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
-  display: block;
-  width: max-content;
-  max-width: 92vw;
-  pointer-events: none;
-  user-select: none;
-
-  color: rgba(255, 253, 248, 0.50) !important;
-  opacity: 0.50;
-
-  font-size: clamp(5.2rem, 18vw, 16rem);
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.095em;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  white-space: nowrap;
-
-  text-shadow:
-    0 2px 10px rgba(255, 253, 248, 0.12),
-    0 20px 70px rgba(0, 0, 0, 0.30);
-  mix-blend-mode: screen;
-}
-
-/* Longer phase labels such as "Before guests arrive" / "Owner leaves" */
-#root .scenario-time-watermark:not(:empty) {
-  overflow-wrap: normal;
-}
-
-/* Accessibility-only duplicate */
-#root .scenario-time-sr {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
+body.boson-onepage-scenario-active {
   overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  clip-path: inset(50%) !important;
+  overscroll-behavior: none !important;
 }
 
-/* Ensure nested metadata rows do not visually compete with the watermark */
-#root .scenario-slide .scenario-time-watermark + .scenario-time-sr {
-  margin: 0 !important;
+#root .scenario-onepage-shell {
+  position: relative;
+  height: calc(100dvh - var(--boson-real-header-h));
+  min-height: calc(100dvh - var(--boson-real-header-h));
+  max-height: calc(100dvh - var(--boson-real-header-h));
+  overflow: hidden !important;
+  isolation: isolate;
+  background: #0f1f1d;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
-/* Mobile tuning */
-@media (max-width: 768px) {
-  #root .scenario-time-watermark {
-    font-size: clamp(4rem, 22vw, 8rem);
-    opacity: 0.42;
-    letter-spacing: -0.08em;
-    max-width: 90vw;
-  }
+#root .scenario-onepage-slide {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  background-position: center;
+  background-size: cover;
 }
 
-/* For long non-clock phase text, keep it impressive but not overflowing */
-@media (max-width: 520px) {
-  #root .scenario-time-watermark {
-    font-size: clamp(3.2rem, 18vw, 6.2rem);
-    white-space: normal;
-    max-width: 86vw;
-    line-height: 0.9;
-  }
+#root .scenario-onepage-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(5, 17, 16, 0.98), rgba(10, 31, 28, 0.72) 48%, rgba(10, 31, 28, 0.32));
 }
 
-/* === BOSONSMART SCENARIO TIME WATERMARK v1 END === */
+#root .scenario-onepage-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.75;
+  background:
+    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.13), transparent 22rem),
+    radial-gradient(circle at 84% 24%, rgba(103,232,249,0.12), transparent 22rem);
+}
 
-/* === BOSONSMART INDEPENDENT SCENARIO CLOCK v1 START === */
+#root .scenario-onepage-copy {
+  position: absolute;
+  z-index: 10;
+  left: clamp(0.9rem, 4vw, 4rem);
+  right: clamp(0.9rem, 4vw, 4rem);
+  bottom: clamp(1.45rem, 6dvh, 4.2rem);
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: clamp(0.45rem, 1.2dvh, 0.8rem);
+  max-width: min(780px, calc(100vw - 1.8rem));
+}
 
-/*
-  Independent scenario time overlay.
-  This clock is mounted once per scenario page and updates from active.time.
-  It is fixed over the scenario viewport, not attached to individual slide scroll.
-*/
+#root .scenario-onepage-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
 
-#root .scenario-clock-overlay {
-  position: fixed;
+#root .scenario-onepage-meta span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.55rem;
+  border-radius: 999px;
+  padding: 0.34rem 0.7rem;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(15, 23, 42, 0.34);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.74rem;
+  line-height: 1;
+  font-weight: 800;
+  white-space: nowrap;
+  backdrop-filter: blur(16px);
+}
+
+#root .scenario-onepage-meta span:first-child {
+  border-color: rgba(153, 246, 228, 0.55);
+  background: rgba(94, 234, 212, 0.9);
+  color: #09211f;
+}
+
+#root .scenario-onepage-copy h1 {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: clamp(2.35rem, 5.2vw, 5.8rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  font-weight: 750;
+  max-width: min(780px, 92vw);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+#root .scenario-onepage-copy p {
+  margin: 0;
+  padding: 0;
+  max-width: min(720px, 92vw);
+  color: rgba(241, 245, 249, 0.88);
+  font-size: clamp(0.95rem, 1.25vw, 1.18rem);
+  line-height: 1.55;
+  font-weight: 520;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+#root .scenario-onepage-shell .scenario-clock-overlay {
+  position: absolute !important;
+  z-index: 6;
   left: 50%;
-  top: 47%;
-  z-index: 48;
-  transform: translate(-50%, -50%);
+  top: 43%;
+  transform: translate(-50%, -50%) !important;
   pointer-events: none;
   user-select: none;
-  width: min(92vw, 1100px);
   text-align: center;
-  mix-blend-mode: screen;
+  width: auto;
+  max-width: 90vw;
 }
 
-#root .scenario-clock-overlay span {
-  display: inline-block;
-  color: rgba(255, 253, 248, 0.48) !important;
-  opacity: 0.48;
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.105em;
-  font-variant-numeric: tabular-nums;
+#root .scenario-onepage-shell .scenario-clock-overlay span {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: clamp(3.2rem, 10vw, 8rem);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -0.08em;
+  color: rgba(255,255,255,0.33);
   text-shadow:
-    0 2px 14px rgba(255, 253, 248, 0.12),
-    0 22px 88px rgba(0, 0, 0, 0.38);
-  filter: blur(0.1px);
+    0 1px 0 rgba(255,255,255,0.2),
+    0 12px 24px rgba(0,0,0,0.34);
 }
 
-#root .scenario-clock-overlay--numeric span {
-  font-size: clamp(7rem, 22vw, 19rem);
+#root .scenario-onepage-dots {
+  position: absolute;
+  z-index: 35;
+  right: calc(env(safe-area-inset-right, 0px) + 0.45rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.5rem 0.26rem;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.28);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
 }
 
-#root .scenario-clock-overlay--phase span {
-  max-width: 86vw;
-  font-size: clamp(3.8rem, 10vw, 9rem);
-  line-height: 0.9;
-  letter-spacing: -0.075em;
-  white-space: normal;
+#root .scenario-onepage-dot {
+  display: block;
+  width: 0.48rem;
+  height: 0.48rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(255,255,255,0.42);
+  opacity: 0.62;
 }
 
-/* Hide old per-slide / metadata time display */
-#root .scenario-inline-time-hidden,
-#root .scenario-slide .scenario-time-watermark,
-#root .scenario-slide .scenario-time-sr {
+#root .scenario-onepage-dot-active {
+  width: 0.78rem;
+  height: 0.78rem;
+  opacity: 1;
+  background: rgba(103,232,249,0.95);
+  box-shadow: 0 0 0 4px rgba(103,232,249,0.16), 0 0 22px rgba(103,232,249,0.38);
+}
+
+#root footer,
+footer {
   display: none !important;
 }
 
-/*
-  Keep real content above the background, but let the overlay sit cinematically
-  across the slide without being clipped by individual slide containers.
-*/
-#root .scenario-slide {
-  position: relative;
-}
-
-#root .scenario-slide > * {
-  position: relative;
-  z-index: 4;
-}
-
-/* Mobile tuning */
 @media (max-width: 768px) {
-  #root .scenario-clock-overlay {
-    top: 43%;
-    width: 94vw;
+  #root .scenario-onepage-copy {
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: clamp(1.1rem, 4.8dvh, 2.1rem);
+    gap: 0.38rem;
+    max-width: calc(100vw - 1.7rem);
   }
 
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(5.2rem, 27vw, 9.5rem);
-    opacity: 0.42;
+  #root .scenario-onepage-meta {
+    gap: 0.32rem;
   }
 
-  #root .scenario-clock-overlay--phase span {
-    font-size: clamp(2.8rem, 14vw, 5.8rem);
-    opacity: 0.42;
+  #root .scenario-onepage-meta span {
+    min-height: 1.28rem;
+    padding: 0.23rem 0.46rem;
+    font-size: 0.56rem;
   }
-}
 
-@media (max-width: 480px) {
-  #root .scenario-clock-overlay {
+  #root .scenario-onepage-copy h1 {
+    font-size: clamp(1.7rem, 7.6vw, 2.55rem);
+    line-height: 0.94;
+  }
+
+  #root .scenario-onepage-copy p {
+    font-size: 0.78rem;
+    line-height: 1.38;
+  }
+
+  #root .scenario-onepage-shell .scenario-clock-overlay {
     top: 42%;
   }
 
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(4.7rem, 28vw, 8rem);
+  #root .scenario-onepage-shell .scenario-clock-overlay span {
+    font-size: clamp(3.2rem, 14vw, 5.8rem);
   }
 }
 
-/* === BOSONSMART INDEPENDENT SCENARIO CLOCK v1 END === */
+@media (max-width: 430px) {
+  #root .scenario-onepage-copy {
+    left: 0.72rem;
+    right: 0.72rem;
+    bottom: 1rem;
+    gap: 0.32rem;
+  }
 
-/* === BOSONSMART SCENARIO CLOCK FONT v1 START === */
+  #root .scenario-onepage-copy h1 {
+    font-size: clamp(1.52rem, 7.2vw, 2.18rem);
+  }
+
+  #root .scenario-onepage-copy p {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  #root .scenario-onepage-meta span {
+    font-size: 0.51rem;
+    padding: 0.19rem 0.36rem;
+  }
+
+  #root .scenario-onepage-dots {
+    right: calc(env(safe-area-inset-right, 0px) + 0.25rem);
+    gap: 0.34rem;
+    padding: 0.44rem 0.22rem;
+  }
+
+  #root .scenario-onepage-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+  }
+
+  #root .scenario-onepage-dot-active {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+}
+
+/* === BOSONSMART LOCKED ONEPAGE SCENARIO v2 END === */
+
+/* === BOSONSMART SOLID SCENARIO TITLE v1 START === */
 
 /*
-  Scenario clock font refinement:
-  thinner, more monospaced, less heavy poster style.
+  Make scene title fully readable.
+  The title should be solid, not transparent/dark.
 */
 
-#root .scenario-clock-overlay span {
-  font-family:
-    "SF Mono",
-    "SFMono-Regular",
-    "Cascadia Mono",
-    "Roboto Mono",
-    "IBM Plex Mono",
-    "Menlo",
-    "Consolas",
-    "Liberation Mono",
-    monospace !important;
-
-  font-weight: 300 !important;
-  letter-spacing: -0.055em !important;
-  font-variant-numeric: tabular-nums lining-nums;
-  font-feature-settings:
-    "tnum" 1,
-    "lnum" 1,
-    "zero" 1;
-
-  color: rgba(255, 253, 248, 0.42) !important;
-  opacity: 0.42;
-
-  text-shadow:
-    0 1px 8px rgba(255, 253, 248, 0.10),
-    0 18px 72px rgba(0, 0, 0, 0.34);
-}
-
-/* Numeric clock can be very large but should feel light */
-#root .scenario-clock-overlay--numeric span {
-  font-weight: 250 !important;
-  letter-spacing: -0.06em !important;
-}
-
-/* Phase text should stay readable, slightly stronger than numeric clock */
-#root .scenario-clock-overlay--phase span {
-  font-weight: 300 !important;
-  letter-spacing: -0.045em !important;
-  opacity: 0.44;
-}
-
-/* Mobile: slightly stronger so thin font remains visible */
-@media (max-width: 768px) {
-  #root .scenario-clock-overlay span {
-    font-weight: 320 !important;
-    opacity: 0.40;
-    letter-spacing: -0.045em !important;
-  }
-
-  #root .scenario-clock-overlay--numeric span {
-    font-weight: 300 !important;
-  }
-}
-
-/* === BOSONSMART SCENARIO CLOCK FONT v1 END === */
-
-/* === BOSONSMART SCENARIO CLOCK SIZE v1 START === */
-
-/*
-  Smaller scenario overlay clock.
-  Keeps the cinematic overlay, but makes it less dominant.
-*/
-
-#root .scenario-clock-overlay {
-  top: 46%;
-}
-
-#root .scenario-clock-overlay--numeric span {
-  font-size: clamp(4.8rem, 14vw, 11.5rem) !important;
-}
-
-#root .scenario-clock-overlay--phase span {
-  font-size: clamp(2.8rem, 6.6vw, 5.8rem) !important;
-  max-width: 78vw;
-}
-
-/* Mobile size reduction */
-@media (max-width: 768px) {
-  #root .scenario-clock-overlay {
-    top: 42%;
-  }
-
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(3.6rem, 18vw, 6.8rem) !important;
-  }
-
-  #root .scenario-clock-overlay--phase span {
-    font-size: clamp(2.1rem, 10vw, 4.2rem) !important;
-    max-width: 84vw;
-  }
-}
-
-@media (max-width: 480px) {
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(3.2rem, 17vw, 5.6rem) !important;
-  }
-
-  #root .scenario-clock-overlay--phase span {
-    font-size: clamp(1.8rem, 9vw, 3.4rem) !important;
-  }
-}
-
-/* === BOSONSMART SCENARIO CLOCK SIZE v1 END === */
-
-/* === BOSONSMART SCENARIO CLOCK 30PCT SMALLER v1 START === */
-
-/*
-  Scenario overlay clock: 30% smaller than the previous refined size.
-*/
-
-#root .scenario-clock-overlay--numeric span {
-  font-size: clamp(3.36rem, 9.8vw, 8.05rem) !important;
-}
-
-#root .scenario-clock-overlay--phase span {
-  font-size: clamp(1.96rem, 4.62vw, 4.06rem) !important;
-  max-width: 72vw;
-}
-
-@media (max-width: 768px) {
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(2.52rem, 12.6vw, 4.76rem) !important;
-  }
-
-  #root .scenario-clock-overlay--phase span {
-    font-size: clamp(1.47rem, 7vw, 2.94rem) !important;
-    max-width: 78vw;
-  }
-}
-
-@media (max-width: 480px) {
-  #root .scenario-clock-overlay--numeric span {
-    font-size: clamp(2.24rem, 11.9vw, 3.92rem) !important;
-  }
-
-  #root .scenario-clock-overlay--phase span {
-    font-size: clamp(1.26rem, 6.3vw, 2.38rem) !important;
-  }
-}
-
-/* === BOSONSMART SCENARIO CLOCK 30PCT SMALLER v1 END === */
-
-/* === BOSONSMART SCENARIO SCROLL SNAP v1 START === */
-
-/*
-  Scenario scroll behaviour:
-  Make each wheel/trackpad movement land on the next full scenario slide.
-  This only activates on pages containing .scenario-slide.
-*/
-
-/* Enable snap only when scenario slides exist */
-html:has(#root .scenario-slide),
-body:has(#root .scenario-slide) {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overscroll-behavior-y: contain;
-}
-
-/* Each scenario step should occupy one clean viewport */
-#root .scenario-slide {
-  min-height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* Prevent the browser from stopping halfway inside dense slide content */
-#root .scenario-slide > * {
-  scroll-margin-top: 0;
-}
-
-/* Keep scenario page sections aligned with the top of the viewport */
-#root .scenario-slide:first-of-type {
-  scroll-snap-align: start;
-}
-
-/* Mobile browsers with dynamic address bars */
-@supports (height: 100dvh) {
-  #root .scenario-slide {
-    min-height: 100dvh;
-  }
-}
-
-/* If reduced motion is preferred, keep snap but avoid aggressive smooth animation */
-@media (prefers-reduced-motion: reduce) {
-  html:has(#root .scenario-slide),
-  body:has(#root .scenario-slide) {
-    scroll-behavior: auto;
-  }
-}
-
-/* === BOSONSMART SCENARIO SCROLL SNAP v1 END === */
-
-/* === BOSONSMART MOBILE SCENARIO DOTS FIX v1 START === */
-
-/*
-  Force the 10 scenario progress dots to remain visible on mobile.
-  Keep them small, fixed to the right edge, and above scenario content.
-*/
-
-#root .scenario-step-dots {
-  display: flex !important;
-  visibility: visible !important;
+#root .scenario-onepage-shell .scenario-onepage-copy h1,
+#root .scenario-onepage-shell .scenario-title-row {
+  color: #ffffff !important;
   opacity: 1 !important;
-  position: fixed !important;
-  z-index: 999 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Tablet / mobile */
-@media (max-width: 768px) {
-  #root .scenario-step-dots {
-    right: max(0.35rem, env(safe-area-inset-right)) !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.42rem !important;
-    padding: 0.5rem 0.28rem !important;
-    border-radius: 999px !important;
-    background: rgba(15, 23, 42, 0.26) !important;
-    border: 1px solid rgba(255, 253, 248, 0.12) !important;
-    backdrop-filter: blur(12px) saturate(1.1) !important;
-  }
-
-  #root .scenario-step-dot {
-    display: grid !important;
-    place-items: center !important;
-    width: 0.48rem !important;
-    height: 0.48rem !important;
-    min-width: 0.48rem !important;
-    min-height: 0.48rem !important;
-    border-radius: 999px !important;
-    opacity: 0.55 !important;
-    background: rgba(255, 253, 248, 0.46) !important;
-    pointer-events: auto !important;
-  }
-
-  #root .scenario-step-dot--active {
-    width: 0.78rem !important;
-    height: 0.78rem !important;
-    min-width: 0.78rem !important;
-    min-height: 0.78rem !important;
-    opacity: 1 !important;
-    background:
-      linear-gradient(135deg, rgba(95, 212, 208, 0.98), rgba(207, 232, 180, 0.95)) !important;
-    box-shadow:
-      0 0 0 4px rgba(95, 212, 208, 0.12),
-      0 0 22px rgba(95, 212, 208, 0.34) !important;
-  }
-
-  /* Hide numbers on mobile, keep only clean dots */
-  #root .scenario-step-dot span {
-    display: none !important;
-  }
+#root .scenario-onepage-shell .scenario-onepage-copy {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
 }
 
-/* Very small phones */
-@media (max-width: 420px) {
-  #root .scenario-step-dots {
-    right: max(0.18rem, env(safe-area-inset-right)) !important;
-    gap: 0.34rem !important;
-    padding: 0.42rem 0.22rem !important;
-  }
-
-  #root .scenario-step-dot {
-    width: 0.42rem !important;
-    height: 0.42rem !important;
-    min-width: 0.42rem !important;
-    min-height: 0.42rem !important;
-  }
-
-  #root .scenario-step-dot--active {
-    width: 0.68rem !important;
-    height: 0.68rem !important;
-    min-width: 0.68rem !important;
-    min-height: 0.68rem !important;
-  }
-}
-
-/* === BOSONSMART MOBILE SCENARIO DOTS FIX v1 END === */
+/* === BOSONSMART SOLID SCENARIO TITLE v1 END === */
