@@ -2116,3 +2116,141 @@ body::before {
 }
 
 /* === BOSONSMART SCENARIO CLOCK 30PCT SMALLER v1 END === */
+
+/* === BOSONSMART SCENARIO SCROLL SNAP v1 START === */
+
+/*
+  Scenario scroll behaviour:
+  Make each wheel/trackpad movement land on the next full scenario slide.
+  This only activates on pages containing .scenario-slide.
+*/
+
+/* Enable snap only when scenario slides exist */
+html:has(#root .scenario-slide),
+body:has(#root .scenario-slide) {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+}
+
+/* Each scenario step should occupy one clean viewport */
+#root .scenario-slide {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Prevent the browser from stopping halfway inside dense slide content */
+#root .scenario-slide > * {
+  scroll-margin-top: 0;
+}
+
+/* Keep scenario page sections aligned with the top of the viewport */
+#root .scenario-slide:first-of-type {
+  scroll-snap-align: start;
+}
+
+/* Mobile browsers with dynamic address bars */
+@supports (height: 100dvh) {
+  #root .scenario-slide {
+    min-height: 100dvh;
+  }
+}
+
+/* If reduced motion is preferred, keep snap but avoid aggressive smooth animation */
+@media (prefers-reduced-motion: reduce) {
+  html:has(#root .scenario-slide),
+  body:has(#root .scenario-slide) {
+    scroll-behavior: auto;
+  }
+}
+
+/* === BOSONSMART SCENARIO SCROLL SNAP v1 END === */
+
+/* === BOSONSMART MOBILE SCENARIO DOTS FIX v1 START === */
+
+/*
+  Force the 10 scenario progress dots to remain visible on mobile.
+  Keep them small, fixed to the right edge, and above scenario content.
+*/
+
+#root .scenario-step-dots {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  z-index: 999 !important;
+}
+
+/* Tablet / mobile */
+@media (max-width: 768px) {
+  #root .scenario-step-dots {
+    right: max(0.35rem, env(safe-area-inset-right)) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.42rem !important;
+    padding: 0.5rem 0.28rem !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.26) !important;
+    border: 1px solid rgba(255, 253, 248, 0.12) !important;
+    backdrop-filter: blur(12px) saturate(1.1) !important;
+  }
+
+  #root .scenario-step-dot {
+    display: grid !important;
+    place-items: center !important;
+    width: 0.48rem !important;
+    height: 0.48rem !important;
+    min-width: 0.48rem !important;
+    min-height: 0.48rem !important;
+    border-radius: 999px !important;
+    opacity: 0.55 !important;
+    background: rgba(255, 253, 248, 0.46) !important;
+    pointer-events: auto !important;
+  }
+
+  #root .scenario-step-dot--active {
+    width: 0.78rem !important;
+    height: 0.78rem !important;
+    min-width: 0.78rem !important;
+    min-height: 0.78rem !important;
+    opacity: 1 !important;
+    background:
+      linear-gradient(135deg, rgba(95, 212, 208, 0.98), rgba(207, 232, 180, 0.95)) !important;
+    box-shadow:
+      0 0 0 4px rgba(95, 212, 208, 0.12),
+      0 0 22px rgba(95, 212, 208, 0.34) !important;
+  }
+
+  /* Hide numbers on mobile, keep only clean dots */
+  #root .scenario-step-dot span {
+    display: none !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  #root .scenario-step-dots {
+    right: max(0.18rem, env(safe-area-inset-right)) !important;
+    gap: 0.34rem !important;
+    padding: 0.42rem 0.22rem !important;
+  }
+
+  #root .scenario-step-dot {
+    width: 0.42rem !important;
+    height: 0.42rem !important;
+    min-width: 0.42rem !important;
+    min-height: 0.42rem !important;
+  }
+
+  #root .scenario-step-dot--active {
+    width: 0.68rem !important;
+    height: 0.68rem !important;
+    min-width: 0.68rem !important;
+    min-height: 0.68rem !important;
+  }
+}
+
+/* === BOSONSMART MOBILE SCENARIO DOTS FIX v1 END === */
