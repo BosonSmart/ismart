@@ -30,7 +30,7 @@ const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 const content = {
   en: {
     nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
-    brandSub: "Smart living system design for Hong Kong homes",
+    brandSub: "Natural smart living for Hong Kong homes",
     buildEstimate: "Build Estimate",
     trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
     common: {
@@ -43,17 +43,17 @@ const content = {
       continuePackages: "Continue to packages",
     },
     home: {
-      eyebrow: "Comfortable smart living for Hong Kong homes",
+      eyebrow: "Natural smart living for Hong Kong homes",
       title: "Show your home what to do — then we install the system behind it.",
-      body: "Boson Smart designs and installs calm, practical smart-living systems for Hong Kong flats ? lighting, curtains, comfort, entry, safety and family controls that work together naturally.",
+      body: "BosonSmart designs practical smart-living setups for Hong Kong flats ? connecting lighting, curtains, comfort, entry and safety routines so daily life feels easier, calmer and less complicated.",
       primary: "Explore scenario timelines",
       secondary: "See packages",
-      introTitle: "Start with the feeling you want at home.",
-      introBody: "Tell us how mornings, evenings, guests, pets, sleep and safety should work. We turn that into a practical smart-home plan you can actually live with.",
+      introTitle: "Start with the daily moments you want to improve.",
+      introBody: "Calmer mornings, easier evenings, smoother hosting, safer night walks, or a better pet-at-home setup ? we turn those moments into a practical first phase.",
     },
     scenariosPage: {
       eyebrow: "Scroll scenarios",
-      title: "Scroll through a real home routine.",
+      title: "Choose a mode and follow the 10-step daily journey.",
       body: "Choose a mode and move through the timeline. Each step shows what the home does, why it helps, and what setup may be involved.",
       choose: "Choose a mode",
       whatHappens: "What the home does",
@@ -62,12 +62,12 @@ const content = {
       activeSetup: "Active setup",
       suggested: "Usually suitable",
       cta: "Continue to packages",
-      progress: "Routine progress",
+      progress: "Journey progress",
     },
     solutionsPage: {
       eyebrow: "Solutions",
-      title: "What we design for daily smart living.",
-      body: "This page connects daily living needs to practical smart system design across lighting, comfort, curtains, entry, safety, sensors, and family controls. You do not need to know the device name first. Start with the outcome.",
+      title: "What we help your home do.",
+      body: "Start from a daily moment: coming home, sleeping, hosting, caring for pets, or moving safely at night. We then shape the smart setup behind it. You do not need to know the device name first. Start with the outcome.",
       task: "Customer task",
       setup: "Possible setup",
       check: "Things to check",
@@ -83,7 +83,7 @@ const content = {
       noAddons: "No add-ons selected",
     },
     contactPage: {
-      eyebrow: "Contact Boson Smart",
+      eyebrow: "Contact BosonSmart",
       title: "Tell us how you want your home to support daily living.",
       body: "Share your flat type, renovation stage, main routine, existing devices, and what you want to improve. We will review your home condition before confirming the next step.",
       detailsTitle: "A few details help us give better advice.",
@@ -105,19 +105,141 @@ const content = {
         icon: "sun",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.22),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(103,232,249,0.16),transparent_38%)]",
         title: "Morning Mode",
-        headline: "From waking up to leaving home.",
-        subtitle: "Start the day with less rushing, fewer forgotten switches, and a smoother leaving-home routine.",
+        headline: "Wake up naturally, get ready smoothly, and leave home with confidence.",
+        subtitle: "A 10-step morning journey from gentle wake-up, dressing support and breakfast assist to safety checks and Away Mode.",
         package: "Starter / Comfort",
-        chips: ["Wake", "Bathroom", "Breakfast", "Away"],
+        chips: [
+          "Wake",
+          "Dress",
+          "Bathroom",
+          "Breakfast",
+          "Leave"
+        ],
         steps: [
-          { time: "07:00", title: "Soft Wake", room: "Bedroom", happens: "The room gently brightens. Curtains can open if suitable. Air-con or fan adjusts.", helps: "Waking up feels less abrupt and more natural.", setup: ["Bedroom scene", "Curtain option", "AC / fan routine"] },
-          { time: "07:10", title: "Bedroom Fresh Start", room: "Bedroom", happens: "Lighting changes from sleep mode to daytime mode.", helps: "The room feels ready for the day instead of staying in sleep mode.", setup: ["Lighting preset", "Scene button", "Schedule"] },
-          { time: "07:25", title: "Bathroom Ready", room: "Bathroom", happens: "Bathroom light and ventilation prepare for use.", helps: "Less fumbling for switches while still half-awake.", setup: ["Motion lighting", "Ventilation timer"] },
-          { time: "07:45", title: "Breakfast Assist", room: "Kitchen / Dining", happens: "Kitchen or dining lighting turns on. Selected safe appliances can be prepared if suitable.", helps: "The morning routine feels more organized.", setup: ["Dining scene", "Selected smart plug"] },
-          { time: "08:05", title: "Outfit & Weather Cue", room: "Entry / Bedroom", happens: "A simple reminder can show rain, humidity, or weather before leaving.", helps: "You are less likely to forget an umbrella or jacket.", setup: ["Voice assistant", "Display", "Weather routine"] },
-          { time: "08:15", title: "Bag / Keys Reminder", room: "Entry", happens: "A reminder near the entrance can cue keys, wallet, umbrella, or work bag.", helps: "Fewer last-minute checks and forgotten items.", setup: ["Entry scene", "Smart speaker", "Reminder display"] },
-          { time: "08:20", title: "Leaving Home Check", room: "Whole home", happens: "Selected lights, air-con, curtains, and door/window status are checked.", helps: "You leave with more confidence.", setup: ["Away mode", "Door/window sensors", "Smart switches"] },
-          { time: "08:25", title: "Energy-Saving Day Mode", room: "Whole home", happens: "Unneeded devices turn off and the home stays in low-use mode.", helps: "The flat avoids unnecessary electricity use while empty.", setup: ["Away mode", "Schedules", "Selected smart plugs"] },
+          {
+            "time": "06:55",
+            "title": "Pre-Wake Preparation",
+            "room": "Bedroom",
+            "happens": "Air-con adjusts, curtains slightly open, and bedroom lighting slowly warms up before the user wakes.",
+            "helps": "The room starts preparing quietly before the alarm, so waking up feels less sudden.",
+            "setup": [
+              "AC routine",
+              "Curtain control",
+              "Gradual lighting"
+            ]
+          },
+          {
+            "time": "07:00",
+            "title": "Gentle Wake-Up",
+            "room": "Bedroom",
+            "happens": "Soft alarm, gradual lighting, curtain opening, and optional “5 more minutes” voice delay.",
+            "helps": "The user can wake up gently while still keeping a simple snooze option.",
+            "setup": [
+              "Smart speaker",
+              "Bedroom scene",
+              "Voice delay"
+            ]
+          },
+          {
+            "time": "07:05",
+            "title": "Morning Audio Briefing",
+            "room": "Bedroom",
+            "happens": "Smart speaker plays podcast, news, weather, or a personal playlist at low volume.",
+            "helps": "The user gets useful information or a calm start without needing to pick up the phone immediately.",
+            "setup": [
+              "Smart speaker",
+              "Podcast / news routine",
+              "Weather briefing"
+            ]
+          },
+          {
+            "time": "07:10",
+            "title": "Out-of-Bed Detection",
+            "room": "Bedroom",
+            "happens": "Smart bed or motion sensor detects wake-up and switches the room from sleep mode to daytime mode.",
+            "helps": "The room responds to real behaviour instead of relying only on a fixed schedule.",
+            "setup": [
+              "Smart bed option",
+              "Motion sensor",
+              "Daytime scene"
+            ]
+          },
+          {
+            "time": "07:15",
+            "title": "Smart Dressing Support",
+            "room": "Wardrobe / Bedroom",
+            "happens": "Wardrobe light turns on; smart mirror can show weather, humidity, calendar, and clothing reminder.",
+            "helps": "Getting dressed becomes smoother and better matched to the day’s weather and schedule.",
+            "setup": [
+              "Wardrobe lighting",
+              "Smart mirror option",
+              "Calendar / weather cue"
+            ]
+          },
+          {
+            "time": "07:25",
+            "title": "Bathroom Ready Mode",
+            "room": "Bathroom",
+            "happens": "Bathroom lighting, ventilation, mirror anti-fog, and hot water preparation activate where suitable.",
+            "helps": "The bathroom feels ready without the user needing to handle every switch while half-awake.",
+            "setup": [
+              "Bathroom scene",
+              "Ventilation timer",
+              "Mirror anti-fog option",
+              "Hot water reminder"
+            ]
+          },
+          {
+            "time": "07:45",
+            "title": "Breakfast Assist",
+            "room": "Kitchen / Dining",
+            "happens": "Coffee machine or kettle prepares drink; dining light turns on; audio continues in the kitchen or dining area.",
+            "helps": "Breakfast feels more organised and the routine can continue smoothly from bedroom to dining area.",
+            "setup": [
+              "Smart plug check",
+              "Coffee / kettle option",
+              "Dining scene",
+              "Audio follow-through"
+            ]
+          },
+          {
+            "time": "07:55",
+            "title": "Kitchen Safety Check",
+            "room": "Kitchen / Dining",
+            "happens": "System checks appliances, smart plugs, and air quality before the user leaves.",
+            "helps": "The user is less likely to leave with uncertainty about kitchen safety or air condition.",
+            "setup": [
+              "Smart plug status",
+              "Appliance checklist",
+              "Air quality sensor option"
+            ]
+          },
+          {
+            "time": "08:05",
+            "title": "Leaving Reminder",
+            "room": "Entry",
+            "happens": "Entry display or speaker reminds user to bring keys, wallet, phone, umbrella, access card, documents, or gym bag.",
+            "helps": "Small daily forgetting moments are reduced before the user leaves home.",
+            "setup": [
+              "Entry display option",
+              "Smart speaker reminder",
+              "Weather / calendar cue"
+            ]
+          },
+          {
+            "time": "08:15",
+            "title": "Away Mode Activation",
+            "room": "Whole home",
+            "happens": "Door/window status, lights, air-con, curtains, appliances, security, and robot vacuum are checked or activated after leaving.",
+            "helps": "The user leaves with confidence while the home shifts into a safe and energy-aware away state.",
+            "setup": [
+              "Away mode",
+              "Door/window sensors",
+              "Lighting and AC check",
+              "Robot vacuum option",
+              "Security routine"
+            ]
+          }
         ],
       },
       {
@@ -126,21 +248,143 @@ const content = {
         icon: "moon",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(103,232,249,0.18),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(124,58,237,0.22),transparent_40%)]",
         title: "Night Mode",
-        headline: "From arriving home to deep rest.",
-        subtitle: "The evening routine adapts from decompression, dinner, entertainment, cleanup, personal time, cooldown, sleep, and late-night safety.",
+        headline: "Arrive home, decompress, relax, and prepare for deep rest.",
+        subtitle: "A 10-step evening journey from welcome mode and dinner support to wind-down, sleep checks and late-night path lighting.",
         package: "Comfort / Safety",
-        chips: ["Entry", "Dinner", "Relax", "Sleep"],
+        chips: [
+          "Arrive",
+          "Dine",
+          "Relax",
+          "Wind Down",
+          "Sleep"
+        ],
         steps: [
-          { time: "18:45", title: "Homecoming Mode", room: "Living room", happens: "Living room can pre-cool. Entry and living room scenes prepare before or as you arrive.", helps: "You do not enter a hot, dark, stressful flat.", setup: ["AC control", "Door sensor", "Welcome scene"] },
-          { time: "18:50", title: "Entry Decompression", room: "Entry", happens: "Entry light rises softly and the home shifts into a calmer scene.", helps: "The transition from outside stress to home feels intentional.", setup: ["Entry lighting", "Door sensor", "Warm scene"] },
-          { time: "19:10", title: "Dinner Assist", room: "Dining", happens: "Dining lighting becomes warmer and brighter. Curtains can close if suitable.", helps: "Dinner feels more relaxed without adjusting everything manually.", setup: ["Dining scene", "Curtain option", "Scene button"] },
-          { time: "20:00", title: "TV Relax", room: "Living room", happens: "Living room lights dim, glare reduces, and the room moves into TV mode.", helps: "The room feels comfortable for watching without harsh lighting.", setup: ["TV scene", "Dimming option", "Curtain control"] },
-          { time: "20:45", title: "Shower / Cleanup", room: "Bathroom / Kitchen", happens: "Bathroom light and ventilation can run with a timer. Dining or kitchen cleanup lighting becomes brighter.", helps: "Cleanup feels easier and ventilation is less likely to be forgotten.", setup: ["Bathroom motion light", "Ventilation timer", "Cleanup scene"] },
-          { time: "21:15", title: "Choose your evening path", room: "Personal zone", happens: "Gaming, workout, or light-work scenes can prepare different parts of the home.", helps: "The home supports your real evening habit instead of one fixed routine.", setup: ["Gaming scene", "Workout scene", "Focus scene"], branches: [["Gaming", "Ambient lighting and desk setup."], ["Workout", "Brighter lights, fan, and music option."], ["Light Work", "Desk light and focus scene without waking the whole home."]] },
-          { time: "22:30", title: "Evening Cooldown", room: "Whole home", happens: "Lighting gradually warms and dims. The home begins moving away from active mode.", helps: "The evening slows down naturally.", setup: ["Dim-down scene", "Timed routine"] },
-          { time: "23:00", title: "Pre-Sleep Mode", room: "Bedroom", happens: "Bedroom temperature, lights, and curtains prepare for sleep.", helps: "Less manual setup before bed.", setup: ["Bedroom scene", "AC routine", "Curtain option"] },
-          { time: "23:30", title: "Sleep Mode", room: "Bedroom", happens: "Selected lights turn off. Only essential low-level or safety settings remain.", helps: "The home becomes quiet and simple.", setup: ["Sleep scene", "Selected standby settings"] },
-          { time: "02:30", title: "Night Safety / Late-Night Toilet Assist", room: "Hallway / Bathroom", happens: "Low-level path lighting turns on only when movement is detected.", helps: "Safer bathroom trips without bright lights waking everyone.", setup: ["Motion sensor", "Low-level path light", "Bathroom assist"] },
+          {
+            "time": "18:45",
+            "title": "Homecoming Preparation",
+            "room": "Living / Entry",
+            "happens": "Before or when the user arrives, the living room pre-cools, entry light turns on, and the home shifts from away mode to welcome mode.",
+            "helps": "The flat feels ready instead of hot, dark, or still in away mode.",
+            "setup": [
+              "AC pre-cool",
+              "Door / arrival trigger",
+              "Welcome scene"
+            ]
+          },
+          {
+            "time": "18:50",
+            "title": "Entry Decompression",
+            "room": "Entry",
+            "happens": "Soft lighting turns on at the entrance, curtains adjust for privacy, and relaxing background music can start automatically.",
+            "helps": "The transition from outside stress to home feels calmer and more intentional.",
+            "setup": [
+              "Entry lighting",
+              "Curtain privacy scene",
+              "Relaxing audio option"
+            ]
+          },
+          {
+            "time": "19:10",
+            "title": "Dinner Assist",
+            "room": "Dining / Kitchen",
+            "happens": "Dining lights become warmer and brighter; kitchen task lights support cooking or food preparation.",
+            "helps": "Dinner preparation and dining feel easier without manually changing several lights.",
+            "setup": [
+              "Dining scene",
+              "Kitchen task lighting",
+              "Scene button"
+            ]
+          },
+          {
+            "time": "20:00",
+            "title": "TV Relax Mode",
+            "room": "Living Room",
+            "happens": "Living room lights dim, curtains close, glare is reduced, and the TV or media system is ready for use.",
+            "helps": "The living room shifts naturally into a comfortable entertainment mood.",
+            "setup": [
+              "TV scene",
+              "Curtain control",
+              "Dimming option",
+              "Media routine"
+            ]
+          },
+          {
+            "time": "20:45",
+            "title": "Shower & Cleanup Support",
+            "room": "Bathroom / Kitchen",
+            "happens": "Bathroom lighting, ventilation, and mirror anti-fog activate; kitchen or dining lights brighten for cleanup.",
+            "helps": "Showering and cleanup are supported without forgetting ventilation or task lighting.",
+            "setup": [
+              "Bathroom scene",
+              "Ventilation timer",
+              "Mirror anti-fog option",
+              "Cleanup lighting"
+            ]
+          },
+          {
+            "time": "21:15",
+            "title": "Evening Activity Scene",
+            "room": "Personal Zone",
+            "happens": "User can choose gaming, workout, reading, or light-work mode, with lighting, fan, speaker, and desk setup adjusted accordingly.",
+            "helps": "The home supports different evening habits instead of forcing one fixed night routine.",
+            "setup": [
+              "Gaming scene",
+              "Workout scene",
+              "Reading scene",
+              "Focus desk setup",
+              "Fan / audio option"
+            ]
+          },
+          {
+            "time": "22:15",
+            "title": "Evening Wind-Down",
+            "room": "Whole Home",
+            "happens": "Lights gradually become warmer and dimmer; louder audio is reduced; home begins preparing for rest.",
+            "helps": "The home gently signals that the evening is slowing down.",
+            "setup": [
+              "Dim-down routine",
+              "Warm lighting",
+              "Audio volume automation"
+            ]
+          },
+          {
+            "time": "22:45",
+            "title": "Pre-Sleep Preparation",
+            "room": "Bedroom",
+            "happens": "Bedroom air-con adjusts, curtains close, bedside lighting turns on softly, and phone charging or nightstand reminders can be triggered.",
+            "helps": "The bedroom feels ready before sleep, reducing last-minute setup.",
+            "setup": [
+              "Bedroom scene",
+              "AC sleep setting",
+              "Curtain close",
+              "Bedside reminder"
+            ]
+          },
+          {
+            "time": "23:15",
+            "title": "Sleep Safety Check",
+            "room": "Whole Home",
+            "happens": "System checks door lock, windows, balcony door, major lights, air-con, and selected appliances before sleep.",
+            "helps": "The user can sleep with more confidence that key items were checked.",
+            "setup": [
+              "Sleep mode",
+              "Door/window sensors",
+              "Lock status",
+              "Appliance checklist"
+            ]
+          },
+          {
+            "time": "02:30",
+            "title": "Late-Night Path Lighting",
+            "room": "Hallway / Bathroom",
+            "happens": "If movement is detected at night, low-level hallway and bathroom lights turn on gently without disturbing sleep.",
+            "helps": "Night bathroom trips become safer without waking the whole home.",
+            "setup": [
+              "Motion sensor",
+              "Low-level path lighting",
+              "Bathroom assist"
+            ]
+          }
         ],
       },
       {
@@ -149,21 +393,139 @@ const content = {
         icon: "users",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.24),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.20),transparent_42%)]",
         title: "Gathering Mode",
-        headline: "Make a small flat feel ready for guests.",
-        subtitle: "Prepare the home for arrival, dining, conversation, entertainment, bathroom use, comfort adjustment, cleanup, and reset.",
+        headline: "Make a small home feel ready, welcoming, comfortable, and easy to reset.",
+        subtitle: "A 10-step hosting journey from guest preparation and welcome scenes to dining, entertainment, goodbye and cleanup reset.",
         package: "Starter / Comfort",
-        chips: ["Welcome", "Dining", "Movie", "Reset"],
+        chips: [
+          "Prepare",
+          "Welcome",
+          "Dine",
+          "Entertain",
+          "Reset"
+        ],
         steps: [
-          { time: "Before guests", title: "Pre-Guest Prep", room: "Living room", happens: "Living room lighting brightens. Air-con starts preparing the room. Curtains adjust if needed.", helps: "The flat feels ready before people arrive.", setup: ["Living room scene", "AC schedule", "Curtain option"] },
-          { time: "Arrival", title: "Welcome Entry", room: "Entry", happens: "Entry light turns on warmly when guests arrive.", helps: "Guests enter a prepared and welcoming space.", setup: ["Entry light", "Door sensor", "Welcome scene"] },
-          { time: "Dinner", title: "Dining Scene", room: "Dining / Kitchen", happens: "Dining lights become warmer and more focused. Kitchen or serving lights support food preparation.", helps: "Hosting feels smoother in a compact flat.", setup: ["Dining scene", "Kitchen lighting", "Scene button"] },
-          { time: "After dinner", title: "Conversation Mode", room: "Living room", happens: "Living room lighting softens and background ambience can be prepared.", helps: "The space feels calmer and more social.", setup: ["Lighting preset", "Speaker routine option"] },
-          { time: "Entertainment", title: "Movie / Music Mode", room: "Living room", happens: "Lights dim, curtains close, and the entertainment scene becomes easier to start.", helps: "Guests feel a more premium home atmosphere.", setup: ["TV scene", "Curtain control", "Ambient lighting"] },
-          { time: "Guest use", title: "Guest Bathroom Assist", room: "Bathroom", happens: "Bathroom light and ventilation respond automatically.", helps: "Guests do not need to find every switch.", setup: ["Motion light", "Ventilation timer"] },
-          { time: "Late evening", title: "Late Gathering Dim", room: "Living room", happens: "Lighting becomes softer later in the night.", helps: "The home naturally moves into a quieter mood.", setup: ["Timed dimming scene"] },
-          { time: "Leaving", title: "Guest Leaving", room: "Entry", happens: "Entry area becomes brighter for shoes, bags, and goodbye.", helps: "The exit moment is easier and less awkward.", setup: ["Entry scene", "Door area lighting"] },
-          { time: "After guests", title: "Cleanup Assist", room: "Kitchen / Dining", happens: "Kitchen and dining lights brighten. Ventilation can continue for a short period.", helps: "Cleanup becomes easier after the gathering.", setup: ["Cleanup scene", "Ventilation timer"] },
-          { time: "Reset", title: "Reset Home", room: "Whole home", happens: "The home returns to normal evening or sleep preparation mode.", helps: "You do not need to undo every setting manually.", setup: ["Reset scene", "Sleep preparation"] },
+          {
+            "time": "Before guests arrive",
+            "title": "Guest Preparation Mode",
+            "room": "Living / Dining",
+            "happens": "Living and dining lights brighten, air-con pre-cools the space, and curtains adjust for privacy and comfort.",
+            "helps": "The home feels ready before guests arrive, even in a compact flat.",
+            "setup": [
+              "Living / dining scene",
+              "AC pre-cool",
+              "Curtain privacy setting"
+            ]
+          },
+          {
+            "time": "Arrival",
+            "title": "Welcome Entry Scene",
+            "room": "Entry",
+            "happens": "Entry lighting turns on warmly, smart doorbell notifies the host, and the entrance area becomes brighter for guests.",
+            "helps": "Guests arrive into a welcoming, clear entrance instead of a dark doorway.",
+            "setup": [
+              "Entry lighting",
+              "Smart doorbell option",
+              "Host notification"
+            ]
+          },
+          {
+            "time": "Arrival",
+            "title": "Host Welcome Setup",
+            "room": "Living Room",
+            "happens": "Background music starts softly, living room lighting becomes inviting, and the main seating area is highlighted.",
+            "helps": "The main social area immediately feels prepared and comfortable.",
+            "setup": [
+              "Background music",
+              "Living room scene",
+              "Seating highlight"
+            ]
+          },
+          {
+            "time": "Dinner",
+            "title": "Dining Scene",
+            "room": "Dining / Kitchen",
+            "happens": "Dining lights focus on the table, kitchen task lights support serving, and selected appliances or ventilation remain active.",
+            "helps": "Serving and eating feel smoother while the dining area becomes the visual focus.",
+            "setup": [
+              "Dining table scene",
+              "Kitchen task lighting",
+              "Ventilation / appliance support"
+            ]
+          },
+          {
+            "time": "After dinner",
+            "title": "Conversation Mode",
+            "room": "Living Room",
+            "happens": "Lighting softens, music volume lowers, and the room shifts to a comfortable social setting.",
+            "helps": "The gathering naturally moves from dining to relaxed conversation.",
+            "setup": [
+              "Soft lighting",
+              "Audio volume control",
+              "Conversation scene"
+            ]
+          },
+          {
+            "time": "Entertainment",
+            "title": "Movie / Music Mode",
+            "room": "Living Room",
+            "happens": "Lights dim, curtains close, glare is reduced, TV or speaker system becomes ready, and the room changes into entertainment mode.",
+            "helps": "The home feels more premium and coordinated for movies, music, or casual entertainment.",
+            "setup": [
+              "Entertainment scene",
+              "Curtain close",
+              "TV / speaker setup",
+              "Glare control"
+            ]
+          },
+          {
+            "time": "During gathering",
+            "title": "Guest Bathroom Assist",
+            "room": "Bathroom",
+            "happens": "Bathroom lights and ventilation activate automatically, helping guests use the space without searching for switches.",
+            "helps": "Guests feel more comfortable and the host has fewer small things to manage.",
+            "setup": [
+              "Bathroom motion light",
+              "Ventilation timer"
+            ]
+          },
+          {
+            "time": "Late evening",
+            "title": "Late Gathering Comfort",
+            "room": "Whole Home",
+            "happens": "Lighting becomes softer, air-con or fan adjusts based on room occupancy, and noise level can be gently reduced.",
+            "helps": "The home stays comfortable as the gathering becomes quieter later in the evening.",
+            "setup": [
+              "Late gathering scene",
+              "Occupancy-based comfort",
+              "Fan / AC adjustment",
+              "Audio volume routine"
+            ]
+          },
+          {
+            "time": "Guests leaving",
+            "title": "Goodbye Scene",
+            "room": "Entry",
+            "happens": "Entry and shoe cabinet lights brighten, the door area becomes clear, and the host receives reminder cues for bags or belongings.",
+            "helps": "The leaving moment is smoother and guests are less likely to forget items.",
+            "setup": [
+              "Entry scene",
+              "Shoe cabinet lighting",
+              "Belongings reminder"
+            ]
+          },
+          {
+            "time": "After gathering",
+            "title": "Cleanup & Reset Mode",
+            "room": "Kitchen / Whole Home",
+            "happens": "Kitchen and dining lights brighten for cleanup, ventilation continues briefly, and the home returns to normal evening or sleep mode.",
+            "helps": "The host can reset the home without manually undoing every scene.",
+            "setup": [
+              "Cleanup lighting",
+              "Ventilation timer",
+              "Reset scene",
+              "Sleep preparation"
+            ]
+          }
         ],
       },
       {
@@ -172,21 +534,139 @@ const content = {
         icon: "eye",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.18),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(103,232,249,0.16),transparent_42%)]",
         title: "Pet Mode",
-        headline: "From your pet’s point of view.",
-        subtitle: "For the quiet hours when your pet is home before you return. Designed for comfort, awareness, and responsible use.",
+        headline: "Keep pets comfortable, safe, and monitored while the owner is away.",
+        subtitle: "A 10-step pet-at-home journey for comfort lighting, temperature protection, activity awareness, remote check-in and return reset.",
         package: "Safety / Comfort",
-        chips: ["Calm", "Comfort", "Check-in", "Return"],
-        disclaimer: "Pet Mode is not a replacement for responsible pet care. Any setup involving temperature, feeding, water, or monitoring should be selected carefully and confirmed before installation.",
+        chips: [
+          "Leave",
+          "Comfort",
+          "Monitor",
+          "Check-in",
+          "Return"
+        ],
+        disclaimer: "Pet Mode is not a replacement for responsible pet care. Temperature, feeding, water, monitoring and device behaviour should be selected carefully and confirmed before installation.",
         steps: [
-          { time: "Human leaves", title: "My Human Leaves", room: "Entry", happens: "The door closes and the home becomes calm instead of suddenly dark and empty.", helps: "The environment feels more stable for the pet.", setup: ["Away routine", "Selected soft lighting"] },
-          { time: "Daytime", title: "Calm Home Setting", room: "Living room", happens: "Selected lights can stay softly on during chosen hours.", helps: "The flat does not feel completely empty.", setup: ["Soft lighting scene", "Schedule"] },
-          { time: "Warm hours", title: "Comfort Temperature Routine", room: "Pet zone", happens: "The room can follow a safer cooling or fan routine depending on what the owner chooses.", helps: "Comfort can be managed more thoughtfully while the owner is away.", setup: ["AC routine", "Fan option", "Temperature awareness"] },
-          { time: "Food / water", title: "Food / Water Area Support", room: "Feeding area", happens: "A small light near food or water can stay on during selected hours.", helps: "The pet’s familiar area remains visible.", setup: ["Low-level light", "Schedule"] },
-          { time: "Resting", title: "Rest Zone Comfort", room: "Rest zone", happens: "The pet’s usual resting zone keeps a comfortable light or temperature setting.", helps: "Daily rest feels more consistent.", setup: ["Scene setting", "Curtain option", "AC / fan routine"] },
-          { time: "Noise / visitor", title: "Doorbell / Noise Softening", room: "Entry", happens: "Doorbell or entry alerts can go to the owner’s phone.", helps: "The owner can know what happened without overcomplicating the home.", setup: ["Video doorbell", "Entry camera option", "Phone notification"] },
-          { time: "Movement", title: "Pet Movement Awareness", room: "Pet zone", happens: "Selected motion or camera options can help the owner know the pet is active.", helps: "Useful for check-ins without disturbing the pet.", setup: ["Camera option", "Motion awareness"] },
-          { time: "Check-in", title: "Human Check-In", room: "Owner phone", happens: "The owner can check selected camera or sensor status if needed.", helps: "Adds reassurance while away.", setup: ["Customer-owned camera/app account"] },
-          { time: "Return", title: "Evening Welcome Back", room: "Entry / Living", happens: "Before the owner returns, the home changes back to welcome mode.", helps: "The pet and owner return to normal home rhythm.", setup: ["Welcome scene", "Lighting routine"] },
+          {
+            "time": "Owner leaves",
+            "title": "Pet Home-Alone Mode",
+            "room": "Entry / Whole Home",
+            "happens": "When the owner leaves, the home avoids becoming fully dark; selected lights stay softly on for pet comfort.",
+            "helps": "The pet’s environment remains more stable and less suddenly empty.",
+            "setup": [
+              "Pet-away routine",
+              "Selected soft lighting",
+              "Away trigger"
+            ]
+          },
+          {
+            "time": "Daytime",
+            "title": "Comfort Lighting",
+            "room": "Living / Pet Zone",
+            "happens": "Soft lighting stays active in the pet’s usual area during selected hours, especially in darker corners or windowless flats.",
+            "helps": "The pet’s familiar area remains visible and comfortable during the day.",
+            "setup": [
+              "Pet zone lighting",
+              "Timed scene",
+              "Low-level light"
+            ]
+          },
+          {
+            "time": "Warm hours",
+            "title": "Temperature Protection",
+            "room": "Living / Pet Zone",
+            "happens": "Air-con, fan, or ventilation follows a safe pet comfort routine, with alerts if the room becomes too hot or humid.",
+            "helps": "Temperature comfort can be managed more responsibly while the owner is away.",
+            "setup": [
+              "AC / fan routine",
+              "Temperature sensor",
+              "Humidity alert"
+            ]
+          },
+          {
+            "time": "Feeding time",
+            "title": "Food & Water Area Support",
+            "room": "Feeding Area",
+            "happens": "A small light near the food or water area turns on, and optional feeder or water fountain status can be monitored.",
+            "helps": "The feeding area remains easy to see and the owner can be aware of selected device status.",
+            "setup": [
+              "Feeding area light",
+              "Feeder option",
+              "Water fountain status option"
+            ]
+          },
+          {
+            "time": "Resting time",
+            "title": "Rest Zone Comfort",
+            "room": "Pet Bed / Sofa Area",
+            "happens": "The pet’s favourite resting area keeps a stable light, temperature, or fan setting to avoid sudden environmental changes.",
+            "helps": "The pet can rest in a more consistent environment.",
+            "setup": [
+              "Rest zone scene",
+              "Fan / AC setting",
+              "Curtain option"
+            ]
+          },
+          {
+            "time": "Noise / Doorbell",
+            "title": "Noise & Visitor Awareness",
+            "room": "Entry",
+            "happens": "Doorbell or unusual entry activity sends a notification to the owner instead of disturbing the pet unnecessarily.",
+            "helps": "The owner stays aware of entry activity without overreacting inside the home.",
+            "setup": [
+              "Video doorbell option",
+              "Entry notification",
+              "Camera option"
+            ]
+          },
+          {
+            "time": "Movement detected",
+            "title": "Pet Activity Check",
+            "room": "Living / Pet Zone",
+            "happens": "Motion sensor or camera confirms the pet is moving normally; owner can receive a simple activity update.",
+            "helps": "The owner gets reassurance without needing to constantly watch the camera.",
+            "setup": [
+              "Motion sensor",
+              "Camera option",
+              "Activity update"
+            ]
+          },
+          {
+            "time": "Owner check-in",
+            "title": "Remote Pet Check-In",
+            "room": "Phone App",
+            "happens": "Owner can check camera view, room temperature, lighting status, and selected device condition from the phone.",
+            "helps": "The owner can check key conditions remotely during the day.",
+            "setup": [
+              "Phone app",
+              "Camera view",
+              "Temperature status",
+              "Device status"
+            ]
+          },
+          {
+            "time": "Before owner returns",
+            "title": "Welcome Back Preparation",
+            "room": "Entry / Living",
+            "happens": "Before the owner arrives, entry and living room lights prepare, air-con adjusts, and the home shifts out of pet-alone mode.",
+            "helps": "The home returns gradually to normal living mode before the owner comes back.",
+            "setup": [
+              "Welcome scene",
+              "Lighting routine",
+              "AC adjustment"
+            ]
+          },
+          {
+            "time": "Owner returns",
+            "title": "Pet Mode Reset",
+            "room": "Whole Home",
+            "happens": "Pet mode ends, normal home mode resumes, and the owner can receive a short summary of temperature, activity, and alerts during the day.",
+            "helps": "The owner quickly understands whether anything important happened while away.",
+            "setup": [
+              "Mode reset",
+              "Daily summary option",
+              "Temperature / activity log"
+            ]
+          }
         ],
       },
     ],
@@ -206,30 +686,30 @@ const content = {
       ["I want a simple smart door entry setup.", "Smart lock option, video doorbell, or entry camera.", "Door type, lock model, power, privacy, access permissions.", "Safety"],
     ],
     packages: [
-      { id: "starter", name: "Essential Smart Living Plan", subtitle: "A calm first phase for everyday control.", icon: "home", tag: "Best first step", basePrice: 3800, description: "For flats that want a practical first phase: selected lighting scenes, home / away routine, app setup, family-friendly control, and clear handover without overbuilding.", includes: [
-        "Routine design for selected daily areas",
-        "Smart lighting scene setup for key zones",
+      { id: "starter", name: "Essential Smart Living", subtitle: "A focused first step for everyday control.", icon: "home", tag: "Best first step", basePrice: 3800, description: "For flats that want to start simply: key lighting scenes, home / away routine, app setup and family-friendly controls without overbuilding.", includes: [
+        "Daily routine review for one core area",
+        "Selected smart lighting scene setup",
         "Home / away preset configuration",
         "App setup and basic family access guidance",
-        "Simple wall switch, scene button, or remote-control option",
-        "Testing, adjustment, and handover explanation"
-      ], assumption: "Starting price assumes one core area and compatible basic smart-control setup. Major rewiring, premium devices, extra rooms, and special installation conditions are quoted separately." },
-      { id: "comfort", name: "Comfort & Atmosphere Plan", subtitle: "Make the home feel ready at the right moment.", icon: "sun", tag: "Most balanced", basePrice: 8800, description: "For homes that want comfort to feel natural: lighting presets, AC routines, curtain options, motion lighting, and energy-saving behaviour coordinated around real daily use.", includes: [
-        "Morning, evening, dining, TV, and sleep scene planning",
-        "Lighting presets for living, dining, work, and sleep",
-        "AC or comfort schedule setup where compatible",
+        "Wall switch, scene button or simple control option",
+        "Testing, adjustment and handover explanation"
+      ], assumption: "Starting estimate assumes one core area and compatible basic smart-control setup. Extra rooms, premium devices, major rewiring and special installation conditions are quoted separately." },
+      { id: "comfort", name: "Comfort & Atmosphere", subtitle: "Make lighting, curtains and comfort work around your routine.", icon: "sun", tag: "Most balanced", basePrice: 8800, description: "For homes that want daily comfort to feel natural: lighting presets, curtain options, compatible AC routines, motion lighting and energy-saving habits.", includes: [
+        "Morning, evening, dining, TV and sleep scene planning",
+        "Lighting presets for daily living areas",
+        "Compatible AC or comfort schedule setup",
         "Curtain or blind automation option",
         "Motion lighting for selected zones",
         "Energy-saving daily routine settings"
-      ], assumption: "Starting price assumes key daily areas such as living room and entry, with practical comfort settings. Extra rooms, curtain motors, complex wiring, and brand upgrades are quoted separately." },
-      { id: "safety", name: "Family Safety & Awareness Plan", subtitle: "For entry awareness, night safety, and selected alerts.", icon: "shield", tag: "Best for families", basePrice: 7800, description: "For families who want a more aware home: entry setup, selected door/window status, night movement support, and phone alerts designed around privacy and real habits.", includes: [
-        "Entry awareness design for the main door area",
-        "Smart lock, video doorbell, or entry camera option",
+      ], assumption: "Starting estimate assumes key daily areas such as living room and entry. Curtain motors, extra rooms, complex wiring and brand upgrades are quoted separately." },
+      { id: "safety", name: "Family Safety & Awareness", subtitle: "Add entry awareness, safer nights and selected family alerts.", icon: "shield", tag: "Best for families", basePrice: 7800, description: "For families who want a more aware home: entry setup, selected door/window status, night movement support and alerts designed around privacy and real habits.", includes: [
+        "Entry awareness review for the main door area",
+        "Smart lock, video doorbell or entry camera option",
         "Door / window sensors for selected key points",
-        "Night safety lighting for hallway or bathroom routes",
+        "Low-level night path lighting",
         "Selected phone alerts with privacy expectations considered",
         "Family access and handover explanation"
-      ], assumption: "Starting price assumes selected entry and safety points. Door condition, lock model, camera placement, privacy preference, and additional sensing points affect final quotation." },
+      ], assumption: "Starting estimate assumes selected entry and safety points. Door condition, lock model, camera placement, privacy preference and additional sensors affect final quotation." },
     ],
     apartments: [
       { id: "studio", label: "Studio / 1-bedroom", description: "Compact setup with fewer control points", adjustment: 0 },
@@ -263,7 +743,7 @@ const content = {
     home: {
       eyebrow: "為香港住宅而設的智能家居情境",
       title: "先想像你想屋企做到甚麼，再由我們安裝背後系統。",
-      body: "Boson Smart 幫住戶將日常生活變成實用智能家居設定：Morning、Night、Gathering 及 Pet Mode。",
+      body: "BosonSmart 幫住戶將日常生活變成實用智能家居設定：Morning、Night、Gathering 及 Pet Mode。",
       primary: "查看情境時間線",
       secondary: "查看起步方案",
       introTitle: "先由生活情境開始，不是先由設備清單開始。",
@@ -301,7 +781,7 @@ const content = {
       noAddons: "未選擇升級項目",
     },
     contactPage: {
-      eyebrow: "聯絡 Boson Smart",
+      eyebrow: "聯絡 BosonSmart",
       title: "告訴我們你想屋企做到甚麼。",
       body: "分享你的單位類型、主要生活情境及想改善的地方。我們會先了解你的單位情況，再建議下一步。",
       detailsTitle: "幾項資料可以幫我們更準確建議。",
@@ -319,92 +799,572 @@ const content = {
     modes: [
       {
         id: "morning",
-        label: "Morning Mode",
+        label: "晨早模式",
         icon: "sun",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.22),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(103,232,249,0.16),transparent_38%)]",
-        title: "Morning Mode",
-        headline: "由起床到離家。",
-        subtitle: "令早上少一點趕急、少一點忘記關掣，離家時更安心。",
+        title: "晨早模式",
+        headline: "自然醒來、順利準備，安心出門。",
+        subtitle: "由預醒、穿衣、浴室和早餐，到廚房安全檢查及 Away Mode 的 10 步晨早流程。",
         package: "Starter / Comfort",
-        chips: ["起床", "浴室", "早餐", "離家"],
+        chips: [
+          "醒來",
+          "穿衣",
+          "浴室",
+          "早餐",
+          "出門"
+        ],
         steps: [
-          { time: "07:00", title: "Soft Wake", room: "睡房", happens: "房間燈光柔和亮起。合適情況下窗簾可以打開，冷氣或風扇調整。", helps: "起床不會太突然，感覺更自然。", setup: ["睡房燈光情境", "窗簾選配", "冷氣 / 風扇設定"] },
-          { time: "07:10", title: "Bedroom Fresh Start", room: "睡房", happens: "睡房由睡眠模式轉成日間模式。", helps: "房間不會一直停留在昏暗睡眠狀態。", setup: ["燈光預設", "情境按鈕", "時間設定"] },
-          { time: "07:25", title: "Bathroom Ready", room: "浴室", happens: "浴室燈及抽氣準備好。", helps: "半醒狀態下不用摸黑找掣。", setup: ["人體感應燈", "抽氣時間設定"] },
-          { time: "07:45", title: "Breakfast Assist", room: "廚房 / 飯廳", happens: "廚房或飯廳燈光亮起。合適安全設備可作預備。", helps: "早上流程更順。", setup: ["飯廳情境", "指定安全智能插座"] },
-          { time: "08:05", title: "Outfit & Weather Cue", room: "玄關 / 睡房", happens: "可提示下雨、濕度或天氣。", helps: "減少忘記雨傘或外套。", setup: ["語音助理", "顯示屏", "天氣提示"] },
-          { time: "08:15", title: "Bag / Keys Reminder", room: "玄關", happens: "玄關附近可提示鎖匙、銀包、雨傘或工作袋。", helps: "減少臨出門才發現漏東西。", setup: ["玄關情境", "智能喇叭", "提醒顯示"] },
-          { time: "08:20", title: "Leaving Home Check", room: "全屋", happens: "檢查指定燈光、冷氣、窗簾及門窗狀態。", helps: "離家時更有信心。", setup: ["離家模式", "門窗感應", "智能開關"] },
-          { time: "08:25", title: "Energy-Saving Day Mode", room: "全屋", happens: "不需要的設備關閉，屋企進入低耗電狀態。", helps: "無人在家時減少不必要用電。", setup: ["離家模式", "時間設定", "指定智能插座"] },
+          {
+            "time": "06:55",
+            "title": "預醒準備",
+            "room": "睡房",
+            "happens": "冷氣調整，窗簾微開，睡房燈光在起床前慢慢變暖。",
+            "helps": "房間先安靜地準備好，起床不會太突然。",
+            "setup": [
+              "冷氣流程",
+              "窗簾控制",
+              "漸亮燈光"
+            ]
+          },
+          {
+            "time": "07:00",
+            "title": "溫和喚醒",
+            "room": "睡房",
+            "happens": "柔和鬧鐘、漸亮燈光、窗簾打開，並可加入「再睡 5 分鐘」語音延遲。",
+            "helps": "用家可以較自然地醒來，同時保留簡單延遲選項。",
+            "setup": [
+              "智能喇叭",
+              "睡房情境",
+              "語音延遲"
+            ]
+          },
+          {
+            "time": "07:05",
+            "title": "晨早音訊簡報",
+            "room": "睡房",
+            "happens": "智能喇叭以低音量播放 podcast、新聞、天氣或個人播放清單。",
+            "helps": "不用立即拿起手機，也可以開始接收天氣和日程資訊。",
+            "setup": [
+              "智能喇叭",
+              "新聞 / podcast 流程",
+              "天氣簡報"
+            ]
+          },
+          {
+            "time": "07:10",
+            "title": "離床偵測",
+            "room": "睡房",
+            "happens": "智能床或動作感應偵測起床，房間由睡眠模式切換到日間模式。",
+            "helps": "房間按真實行為反應，而不只是依靠固定時間表。",
+            "setup": [
+              "智能床選項",
+              "動作感應",
+              "日間情境"
+            ]
+          },
+          {
+            "time": "07:15",
+            "title": "智能穿衣輔助",
+            "room": "衣櫃 / 睡房",
+            "happens": "衣櫃燈打開；智能鏡可顯示天氣、濕度、行事曆和衣著提醒。",
+            "helps": "穿衣和出門準備更順手，亦更配合當日天氣和日程。",
+            "setup": [
+              "衣櫃燈",
+              "智能鏡選項",
+              "行事曆 / 天氣提示"
+            ]
+          },
+          {
+            "time": "07:25",
+            "title": "浴室準備模式",
+            "room": "浴室",
+            "happens": "浴室燈光、抽風、防霧鏡和熱水準備在合適條件下啟動。",
+            "helps": "半醒狀態下也不用逐個開關處理浴室設定。",
+            "setup": [
+              "浴室情境",
+              "抽風時間制",
+              "防霧鏡選項",
+              "熱水提醒"
+            ]
+          },
+          {
+            "time": "07:45",
+            "title": "早餐輔助",
+            "room": "廚房 / 飯廳",
+            "happens": "咖啡機或水壺準備飲品；飯廳燈打開；音訊可延續到廚房或飯廳。",
+            "helps": "早餐流程更連貫，從睡房到飯廳不需要重新設定。",
+            "setup": [
+              "智能插座檢查",
+              "咖啡 / 水壺選項",
+              "飯廳情境",
+              "音訊延續"
+            ]
+          },
+          {
+            "time": "07:55",
+            "title": "廚房安全檢查",
+            "room": "廚房 / 飯廳",
+            "happens": "系統檢查電器、智能插座和空氣質素，準備出門。",
+            "helps": "出門前減少對廚房安全和空氣狀態的疑慮。",
+            "setup": [
+              "智能插座狀態",
+              "電器檢查清單",
+              "空氣質素感應選項"
+            ]
+          },
+          {
+            "time": "08:05",
+            "title": "出門提醒",
+            "room": "玄關",
+            "happens": "玄關顯示屏或喇叭提醒鑰匙、銀包、手機、雨傘、門卡、文件或健身袋。",
+            "helps": "減少日常出門前忘記小物的情況。",
+            "setup": [
+              "玄關顯示選項",
+              "智能喇叭提醒",
+              "天氣 / 行事曆提示"
+            ]
+          },
+          {
+            "time": "08:15",
+            "title": "Away Mode 啟動",
+            "room": "全屋",
+            "happens": "離家後檢查或啟動門窗狀態、燈光、冷氣、窗簾、電器、保安和掃地機械人。",
+            "helps": "用家可以更安心離家，家中亦轉為節能和安全狀態。",
+            "setup": [
+              "Away Mode",
+              "門窗感應",
+              "燈光及冷氣檢查",
+              "掃地機械人選項",
+              "保安流程"
+            ]
+          }
         ],
       },
       {
         id: "night",
-        label: "Night Mode",
+        label: "夜間模式",
         icon: "moon",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(103,232,249,0.18),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(124,58,237,0.22),transparent_40%)]",
-        title: "Night Mode",
-        headline: "由回家到深度休息。",
-        subtitle: "由減壓、晚飯、娛樂、清潔、個人時間、冷靜、睡眠，到夜間安全協助。",
+        title: "夜間模式",
+        headline: "回家、放鬆、休息，逐步準備深層睡眠。",
+        subtitle: "由回家迎接、晚餐、放鬆，到睡前檢查及深夜路徑燈的 10 步夜間流程。",
         package: "Comfort / Safety",
-        chips: ["玄關", "晚飯", "放鬆", "睡眠"],
+        chips: [
+          "回家",
+          "晚餐",
+          "放鬆",
+          "睡前",
+          "睡眠"
+        ],
         steps: [
-          { time: "18:45", title: "Homecoming Mode", room: "客廳", happens: "客廳可以預冷，玄關及客廳情境準備好。", helps: "不會一入屋就面對又熱又暗的環境。", setup: ["智能冷氣控制", "門磁感應", "回家燈光情境"] },
-          { time: "18:50", title: "Entry Decompression", room: "玄關", happens: "玄關燈柔和亮起，家中轉入較放鬆情境。", helps: "由外面壓力轉入回家狀態。", setup: ["玄關燈光", "門磁感應", "暖光情境"] },
-          { time: "19:10", title: "Dinner Assist", room: "飯廳", happens: "飯廳燈光變暖變集中，窗簾可按需要關上。", helps: "晚飯時不用逐項手動調整。", setup: ["飯廳情境", "窗簾選配", "情境按鈕"] },
-          { time: "20:00", title: "TV Relax", room: "客廳", happens: "客廳燈光調暗，減少反光，進入睇電視模式。", helps: "睇電視時光線更舒服。", setup: ["TV 情境", "調光選配", "窗簾控制"] },
-          { time: "20:45", title: "Shower / Cleanup", room: "浴室 / 廚房", happens: "浴室燈及抽氣可按時間運作，廚房或飯廳清潔燈光變亮。", helps: "清潔更方便，也較少忘記關抽氣。", setup: ["浴室感應燈", "抽氣時間", "清潔情境"] },
-          { time: "21:15", title: "Choose your evening path", room: "個人空間", happens: "遊戲、運動或輕工作情境可以準備不同空間。", helps: "屋企配合你真正的夜晚習慣，而不是只有一個固定模式。", setup: ["Gaming 情境", "Workout 情境", "Focus 情境"], branches: [["Gaming", "氣氛燈及桌面設定。"], ["Workout", "較明亮燈光、風扇及音樂選配。"], ["Light Work", "枱燈及專注情境，不令全屋太精神。"]] },
-          { time: "22:30", title: "Evening Cooldown", room: "全屋", happens: "燈光逐漸變暖變暗，屋企開始離開活動模式。", helps: "晚上自然慢下來。", setup: ["漸暗情境", "時間設定"] },
-          { time: "23:00", title: "Pre-Sleep Mode", room: "睡房", happens: "睡房溫度、燈光及窗簾準備睡眠。", helps: "睡前少一點手動調整。", setup: ["睡房情境", "冷氣設定", "窗簾選配"] },
-          { time: "23:30", title: "Sleep Mode", room: "睡房", happens: "指定燈光關閉，只保留必要低亮度或安全設定。", helps: "屋企回到安靜簡單狀態。", setup: ["睡眠情境", "指定待機設定"] },
-          { time: "02:30", title: "Night Safety / Late-Night Toilet Assist", room: "走廊 / 浴室", happens: "偵測到走動時，低亮度路徑燈才柔和亮起。", helps: "半夜去洗手間更安全，又不會強光刺醒家人。", setup: ["人體感應", "低亮度路徑燈", "浴室輔助"] },
+          {
+            "time": "18:45",
+            "title": "回家準備",
+            "room": "客廳 / 玄關",
+            "happens": "用家到家前或到家時，客廳預冷，玄關燈亮起，家中由 Away Mode 轉為 Welcome Mode。",
+            "helps": "回家時不會面對又熱又暗、仍停留在離家狀態的單位。",
+            "setup": [
+              "冷氣預冷",
+              "門口 / 到家觸發",
+              "Welcome 情境"
+            ]
+          },
+          {
+            "time": "18:50",
+            "title": "玄關減壓",
+            "room": "玄關",
+            "happens": "玄關柔和燈光亮起，窗簾因應私隱調整，放鬆背景音樂可自動開始。",
+            "helps": "由外面回到家中的轉換更柔和、更有儀式感。",
+            "setup": [
+              "玄關燈光",
+              "窗簾私隱情境",
+              "放鬆音樂選項"
+            ]
+          },
+          {
+            "time": "19:10",
+            "title": "晚餐輔助",
+            "room": "飯廳 / 廚房",
+            "happens": "飯廳燈變得更暖更亮；廚房工作燈支援煮食或備餐。",
+            "helps": "晚餐和煮食過程更順，不用逐個調整燈光。",
+            "setup": [
+              "飯廳情境",
+              "廚房工作燈",
+              "情境掣"
+            ]
+          },
+          {
+            "time": "20:00",
+            "title": "電視放鬆模式",
+            "room": "客廳",
+            "happens": "客廳燈光調暗，窗簾關上，減少反光，電視或影音系統準備使用。",
+            "helps": "客廳自然轉為舒適的娛樂氣氛。",
+            "setup": [
+              "TV 情境",
+              "窗簾控制",
+              "調光選項",
+              "影音流程"
+            ]
+          },
+          {
+            "time": "20:45",
+            "title": "沖涼與清理支援",
+            "room": "浴室 / 廚房",
+            "happens": "浴室燈光、抽風和防霧鏡啟動；廚房或飯廳燈光變亮以方便清理。",
+            "helps": "沖涼和清理更順手，也較不容易忘記抽風。",
+            "setup": [
+              "浴室情境",
+              "抽風時間制",
+              "防霧鏡選項",
+              "清理燈光"
+            ]
+          },
+          {
+            "time": "21:15",
+            "title": "晚間活動情境",
+            "room": "個人活動區",
+            "happens": "用家可選 gaming、workout、閱讀或輕工作模式，燈光、風扇、喇叭和書枱配置相應調整。",
+            "helps": "家中能支援不同晚間習慣，而不是只有一個固定夜間流程。",
+            "setup": [
+              "Gaming 情境",
+              "運動情境",
+              "閱讀情境",
+              "專注書枱設定",
+              "風扇 / 音訊選項"
+            ]
+          },
+          {
+            "time": "22:15",
+            "title": "晚間放慢",
+            "room": "全屋",
+            "happens": "燈光逐漸變暖和變暗；較大的音量降低；家中開始準備休息。",
+            "helps": "家中慢慢提示晚上進入休息節奏。",
+            "setup": [
+              "漸暗流程",
+              "暖色燈光",
+              "音量自動調整"
+            ]
+          },
+          {
+            "time": "22:45",
+            "title": "睡前準備",
+            "room": "睡房",
+            "happens": "睡房冷氣調整，窗簾關上，床頭燈柔和亮起，並可觸發手機充電或床頭提醒。",
+            "helps": "睡房在睡前已準備好，減少臨睡前手動設定。",
+            "setup": [
+              "睡房情境",
+              "冷氣睡眠設定",
+              "窗簾關閉",
+              "床頭提醒"
+            ]
+          },
+          {
+            "time": "23:15",
+            "title": "睡眠安全檢查",
+            "room": "全屋",
+            "happens": "系統檢查門鎖、窗戶、露台門、主要燈光、冷氣和指定電器。",
+            "helps": "用家可更安心入睡，知道重點項目已被檢查。",
+            "setup": [
+              "Sleep Mode",
+              "門窗感應",
+              "門鎖狀態",
+              "電器檢查清單"
+            ]
+          },
+          {
+            "time": "02:30",
+            "title": "深夜路徑燈",
+            "room": "走廊 / 浴室",
+            "happens": "深夜偵測到移動時，走廊和浴室低亮度燈光柔和亮起，不打擾睡眠。",
+            "helps": "夜間去浴室更安全，同時不會用強光弄醒家人。",
+            "setup": [
+              "動作感應",
+              "低亮度路徑燈",
+              "浴室輔助"
+            ]
+          }
         ],
       },
       {
         id: "gathering",
-        label: "Gathering Mode",
+        label: "聚會模式",
         icon: "users",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.24),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.20),transparent_42%)]",
-        title: "Gathering Mode",
-        headline: "令細單位更適合招待客人。",
-        subtitle: "由客人到達前、用餐、聊天、娛樂、浴室、舒適調整、清潔到重設。",
+        title: "聚會模式",
+        headline: "讓細小的家變得準備好、舒服、好招呼，亦容易還原。",
+        subtitle: "由客人到達前準備、歡迎、用餐和娛樂，到送客與清理還原的 10 步聚會流程。",
         package: "Starter / Comfort",
-        chips: ["歡迎", "用餐", "娛樂", "重設"],
+        chips: [
+          "準備",
+          "歡迎",
+          "用餐",
+          "娛樂",
+          "還原"
+        ],
         steps: [
-          { time: "客人到前", title: "Pre-Guest Prep", room: "客廳", happens: "客廳燈光變亮，冷氣開始準備，窗簾可按需要調整。", helps: "客人到之前，屋企已經有準備好招待的感覺。", setup: ["客廳情境", "冷氣時間設定", "窗簾選配"] },
-          { time: "到達", title: "Welcome Entry", room: "玄關", happens: "客人到達時，玄關燈溫暖亮起。", helps: "入屋第一刻更舒服。", setup: ["玄關燈", "門磁感應", "歡迎情境"] },
-          { time: "晚飯", title: "Dining Scene", room: "飯廳 / 廚房", happens: "飯廳燈光變暖更集中，廚房或上菜位置有足夠光。", helps: "細單位招呼客人更順。", setup: ["飯廳情境", "廚房燈光", "情境按鈕"] },
-          { time: "飯後", title: "Conversation Mode", room: "客廳", happens: "客廳燈光變柔和，背景氣氛可準備。", helps: "空間感覺更適合聊天。", setup: ["燈光預設", "音樂設定選配"] },
-          { time: "娛樂", title: "Movie / Music Mode", room: "客廳", happens: "燈光調暗、窗簾關上，娛樂情境更易開始。", helps: "家中氣氛更有質感。", setup: ["TV 情境", "窗簾控制", "氣氛燈"] },
-          { time: "客人使用", title: "Guest Bathroom Assist", room: "浴室", happens: "浴室燈及抽氣自動反應。", helps: "客人不用摸索每個開關。", setup: ["人體感應燈", "抽氣時間"] },
-          { time: "夜深", title: "Late Gathering Dim", room: "客廳", happens: "夜深後燈光變得更柔和。", helps: "家中自然轉入較安靜氣氛。", setup: ["時間漸暗情境"] },
-          { time: "離開", title: "Guest Leaving", room: "玄關", happens: "玄關區變亮，方便穿鞋、拿袋及道別。", helps: "離開時更順，不會昏暗混亂。", setup: ["玄關情境", "門口燈光"] },
-          { time: "客人走後", title: "Cleanup Assist", room: "廚房 / 飯廳", happens: "廚房及飯廳燈光變亮，抽氣可延續一段時間。", helps: "聚會後清潔更方便。", setup: ["清潔情境", "抽氣時間"] },
-          { time: "重設", title: "Reset Home", room: "全屋", happens: "屋企回復正常晚間或睡前模式。", helps: "不用逐項把設定改回來。", setup: ["重設情境", "睡前準備"] },
+          {
+            "time": "客人到達前",
+            "title": "客人準備模式",
+            "room": "客廳 / 飯廳",
+            "happens": "客廳和飯廳燈光變亮，冷氣預冷空間，窗簾因應私隱和舒適調整。",
+            "helps": "即使是小單位，客人到達前也感覺已準備好。",
+            "setup": [
+              "客飯廳情境",
+              "冷氣預冷",
+              "窗簾私隱設定"
+            ]
+          },
+          {
+            "time": "到達",
+            "title": "歡迎玄關情境",
+            "room": "玄關",
+            "happens": "玄關燈光溫暖亮起，智能門鐘通知主人，入口區域為客人變得更明亮。",
+            "helps": "客人進門時感覺清楚、舒服和受歡迎。",
+            "setup": [
+              "玄關燈光",
+              "智能門鐘選項",
+              "主人通知"
+            ]
+          },
+          {
+            "time": "到達",
+            "title": "主人迎客設定",
+            "room": "客廳",
+            "happens": "背景音樂柔和開始，客廳燈光變得親切，主要座位區被突出。",
+            "helps": "主要社交空間立即變得準備好和舒服。",
+            "setup": [
+              "背景音樂",
+              "客廳情境",
+              "座位區突出"
+            ]
+          },
+          {
+            "time": "晚餐",
+            "title": "用餐情境",
+            "room": "飯廳 / 廚房",
+            "happens": "飯廳燈光集中在餐桌，廚房工作燈支援上菜，指定電器或抽風保持運作。",
+            "helps": "上菜和用餐更順，餐桌亦成為視覺焦點。",
+            "setup": [
+              "餐桌情境",
+              "廚房工作燈",
+              "抽風 / 電器支援"
+            ]
+          },
+          {
+            "time": "飯後",
+            "title": "聊天模式",
+            "room": "客廳",
+            "happens": "燈光變柔和，音樂音量降低，房間轉為舒適社交設定。",
+            "helps": "聚會自然由用餐轉到輕鬆聊天。",
+            "setup": [
+              "柔和燈光",
+              "音量控制",
+              "聊天情境"
+            ]
+          },
+          {
+            "time": "娛樂",
+            "title": "電影 / 音樂模式",
+            "room": "客廳",
+            "happens": "燈光調暗，窗簾關上，減少反光，電視或喇叭系統準備好，房間轉為娛樂模式。",
+            "helps": "家中氣氛變得更有質感，適合電影、音樂或輕鬆娛樂。",
+            "setup": [
+              "娛樂情境",
+              "窗簾關閉",
+              "電視 / 喇叭設定",
+              "反光控制"
+            ]
+          },
+          {
+            "time": "聚會期間",
+            "title": "客用浴室輔助",
+            "room": "浴室",
+            "happens": "浴室燈和抽風自動啟動，幫助客人不用找開關。",
+            "helps": "客人使用更方便，主人也少一件小事要處理。",
+            "setup": [
+              "浴室感應燈",
+              "抽風時間制"
+            ]
+          },
+          {
+            "time": "夜深",
+            "title": "晚段聚會舒適",
+            "room": "全屋",
+            "happens": "燈光變柔和，冷氣或風扇按人數或佔用情況調整，音量可逐步降低。",
+            "helps": "聚會到較晚時間時，家中仍保持舒服並慢慢變安靜。",
+            "setup": [
+              "晚段聚會情境",
+              "按佔用調整舒適度",
+              "風扇 / 冷氣調整",
+              "音量流程"
+            ]
+          },
+          {
+            "time": "客人離開",
+            "title": "送客情境",
+            "room": "玄關",
+            "happens": "玄關和鞋櫃燈變亮，門口區域更清晰，主人收到袋或物品提醒。",
+            "helps": "送客過程更順，客人也較不容易遺留物品。",
+            "setup": [
+              "玄關情境",
+              "鞋櫃燈",
+              "物品提醒"
+            ]
+          },
+          {
+            "time": "聚會後",
+            "title": "清理與還原模式",
+            "room": "廚房 / 全屋",
+            "happens": "廚房和飯廳燈變亮方便清理，抽風短暫延續，家中回復正常夜間或睡眠模式。",
+            "helps": "主人不用逐個取消聚會設定，也可以更快開始清理和休息。",
+            "setup": [
+              "清理燈光",
+              "抽風時間制",
+              "還原情境",
+              "睡眠準備"
+            ]
+          }
         ],
       },
       {
         id: "pet",
-        label: "Pet Mode",
+        label: "寵物模式",
         icon: "eye",
         visual: "bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.18),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(103,232,249,0.16),transparent_42%)]",
-        title: "Pet Mode",
-        headline: "由寵物角度出發。",
-        subtitle: "為主人不在家時的安靜時段而設，重點是舒適、狀態掌握及負責任使用。",
+        title: "寵物模式",
+        headline: "主人外出時，讓寵物保持舒適、安全和可被留意。",
+        subtitle: "針對寵物獨自在家時的燈光、溫度、活動感知、遠端查看和回家還原的 10 步流程。",
         package: "Safety / Comfort",
-        chips: ["平靜", "舒適", "查看", "回家"],
-        disclaimer: "寵物模式不能取代日常照顧。任何涉及溫度、餵食、飲水或監察的設備，都應先確認安全性及適合性。",
+        chips: [
+          "離家",
+          "舒適",
+          "監察",
+          "查看",
+          "回家"
+        ],
+        disclaimer: "寵物模式不能取代負責任的寵物照顧。任何涉及溫度、餵食、飲水、監察或設備自動化的設定，都應謹慎選擇並在安裝前確認。",
         steps: [
-          { time: "主人離開", title: "My Human Leaves", room: "玄關", happens: "門關上後，家中保持平靜，不會突然全黑全靜。", helps: "環境對寵物更穩定。", setup: ["離家情境", "指定柔和燈光"] },
-          { time: "日間", title: "Calm Home Setting", room: "客廳", happens: "指定燈光可在選定時段柔和亮起。", helps: "屋企不會像完全空置。", setup: ["柔和燈光情境", "時間設定"] },
-          { time: "較熱時段", title: "Comfort Temperature Routine", room: "寵物區", happens: "可按主人選擇，設定較安全的冷氣或風扇流程。", helps: "主人不在家時仍可更有計劃地照顧舒適度。", setup: ["冷氣設定", "風扇選配", "溫度掌握"] },
-          { time: "食水位置", title: "Food / Water Area Support", room: "食水區", happens: "食物或水附近可在指定時段保留低亮度燈。", helps: "熟悉位置保持可見。", setup: ["低亮度燈", "時間設定"] },
-          { time: "休息", title: "Rest Zone Comfort", room: "休息區", happens: "常用休息位置保持合適光線或溫度。", helps: "日常休息更穩定。", setup: ["情境設定", "窗簾選配", "冷氣 / 風扇設定"] },
-          { time: "聲音 / 訪客", title: "Doorbell / Noise Softening", room: "玄關", happens: "門鈴或入口提醒可傳送給主人。", helps: "主人可知道發生甚麼，不用令家中系統過份複雜。", setup: ["視像門鈴", "入口鏡頭選配", "手機提示"] },
-          { time: "活動", title: "Pet Movement Awareness", room: "寵物區", happens: "指定動作或鏡頭選項可讓主人知道寵物有活動。", helps: "可作簡單查看，不一定打擾寵物。", setup: ["鏡頭選項", "活動感應"] },
-          { time: "查看", title: "Human Check-In", room: "主人手機", happens: "主人可按需要查看指定鏡頭或感應狀態。", helps: "離家時更安心。", setup: ["客戶持有鏡頭 / App 帳戶"] },
-          { time: "主人回家", title: "Evening Welcome Back", room: "玄關 / 客廳", happens: "主人回來前，家中轉回歡迎模式。", helps: "寵物與主人回到正常回家節奏。", setup: ["回家情境", "燈光流程"] },
+          {
+            "time": "主人離開",
+            "title": "寵物獨自在家模式",
+            "room": "玄關 / 全屋",
+            "happens": "主人離家時，家中避免完全變暗；指定燈光柔和保留，讓寵物更舒服。",
+            "helps": "寵物身處的環境更穩定，不會突然變得漆黑和空蕩。",
+            "setup": [
+              "寵物離家流程",
+              "指定柔和燈光",
+              "離家觸發"
+            ]
+          },
+          {
+            "time": "日間",
+            "title": "舒適燈光",
+            "room": "客廳 / 寵物區",
+            "happens": "寵物常用區域在指定時間保持柔和燈光，特別適合較暗角落或無窗單位。",
+            "helps": "寵物熟悉的區域保持可見和舒適。",
+            "setup": [
+              "寵物區燈光",
+              "時間情境",
+              "低亮度燈"
+            ]
+          },
+          {
+            "time": "炎熱時段",
+            "title": "溫度保護",
+            "room": "客廳 / 寵物區",
+            "happens": "冷氣、風扇或抽風按安全舒適流程運作，當房間過熱或過濕時可發出提醒。",
+            "helps": "主人外出時也可以更負責任地管理溫度舒適。",
+            "setup": [
+              "冷氣 / 風扇流程",
+              "溫度感應",
+              "濕度提醒"
+            ]
+          },
+          {
+            "time": "餵食時間",
+            "title": "食物與飲水區支援",
+            "room": "餵食區",
+            "happens": "食物或飲水位置附近的小燈亮起，並可選擇監察餵食器或飲水機狀態。",
+            "helps": "餵食區保持清楚可見，主人亦可留意指定設備狀態。",
+            "setup": [
+              "餵食區燈光",
+              "餵食器選項",
+              "飲水機狀態選項"
+            ]
+          },
+          {
+            "time": "休息時間",
+            "title": "休息區舒適",
+            "room": "寵物床 / 梳化區",
+            "happens": "寵物喜歡的休息區保持穩定燈光、溫度或風扇設定，避免環境突然變化。",
+            "helps": "寵物可以在較穩定的環境休息。",
+            "setup": [
+              "休息區情境",
+              "風扇 / 冷氣設定",
+              "窗簾選項"
+            ]
+          },
+          {
+            "time": "噪音 / 門鐘",
+            "title": "聲音與訪客感知",
+            "room": "玄關",
+            "happens": "門鐘或異常入門活動改為通知主人，而不是不必要地打擾寵物。",
+            "helps": "主人可以知道門口發生甚麼，而家中反應不會過度複雜。",
+            "setup": [
+              "視像門鐘選項",
+              "玄關通知",
+              "鏡頭選項"
+            ]
+          },
+          {
+            "time": "偵測到活動",
+            "title": "寵物活動檢查",
+            "room": "客廳 / 寵物區",
+            "happens": "動作感應或鏡頭確認寵物正常活動，主人可收到簡單活動更新。",
+            "helps": "主人得到安心感，而不需要一直盯著鏡頭。",
+            "setup": [
+              "動作感應",
+              "鏡頭選項",
+              "活動更新"
+            ]
+          },
+          {
+            "time": "主人查看",
+            "title": "遠端寵物查看",
+            "room": "手機 App",
+            "happens": "主人可在手機查看鏡頭畫面、室溫、燈光狀態和指定設備狀況。",
+            "helps": "主人在日間可遠端確認重要狀況。",
+            "setup": [
+              "手機 App",
+              "鏡頭畫面",
+              "溫度狀態",
+              "設備狀態"
+            ]
+          },
+          {
+            "time": "主人回來前",
+            "title": "歡迎回家準備",
+            "room": "玄關 / 客廳",
+            "happens": "主人到家前，玄關和客廳燈光準備，冷氣調整，家中逐步離開寵物獨自在家模式。",
+            "helps": "主人回來前，家中慢慢回復正常生活模式。",
+            "setup": [
+              "Welcome 情境",
+              "燈光流程",
+              "冷氣調整"
+            ]
+          },
+          {
+            "time": "主人回家",
+            "title": "寵物模式還原",
+            "room": "全屋",
+            "happens": "寵物模式結束，正常家居模式恢復，主人可收到日間溫度、活動和提醒摘要。",
+            "helps": "主人可以快速知道外出期間是否有重要狀況。",
+            "setup": [
+              "模式還原",
+              "日間摘要選項",
+              "溫度 / 活動記錄"
+            ]
+          }
         ],
       },
     ],
@@ -424,30 +1384,30 @@ const content = {
       ["想有簡單智能門口設定。", "智能門鎖選配、視像門鈴或入口鏡頭。", "門身類型、鎖型號、電源、私隱、權限。", "Safety"],
     ],
     packages: [
-      { id: "starter", name: "????????", subtitle: "??????????????????", icon: "home", tag: "??????", basePrice: 3800, description: "???????????????????????Home / Away ???App ????????????????????????", includes: [
-        "?????????????",
-        "????????????",
-        "?? Home / Away ????",
-        "App ???????????",
-        "????????????????",
-        "????????????"
-      ], assumption: "???????????????????????????????????????????????????" },
-      { id: "comfort", name: "???????", subtitle: "??????????????", icon: "sun", tag: "???", basePrice: 8800, description: "?????????????????????????????????????????????????", includes: [
-        "??????????????????",
-        "?????????????????",
-        "????????????",
-        "??????????",
-        "???????",
-        "????????"
-      ], assumption: "??????????????????????????????????????????????????????" },
-      { id: "safety", name: "?????????", subtitle: "?????????????????", icon: "shield", tag: "?????", basePrice: 7800, description: "???????????????????????????????????????????????????", includes: [
-        "????????????",
-        "????????????????",
-        "????????",
-        "???????????",
-        "?????????????",
-        "???????????"
-      ], assumption: "?????????????????????????????????????????????????" },
+      { id: "starter", name: "基礎智能生活", subtitle: "先做好最常用的日常控制。", icon: "home", tag: "最適合第一步", basePrice: 3800, description: "適合想先簡單開始的單位：重點燈光情境、Home / Away 流程、App 設定和家人易用控制，不一開始過度配置。", includes: [
+        "整理一個核心區域的日常流程",
+        "設定指定智能燈光情境",
+        "配置 Home / Away 預設流程",
+        "App 設定及基本家人權限說明",
+        "牆掣、情境掣或簡單控制選項",
+        "測試、微調及交付操作說明"
+      ], assumption: "起步估算假設一個核心區域及兼容的基本智能控制設定。額外房間、高階設備、大型改線及特殊安裝條件會另行報價。" },
+      { id: "comfort", name: "舒適與氣氛", subtitle: "讓燈光、窗簾和舒適設定配合你的生活節奏。", icon: "sun", tag: "最平衡", basePrice: 8800, description: "適合希望日常舒適更自然的家庭：燈光預設、窗簾選項、兼容冷氣流程、感應燈及日常節能習慣。", includes: [
+        "規劃早上、夜晚、晚飯、睇戲及睡眠情境",
+        "設定日常生活區域燈光預設",
+        "配置兼容冷氣或舒適時間表",
+        "窗簾或百葉自動化選項",
+        "指定區域感應燈",
+        "日常節能流程設定"
+      ], assumption: "起步估算假設客廳及玄關等主要日常區域。窗簾摩打、額外房間、複雜電線及品牌升級會另行報價。" },
+      { id: "safety", name: "家庭安全與感知", subtitle: "加入入戶感知、夜間安全和指定家人通知。", icon: "shield", tag: "最適合家庭", basePrice: 7800, description: "適合希望家居更有感知的家庭：玄關配置、指定門窗狀態、夜間走動支援，以及按私隱和真實習慣設計的通知。", includes: [
+        "檢視主要入戶位置感知流程",
+        "智能門鎖、視像門鐘或玄關鏡頭選項",
+        "指定重點門窗感應",
+        "低亮度夜間路徑燈",
+        "按私隱期望配置指定手機通知",
+        "家人權限及交付操作說明"
+      ], assumption: "起步估算假設指定玄關及安全感知點。門身狀況、門鎖型號、鏡頭位置、私隱要求及額外感應點會影響最終報價。" },
     ],
     apartments: [
       { id: "studio", label: "開放式 / 一房單位", description: "較少控制點，適合輕量入門", adjustment: 0 },
@@ -499,7 +1459,7 @@ export default function App() {
   ].join("\n");
 
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(enquiry)}`;
-  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Boson Smart Estimate")}&body=${encodeURIComponent(enquiry)}`;
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("BosonSmart Estimate")}&body=${encodeURIComponent(enquiry)}`;
 
   useEffect(() => {
     const onHash = () => setPage(getPage());
@@ -564,7 +1524,7 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
         <button onClick={() => go("home")} className="flex items-center gap-3 text-left">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/20"><Icon name="bolt" className="h-5 w-5" /></span>
           <span>
-            <span className="block text-base font-semibold tracking-tight">Boson Smart</span>
+            <span className="block text-base font-semibold tracking-tight">BosonSmart</span>
             <span className="hidden text-xs text-slate-400 sm:block">{t.brandSub}</span>
           </span>
         </button>
@@ -809,7 +1769,7 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
             key={`${step.title}-${index}`}
             onClick={() => jumpTo(index)}
             className={`h-2.5 w-2.5 rounded-full border transition-all ${activeStep === index ? "h-7 border-cyan-200 bg-cyan-300" : "border-white/25 bg-white/20 hover:bg-white/45"}`}
-            aria-label={`${step.time} ${step.title}`}
+            aria-label={`$<span className="scenario-time-watermark" aria-hidden="true"><span className="scenario-inline-time-hidden">{step.time}</span></span><span className="scenario-time-sr">{step.time}</span> ${step.title}`}
           />
         ))}
       </nav>
@@ -865,11 +1825,112 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
             </div>
 
             <div className="pointer-events-none absolute bottom-4 right-4 z-10 text-xs font-semibold uppercase tracking-[0.18em] text-white/45 md:hidden">
-              {active.time}
+              <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={activeStep} />
             </div>
           </section>
         ))}
       </div>
+    </div>
+  );
+}
+
+
+function parseScenarioClockTime(value) {
+  const text = String(value || "").trim();
+  const match = text.match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return null;
+
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
+  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) return null;
+
+  return hours * 60 + minutes;
+}
+
+function formatScenarioClockTime(totalMinutes) {
+  const normalized = ((Math.round(totalMinutes) % 1440) + 1440) % 1440;
+  const hours = Math.floor(normalized / 60);
+  const minutes = normalized % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+function ScenarioTimeOverlay({ value, modeId, stepIndex }) {
+  const [displayValue, setDisplayValue] = useState(String(value || ""));
+  const previousNumericRef = useRef(null);
+  const frameRef = useRef(null);
+
+  useEffect(() => {
+    const nextText = String(value || "").trim();
+    const nextNumeric = parseScenarioClockTime(nextText);
+
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
+
+    if (nextNumeric === null) {
+      previousNumericRef.current = null;
+      setDisplayValue(nextText);
+      return undefined;
+    }
+
+    const previousNumeric =
+      typeof previousNumericRef.current === "number"
+        ? previousNumericRef.current
+        : nextNumeric;
+
+    let targetNumeric = nextNumeric;
+
+    /*
+      If the next step crosses midnight, animate forward through midnight.
+      Example: 23:15 -> 02:30 becomes 23:15 -> 26:30 visually,
+      while the displayed value wraps back to 02:30.
+    */
+    if (targetNumeric < previousNumeric) {
+      targetNumeric += 1440;
+    }
+
+    const distance = Math.abs(targetNumeric - previousNumeric);
+    const duration = Math.min(1150, Math.max(520, distance * 18));
+    const startedAt = performance.now();
+
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    function tick(now) {
+      const t = Math.min(1, (now - startedAt) / duration);
+      const eased = easeOutCubic(t);
+      const current = previousNumeric + (targetNumeric - previousNumeric) * eased;
+
+      setDisplayValue(formatScenarioClockTime(current));
+
+      if (t < 1) {
+        frameRef.current = requestAnimationFrame(tick);
+      } else {
+        previousNumericRef.current = nextNumeric;
+        setDisplayValue(formatScenarioClockTime(nextNumeric));
+      }
+    }
+
+    frameRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
+  }, [value, modeId, stepIndex]);
+
+  const numeric = parseScenarioClockTime(value) !== null;
+
+  return (
+    <div
+      className={`scenario-clock-overlay ${numeric ? "scenario-clock-overlay--numeric" : "scenario-clock-overlay--phase"}`}
+      aria-hidden="true"
+    >
+      <span>{displayValue}</span>
     </div>
   );
 }
@@ -1181,27 +2242,28 @@ function ContactPage(props) {
   const isZhContact = /[\u3400-\u9fff]/.test(t?.contactPage?.title || "");
   const contactQuickStart = isZhContact
     ? {
-        eyebrow: "\u4e0d\u78ba\u5b9a\u9700\u8981\u751a\u9ebc\uff1f",
-        title: "\u5148\u767c\u5e7e\u5f35\u76f8\u7d66\u6211\u5011\uff0c\u6211\u5011\u5e6b\u4f60\u6574\u7406\u7b2c\u4e00\u968e\u6bb5\u65b9\u5411\u3002",
-        body: "\u4f60\u4e0d\u9700\u8981\u5148\u61c2\u667a\u80fd\u8a2d\u5099\u3002\u53ea\u8981\u767c\u9001\u95dc\u9375\u4f4d\u7f6e\uff0c\u6211\u5011\u5c31\u53ef\u4ee5\u5148\u5224\u65b7\u54ea\u4e9b\u60c5\u5883\u6700\u503c\u5f97\u505a\uff0c\u54ea\u4e9b\u9700\u8981\u73fe\u5834\u518d\u78ba\u8a8d\u3002",
+        eyebrow: "\u672a\u80af\u5b9a\u9700\u8981\u505a\u751a\u9ebc\uff1f",
+        title: "\u53ef\u4ee5\u5148\u767c\u76f8\u7d66\u6211\u5011\u3002",
+        body: "\u767c\u9001\u5ba2\u5ef3\u3001\u7246\u63a3\u3001Router\u3001\u7a97\u7c3e\u4f4d\u7f6e\u53ca\u5165\u6236\u9580\u76f8\u7247\uff0c\u6211\u5011\u6703\u5148\u5e6b\u4f60\u6574\u7406\u6700\u5be6\u969b\u7684\u7b2c\u4e00\u968e\u6bb5\u65b9\u5411\uff0c\u518d\u8a0e\u8ad6\u5177\u9ad4\u8a2d\u5099\u3002",
         items: [
           "\u5ba2\u5ef3\u3001\u98ef\u5ef3\u6216\u60f3\u5148\u6539\u5584\u7684\u4e3b\u8981\u5340\u57df",
           "\u73fe\u6709\u7246\u63a3\u3001\u71c8\u5177\u3001\u7a97\u7c3e\u8def\u8ecc\u53ca\u5165\u6236\u9580",
           "Router / Wi-Fi \u4f4d\u7f6e\uff0c\u4ee5\u53ca\u73fe\u6709\u667a\u80fd\u8a2d\u5099\u6216 App",
-          "\u4f60\u60f3\u6539\u5584\u7684\u65e5\u5e38\u554f\u984c\uff1a\u591c\u9593\u3001\u51fa\u9580\u3001\u805a\u6703\u3001\u5bf5\u7269\u6216\u5b89\u5168"
+          "\u6700\u60f3\u6539\u5584\u7684\u65e5\u5e38\u554f\u984c\uff1a\u591c\u9593\u3001\u51fa\u9580\u3001\u805a\u6703\u3001\u5bf5\u7269\u6216\u5b89\u5168"
         ],
       }
     : {
         eyebrow: "Not sure what you need?",
-        title: "Send a few photos first. We will help shape the first practical phase.",
-        body: "You do not need to understand smart-home devices before contacting us. Send the key areas and we can advise which routines are worth doing first, and what needs a site check.",
+        title: "Send photos first.",
+        body: "Send photos of your living room, switches, router, curtain area and entrance. We will help shape the most practical first phase before discussing exact devices.",
         items: [
-          "Living, dining, or the main area you want to improve first",
-          "Existing switches, lights, curtain rail, and entry door",
+          "Living, dining or the main area you want to improve first",
+          "Existing switches, lights, curtain rail and entry door",
           "Router / Wi-Fi location, plus any existing smart devices or apps",
-          "The daily problem you want to fix: night, leaving home, hosting, pets, or safety"
+          "The daily problem you want to fix: night, leaving home, hosting, pets or safety"
         ],
       };
+
   return (
     <>
       <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={t.nav.scenarios} secondary={t.nav.solutions} onPrimary={() => go("scenarios")} onSecondary={() => go("solutions")} />
@@ -1335,7 +2397,7 @@ function Footer({ t, go }) {
   return (
     <footer className="relative z-10 border-t border-white/10 px-4 py-8 text-sm text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <p>© 2026 Boson Smart. {t.brandSub}</p>
+        <p>© 2026 BosonSmart. {t.brandSub}</p>
         <div className="flex flex-wrap gap-4">
           {footerLinks.map(([id, label]) => (
             <button key={id} onClick={() => go(id)} className="hover:text-white">{label}</button>

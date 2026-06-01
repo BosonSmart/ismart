@@ -6,3 +6,4 @@ dist
 _backup-before-bosonsmart-update-*/
 src/*.bak-*
 patch-bosonsmart-*.cjs
+_last-bosonsmart-*.json
