@@ -1568,81 +1568,209 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
 }
 
 function HomePage(props) {
-  const { t, language, go, activeMode, setActiveMode } = props;
-  const homeSteps = language === "zh"
-    ? [
-        ["01", "選擇生活情境", "先由 Morning、Night、Gathering 或 Pet Mode 代入你的日常。"],
-        ["02", "理解可能設定", "再看背後可能涉及的燈光、冷氣、窗簾、感應器及控制方式。"],
-        ["03", "到方案頁估算", "最後才進入起步方案、加選項目及初步預算。"],
-      ]
-    : [
-        ["01", "Tell us the feeling", "Calmer mornings, easier evenings, safer night walks, smoother hosting, or a better pet-at-home setup."],
-        ["02", "We design the setup", "Lighting, curtains, comfort, entry, sensors and controls are planned around how your family actually uses the home."],
-        ["03", "Install with handover", "After checking site conditions, we configure, test and explain the system so it remains easy to use."],
-      ];
+  const { t, go, language } = props;
+  const isZh = language === "zh" || /[\u3400-\u9fff]/.test(t?.nav?.home || "");
+
+  const [activeVibe, setActiveVibe] = useState("morning");
+
+  const copy = isZh
+    ? {
+        heroEyebrow: "\u667a\u80fd\u5bb6\u5c45\u8a2d\u8a08\u5de5\u4f5c\u5ba4",
+        heroTitle: "\u7576\u4f60\u7684\u5bb6\uff0c\u958b\u59cb\u7406\u89e3\u4f60\u7684\u751f\u6d3b\u7bc0\u594f\u3002",
+        heroBody: "BosonSmart \u70ba\u9999\u6e2f\u5bb6\u5ead\u898f\u5283\u751f\u6d3b\u60c5\u5883\u3001\u8212\u9069\u63a7\u5236\u3001\u79c1\u96b1\u3001\u5b89\u5168\u548c\u624b\u52d5\u5099\u7528\u7cfb\u7d71\uff0c\u8b93\u667a\u80fd\u5bb6\u5c45\u4e0d\u518d\u662f\u96f6\u6563\u8a2d\u5099\u3002",
+        primary: "\u5efa\u7acb\u9810\u7b97\u65b9\u5411",
+        secondary: "\u67e5\u770b\u751f\u6d3b\u60c5\u5883",
+        philosophyTitle: "\u79d1\u6280\u61c9\u8a72\u8b93\u5bb6\u66f4\u8212\u9069\uff0c\u4e0d\u662f\u8b93\u751f\u6d3b\u66f4\u8907\u96dc\u3002",
+        pains: [
+          { title: "\u63a7\u5236\u592a\u8907\u96dc\uff1f", body: "\u592a\u591a App\u3001\u592a\u591a\u958b\u95dc\u3001\u5bb6\u4eba\u4e0d\u77e5\u600e\u6a23\u7528\u3002" },
+          { title: "\u8a2d\u5099\u5404\u81ea\u5de5\u4f5c\uff1f", body: "\u71c8\u3001\u7a97\u7c3e\u3001\u51b7\u6c23\u3001\u611f\u61c9\u5668\u6c92\u6709\u6210\u70ba\u4e00\u5957\u751f\u6d3b\u908f\u8f2f\u3002" },
+          { title: "\u4e0d\u77e5\u5148\u8cb7\u751a\u9ebc\uff1f", body: "\u5148\u898f\u5283\u751f\u6d3b\u60c5\u5883\u548c\u9810\u7b97\u65b9\u5411\uff0c\u518d\u6c7a\u5b9a\u8a2d\u5099\u3002" },
+        ],
+        spheresTitle: "\u6211\u5011\u7684\u667a\u80fd\u751f\u6d3b\u8a2d\u8a08\u7bc4\u570d",
+        spheres: [
+          { title: "\u751f\u6d3b\u60c5\u5883\u898f\u5283", body: "\u5c07\u65e9\u6668\u3001\u591c\u9593\u3001\u805a\u6703\u3001\u96e2\u5bb6\u548c\u56de\u5bb6\u8f49\u6210\u53ef\u57f7\u884c\u7684\u623f\u9593\u908f\u8f2f\u3002" },
+          { title: "\u8212\u9069\u8207\u79c1\u96b1", body: "\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u51b7\u6c23\u3001\u98a8\u6247\u548c\u901a\u98a8\u914d\u5408\u771f\u5be6\u4f5c\u606f\u3002" },
+          { title: "\u5b89\u5168\u8207\u7167\u9867", body: "\u9580\u7a97\u3001\u6d74\u5ba4\u3001\u591c\u8d77\u3001\u5bf5\u7269\u548c\u9577\u8005\u9700\u6c42\u7684\u6eab\u548c\u652f\u63f4\u3002" },
+        ],
+        vibeTitle: "\u9078\u64c7\u4e00\u7a2e\u5bb6\u7684\u6c23\u6c1b",
+        vibeBody: "\u5f9e\u60c5\u5883\u958b\u59cb\uff0c\u800c\u4e0d\u662f\u5f9e\u8a2d\u5099\u6e05\u55ae\u958b\u59cb\u3002",
+        vibes: {
+          morning: { label: "\u6668\u65e9", title: "\u81ea\u7136\u9192\u4f86\uff0c\u9806\u5229\u51fa\u9580\u3002", body: "\u6f38\u4eae\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u6d74\u5ba4\u6e96\u5099\u548c\u96e2\u5bb6\u6aa2\u67e5\u9023\u6210\u4e00\u500b\u7bc0\u594f\u3002" },
+          night: { label: "\u591c\u9593", title: "\u56de\u5bb6\u5f8c\u6162\u6162\u964d\u901f\u3002", body: "\u95dc\u7167\u706f\u5149\u3001\u51b7\u6c23\u3001\u7a97\u7c3e\u3001\u5a1b\u6a02\u548c\u7761\u524d\u6aa2\u67e5\u3002" },
+          gathering: { label: "\u805a\u6703", title: "\u8b93\u7d30\u5c0f\u7684\u5bb6\u4e5f\u80fd\u597d\u597d\u62db\u547c\u4eba\u3002", body: "\u6b61\u8fce\u71c8\u5149\u3001\u7528\u9910\u6c23\u6c1b\u3001TV \u6a21\u5f0f\u548c\u6e05\u7406\u9084\u539f\u4e00\u8d77\u8a2d\u8a08\u3002" },
+          pet: { label: "\u5bf5\u7269", title: "\u4eba\u4e0d\u5728\u5bb6\uff0c\u4e5f\u80fd\u7167\u9867\u5bf5\u7269\u8212\u9069\u548c\u5b89\u5168\u3002", body: "\u6eab\u5ea6\u3001\u901a\u98a8\u3001\u71c8\u5149\u3001\u9060\u7aef\u67e5\u770b\u548c\u56de\u5bb6\u9084\u539f\u3002" },
+        },
+        sanctuariesTitle: "\u623f\u9593\u4e0d\u53ea\u662f\u7a7a\u9593\uff0c\u662f\u4e0d\u540c\u751f\u6d3b\u7247\u6bb5\u7684\u5bb9\u5668\u3002",
+        rooms: [
+          { title: "\u5ba2\u5ef3", body: "\u805a\u6703\u3001TV\u3001\u95b1\u8b80\u548c\u79c1\u96b1\u7a97\u7c3e\u60c5\u5883\u3002" },
+          { title: "\u7761\u623f", body: "\u8d77\u5e8a\u3001\u7761\u524d\u3001\u51b7\u6c23\u7bc0\u594f\u548c\u5e8a\u908a\u5099\u7528\u3002" },
+          { title: "\u5165\u53e3", body: "Welcome Mode\u3001Away Mode \u548c\u5168\u5c4b\u6aa2\u67e5\u3002" },
+        ],
+        finalTitle: "\u6e96\u5099\u70ba\u4f60\u7684\u5bb6\u5efa\u7acb\u4e00\u500b\u667a\u80fd\u751f\u6d3b\u65b9\u5411\uff1f",
+        finalBody: "\u5148\u7528\u5e7e\u500b\u9078\u64c7\u4e86\u89e3\u9069\u5408\u4f60\u7684\u8d77\u6b65\u65b9\u6848\u3002",
+      }
+    : {
+        heroEyebrow: "Smart living design studio",
+        heroTitle: "When your home understands your rhythm.",
+        heroBody: "BosonSmart plans daily scenes, comfort, privacy, safety and manual fallback controls for Hong Kong homes ? so smart living feels calm, useful and natural.",
+        primary: "Build estimate",
+        secondary: "Explore scenarios",
+        philosophyTitle: "Technology should elevate, not distract.",
+        pains: [
+          { title: "Too many controls?", body: "Too many apps, switches and routines make the home harder for everyone to use." },
+          { title: "Gadget clutter?", body: "Lighting, curtains, comfort and sensors should work as one living logic, not isolated devices." },
+          { title: "Not sure what to buy first?", body: "Start with scenes and budget direction before choosing devices." },
+        ],
+        spheresTitle: "Our smart-living design spheres",
+        spheres: [
+          { title: "Daily scene planning", body: "Morning, night, gathering, away and return-home moments become practical room logic." },
+          { title: "Comfort and privacy", body: "Lighting, curtains, AC, fan and ventilation are planned around real routines." },
+          { title: "Safety and care", body: "Gentle support for entrance, bathroom, night path, pet and elder-related needs." },
+        ],
+        vibeTitle: "Personalize your home vibe",
+        vibeBody: "Start from a living moment, not a device list.",
+        vibes: {
+          morning: { label: "Morning", title: "Wake up naturally and leave with confidence.", body: "Gradual lighting, curtains, bathroom preparation and away checks become one calm rhythm." },
+          night: { label: "Night", title: "Return home and gently slow down.", body: "Lighting, cooling, curtains, entertainment and bedtime checks work together." },
+          gathering: { label: "Gathering", title: "Make a small home feel ready for guests.", body: "Welcome lighting, dining ambience, TV mode and cleanup reset are designed as one flow." },
+          pet: { label: "Pet", title: "Keep pets comfortable while you are away.", body: "Temperature, ventilation, lighting, remote check-in and return reset support daily care." },
+        },
+        sanctuariesTitle: "Rooms become sanctuaries for different living moments.",
+        rooms: [
+          { title: "Living room", body: "Gathering, TV, reading and curtain privacy scenes." },
+          { title: "Bedroom", body: "Wake-up, sleep mode, AC rhythm and bedside fallback." },
+          { title: "Entrance", body: "Welcome Mode, Away Mode and whole-home checks." },
+        ],
+        finalTitle: "Ready to create a smart-living direction for your home?",
+        finalBody: "Answer a few choices to find the starting package that fits your space.",
+      };
+
+  const activeVibeCopy = copy.vibes[activeVibe];
 
   return (
-    <>
-      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[0.9fr_1fr] lg:px-6">
-        <div className="flex flex-col justify-center">
-          <Eyebrow icon="bolt">{t.home.eyebrow}</Eyebrow>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">{t.home.title}</h1>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">{t.home.body}</p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button onClick={() => go("scenarios")} className="btn-primary">{t.home.primary}<Icon name="arrow" className="h-4 w-4" /></button>
-            <button onClick={() => go("solutions")} className="btn-secondary">{t.nav.solutions}</button>
+    <main className="home-ambient-page">
+      <section className="home-ambient-hero">
+        <div className="home-ambient-hero__visual" aria-hidden="true">
+          <div className="home-ambient-room">
+            <div className="home-ambient-window home-ambient-window--left" />
+            <div className="home-ambient-window home-ambient-window--right" />
+            <div className="home-ambient-sofa" />
+            <div className="home-ambient-table" />
+            <div className="home-ambient-plant home-ambient-plant--left" />
+            <div className="home-ambient-plant home-ambient-plant--right" />
+            <div className="home-ambient-sunbeam" />
           </div>
-
-          <TrustStrip t={t} />
         </div>
 
-        <HomeModeShowcase t={t} activeMode={activeMode} setActiveMode={setActiveMode} go={go} />
+        <div className="home-ambient-hero__copy">
+          <p className="home-ambient-eyebrow">{copy.heroEyebrow}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p>{copy.heroBody}</p>
+
+          <div className="home-ambient-actions">
+            <button type="button" className="btn-primary" onClick={() => go && go("estimate")}>
+              {copy.primary}
+              <Icon name="arrowRight" className="h-4 w-4" />
+            </button>
+            <button type="button" className="btn-secondary" onClick={() => go && go("scenarios")}>
+              {copy.secondary}
+            </button>
+          </div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <div className="mb-8">
-          <SectionHeader eyebrow={t.scenariosPage.eyebrow} title={t.home.introTitle} text={t.home.introBody} noMargin />
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {homeSteps.map(([num, title, body]) => (
-            <Card key={num} className="p-5">
-              <p className="mb-4 text-sm font-bold text-cyan-300">{num}</p>
-              <h3 className="text-xl font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{body}</p>
-            </Card>
+      <section className="home-ambient-philosophy">
+        <h2>{copy.philosophyTitle}</h2>
+        <div className="home-ambient-pain-grid">
+          {copy.pains.map((item) => (
+            <article key={item.title} className="home-ambient-pain-card">
+              <div className="home-ambient-card-icon">
+                <Icon name="spark" className="h-5 w-5" />
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12 lg:px-6">
-        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <SectionHeader
-            eyebrow={t.solutionsPage.eyebrow}
-            title={language === "zh" ? "由一句「我想屋企可以……」開始。" : "Start with “I want my home to…”"}
-            text={language === "zh" ? "不用先記住產品名稱。先講你想改善甚麼生活片段，再由我們把它轉成可行設定。" : "You do not need to remember product names first. Start with the life moment you want to improve, then we translate it into a practical setup."}
-          />
+      <section className="home-ambient-spheres">
+        <div className="home-ambient-section-heading">
+          <p>{isZh ? "\u8a2d\u8a08\u7bc4\u570d" : "Consulting spheres"}</p>
+          <h2>{copy.spheresTitle}</h2>
+        </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {t.solutionTasks.slice(0, 4).map(([task, setup], index) => (
-              <button key={task} onClick={() => go("solutions")} className="group rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-5 text-left transition hover:border-cyan-300/40 hover:bg-cyan-300/10">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
-                    <Icon name={["sparkle", "sun", "lock", "shield"][index % 4]} className="h-5 w-5" />
-                  </span>
-                  <Icon name="arrow" className="h-4 w-4 text-cyan-200 transition group-hover:translate-x-1" />
-                </div>
-                <h3 className="text-lg font-semibold">{task}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{setup}</p>
-              </button>
-            ))}
-          </div>
+        <div className="home-ambient-sphere-grid">
+          {copy.spheres.map((item) => (
+            <article key={item.title} className="home-ambient-sphere-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <FinalCta {...props} noMoney />
-    </>
+      <section className="home-ambient-vibe">
+        <div className="home-ambient-vibe__copy">
+          <p>{isZh ? "\u6c23\u6c1b\u9078\u64c7" : "Home vibe personalizer"}</p>
+          <h2>{copy.vibeTitle}</h2>
+          <span>{copy.vibeBody}</span>
+
+          <div className="home-ambient-vibe-tabs">
+            {Object.entries(copy.vibes).map(([id, item]) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setActiveVibe(id)}
+                className={activeVibe === id ? "home-ambient-vibe-tab home-ambient-vibe-tab--active" : "home-ambient-vibe-tab"}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <button type="button" className="home-ambient-small-cta" onClick={() => go && go("scenarios")}>
+            {copy.secondary}
+            <Icon name="arrowRight" className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="home-ambient-vibe-card">
+          <div className={"home-ambient-vibe-preview home-ambient-vibe-preview--" + activeVibe} />
+          <h3>{activeVibeCopy.title}</h3>
+          <p>{activeVibeCopy.body}</p>
+        </div>
+      </section>
+
+      <section className="home-ambient-sanctuaries">
+        <div className="home-ambient-section-heading">
+          <p>{isZh ? "\u623f\u9593\u60c5\u5883" : "Room sanctuaries"}</p>
+          <h2>{copy.sanctuariesTitle}</h2>
+        </div>
+
+        <div className="home-ambient-room-grid">
+          {copy.rooms.map((room) => (
+            <article key={room.title} className="home-ambient-room-card">
+              <div />
+              <h3>{room.title}</h3>
+              <p>{room.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-ambient-final">
+        <div>
+          <h2>{copy.finalTitle}</h2>
+          <p>{copy.finalBody}</p>
+        </div>
+
+        <button type="button" className="btn-primary" onClick={() => go && go("estimate")}>
+          {copy.primary}
+          <Icon name="arrowRight" className="h-4 w-4" />
+        </button>
+      </section>
+    </main>
   );
 }
 
@@ -2294,138 +2422,502 @@ function SmartThingChip({ label }) {
   );
 }
 
-function SolutionsPage({ t, language, go }) {
-  const featureMap = language === "zh"
+function SolutionsPage(props) {
+  const { t, go } = props;
+
+  const isZh = /[\u3400-\u9fff]/.test(
+    [
+      t?.nav?.home || "",
+      t?.nav?.solutions || "",
+      t?.solutionsPage?.title || "",
+      t?.solutionsPage?.body || "",
+    ].join(" ")
+  );
+
+  const [activeSystem, setActiveSystem] = useState("all");
+
+  const copy = isZh
+    ? {
+        heroEyebrow: "\u667a\u80fd\u5bb6\u5c45\u7cfb\u7d71\u8a2d\u8a08",
+        heroTitle: "\u4e0d\u662f\u8cb7\u4e00\u5806\u8a2d\u5099\uff0c\u800c\u662f\u8a2d\u8a08\u4e00\u5957\u8ddf\u751f\u6d3b\u7bc0\u594f\u914d\u5408\u7684\u667a\u80fd\u7cfb\u7d71\u3002",
+        heroBody: "BosonSmart \u5c07\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u8212\u9069\u5ea6\u3001\u611f\u61c9\u3001\u5b89\u5168\u548c\u624b\u52d5\u5099\u7528\u63a7\u5236\uff0c\u6309\u7167\u771f\u5be6\u65e5\u5e38\u60c5\u5883\u9023\u63a5\u6210\u4e00\u5957\u53ef\u7528\u3001\u53ef\u7406\u89e3\u3001\u53ef\u5206\u968e\u6bb5\u5be6\u884c\u7684\u5bb6\u5c45\u65b9\u6848\u3002",
+        primaryCta: "\u5efa\u7acb\u9810\u7b97\u65b9\u5411",
+        secondaryCta: "\u67e5\u770b\u751f\u6d3b\u60c5\u5883",
+        diagramEyebrow: "\u7cfb\u7d71\u5730\u5716",
+        diagramTitle: "\u770b\u898b\u667a\u80fd\u751f\u6d3b\u7cfb\u7d71\u5982\u4f55\u5728\u5bb6\u4e2d\u4e92\u76f8\u9023\u63a5\u3002",
+        diagramBody: "\u9ede\u9078\u4e0d\u540c\u7cfb\u7d71\u985e\u5225\uff0c\u67e5\u770b\u5b83\u5011\u5982\u4f55\u5728\u5ba2\u5ef3\u3001\u623f\u9593\u3001\u5eda\u623f\u3001\u6d74\u5ba4\u548c\u5165\u53e3\u4f4d\u7f6e\u5de5\u4f5c\u3002",
+        tabs: [
+          { id: "all", label: "\u5168\u90e8\u7cfb\u7d71", note: "\u770b\u5230\u5404\u500b\u8a2d\u5099\u548c\u63a7\u5236\u9ede\u5982\u4f55\u4e00\u8d77\u5de5\u4f5c\u3002" },
+          { id: "lighting", label: "\u71c8\u5149", note: "\u65e9\u6668\u3001\u591c\u9593\u3001\u805a\u6703\u548c\u8def\u5f91\u71c8\u60c5\u5883\u3002" },
+          { id: "comfort", label: "\u8212\u9069", note: "\u51b7\u6c23\u3001\u98a8\u6247\u3001\u7a97\u7c3e\u3001\u901a\u98a8\u548c\u6eab\u5ea6\u7bc0\u594f\u3002" },
+          { id: "safety", label: "\u5b89\u5168", note: "\u5165\u53e3\u3001\u9580\u7a97\u3001\u6d74\u5ba4\u3001\u591c\u8d77\u548c\u7570\u5e38\u63d0\u9192\u3002" },
+          { id: "pet", label: "\u5bf5\u7269 / \u9577\u8005", note: "\u770b\u9867\u3001\u901a\u98a8\u3001\u6d3b\u52d5\u611f\u77e5\u548c\u5b89\u5168\u63d0\u9192\u3002" },
+          { id: "manual", label: "\u624b\u52d5\u5099\u7528", note: "\u4fdd\u7559\u5bb6\u4eba\u6613\u7528\u7684\u958b\u95dc\u3001\u5834\u666f\u6309\u9215\u548c\u7c21\u55ae\u63a7\u5236\u3002" },
+        ],
+        hotspotLabels: {
+          livingLight: "\u5ba2\u5ef3\u71c8\u5149\u60c5\u5883",
+          curtain: "\u96fb\u52d5\u7a97\u7c3e / \u79c1\u96b1",
+          ac: "\u8212\u9069\u6eab\u5ea6\u5340",
+          bedroomSwitch: "\u5e8a\u908a\u60c5\u5883\u6309\u9215",
+          bathVent: "\u6d74\u5ba4\u901a\u98a8 / \u6fd5\u5ea6",
+          entrance: "\u9580\u53e3\u611f\u61c9 / Away Mode",
+          kitchen: "\u5eda\u623f\u4efb\u52d9\u71c8 / \u63d0\u9192",
+          pet: "\u5bf5\u7269\u89d2 / \u9060\u7aef\u67e5\u770b",
+          hub: "\u667a\u80fd\u4e2d\u5fc3 / Wi-Fi",
+          panel: "\u7246\u8eab\u624b\u52d5\u63a7\u5236",
+        },
+        layersTitle: "\u516d\u500b\u667a\u80fd\u751f\u6d3b\u7cfb\u7d71\u5c64",
+        layersBody: "\u6211\u5011\u7528\u300c\u5c64\u300d\u7684\u65b9\u5f0f\u601d\u8003\uff0c\u78ba\u4fdd\u8a2d\u5099\u4e0d\u662f\u96f6\u6563\u52a0\u5165\uff0c\u800c\u662f\u56de\u61c9\u4f60\u7684\u751f\u6d3b\u7bc0\u594f\u3002",
+        layers: [
+          { title: "\u60c5\u5883\u908f\u8f2f", body: "\u5c07\u65e9\u6668\u3001\u591c\u9593\u3001\u805a\u6703\u3001\u96e2\u5bb6\u548c\u56de\u5bb6\u7b49\u7247\u6bb5\u8f49\u5316\u6210\u53ef\u91cd\u8907\u4f7f\u7528\u7684\u63a7\u5236\u908f\u8f2f\u3002", package: "\u60c5\u5883\u898f\u5283 / \u5168\u5c4b\u8a2d\u8a08" },
+          { title: "\u71c8\u5149\u8207\u6c23\u6c1b", body: "\u898f\u5283\u4e3b\u71c8\u3001\u6c23\u6c1b\u71c8\u3001\u591c\u9593\u8def\u5f91\u71c8\u548c\u4e0d\u540c\u5834\u666f\u4e0b\u7684\u4eae\u5ea6\u3002", package: "\u5165\u9580\u8a2d\u7f6e / \u5168\u5c4b\u8a2d\u8a08" },
+          { title: "\u7a97\u7c3e\u8207\u79c1\u96b1", body: "\u8655\u7406\u65e5\u5149\u3001\u897f\u66ec\u3001\u96b1\u79c1\u548c\u5165\u7761\u6642\u7684\u7a97\u7c3e\u914d\u7f6e\u3002", package: "\u5165\u9580\u8a2d\u7f6e / \u5168\u5c4b\u8a2d\u8a08" },
+          { title: "\u8212\u9069\u8207\u901a\u98a8", body: "\u628a\u51b7\u6c23\u3001\u98a8\u6247\u3001\u901a\u98a8\u548c\u4f5c\u606f\u9023\u7d50\uff0c\u907f\u514d\u53ea\u6709\u55ae\u4e00\u958b\u95dc\u3002", package: "\u5165\u9580\u8a2d\u7f6e / \u5168\u5c4b\u8a2d\u8a08" },
+          { title: "\u5b89\u5168\u8207\u611f\u61c9", body: "\u5165\u53e3\u3001\u9580\u7a97\u3001\u6d74\u5ba4\u3001\u591c\u8d77\u8def\u5f91\u548c\u7570\u5e38\u72c0\u614b\u7684\u7c21\u6613\u63d0\u9192\u3002", package: "\u60c5\u5883\u898f\u5283 / \u5168\u5c4b\u8a2d\u8a08" },
+          { title: "\u624b\u52d5\u5099\u7528\u8207\u5bb6\u4eba\u63a7\u5236", body: "\u4fdd\u7559\u958b\u95dc\u3001\u5834\u666f\u6309\u9215\u548c\u7c21\u55ae\u624b\u52d5\u64cd\u4f5c\uff0c\u8b93\u4e0d\u540c\u5bb6\u4eba\u90fd\u7528\u5f97\u5230\u3002", package: "\u5168\u90e8\u65b9\u6848" },
+        ],
+        roomsTitle: "\u6309\u623f\u9593\u7406\u89e3\u667a\u80fd\u751f\u6d3b",
+        rooms: [
+          { room: "\u5ba2\u5ef3", body: "\u805a\u6703\u6a21\u5f0f\u3001TV \u6a21\u5f0f\u3001\u7a97\u7c3e\u79c1\u96b1\u3001\u8a2a\u5ba2\u6b61\u8fce\u71c8\u5149\u3002" },
+          { room: "\u7761\u623f", body: "\u8d77\u5e8a\u71c8\u5149\u3001\u7761\u524d\u6a21\u5f0f\u3001\u51b7\u6c23\u7bc0\u594f\u3001\u5e8a\u908a\u624b\u52d5\u5099\u7528\u3002" },
+          { room: "\u5eda\u623f", body: "\u4efb\u52d9\u71c8\u3001\u96fb\u5668\u63d0\u9192\u3001\u5b89\u5168\u6aa2\u67e5\u548c\u901a\u98a8\u652f\u63f4\u3002" },
+          { room: "\u6d74\u5ba4", body: "\u591c\u9593\u611f\u61c9\u71c8\u3001\u901a\u98a8\u8a08\u6642\u3001\u6fd5\u5ea6\u53cd\u61c9\u548c\u9632\u9727\u93e1\u9078\u9805\u3002" },
+          { room: "\u5165\u53e3", body: "Away Mode\u3001Welcome Mode\u3001\u9580\u53e3\u611f\u61c9\u3001\u5168\u5c4b\u71c8\u5149\u6aa2\u67e5\u3002" },
+          { room: "\u5bf5\u7269\u89d2", body: "\u8212\u9069\u71c8\u5149\u3001\u6eab\u5ea6\u5b89\u5168\u3001\u9060\u7aef\u67e5\u770b\u3001\u9910\u6c34\u63d0\u9192\u3002" },
+        ],
+        principlesTitle: "BosonSmart \u7684\u8a2d\u8a08\u65b9\u6cd5",
+        principles: [
+          { title: "\u4e0d\u5148\u8cb7\u8a2d\u5099", body: "\u5148\u7406\u89e3\u751f\u6d3b\u6d41\u7a0b\uff0c\u518d\u6c7a\u5b9a\u54ea\u4e9b\u8a2d\u5099\u771f\u6b63\u6709\u7528\u3002" },
+          { title: "\u624b\u52d5\u5099\u7528\u5fc5\u9808\u5b58\u5728", body: "\u5bb6\u4eba\u4e0d\u61c9\u53ea\u4f9d\u8cf4 App \u6216\u8a9e\u97f3\uff0c\u7c21\u55ae\u958b\u95dc\u4ecd\u7136\u91cd\u8981\u3002" },
+          { title: "\u53ef\u5206\u968e\u6bb5\u5be6\u884c", body: "\u53ef\u4ee5\u5148\u505a\u898f\u5283\uff0c\u518d\u7531\u4e00\u500b\u5340\u57df\u6216\u5168\u5c4b\u9010\u6b65\u5c55\u958b\u3002" },
+        ],
+        packagesTitle: "\u5c07\u89e3\u6c7a\u65b9\u6848\u9023\u5230\u8d77\u6b65\u65b9\u6848",
+        packages: [
+          { title: "\u667a\u80fd\u60c5\u5883\u898f\u5283", body: "\u9069\u5408\u88dd\u4fee\u524d\u3001\u8cfc\u8cb7\u8a2d\u5099\u524d\uff0c\u5148\u6574\u7406\u60c5\u5883\u908f\u8f2f\u3001\u623f\u9593\u63a7\u5236\u548c\u9810\u7b97\u65b9\u5411\u3002" },
+          { title: "\u5165\u9580\u667a\u80fd\u751f\u6d3b\u8a2d\u7f6e", body: "\u9069\u5408\u4e00\u81f3\u5169\u500b\u91cd\u9ede\u5340\u57df\uff0c\u5982\u5ba2\u5ef3\u52a0\u7761\u623f\u7684\u71c8\u5149\u3001\u7a97\u7c3e\u6216\u8212\u9069\u63a7\u5236\u3002" },
+          { title: "\u5168\u5c4b\u667a\u80fd\u751f\u6d3b\u8a2d\u8a08", body: "\u9069\u5408\u5168\u5c4b\u898f\u5283\u3001\u5bb6\u5ead\u4f7f\u7528\u548c\u88dd\u4fee\u914d\u5408\uff0c\u5305\u542b\u7cfb\u7d71\u5730\u5716\u548c\u5206\u968e\u6bb5\u9810\u7b97\u65b9\u5411\u3002" },
+        ],
+        packageCta: "\u627e\u5230\u9069\u5408\u4f60\u7684\u8d77\u6b65\u65b9\u6848",
+        finalTitle: "\u4e0d\u78ba\u5b9a\u61c9\u8a72\u5148\u505a\u54ea\u4e00\u90e8\u5206\uff1f",
+        finalBody: "\u7528\u5e7e\u500b\u9078\u64c7\u5148\u5efa\u7acb\u9810\u7b97\u65b9\u5411\uff0c\u518d\u6c7a\u5b9a\u898f\u5283\u3001\u8a2d\u7f6e\u6216\u5168\u5c4b\u8a2d\u8a08\u3002",
+      }
+    : {
+        heroEyebrow: "Smart living system design",
+        heroTitle: "Not a pile of gadgets. A smart system designed around daily routines.",
+        heroBody: "BosonSmart connects lighting, curtains, comfort, sensors, safety and manual fallback controls into a practical home system that follows real daily moments.",
+        primaryCta: "Build estimate",
+        secondaryCta: "Explore scenarios",
+        diagramEyebrow: "System map",
+        diagramTitle: "See how a smart-living system connects across the home.",
+        diagramBody: "Select a system category to see how it works across the living room, bedroom, kitchen, bathroom and entrance.",
+        tabs: [
+          { id: "all", label: "All systems", note: "See how devices and control points work together." },
+          { id: "lighting", label: "Lighting", note: "Morning, night, gathering and path-light scenes." },
+          { id: "comfort", label: "Comfort", note: "AC, fan, curtains, ventilation and temperature rhythm." },
+          { id: "safety", label: "Safety", note: "Entrance, door/window, bathroom, night path and alerts." },
+          { id: "pet", label: "Pet / elder", note: "Care, ventilation, activity awareness and comfort reminders." },
+          { id: "manual", label: "Manual control", note: "Wall switches, scene buttons and family-friendly fallback." },
+        ],
+        hotspotLabels: {
+          livingLight: "Living room lighting scene",
+          curtain: "Motorized curtain / privacy",
+          ac: "Comfort temperature zone",
+          bedroomSwitch: "Bedside scene switch",
+          bathVent: "Bathroom ventilation / humidity",
+          entrance: "Entrance sensor / Away Mode",
+          kitchen: "Kitchen task light / reminder",
+          pet: "Pet corner / remote check-in",
+          hub: "Smart hub / Wi-Fi",
+          panel: "Wall manual control",
+        },
+        layersTitle: "Six smart-living system layers",
+        layersBody: "We think in layers so the devices are not installed randomly. Each layer supports a real living rhythm.",
+        layers: [
+          { title: "Scene logic", body: "Morning, night, gathering, away and return-home moments become reusable control logic.", package: "Scene Planning / Full Home Design" },
+          { title: "Lighting and ambience", body: "Plan main lights, ambience lights, night paths and brightness for different situations.", package: "Starter Setup / Full Home Design" },
+          { title: "Curtains and privacy", body: "Handle daylight, glare, privacy and sleep routines through curtain logic.", package: "Starter Setup / Full Home Design" },
+          { title: "Comfort and ventilation", body: "Connect AC, fan, ventilation and daily rhythm instead of relying on one-off switching.", package: "Starter Setup / Full Home Design" },
+          { title: "Safety and awareness", body: "Entrance, door/window, bathroom, night path and abnormal-status reminders.", package: "Scene Planning / Full Home Design" },
+          { title: "Manual fallback and family control", body: "Keep switches, scene buttons and simple manual control so every family member can use the home.", package: "All packages" },
+        ],
+        roomsTitle: "Understand smart living room by room",
+        rooms: [
+          { room: "Living room", body: "Gathering scenes, TV mode, curtain privacy and visitor-ready lighting." },
+          { room: "Bedroom", body: "Wake-up light, sleep mode, AC rhythm and bedside manual control." },
+          { room: "Kitchen", body: "Task lighting, appliance reminders, safety checks and ventilation support." },
+          { room: "Bathroom", body: "Night motion lighting, ventilation timer, humidity response and mirror anti-fog option." },
+          { room: "Entrance", body: "Away Mode, Welcome Mode, entrance awareness and all-off checks." },
+          { room: "Pet corner", body: "Comfort light, temperature safety, remote check-in and feeding/water reminders." },
+        ],
+        principlesTitle: "How BosonSmart designs differently",
+        principles: [
+          { title: "Not gadget-first", body: "We start from daily routines, then decide which devices are actually useful." },
+          { title: "Manual fallback included", body: "Family members should not rely only on apps or voice. Simple switches still matter." },
+          { title: "Phased implementation", body: "Start with planning, then one priority zone or full-home design." },
+        ],
+        packagesTitle: "Connect solutions to a starting package",
+        packages: [
+          { title: "Smart Scene Planning", body: "Best before renovation or device purchase. Clarify scene logic, room control and budget direction first." },
+          { title: "Starter Smart Living Setup", body: "Best for one to two priority zones, such as living room plus bedroom lighting, curtains or comfort control." },
+          { title: "Full Home Smart Living Design", body: "Best for whole-home planning, family use and renovation coordination with system map and phased budget direction." },
+        ],
+        packageCta: "Find your starting package",
+        finalTitle: "Not sure where your home should start?",
+        finalBody: "Answer a few choices to receive a practical budget direction before deciding on planning, setup or full-home design.",
+      };
+
+  const activeTab = copy.tabs.find((item) => item.id === activeSystem) || copy.tabs[0];
+
+  const hotspots = [
+    { id: "livingLight", x: 40, y: 34, groups: ["all", "lighting", "manual"] },
+    { id: "curtain", x: 24, y: 42, groups: ["all", "comfort", "manual"] },
+    { id: "ac", x: 63, y: 30, groups: ["all", "comfort"] },
+    { id: "bedroomSwitch", x: 67, y: 59, groups: ["all", "lighting", "manual"] },
+    { id: "bathVent", x: 42, y: 66, groups: ["all", "comfort", "safety"] },
+    { id: "entrance", x: 74, y: 76, groups: ["all", "safety", "manual"] },
+    { id: "kitchen", x: 30, y: 62, groups: ["all", "lighting", "safety"] },
+    { id: "pet", x: 55, y: 76, groups: ["all", "pet", "safety"] },
+    { id: "hub", x: 50, y: 47, groups: ["all", "comfort", "safety", "pet", "manual", "lighting"] },
+    { id: "panel", x: 72, y: 45, groups: ["all", "manual", "lighting"] },
+  ];
+
+  function hotspotActive(hotspot) {
+    return hotspot.groups.includes(activeSystem);
+  }
+
+  const activeHotspotList = hotspots
+    .filter((hotspot) => hotspotActive(hotspot))
+    .map((hotspot) => copy.hotspotLabels[hotspot.id]);
+
+  const designFlow = isZh
     ? [
-        { id: "entry", title: "智能門鎖及玄關", task: "我想回家、離家、訪客進入都更順。", room: "玄關", icon: "lock", setup: ["智能門鎖", "門磁", "迎賓燈光", "離家模式"], check: "門身、鎖體、電源、出入權限、家人使用習慣。", pos: { top: "18%", left: "18%" } },
-        { id: "living", title: "客廳情境燈光", task: "我想一按轉換睇戲、晚飯、聚會或放鬆模式。", room: "客廳", icon: "sparkle", setup: ["燈光情境", "情境按鈕", "氣氛燈"], check: "現有開關、零線、燈具類型、是否需要保留傳統牆掣。", pos: { top: "36%", left: "44%" } },
-        { id: "climate", title: "冷氣與舒適控制", task: "我想回家前或睡前，溫度已經準備好。", room: "客廳 / 睡房", icon: "sun", setup: ["冷氣控制", "時間設定", "舒適模式"], check: "冷氣型號、遙控兼容、Wi‑Fi 覆蓋、日常使用時間。", pos: { top: "23%", left: "60%" } },
-        { id: "curtain", title: "窗簾自動化", task: "我想窗簾配合早上、黃昏、睇戲或私隱需要。", room: "窗邊", icon: "home", setup: ["窗簾摩打", "日程", "電影模式"], check: "窗簾路軌、窗簾重量、電源位、安裝空間。", pos: { top: "14%", left: "74%" } },
-        { id: "bedroom", title: "睡房睡眠模式", task: "我想睡前降燈、冷氣、窗簾及夜燈一併準備。", room: "睡房", icon: "moon", setup: ["睡房情境", "睡眠模式", "夜燈"], check: "睡眠習慣、冷氣設定、床邊控制、夜間走動路線。", pos: { top: "58%", left: "70%" } },
-        { id: "bath", title: "浴室感應與抽氣", task: "我想夜晚去洗手間更安全，也少一點忘記關抽氣。", room: "浴室 / 走廊", icon: "clock", setup: ["感應燈", "抽氣時間", "夜間輔助"], check: "浴室開關、抽氣扇線路、感應角度、夜燈亮度。", pos: { top: "60%", left: "25%" } },
-        { id: "safety", title: "感應與通知", task: "我想知道指定門窗或活動狀態。", room: "全屋重點位", icon: "shield", setup: ["門窗感應", "手機通知", "安全模式"], check: "通知頻率、私隱期望、感應器位置、家人接受程度。", pos: { top: "76%", left: "46%" } },
+        {
+          step: "01",
+          title: "\u751f\u6d3b\u7247\u6bb5",
+          body: "\u5148\u7406\u89e3\u7528\u6236\u771f\u6b63\u7684\u751f\u6d3b\u6642\u9593\u9ede\uff0c\u4f8b\u5982\u8d77\u5e8a\u3001\u56de\u5bb6\u3001\u5165\u7761\u6216\u96e2\u5bb6\u3002",
+        },
+        {
+          step: "02",
+          title: "\u60c5\u5883\u908f\u8f2f",
+          body: "\u628a\u751f\u6d3b\u7247\u6bb5\u8f49\u5316\u6210\u53ef\u57f7\u884c\u7684\u623f\u9593\u908f\u8f2f\uff0c\u4f8b\u5982\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u8212\u9069\u5ea6\u548c\u63d0\u9192\u689d\u4ef6\u3002",
+        },
+        {
+          step: "03",
+          title: "\u7cfb\u7d71\u914d\u7f6e",
+          body: "\u518d\u9078\u64c7\u9069\u5408\u7684\u8a2d\u5099\u985e\u5225\u3001\u63a7\u5236\u65b9\u5f0f\u3001\u611f\u61c9\u689d\u4ef6\u548c\u5b89\u88dd\u512a\u5148\u6b21\u5e8f\u3002",
+        },
+        {
+          step: "04",
+          title: "\u5099\u7528\u8207\u9810\u7b97",
+          body: "\u4fdd\u7559\u624b\u52d5\u5099\u7528\u63a7\u5236\uff0c\u4e26\u5c07\u65b9\u6848\u6574\u7406\u6210\u53ef\u5206\u968e\u6bb5\u57f7\u884c\u7684\u9810\u7b97\u65b9\u5411\u3002",
+        },
       ]
     : [
-        { id: "entry", title: "Smart lock and entry", task: "I want arrival, leaving, and visitor entry to feel smoother.", room: "Entry", icon: "lock", setup: ["Smart lock", "Door sensor", "Welcome lighting", "Away mode"], check: "Door type, lock body, power, access permissions, and family habits.", pos: { top: "18%", left: "18%" } },
-        { id: "living", title: "Living-room lighting scenes", task: "I want one-tap scenes for TV, dinner, gathering, or relaxing.", room: "Living room", icon: "sparkle", setup: ["Lighting scene", "Scene button", "Ambient light"], check: "Existing switches, neutral wire, light type, and manual wall-control preference.", pos: { top: "36%", left: "44%" } },
-        { id: "climate", title: "Climate and comfort control", task: "I want the temperature ready before arriving home or sleeping.", room: "Living / Bedroom", icon: "sun", setup: ["AC control", "Schedule", "Comfort mode"], check: "AC model, remote compatibility, Wi‑Fi coverage, and daily usage rhythm.", pos: { top: "23%", left: "60%" } },
-        { id: "curtain", title: "Curtain automation", task: "I want curtains to match morning, evening, movie, or privacy needs.", room: "Window side", icon: "home", setup: ["Curtain motor", "Daily schedule", "Movie mode"], check: "Curtain rail, curtain weight, nearby power, and installation clearance.", pos: { top: "14%", left: "74%" } },
-        { id: "bedroom", title: "Bedroom sleep mode", task: "I want lighting, AC, curtains, and night light prepared together.", room: "Bedroom", icon: "moon", setup: ["Bedroom scene", "Sleep mode", "Night light"], check: "Sleep habit, AC setting, bedside control, and late-night route.", pos: { top: "58%", left: "70%" } },
-        { id: "bath", title: "Bathroom sensing and ventilation", task: "I want safer late-night toilet trips and fewer forgotten ventilation fans.", room: "Bathroom / Hallway", icon: "clock", setup: ["Motion light", "Vent timer", "Night assist"], check: "Bathroom switches, fan wiring, sensor angle, and night-light brightness.", pos: { top: "60%", left: "25%" } },
-        { id: "safety", title: "Sensors and alerts", task: "I want to know selected door, window, or movement status.", room: "Key points", icon: "shield", setup: ["Door/window sensor", "Phone alert", "Safety mode"], check: "Alert frequency, privacy expectations, sensor locations, and family acceptance.", pos: { top: "76%", left: "46%" } },
+        {
+          step: "01",
+          title: "Living moments",
+          body: "We first understand the real moments of the day, such as waking up, returning home, sleeping or leaving.",
+        },
+        {
+          step: "02",
+          title: "Scene logic",
+          body: "Those moments become room logic: lighting, curtains, comfort, reminders and safety conditions.",
+        },
+        {
+          step: "03",
+          title: "System configuration",
+          body: "Then we choose suitable device categories, control methods, sensors and installation priorities.",
+        },
+        {
+          step: "04",
+          title: "Fallback and budget",
+          body: "Manual fallback stays included, and the solution becomes a phased budget direction.",
+        },
       ];
 
-  const [active, setActive] = useState(featureMap[1].id);
-  const current = featureMap.find((item) => item.id === active) || featureMap[0];
+  const systemComponents = isZh
+    ? [
+        {
+          title: "\u71c8\u5149\u8207\u958b\u95dc",
+          body: "\u4e3b\u71c8\u3001\u6c23\u6c1b\u71c8\u3001\u591c\u9593\u8def\u5f91\u71c8\u3001\u5834\u666f\u6309\u9215\u548c\u624b\u52d5\u958b\u95dc\u898f\u5283\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u4e0d\u53ea\u662f\u958b\u95dc\uff0c\u800c\u662f\u4e0d\u540c\u6642\u9593\u548c\u6d3b\u52d5\u7684\u71c8\u5149\u72c0\u614b\u3002",
+        },
+        {
+          title: "\u7a97\u7c3e\u8207\u906e\u967d",
+          body: "\u96fb\u52d5\u7a97\u7c3e\u3001\u65e5\u5149\u8abf\u7bc0\u3001\u79c1\u96b1\u5834\u666f\u3001\u5165\u7761\u95dc\u7a97\u7c3e\u548c\u897f\u66ec\u8655\u7406\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u628a\u65e5\u5149\u3001\u666f\u89c0\u3001\u79c1\u96b1\u548c\u8212\u9069\u5ea6\u4e00\u8d77\u8003\u616e\u3002",
+        },
+        {
+          title: "\u8212\u9069\u8207\u901a\u98a8",
+          body: "\u51b7\u6c23\u3001\u98a8\u6247\u3001\u6d74\u5ba4\u901a\u98a8\u3001\u6fd5\u5ea6\u56de\u61c9\u3001\u6eab\u5ea6\u7bc0\u594f\u548c\u4f5c\u606f\u9023\u52d5\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u8b93\u8a2d\u5099\u914d\u5408\u4eba\u7684\u4f5c\u606f\uff0c\u800c\u4e0d\u662f\u8981\u4eba\u4e0d\u65b7\u624b\u52d5\u8abf\u6574\u3002",
+        },
+        {
+          title: "\u611f\u61c9\u8207\u5b89\u5168",
+          body: "\u9580\u7a97\u611f\u61c9\u3001\u52d5\u4f5c\u611f\u61c9\u3001\u591c\u8d77\u8def\u5f91\u3001\u6d74\u5ba4\u63d0\u9192\u3001Away Mode \u548c\u7c21\u6613\u7570\u5e38\u901a\u77e5\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u63d0\u9192\u61c9\u8a72\u6709\u7528\uff0c\u4e0d\u61c9\u8b8a\u6210\u8a0a\u606f\u566a\u97f3\u3002",
+        },
+        {
+          title: "\u5bf5\u7269 / \u9577\u8005\u652f\u63f4",
+          body: "\u9060\u7aef\u67e5\u770b\u3001\u6eab\u5ea6\u4fdd\u8b77\u3001\u901a\u98a8\u3001\u5582\u98df\u98f2\u6c34\u63d0\u9192\u3001\u591c\u9593\u8f14\u52a9\u548c\u7570\u5e38\u6d3b\u52d5\u63d0\u793a\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u652f\u63f4\u61c9\u8a72\u6eab\u548c\u3001\u5be6\u7528\uff0c\u800c\u4e0d\u662f\u904e\u5ea6\u76e3\u63a7\u3002",
+        },
+        {
+          title: "\u4e2d\u5fc3\u3001Wi-Fi \u8207\u63a7\u5236",
+          body: "\u667a\u80fd\u4e2d\u5fc3\u3001Wi-Fi \u8986\u84cb\u3001\u624b\u6a5f App\u3001\u5834\u666f\u6309\u9215\u3001\u8a9e\u97f3\u9078\u9805\u548c\u5bb6\u4eba\u6b0a\u9650\u4ea4\u4ed8\u3002",
+          design: "\u8a2d\u8a08\u91cd\u9ede\uff1a\u7cfb\u7d71\u8981\u6613\u7ba1\u7406\u3001\u6613\u7dad\u8b77\uff0c\u4e26\u4fdd\u7559\u624b\u52d5\u5099\u7528\u3002",
+        },
+      ]
+    : [
+        {
+          title: "Lighting and switches",
+          body: "Main lights, ambience lights, night paths, scene buttons and manual switch planning.",
+          design: "Design focus: not just on/off control, but lighting states for different times and activities.",
+        },
+        {
+          title: "Curtains and shading",
+          body: "Motorized curtains, daylight control, privacy scenes, sleep routines and glare management.",
+          design: "Design focus: daylight, view, privacy and comfort should be planned together.",
+        },
+        {
+          title: "Comfort and ventilation",
+          body: "Air-conditioning, fans, bathroom ventilation, humidity response, temperature rhythm and daily routines.",
+          design: "Design focus: devices should follow human routines, not require constant manual adjustment.",
+        },
+        {
+          title: "Sensors and safety",
+          body: "Door/window sensors, motion sensors, night paths, bathroom support, Away Mode and simple alerts.",
+          design: "Design focus: alerts should be useful, not become notification noise.",
+        },
+        {
+          title: "Pet / elder support",
+          body: "Remote check-in, temperature protection, ventilation, feeding/water reminders, night support and activity awareness.",
+          design: "Design focus: support should be gentle and practical, not over-surveillance.",
+        },
+        {
+          title: "Hub, Wi-Fi and control",
+          body: "Smart hub, Wi-Fi coverage, mobile app, scene buttons, optional voice control and family account handover.",
+          design: "Design focus: the system should be manageable, maintainable and backed up by manual controls.",
+        },
+      ];
 
   return (
-    <>
-      <PageHero
-        eyebrow={t.solutionsPage.eyebrow}
-        title={language === "zh" ? "在一張圖上看懂：你想屋企做到甚麼。" : "See the smart-home setup on one apartment diagram."}
-        body={language === "zh" ? "這頁把原本的 Solutions 和圖解合併：先點選單位位置，再看對應生活需求、可能設定及安裝前要確認的事項。" : "This merges the old Solutions page and the isometric diagram: select a point in the apartment, then see the related life task, possible setup, and what must be checked before installation."}
-        primary={t.common.continuePackages}
-        secondary={t.nav.scenarios}
-        onPrimary={() => go("estimate")}
-        onSecondary={() => go("scenarios")}
-      />
+    <main className="solutions-system-page">
+      <section className="solutions-system-hero">
+        <div className="solutions-system-hero__copy">
+          <p className="solutions-system-eyebrow">{copy.heroEyebrow}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p>{copy.heroBody}</p>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 lg:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:items-start">
-          <Card className="overflow-hidden p-0 lg:sticky lg:top-24">
-            <div className="merged-iso-shell">
-              <div className="merged-iso-intro">
-                <p>{language === "zh" ? "Interactive feature map" : "Interactive feature map"}</p>
-                <h2>{language === "zh" ? "點選位置，理解智能功能。" : "Click a point to understand the feature."}</h2>
+          <div className="solutions-system-hero__actions">
+            <button type="button" className="btn-primary" onClick={() => go && go("estimate")}>
+              {copy.primaryCta}
+              <Icon name="arrowRight" className="h-4 w-4" />
+            </button>
+            <button type="button" className="btn-secondary" onClick={() => go && go("scenarios")}>
+              {copy.secondaryCta}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="solutions-map-section">
+        <div className="solutions-section-heading">
+          <p>{copy.diagramEyebrow}</p>
+          <h2>{copy.diagramTitle}</h2>
+          <span>{copy.diagramBody}</span>
+        </div>
+
+        <div className="solutions-map-shell">
+          <div className="solutions-iso-stage" aria-label={copy.diagramTitle}>
+            <div className="solutions-iso-house">
+              <div className="solutions-iso-floor solutions-iso-floor--living">
+                <span>Living</span>
+              </div>
+              <div className="solutions-iso-floor solutions-iso-floor--bedroom">
+                <span>Bedroom</span>
+              </div>
+              <div className="solutions-iso-floor solutions-iso-floor--kitchen">
+                <span>Kitchen</span>
+              </div>
+              <div className="solutions-iso-floor solutions-iso-floor--bath">
+                <span>Bath</span>
+              </div>
+              <div className="solutions-iso-floor solutions-iso-floor--entry">
+                <span>Entry</span>
               </div>
 
-              <div className="merged-iso-stage">
-                <div className="iso-floor iso-living" />
-                <div className="iso-floor iso-entry" />
-                <div className="iso-floor iso-bedroom" />
-                <div className="iso-floor iso-bathroom" />
-                <div className="iso-floor iso-study" />
+              <div className="solutions-iso-wall solutions-iso-wall--left" />
+              <div className="solutions-iso-wall solutions-iso-wall--right" />
+              <div className="solutions-iso-roof" />
 
-                <div className="iso-wall iso-wall-top" />
-                <div className="iso-wall iso-wall-mid" />
-                <div className="iso-wall iso-wall-right" />
-
-                <div className="iso-furniture iso-sofa" />
-                <div className="iso-furniture iso-tv" />
-                <div className="iso-furniture iso-bed" />
-                <div className="iso-furniture iso-table" />
-                <div className="iso-furniture iso-cabinet" />
-
-                {featureMap.map((feature) => (
-                  <button
-                    key={feature.id}
-                    onClick={() => setActive(feature.id)}
-                    className={`iso-hotspot ${active === feature.id ? "iso-hotspot-active" : ""}`}
-                    style={{ top: feature.pos.top, left: feature.pos.left }}
-                    aria-label={feature.title}
-                  >
-                    <span className="iso-hotspot-dot"><Icon name={feature.icon} className="h-3.5 w-3.5" /></span>
-                    <span className="iso-hotspot-label">{feature.title}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </Card>
-
-          <div className="grid gap-4">
-            <Card className="p-6">
-              <div className="mb-5 flex items-start gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200"><Icon name={current.icon} className="h-6 w-6" /></span>
-                <div>
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{current.room}</p>
-                  <h2 className="text-2xl font-semibold md:text-3xl">{current.title}</h2>
-                  <p className="mt-3 text-base leading-7 text-slate-200">{current.task}</p>
-                </div>
-              </div>
-
-              <div className="grid gap-3">
-                <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-4">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">{t.solutionsPage.setup}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {current.setup.map((item) => <SmartThingChip key={item} label={item} />)}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-200">{t.solutionsPage.check}</p>
-                  {current.check}
-                </div>
-              </div>
-            </Card>
-
-            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-1">
-              {featureMap.map((feature) => (
+              {hotspots.map((hotspot) => (
                 <button
-                  key={feature.id}
-                  onClick={() => setActive(feature.id)}
-                  className={`group rounded-[1.3rem] border p-4 text-left transition ${active === feature.id ? "border-cyan-300/70 bg-cyan-300/10" : "border-white/10 bg-white/[0.045] hover:bg-white/[0.08]"}`}
+                  key={hotspot.id}
+                  type="button"
+                  className={hotspotActive(hotspot) ? "solutions-hotspot solutions-hotspot--active" : "solutions-hotspot"}
+                  style={{ left: hotspot.x + "%", top: hotspot.y + "%" }}
+                  aria-label={copy.hotspotLabels[hotspot.id]}
+                  title={copy.hotspotLabels[hotspot.id]}
                 >
-                  <div className="mb-3 flex items-start justify-between gap-4">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-cyan-200"><Icon name={feature.icon} className="h-5 w-5" /></span>
-                    <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400">{feature.room}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold">{feature.task}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">{feature.title}</p>
+                  <span />
+                  <em>{copy.hotspotLabels[hotspot.id]}</em>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <aside className="solutions-map-control">
+            <div>
+              <p>{activeTab.label}</p>
+              <h3>{activeTab.note}</h3>
+            </div>
+
+            <div className="solutions-map-tabs">
+              {copy.tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveSystem(tab.id)}
+                  className={activeSystem === tab.id ? "solutions-map-tab solutions-map-tab--active" : "solutions-map-tab"}
+                >
+                  {tab.label}
                 </button>
               ))}
             </div>
 
-            <Card className="grid gap-5 p-6 md:grid-cols-[1fr_auto] md:items-center">
+            <div className="solutions-map-highlights">
+              <span>{isZh ? "\u76ee\u524d\u9ad8\u4eae" : "Highlighted points"}</span>
               <div>
-                <h3 className="text-2xl font-semibold">{language === "zh" ? "圖上了解後，再查看起步方案。" : "After the map, continue to starting packages."}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{language === "zh" ? "這頁不放價錢，避免客戶未理解範圍就只看價格。估算只放在方案頁。" : "This page avoids pricing so customers understand the scope first. Estimates only appear on the package page."}</p>
+                {activeHotspotList.slice(0, 6).map((label) => (
+                  <em key={label}>{label}</em>
+                ))}
               </div>
-              <button onClick={() => go("estimate")} className="btn-primary justify-center">{t.common.continuePackages}<Icon name="arrow" className="h-4 w-4" /></button>
-            </Card>
-          </div>
+            </div>
+          </aside>
         </div>
       </section>
-    </>
+
+      <section className="solutions-process-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u8a2d\u8a08\u6d41\u7a0b" : "Design process"}</p>
+          <h2>{isZh ? "\u7531\u751f\u6d3b\u5230\u7cfb\u7d71\uff0c\u518d\u5230\u9810\u7b97\u65b9\u5411\u3002" : "From daily life to system logic, then to budget direction."}</h2>
+          <span>{isZh ? "\u9019\u500b\u6d41\u7a0b\u8b93\u667a\u80fd\u5bb6\u5c45\u4e0d\u6703\u8b8a\u6210\u96f6\u6563\u63a1\u8cfc\uff0c\u800c\u662f\u4e00\u5957\u6709\u7bc0\u594f\u3001\u6709\u5099\u7528\u3001\u53ef\u5206\u968e\u6bb5\u5be6\u884c\u7684\u65b9\u6848\u3002" : "This flow prevents random gadget buying and turns the home into a planned, usable and phased smart-living system."}</span>
+        </div>
+
+        <div className="solutions-process-track">
+          {designFlow.map((item) => (
+            <article key={item.step} className="solutions-process-card">
+              <span>{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="solutions-components-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u7cfb\u7d71\u5143\u4ef6" : "System components"}</p>
+          <h2>{isZh ? "\u6211\u5011\u5354\u8abf\u7684\u4e0d\u53ea\u662f\u8a2d\u5099\uff0c\u800c\u662f\u8a2d\u5099\u4e4b\u9593\u7684\u95dc\u4fc2\u3002" : "We coordinate not just devices, but the relationships between them."}</h2>
+          <span>{isZh ? "\u4ee5\u4e0b\u662f\u4e00\u500b\u667a\u80fd\u751f\u6d3b\u65b9\u6848\u53ef\u80fd\u5305\u542b\u7684\u7cfb\u7d71\u985e\u5225\u3002\u771f\u6b63\u7684\u91cd\u9ede\u4e0d\u662f\u8d8a\u591a\u8d8a\u597d\uff0c\u800c\u662f\u9078\u5c0d\u4f60\u7684\u751f\u6d3b\u6709\u7528\u7684\u90e8\u5206\u3002" : "These are the system categories a smart-living plan may include. The goal is not to add more devices, but to choose the parts that are useful for your routines."}</span>
+        </div>
+
+        <div className="solutions-components-grid">
+          {systemComponents.map((item) => (
+            <article key={item.title} className="solutions-component-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <em>{item.design}</em>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="solutions-layers-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u7cfb\u7d71\u5c64" : "System layers"}</p>
+          <h2>{copy.layersTitle}</h2>
+          <span>{copy.layersBody}</span>
+        </div>
+
+        <div className="solutions-layer-grid">
+          {copy.layers.map((layer, index) => (
+            <article key={layer.title} className="solutions-layer-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{layer.title}</h3>
+              <p>{layer.body}</p>
+              <em>{layer.package}</em>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="solutions-room-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u623f\u9593\u61c9\u7528" : "Room examples"}</p>
+          <h2>{copy.roomsTitle}</h2>
+        </div>
+
+        <div className="solutions-room-grid">
+          {copy.rooms.map((room) => (
+            <article key={room.room} className="solutions-room-card">
+              <h3>{room.room}</h3>
+              <p>{room.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="solutions-principles-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u8a2d\u8a08\u539f\u5247" : "Design principles"}</p>
+          <h2>{copy.principlesTitle}</h2>
+        </div>
+
+        <div className="solutions-principle-grid">
+          {copy.principles.map((principle) => (
+            <article key={principle.title} className="solutions-principle-card">
+              <h3>{principle.title}</h3>
+              <p>{principle.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="solutions-package-section">
+        <div className="solutions-section-heading">
+          <p>{isZh ? "\u65b9\u6848\u9023\u63a5" : "Package path"}</p>
+          <h2>{copy.packagesTitle}</h2>
+        </div>
+
+        <div className="solutions-package-grid">
+          {copy.packages.map((item) => (
+            <article key={item.title} className="solutions-package-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <button type="button" className="solutions-package-cta" onClick={() => go && go("estimate")}>
+          {copy.packageCta}
+          <Icon name="arrowRight" className="h-4 w-4" />
+        </button>
+      </section>
+
+      <section className="solutions-final-cta">
+        <div>
+          <h2>{copy.finalTitle}</h2>
+          <p>{copy.finalBody}</p>
+        </div>
+
+        <button type="button" className="btn-primary" onClick={() => go && go("estimate")}>
+          {copy.primaryCta}
+          <Icon name="arrowRight" className="h-4 w-4" />
+        </button>
+      </section>
+    </main>
   );
 }
 
