@@ -6826,3 +6826,96 @@ html {
 }
 
 /* === BOSONSMART HOME VIBE OVERFLOW FIX v1 END === */
+
+/* === BOSONSMART SOLUTIONS MOBILE POLISH v1 START === */
+
+/*
+  Solutions screenshot review fixes:
+  - Improve dark-card heading contrast.
+  - Put isometric diagram before controls on mobile.
+  - Improve final CTA readability.
+*/
+
+/* Dark system-map control panel contrast */
+#root .solutions-map-control,
+#root .solutions-map-control * {
+  color-scheme: dark;
+}
+
+#root .solutions-map-control h3,
+#root .solutions-map-control > div:first-child h3 {
+  color: rgba(255, 255, 255, 0.94) !important;
+  text-shadow: none !important;
+}
+
+#root .solutions-map-control > div:first-child p {
+  color: rgba(103, 232, 249, 0.94) !important;
+}
+
+#root .solutions-map-control .solutions-map-highlights > span {
+  color: rgba(248, 250, 252, 0.58) !important;
+}
+
+/* Final CTA dark panel contrast */
+#root .solutions-final-cta h2 {
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: none !important;
+}
+
+#root .solutions-final-cta p {
+  color: rgba(248, 250, 252, 0.82) !important;
+}
+
+/* Mobile: show the diagram first, then the controls. */
+@media (max-width: 980px) {
+  #root .solutions-map-control {
+    order: 2 !important;
+  }
+
+  #root .solutions-iso-stage {
+    order: 1 !important;
+  }
+}
+
+/* Mobile: make the control card slightly less heavy after the diagram. */
+@media (max-width: 720px) {
+  #root .solutions-map-control {
+    padding: 0.9rem !important;
+  }
+
+  #root .solutions-map-control h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  #root .solutions-map-tabs {
+    gap: 0.42rem !important;
+  }
+
+  #root .solutions-map-tab {
+    border-radius: 0.82rem !important;
+    padding: 0.66rem 0.72rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  #root .solutions-map-highlights {
+    border-radius: 0.86rem !important;
+    padding: 0.72rem !important;
+  }
+
+  #root .solutions-map-highlights em {
+    font-size: 0.6rem !important;
+  }
+
+  #root .solutions-final-cta {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  #root .solutions-final-cta h2 {
+    font-size: clamp(1.55rem, 8vw, 2.4rem) !important;
+  }
+}
+
+/* === BOSONSMART SOLUTIONS MOBILE POLISH v1 END === */
