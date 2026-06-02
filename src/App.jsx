@@ -1612,7 +1612,7 @@ function HomePage(props) {
     : {
         heroEyebrow: "Smart living design studio",
         heroTitle: "When your home understands your rhythm.",
-        heroBody: "BosonSmart plans daily scenes, comfort, privacy, safety and manual fallback controls for Hong Kong homes ? so smart living feels calm, useful and natural.",
+        heroBody: "BosonSmart plans daily scenes, comfort, privacy, safety and manual fallback controls for Hong Kong homes, so smart living feels calm, useful and natural.",
         primary: "Build estimate",
         secondary: "Explore scenarios",
         philosophyTitle: "Technology should elevate, not distract.",
@@ -1647,6 +1647,60 @@ function HomePage(props) {
 
   const activeVibeCopy = copy.vibes[activeVibe];
 
+  const homeRoutes = isZh
+    ? [
+        {
+          id: "scenarios",
+          step: "01",
+          title: "\u770b\u751f\u6d3b\u60c5\u5883",
+          body: "\u5148\u611f\u53d7\u65e9\u6668\u3001\u591c\u9593\u3001\u805a\u6703\u548c\u5bf5\u7269\u6a21\u5f0f\u5982\u4f55\u5728\u771f\u5be6\u751f\u6d3b\u4e2d\u904b\u4f5c\u3002",
+          cta: "\u63a2\u7d22\u60c5\u5883",
+          target: "scenarios",
+        },
+        {
+          id: "solutions",
+          step: "02",
+          title: "\u7406\u89e3\u7cfb\u7d71",
+          body: "\u67e5\u770b\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u8212\u9069\u3001\u611f\u61c9\u548c\u5099\u7528\u63a7\u5236\u5982\u4f55\u4e92\u76f8\u9023\u63a5\u3002",
+          cta: "\u67e5\u770b\u65b9\u6848",
+          target: "solutions",
+        },
+        {
+          id: "estimate",
+          step: "03",
+          title: "\u5efa\u7acb\u9810\u7b97",
+          body: "\u7528\u9078\u64c7\u5361\u7247\u627e\u5230\u9069\u5408\u4f60\u7684\u8d77\u6b65\u65b9\u6848\u548c\u9810\u7b97\u65b9\u5411\u3002",
+          cta: "\u958b\u59cb\u4f30\u7b97",
+          target: "estimate",
+        },
+      ]
+    : [
+        {
+          id: "scenarios",
+          step: "01",
+          title: "Explore scenarios",
+          body: "See how morning, night, gathering and pet modes work in real daily life.",
+          cta: "View scenarios",
+          target: "scenarios",
+        },
+        {
+          id: "solutions",
+          step: "02",
+          title: "Understand the system",
+          body: "Learn how lighting, curtains, comfort, sensors and fallback controls connect.",
+          cta: "View solutions",
+          target: "solutions",
+        },
+        {
+          id: "estimate",
+          step: "03",
+          title: "Build an estimate",
+          body: "Use selectable cards to find your starting package and budget direction.",
+          cta: "Start estimate",
+          target: "estimate",
+        },
+      ];
+
   return (
     <main className="home-ambient-page">
       <section className="home-ambient-hero">
@@ -1676,36 +1730,41 @@ function HomePage(props) {
               {copy.secondary}
             </button>
           </div>
+
+          <div className="home-ambient-hero-questions" aria-label={isZh ? "\u5e38\u898b\u554f\u984c" : "Common smart home questions"}>
+            {copy.pains.map((item) => (
+              <p key={item.title} className="home-ambient-hero-question">
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="home-ambient-philosophy">
-        <h2>{copy.philosophyTitle}</h2>
-        <div className="home-ambient-pain-grid">
-          {copy.pains.map((item) => (
-            <article key={item.title} className="home-ambient-pain-card">
-              <div className="home-ambient-card-icon">
-                <Icon name="spark" className="h-5 w-5" />
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="home-ambient-spheres">
-        <div className="home-ambient-section-heading">
-          <p>{isZh ? "\u8a2d\u8a08\u7bc4\u570d" : "Consulting spheres"}</p>
-          <h2>{copy.spheresTitle}</h2>
+      <section className="home-ambient-route-strip" aria-label={isZh ? "\u7db2\u7ad9\u8def\u5f91" : "Site journey"}>
+        <div className="home-ambient-route-heading">
+          <p>{isZh ? "\u7c21\u55ae\u8d77\u6b65" : "Simple path"}</p>
+          <h2>{isZh ? "3 \u6b65\u5efa\u7acb\u667a\u80fd\u5bb6\u5c45" : "3 Steps to a Smart Home!"}</h2>
+          <span>{isZh ? "\u5148\u611f\u53d7\u751f\u6d3b\u60c5\u5883\uff0c\u518d\u7406\u89e3\u7cfb\u7d71\uff0c\u6700\u5f8c\u5efa\u7acb\u9069\u5408\u4f60\u7684\u9810\u7b97\u65b9\u5411\u3002" : "Explore the feeling, understand the system, then build a practical estimate direction."}</span>
         </div>
 
-        <div className="home-ambient-sphere-grid">
-          {copy.spheres.map((item) => (
-            <article key={item.title} className="home-ambient-sphere-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
+        <div className="home-ambient-route-grid">
+          {homeRoutes.map((route) => (
+            <button
+              key={route.id}
+              type="button"
+              onClick={() => go && go(route.target)}
+              className={"home-ambient-route-card home-ambient-route-card--" + route.id}
+            >
+              <span>{route.step}</span>
+              <h2>{route.title}</h2>
+              <p>{route.body}</p>
+              <em>
+                {route.cta}
+                <Icon name="arrowRight" className="h-4 w-4" />
+              </em>
+            </button>
           ))}
         </div>
       </section>
@@ -1739,23 +1798,6 @@ function HomePage(props) {
           <div className={"home-ambient-vibe-preview home-ambient-vibe-preview--" + activeVibe} />
           <h3>{activeVibeCopy.title}</h3>
           <p>{activeVibeCopy.body}</p>
-        </div>
-      </section>
-
-      <section className="home-ambient-sanctuaries">
-        <div className="home-ambient-section-heading">
-          <p>{isZh ? "\u623f\u9593\u60c5\u5883" : "Room sanctuaries"}</p>
-          <h2>{copy.sanctuariesTitle}</h2>
-        </div>
-
-        <div className="home-ambient-room-grid">
-          {copy.rooms.map((room) => (
-            <article key={room.title} className="home-ambient-room-card">
-              <div />
-              <h3>{room.title}</h3>
-              <p>{room.body}</p>
-            </article>
-          ))}
         </div>
       </section>
 

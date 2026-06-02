@@ -6144,3 +6144,485 @@ html {
 }
 
 /* === BOSONSMART HOME AMBIENT STYLE v1 END === */
+
+/* === BOSONSMART HOME FRONT DOOR v1 START === */
+
+/*
+  Home page role refinement:
+  Home should act as a front door: brand promise + clear next-step routing.
+*/
+
+#root .home-ambient-route-strip {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+#root .home-ambient-route-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(74, 63, 45, 0.12);
+  border-radius: 1.55rem;
+  padding: 1.05rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.66), transparent 12rem),
+    linear-gradient(145deg, rgba(255, 253, 248, 0.86), rgba(235, 220, 196, 0.56));
+  color: #1d1a15;
+  text-align: left;
+  cursor: pointer;
+  box-shadow:
+    0 20px 54px rgba(74, 63, 45, 0.075),
+    inset 0 1px 0 rgba(255,255,255,0.88);
+  transition:
+    transform 140ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+#root .home-ambient-route-card::before {
+  content: "";
+  position: absolute;
+  right: -2.6rem;
+  top: -2.6rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.08);
+}
+
+#root .home-ambient-route-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 118, 110, 0.18);
+  box-shadow:
+    0 26px 68px rgba(74, 63, 45, 0.11),
+    inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+#root .home-ambient-route-card:active {
+  transform: translateY(0) scale(0.992);
+}
+
+#root .home-ambient-route-card > span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(16, 32, 30, 0.08);
+  color: #10201e;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+#root .home-ambient-route-card h2 {
+  position: relative;
+  margin: 0.78rem 0 0;
+  color: #1d1a15;
+  font-size: clamp(1.12rem, 2vw, 1.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  font-weight: 830;
+}
+
+#root .home-ambient-route-card p {
+  position: relative;
+  margin: 0.52rem 0 0;
+  color: rgba(29, 26, 21, 0.64);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#root .home-ambient-route-card em {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: 0.85rem;
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 860;
+}
+
+#root .home-ambient-route-card--estimate {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(103, 232, 249, 0.18), transparent 12rem),
+    linear-gradient(145deg, rgba(240, 253, 250, 0.9), rgba(255, 253, 248, 0.66));
+}
+
+#root .home-ambient-philosophy {
+  padding-top: clamp(2rem, 5vw, 4rem) !important;
+}
+
+@media (max-width: 980px) {
+  #root .home-ambient-route-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .home-ambient-route-strip {
+    padding-left: 0.82rem;
+    padding-right: 0.82rem;
+    gap: 0.72rem;
+  }
+
+  #root .home-ambient-route-card {
+    border-radius: 1.22rem;
+    padding: 1rem;
+  }
+
+  #root .home-ambient-route-card h2 {
+    font-size: 1.18rem;
+  }
+
+  #root .home-ambient-route-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* === BOSONSMART HOME FRONT DOOR v1 END === */
+
+/* === BOSONSMART HOME HERO WHISPERS v1 START === */
+
+/*
+  Home hero whispers:
+  Move the three concern cards into the hero bottom area.
+  They should feel like quiet guidance, not a full section.
+*/
+
+#root .home-ambient-hero {
+  position: relative;
+}
+
+#root .home-ambient-hero-whispers {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: clamp(1rem, 2.6vw, 2rem);
+  width: min(1040px, calc(100% - 2rem));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.62rem;
+  pointer-events: auto;
+}
+
+#root .home-ambient-hero-whisper {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.58rem;
+  align-items: start;
+  border: 1px solid rgba(74, 63, 45, 0.1);
+  border-radius: 1.25rem;
+  padding: 0.78rem;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 248, 0.64), rgba(255, 253, 248, 0.38));
+  box-shadow:
+    0 16px 42px rgba(74, 63, 45, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+
+#root .home-ambient-hero-whisper > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  background: rgba(16, 32, 30, 0.08);
+  color: #10201e;
+}
+
+#root .home-ambient-hero-whisper h2 {
+  margin: 0;
+  color: rgba(29, 26, 21, 0.88);
+  font-size: 0.9rem;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 840;
+}
+
+#root .home-ambient-hero-whisper p {
+  margin: 0.28rem 0 0;
+  color: rgba(29, 26, 21, 0.58);
+  font-size: 0.72rem;
+  line-height: 1.34;
+}
+
+#root .home-ambient-philosophy,
+#root .home-ambient-spheres {
+  display: none !important;
+}
+
+/* After removing the old sections, keep the next section breathing naturally. */
+#root .home-ambient-vibe {
+  padding-top: clamp(2rem, 5vw, 4rem) !important;
+}
+
+@media (max-width: 980px) {
+  #root .home-ambient-hero-whispers {
+    width: min(680px, calc(100% - 1.64rem));
+    grid-template-columns: 1fr;
+    gap: 0.46rem;
+  }
+
+  #root .home-ambient-hero-whisper {
+    padding: 0.68rem;
+    border-radius: 1rem;
+  }
+
+  #root .home-ambient-hero-whisper p {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .home-ambient-hero {
+    min-height: calc(100dvh - var(--boson-real-header-h, 68px)) !important;
+  }
+
+  #root .home-ambient-hero__copy {
+    padding-bottom: 10.5rem !important;
+  }
+
+  #root .home-ambient-hero-whispers {
+    left: 0.82rem;
+    right: 0.82rem;
+    bottom: 0.82rem;
+    width: auto;
+    transform: none;
+  }
+
+  #root .home-ambient-hero-whisper {
+    grid-template-columns: auto minmax(0, 1fr);
+    background:
+      linear-gradient(145deg, rgba(255, 253, 248, 0.7), rgba(255, 253, 248, 0.44));
+  }
+
+  #root .home-ambient-hero-whisper > span {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  #root .home-ambient-hero-whisper h2 {
+    font-size: 0.82rem;
+  }
+}
+
+/* === BOSONSMART HOME HERO WHISPERS v1 END === */
+
+/* === BOSONSMART HOME SUBTLE HERO QUESTIONS v1 START === */
+
+/*
+  Hero questions: no bubbles, no bottom alignment.
+  These should read like quiet editorial whispers below the CTA.
+*/
+
+#root .home-ambient-hero-whispers,
+#root .home-ambient-hero-whisper {
+  display: none !important;
+}
+
+#root .home-ambient-hero-questions {
+  width: min(760px, 100%);
+  margin: clamp(1rem, 2vw, 1.35rem) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.8vw, 1.15rem);
+  text-align: left;
+}
+
+#root .home-ambient-hero-question {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+#root .home-ambient-hero-question strong {
+  display: block;
+  color: rgba(29, 26, 21, 0.66);
+  font-size: clamp(0.78rem, 1vw, 0.88rem);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+  font-weight: 680;
+}
+
+#root .home-ambient-hero-question span {
+  display: block;
+  margin-top: 0.28rem;
+  color: rgba(29, 26, 21, 0.44);
+  font-size: clamp(0.68rem, 0.9vw, 0.76rem);
+  line-height: 1.38;
+  font-weight: 420;
+}
+
+@media (max-width: 820px) {
+  #root .home-ambient-hero__copy {
+    padding-bottom: clamp(3.2rem, 9vh, 5rem) !important;
+  }
+
+  #root .home-ambient-hero-questions {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 0.52rem;
+    margin-top: 1rem;
+  }
+
+  #root .home-ambient-hero-question {
+    max-width: 30rem;
+  }
+
+  #root .home-ambient-hero-question strong {
+    font-size: 0.78rem;
+  }
+
+  #root .home-ambient-hero-question span {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 520px) {
+  #root .home-ambient-hero-question span {
+    display: none;
+  }
+
+  #root .home-ambient-hero-questions {
+    gap: 0.38rem;
+  }
+}
+
+/* === BOSONSMART HOME SUBTLE HERO QUESTIONS v1 END === */
+
+/* === BOSONSMART HOME PANEL SECTIONS v1 START === */
+
+/*
+  Home page panel rhythm:
+  Hero → 3 Steps → Vibe personalizer → Final CTA.
+*/
+
+#root .home-ambient-route-strip {
+  min-height: calc(100dvh - var(--boson-real-header-h, 68px));
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(4.2rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem) !important;
+
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+#root .home-ambient-route-heading {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#root .home-ambient-route-heading p {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 63, 45, 0.12);
+  padding: 0.38rem 0.72rem;
+  background: rgba(255, 253, 248, 0.68);
+  color: #6b5a3e;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+#root .home-ambient-route-heading h2 {
+  margin: 0;
+  color: #1d1a15;
+  font-size: clamp(2.45rem, 6vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.074em;
+  font-weight: 820;
+}
+
+#root .home-ambient-route-heading span {
+  display: block;
+  max-width: 660px;
+  margin: 0.9rem auto 0;
+  color: rgba(29, 26, 21, 0.62);
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  line-height: 1.58;
+}
+
+#root .home-ambient-route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+#root .home-ambient-vibe {
+  min-height: calc(100dvh - var(--boson-real-header-h, 68px));
+  align-content: center;
+  padding-top: clamp(4.2rem, 8vw, 7rem) !important;
+  padding-bottom: clamp(4.2rem, 8vw, 7rem) !important;
+}
+
+#root .home-ambient-final {
+  min-height: calc(100dvh - var(--boson-real-header-h, 68px));
+  align-content: center;
+  margin-top: 0 !important;
+}
+
+/* The old direct grid rules for route strip should no longer affect layout. */
+#root .home-ambient-route-strip > .home-ambient-route-card {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  #root .home-ambient-route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #root .home-ambient-route-strip,
+  #root .home-ambient-vibe,
+  #root .home-ambient-final {
+    min-height: auto;
+    padding-top: clamp(3.2rem, 8vh, 5rem) !important;
+    padding-bottom: clamp(3.2rem, 8vh, 5rem) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .home-ambient-route-strip {
+    padding-left: 0.82rem !important;
+    padding-right: 0.82rem !important;
+  }
+
+  #root .home-ambient-route-heading {
+    text-align: left;
+    margin: 0;
+  }
+
+  #root .home-ambient-route-heading p {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #root .home-ambient-route-heading h2 {
+    font-size: clamp(2.25rem, 10.5vw, 3.7rem);
+  }
+
+  #root .home-ambient-route-heading span {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* === BOSONSMART HOME PANEL SECTIONS v1 END === */
