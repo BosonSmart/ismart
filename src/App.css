@@ -3550,3 +3550,292 @@ footer {
 }
 
 /* === BOSONSMART REMOVE HORIZONTAL PAUSE v1 END === */
+
+/* === BOSONSMART FASTER SCENARIO MOTION v1 START === */
+
+/*
+  Faster scenario motion tuning.
+  Vertical: quicker than before.
+  Horizontal: much quicker and snappier.
+*/
+
+/* Vertical scene movement */
+#root .scenario-motion-next,
+#root .scenario-motion-prev {
+  animation-duration: 560ms !important;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+#root .scenario-motion-next .scenario-onepage-copy,
+#root .scenario-motion-prev .scenario-onepage-copy,
+#root .scenario-motion-next .scenario-ending-page__inner,
+#root .scenario-motion-prev .scenario-ending-page__inner {
+  animation-duration: 620ms !important;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Horizontal scenario switching: much faster */
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev,
+#root .scenario-motion-mode-next,
+#root .scenario-motion-mode-prev {
+  animation-duration: 360ms !important;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.35, 1) !important;
+  animation-fill-mode: both !important;
+  filter: none !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner,
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation-duration: 320ms !important;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.35, 1) !important;
+  animation-fill-mode: both !important;
+}
+
+/* Keep horizontal movement clean and fast, no blur */
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.96;
+    transform: translate3d(24%, 0, 0) scale(0.999);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.96;
+    transform: translate3d(-8%, 0, 0) scale(0.998);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.96;
+    transform: translate3d(-24%, 0, 0) scale(0.999);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.96;
+    transform: translate3d(8%, 0, 0) scale(0.998);
+    filter: none;
+  }
+}
+
+/* Remove text pause almost completely */
+@keyframes bosonModeCopyIn {
+  from {
+    opacity: 0.92;
+    transform: translate3d(0.12rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.92;
+    transform: translate3d(-0.08rem, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.92;
+    transform: translate3d(0.08rem, 0, 0);
+  }
+}
+
+/* Faster vertical keyframes, still premium */
+@keyframes bosonSceneInFromBottom {
+  from {
+    opacity: 0.42;
+    transform: translate3d(0, 16%, 0) scale(1.008);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonSceneInFromTop {
+  from {
+    opacity: 0.42;
+    transform: translate3d(0, -16%, 0) scale(1.008);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonSceneCopySettle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* === BOSONSMART FASTER SCENARIO MOTION v1 END === */
+
+/* === BOSONSMART DISABLE HORIZONTAL MODE MOTION v1 START === */
+
+/*
+  Horizontal scenario swipe/scroll removed.
+  Mode buttons still work, but no horizontal transition animation is used.
+*/
+
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev,
+#root .scenario-motion-mode-next,
+#root .scenario-motion-mode-prev,
+#root .scenario-motion-none {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-motion-mode-next .scenario-onepage-copy,
+#root .scenario-motion-mode-prev .scenario-onepage-copy,
+#root .scenario-motion-none .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner,
+#root .scenario-motion-mode-next .scenario-ending-page__inner,
+#root .scenario-motion-mode-prev .scenario-ending-page__inner,
+#root .scenario-motion-none .scenario-ending-page__inner {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* === BOSONSMART DISABLE HORIZONTAL MODE MOTION v1 END === */
+
+/* === BOSONSMART BALANCED VERTICAL MOTION v1 START === */
+
+/*
+  Balanced vertical scene motion.
+  Slower than the current fast version, quicker than the earlier slow version.
+*/
+
+#root .scenario-motion-next,
+#root .scenario-motion-prev {
+  animation-duration: 720ms !important;
+  animation-timing-function: cubic-bezier(0.18, 1, 0.32, 1) !important;
+  animation-fill-mode: both !important;
+}
+
+#root .scenario-motion-next .scenario-onepage-copy,
+#root .scenario-motion-prev .scenario-onepage-copy,
+#root .scenario-motion-next .scenario-ending-page__inner,
+#root .scenario-motion-prev .scenario-ending-page__inner {
+  animation-duration: 820ms !important;
+  animation-timing-function: cubic-bezier(0.18, 1, 0.32, 1) !important;
+  animation-fill-mode: both !important;
+}
+
+@keyframes bosonSceneInFromBottom {
+  from {
+    opacity: 0.34;
+    transform: translate3d(0, 20%, 0) scale(1.01);
+    filter: none;
+  }
+  55% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonSceneInFromTop {
+  from {
+    opacity: 0.34;
+    transform: translate3d(0, -20%, 0) scale(1.01);
+    filter: none;
+  }
+  55% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonSceneCopySettle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.35rem, 0);
+  }
+  18% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* === BOSONSMART BALANCED VERTICAL MOTION v1 END === */

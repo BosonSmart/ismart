@@ -1745,45 +1745,22 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
     }, duration);
   }
 
-  function switchMode(nextMode, direction = 0) {
+  function switchMode(nextMode) {
     if (!nextMode || nextMode === activeMode) return;
-
-    const currentModeIndex = Math.max(0, modes.findIndex((item) => item.id === activeMode));
-    const nextModeIndex = Math.max(0, modes.findIndex((item) => item.id === nextMode));
-
-    let resolvedDirection = direction;
-    if (resolvedDirection === 0) {
-      resolvedDirection = nextModeIndex >= currentModeIndex ? 1 : -1;
-    }
 
     if (modeTransitionTimerRef.current) {
       window.clearTimeout(modeTransitionTimerRef.current);
       modeTransitionTimerRef.current = null;
     }
 
-    setModeTransition({
-      key: Date.now(),
-      direction: resolvedDirection > 0 ? "next" : "prev",
-      outgoingMode: mode,
-      outgoingPageIndex: safePageIndex,
-    });
-
-    setMotionDirection(resolvedDirection > 0 ? "mode-next" : "mode-prev");
+    setModeTransition(null);
+    setMotionDirection("none");
     setActiveMode(nextMode);
     setActiveStep(0);
-
-    modeTransitionTimerRef.current = window.setTimeout(() => {
-      setModeTransition(null);
-      modeTransitionTimerRef.current = null;
-    }, 980);
   }
 
   function switchModeByDirection(direction) {
-    const currentIndex = Math.max(0, modes.findIndex((item) => item.id === activeMode));
-    const nextIndex = (currentIndex + direction + modes.length) % modes.length;
-    const nextMode = modes[nextIndex]?.id;
-
-    switchMode(nextMode, direction);
+    return;
   }
 
   useEffect(() => {
@@ -1821,22 +1798,10 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       if (wheelLockRef.current) return;
 
       moveTo(safePageIndex + direction);
-      lockBriefly(980);
+      lockBriefly(760);
     }
 
     function handleWheel(event) {
-      const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
-
-      if (horizontal && Math.abs(event.deltaX) > 12) {
-        event.preventDefault();
-
-        if (wheelLockRef.current) return;
-
-        switchModeByDirection(event.deltaX > 0 ? 1 : -1);
-        lockBriefly(700);
-        return;
-      }
-
       if (Math.abs(event.deltaY) < 8) return;
 
       event.preventDefault();
@@ -1852,20 +1817,6 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       if (event.key === "ArrowUp" || event.key === "PageUp") {
         event.preventDefault();
         moveByDirection(-1);
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        if (wheelLockRef.current) return;
-        switchModeByDirection(1);
-        lockBriefly(700);
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        if (wheelLockRef.current) return;
-        switchModeByDirection(-1);
-        lockBriefly(700);
       }
     }
 
@@ -1886,15 +1837,6 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       if (!touch) return;
 
       const deltaY = touchStartYRef.current - touch.clientY;
-      const deltaX = touchStartXRef.current - touch.clientX;
-
-      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 42) {
-        if (wheelLockRef.current) return;
-
-        switchModeByDirection(deltaX > 0 ? 1 : -1);
-        lockBriefly(700);
-        return;
-      }
 
       if (Math.abs(deltaY) < 42) return;
 
