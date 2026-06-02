@@ -1714,6 +1714,11 @@ function ScenariosPage(props) {
 function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep, go }) {
   const wheelLockRef = useRef(false);
   const touchStartYRef = useRef(0);
+  const touchStartXRef = useRef(0);
+  const modeTransitionTimerRef = useRef(null);
+
+  const [motionDirection, setMotionDirection] = useState("next");
+  const [modeTransition, setModeTransition] = useState(null);
 
   const summaryIndex = mode.steps.length;
   const safePageIndex = Math.max(0, Math.min(summaryIndex, activeStep));
@@ -1726,19 +1731,59 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
   }
 
   function moveTo(index) {
-    setActiveStep(clampPageIndex(index));
+    const nextIndex = clampPageIndex(index);
+    if (nextIndex === safePageIndex) return;
+
+    setMotionDirection(nextIndex > safePageIndex ? "next" : "prev");
+    setActiveStep(nextIndex);
   }
 
-  function lockBriefly() {
+  function lockBriefly(duration = 980) {
     wheelLockRef.current = true;
     window.setTimeout(() => {
       wheelLockRef.current = false;
-    }, 560);
+    }, duration);
   }
 
-  function switchMode(nextMode) {
+  function switchMode(nextMode, direction = 0) {
+    if (!nextMode || nextMode === activeMode) return;
+
+    const currentModeIndex = Math.max(0, modes.findIndex((item) => item.id === activeMode));
+    const nextModeIndex = Math.max(0, modes.findIndex((item) => item.id === nextMode));
+
+    let resolvedDirection = direction;
+    if (resolvedDirection === 0) {
+      resolvedDirection = nextModeIndex >= currentModeIndex ? 1 : -1;
+    }
+
+    if (modeTransitionTimerRef.current) {
+      window.clearTimeout(modeTransitionTimerRef.current);
+      modeTransitionTimerRef.current = null;
+    }
+
+    setModeTransition({
+      key: Date.now(),
+      direction: resolvedDirection > 0 ? "next" : "prev",
+      outgoingMode: mode,
+      outgoingPageIndex: safePageIndex,
+    });
+
+    setMotionDirection(resolvedDirection > 0 ? "mode-next" : "mode-prev");
     setActiveMode(nextMode);
     setActiveStep(0);
+
+    modeTransitionTimerRef.current = window.setTimeout(() => {
+      setModeTransition(null);
+      modeTransitionTimerRef.current = null;
+    }, 980);
+  }
+
+  function switchModeByDirection(direction) {
+    const currentIndex = Math.max(0, modes.findIndex((item) => item.id === activeMode));
+    const nextIndex = (currentIndex + direction + modes.length) % modes.length;
+    const nextMode = modes[nextIndex]?.id;
+
+    switchMode(nextMode, direction);
   }
 
   useEffect(() => {
@@ -1759,6 +1804,11 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       document.body.classList.remove("boson-onepage-scenario-active");
       window.removeEventListener("resize", syncHeaderHeight);
       window.removeEventListener("orientationchange", syncHeaderHeight);
+
+      if (modeTransitionTimerRef.current) {
+        window.clearTimeout(modeTransitionTimerRef.current);
+        modeTransitionTimerRef.current = null;
+      }
     };
   }, []);
 
@@ -1771,11 +1821,22 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       if (wheelLockRef.current) return;
 
       moveTo(safePageIndex + direction);
-      lockBriefly();
+      lockBriefly(980);
     }
 
     function handleWheel(event) {
-      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+
+      if (horizontal && Math.abs(event.deltaX) > 12) {
+        event.preventDefault();
+
+        if (wheelLockRef.current) return;
+
+        switchModeByDirection(event.deltaX > 0 ? 1 : -1);
+        lockBriefly(700);
+        return;
+      }
+
       if (Math.abs(event.deltaY) < 8) return;
 
       event.preventDefault();
@@ -1792,10 +1853,28 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
         event.preventDefault();
         moveByDirection(-1);
       }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        if (wheelLockRef.current) return;
+        switchModeByDirection(1);
+        lockBriefly(700);
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        if (wheelLockRef.current) return;
+        switchModeByDirection(-1);
+        lockBriefly(700);
+      }
     }
 
     function handleTouchStart(event) {
-      touchStartYRef.current = event.touches?.[0]?.clientY || 0;
+      const touch = event.touches?.[0];
+      if (!touch) return;
+
+      touchStartYRef.current = touch.clientY;
+      touchStartXRef.current = touch.clientX;
     }
 
     function handleTouchMove(event) {
@@ -1803,12 +1882,23 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
     }
 
     function handleTouchEnd(event) {
-      const endY = event.changedTouches?.[0]?.clientY || 0;
-      const delta = touchStartYRef.current - endY;
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
 
-      if (Math.abs(delta) < 42) return;
+      const deltaY = touchStartYRef.current - touch.clientY;
+      const deltaX = touchStartXRef.current - touch.clientX;
 
-      moveByDirection(delta > 0 ? 1 : -1);
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 42) {
+        if (wheelLockRef.current) return;
+
+        switchModeByDirection(deltaX > 0 ? 1 : -1);
+        lockBriefly(700);
+        return;
+      }
+
+      if (Math.abs(deltaY) < 42) return;
+
+      moveByDirection(deltaY > 0 ? 1 : -1);
     }
 
     window.addEventListener("wheel", handleWheel, { passive: false });
@@ -1824,7 +1914,7 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [safePageIndex, summaryIndex, setActiveStep]);
+  }, [safePageIndex, summaryIndex, activeMode, modes, setActiveMode, setActiveStep]);
 
   const activeLanguageText = [
     activeMode || "",
@@ -1844,22 +1934,11 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
         eyebrow: "\u60c5\u5883\u7e3d\u7d50",
         title: "\u7531\u65e5\u5e38\u751f\u6d3b\u6d41\u7a0b\uff0c\u6574\u7406\u6210\u53ef\u843d\u5730\u7684\u667a\u80fd\u5bb6\u5c45\u898f\u5283\u3002",
         body: "\u4ee5\u4e0a\u60c5\u5883\u5c55\u793a\u7684\u4e0d\u53ea\u662f\u55ae\u4e00\u8a2d\u5099\uff0c\u800c\u662f\u628a\u71c8\u5149\u3001\u7a97\u7c3e\u3001\u8212\u9069\u5ea6\u3001\u611f\u61c9\u3001\u5b89\u5168\u548c\u624b\u52d5\u5099\u7528\u63a7\u5236\uff0c\u6309\u7167\u771f\u5be6\u751f\u6d3b\u7bc0\u594f\u9023\u63a5\u6210\u4e00\u5957\u8a2d\u8a08\u3002",
-        points: [
-          "\u71c8\u5149\u60c5\u5883",
-          "\u8212\u9069\u63a7\u5236",
-          "\u79c1\u96b1\u8207\u7a97\u7c3e",
-          "\u611f\u61c9\u8207\u5b89\u5168",
-          "\u624b\u52d5\u5099\u7528"
-        ],
+        points: ["\u71c8\u5149\u60c5\u5883", "\u8212\u9069\u63a7\u5236", "\u79c1\u96b1\u8207\u7a97\u7c3e", "\u611f\u61c9\u8207\u5b89\u5168", "\u624b\u52d5\u5099\u7528"],
         packageEyebrow: "\u5efa\u8b70\u8d77\u6b65\u65b9\u6848",
         packageTitle: "\u667a\u80fd\u60c5\u5883\u898f\u5283\u5165\u9580\u65b9\u6848",
         packageBody: "\u9069\u5408\u60f3\u5148\u91d0\u6e05\u8a2d\u8a08\u65b9\u5411\u3001\u623f\u9593\u908f\u8f2f\u3001\u8a2d\u5099\u9078\u578b\u548c\u9810\u7b97\u7bc4\u570d\u7684\u5bb6\u5ead\uff0c\u5728\u8cfc\u8cb7\u8a2d\u5099\u6216\u88dd\u4fee\u524d\u5efa\u7acb\u6e05\u6670\u85cd\u5716\u3002",
-        packageItems: [
-          "\u751f\u6d3b\u60c5\u5883\u898f\u5283",
-          "\u623f\u9593\u63a7\u5236\u908f\u8f2f",
-          "\u8a2d\u5099\u65b9\u5411\u5efa\u8b70",
-          "\u521d\u6b65\u9810\u7b97\u53c3\u8003"
-        ],
+        packageItems: ["\u751f\u6d3b\u60c5\u5883\u898f\u5283", "\u623f\u9593\u63a7\u5236\u908f\u8f2f", "\u8a2d\u5099\u65b9\u5411\u5efa\u8b70", "\u521d\u6b65\u9810\u7b97\u53c3\u8003"],
         cta: "\u67e5\u770b\u9810\u7b97\u65b9\u5411",
       }
     : {
@@ -1874,47 +1953,18 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
         cta: "View estimate direction",
       };
 
+  const motionClass = "scenario-motion-" + motionDirection;
+  const isModeTransitioning = Boolean(modeTransition);
 
-  return (
-    <div className="scenario-onepage-shell">
-      <FloatingModeSelector modes={modes} activeMode={activeMode} setActiveMode={switchMode} setActiveStep={setActiveStep} />
+  function renderScenePage(sceneMode, pageIndex, className) {
+    const sceneSummaryIndex = sceneMode.steps.length;
+    const sceneIsSummary = pageIndex >= sceneSummaryIndex;
+    const sceneStepIndex = Math.max(0, Math.min(sceneMode.steps.length - 1, pageIndex));
+    const sceneStep = sceneMode.steps[sceneStepIndex] || sceneMode.steps[0];
 
-      {!isSummaryPage && <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={safeActiveStep} />}
-
-      <nav className="scenario-onepage-dots" aria-label={t.scenariosPage.progress}>
-        {mode.steps.map((step, index) => (
-          <button
-            key={step.title + "-" + index}
-            type="button"
-            onClick={() => moveTo(index)}
-            className={safePageIndex === index ? "scenario-onepage-dot scenario-onepage-dot-active" : "scenario-onepage-dot"}
-            aria-label={step.time + " " + step.title}
-          />
-        ))}
-      </nav>
-
-      {!isSummaryPage ? (
-        <section
-          key={mode.id + "-" + active.title + "-" + safeActiveStep}
-          className="scenario-onepage-slide"
-          style={{ backgroundImage: sceneBackground(mode.id, safeActiveStep) }}
-        >
-          <div className="scenario-onepage-shade" />
-          <div className="scenario-onepage-glow" />
-
-          <div className="scenario-onepage-copy">
-            <div className="scenario-onepage-meta">
-              <span>{active.time}</span>
-              <span>{active.room}</span>
-              <span>{safeActiveStep + 1} / {mode.steps.length}</span>
-            </div>
-
-            <h1>{active.title}</h1>
-            <p>{active.happens}</p>
-          </div>
-        </section>
-      ) : (
-        <section className="scenario-ending-page">
+    if (sceneIsSummary) {
+      return (
+        <section key={"summary-" + sceneMode.id + "-" + className} className={"scenario-ending-page " + className}>
           <div className="scenario-ending-page__inner">
             <p className="scenario-ending-page__eyebrow">{summary.eyebrow}</p>
             <h1>{summary.title}</h1>
@@ -1944,7 +1994,60 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
             </button>
           </div>
         </section>
-      )}
+      );
+    }
+
+    return (
+      <section
+        key={sceneMode.id + "-" + sceneStep.title + "-" + sceneStepIndex + "-" + className}
+        className={"scenario-onepage-slide " + className}
+        style={{ backgroundImage: sceneBackground(sceneMode.id, sceneStepIndex) }}
+      >
+        <div className="scenario-onepage-shade" />
+        <div className="scenario-onepage-glow" />
+
+        <div className="scenario-onepage-copy">
+          <div className="scenario-onepage-meta">
+            <span>{sceneStep.time}</span>
+            <span>{sceneStep.room}</span>
+            <span>{sceneStepIndex + 1} / {sceneMode.steps.length}</span>
+          </div>
+
+          <h1>{sceneStep.title}</h1>
+          <p>{sceneStep.happens}</p>
+        </div>
+      </section>
+    );
+  }
+
+  const incomingClass = isModeTransitioning
+    ? "scenario-mode-in-" + modeTransition.direction
+    : motionClass;
+
+  const outgoingClass = isModeTransitioning
+    ? "scenario-mode-out-" + modeTransition.direction
+    : "";
+
+  return (
+    <div className={isModeTransitioning ? "scenario-onepage-shell scenario-mode-transitioning" : "scenario-onepage-shell"}>
+      <FloatingModeSelector modes={modes} activeMode={activeMode} setActiveMode={switchMode} setActiveStep={setActiveStep} />
+
+      {!isSummaryPage && <ScenarioTimeOverlay value={active.time} modeId={mode.id} stepIndex={safeActiveStep} />}
+
+      <nav className="scenario-onepage-dots" aria-label={t.scenariosPage.progress}>
+        {mode.steps.map((step, index) => (
+          <button
+            key={step.title + "-" + index}
+            type="button"
+            onClick={() => moveTo(index)}
+            className={safePageIndex === index ? "scenario-onepage-dot scenario-onepage-dot-active" : "scenario-onepage-dot"}
+            aria-label={step.time + " " + step.title}
+          />
+        ))}
+      </nav>
+
+      {modeTransition && renderScenePage(modeTransition.outgoingMode, modeTransition.outgoingPageIndex, outgoingClass)}
+      {renderScenePage(mode, safePageIndex, incomingClass)}
     </div>
   );
 }

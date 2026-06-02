@@ -2647,3 +2647,906 @@ footer {
 }
 
 /* === BOSONSMART SCENARIO SUMMARY PACKAGE DESIGN v1 END === */
+
+/* === BOSONSMART REELS MOTION v1 START === */
+
+/*
+  Reels-style scene motion:
+  - vertical scroll/swipe moves between scenes
+  - horizontal swipe moves between scenario modes
+*/
+
+#root .scenario-onepage-slide,
+#root .scenario-ending-page {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+}
+
+#root .scenario-motion-next {
+  animation: bosonSceneInFromBottom 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#root .scenario-motion-prev {
+  animation: bosonSceneInFromTop 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#root .scenario-motion-mode-next {
+  animation: bosonSceneInFromRight 950ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#root .scenario-motion-mode-prev {
+  animation: bosonSceneInFromLeft 950ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#root .scenario-motion-next .scenario-onepage-copy,
+#root .scenario-motion-prev .scenario-onepage-copy,
+#root .scenario-motion-mode-next .scenario-onepage-copy,
+#root .scenario-motion-mode-prev .scenario-onepage-copy,
+#root .scenario-motion-next .scenario-ending-page__inner,
+#root .scenario-motion-prev .scenario-ending-page__inner,
+#root .scenario-motion-mode-next .scenario-ending-page__inner,
+#root .scenario-motion-mode-prev .scenario-ending-page__inner {
+  animation: bosonSceneCopySettle 1050ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes bosonSceneInFromBottom {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, 18%, 0) scale(1.015);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromTop {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, -18%, 0) scale(1.015);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromRight {
+  from {
+    opacity: 0.35;
+    transform: translate3d(18%, 0, 0) scale(1.015);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromLeft {
+  from {
+    opacity: 0.35;
+    transform: translate3d(-18%, 0, 0) scale(1.015);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneCopySettle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root .scenario-motion-next,
+  #root .scenario-motion-prev,
+  #root .scenario-motion-mode-next,
+  #root .scenario-motion-mode-prev,
+  #root .scenario-motion-next .scenario-onepage-copy,
+  #root .scenario-motion-prev .scenario-onepage-copy,
+  #root .scenario-motion-mode-next .scenario-onepage-copy,
+  #root .scenario-motion-mode-prev .scenario-onepage-copy,
+  #root .scenario-motion-next .scenario-ending-page__inner,
+  #root .scenario-motion-prev .scenario-ending-page__inner,
+  #root .scenario-motion-mode-next .scenario-ending-page__inner,
+  #root .scenario-motion-mode-prev .scenario-ending-page__inner {
+    animation: none !important;
+  }
+}
+
+/* === BOSONSMART REELS MOTION v1 END === */
+
+/* === BOSONSMART SLOWER SCENARIO MOTION v1 START === */
+
+/*
+  Slower, smoother TikTok/Reels-style scene transitions.
+*/
+
+#root .scenario-motion-next {
+  animation-duration: 900ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-motion-prev {
+  animation-duration: 900ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-motion-mode-next {
+  animation-duration: 950ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-motion-mode-prev {
+  animation-duration: 950ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-motion-next .scenario-onepage-copy,
+#root .scenario-motion-prev .scenario-onepage-copy,
+#root .scenario-motion-mode-next .scenario-onepage-copy,
+#root .scenario-motion-mode-prev .scenario-onepage-copy,
+#root .scenario-motion-next .scenario-ending-page__inner,
+#root .scenario-motion-prev .scenario-ending-page__inner,
+#root .scenario-motion-mode-next .scenario-ending-page__inner,
+#root .scenario-motion-mode-prev .scenario-ending-page__inner {
+  animation-duration: 1050ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Make entry feel less jumpy and more premium */
+@keyframes bosonSceneInFromBottom {
+  from {
+    opacity: 0.18;
+    transform: translate3d(0, 26%, 0) scale(1.02);
+    filter: blur(12px);
+  }
+  58% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromTop {
+  from {
+    opacity: 0.18;
+    transform: translate3d(0, -26%, 0) scale(1.02);
+    filter: blur(12px);
+  }
+  58% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromRight {
+  from {
+    opacity: 0.18;
+    transform: translate3d(26%, 0, 0) scale(1.02);
+    filter: blur(12px);
+  }
+  58% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneInFromLeft {
+  from {
+    opacity: 0.18;
+    transform: translate3d(-26%, 0, 0) scale(1.02);
+    filter: blur(12px);
+  }
+  58% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonSceneCopySettle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+  }
+  42% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* === BOSONSMART SLOWER SCENARIO MOTION v1 END === */
+
+/* === BOSONSMART HORIZONTAL MODE SWIPE v1 START === */
+
+/*
+  Improved horizontal scenario-mode transition.
+  The old scenario now visibly slides out while the new scenario slides in.
+*/
+
+#root .scenario-mode-transitioning .scenario-onepage-slide,
+#root .scenario-mode-transitioning .scenario-ending-page {
+  pointer-events: none;
+}
+
+#root .scenario-mode-in-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-next,
+#root .scenario-mode-out-prev {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+}
+
+#root .scenario-mode-in-next {
+  z-index: 4 !important;
+  animation: bosonModeCarouselInNext 980ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+#root .scenario-mode-out-next {
+  z-index: 3 !important;
+  animation: bosonModeCarouselOutNext 980ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+#root .scenario-mode-in-prev {
+  z-index: 4 !important;
+  animation: bosonModeCarouselInPrev 980ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+#root .scenario-mode-out-prev {
+  z-index: 3 !important;
+  animation: bosonModeCarouselOutPrev 980ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner {
+  animation: bosonModeCopyIn 1080ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation: bosonModeCopyOut 760ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.55;
+    transform: translate3d(100%, 0, 0) scale(0.985);
+    filter: blur(8px);
+  }
+  62% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.42;
+    transform: translate3d(-36%, 0, 0) scale(0.965);
+    filter: blur(9px);
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.55;
+    transform: translate3d(-100%, 0, 0) scale(0.985);
+    filter: blur(8px);
+  }
+  62% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.42;
+    transform: translate3d(36%, 0, 0) scale(0.965);
+    filter: blur(9px);
+  }
+}
+
+@keyframes bosonModeCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(2.1rem, 0, 0);
+  }
+  46% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-1.4rem, 0, 0);
+  }
+}
+
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation-name: bosonModeCopyOutPrev !important;
+}
+
+@keyframes bosonModeCopyOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(1.4rem, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root .scenario-mode-in-next,
+  #root .scenario-mode-in-prev,
+  #root .scenario-mode-out-next,
+  #root .scenario-mode-out-prev,
+  #root .scenario-mode-in-next .scenario-onepage-copy,
+  #root .scenario-mode-in-prev .scenario-onepage-copy,
+  #root .scenario-mode-out-next .scenario-onepage-copy,
+  #root .scenario-mode-out-prev .scenario-onepage-copy,
+  #root .scenario-mode-in-next .scenario-ending-page__inner,
+  #root .scenario-mode-in-prev .scenario-ending-page__inner,
+  #root .scenario-mode-out-next .scenario-ending-page__inner,
+  #root .scenario-mode-out-prev .scenario-ending-page__inner {
+    animation: none !important;
+  }
+}
+
+/* === BOSONSMART HORIZONTAL MODE SWIPE v1 END === */
+
+/* === BOSONSMART SOFTER HORIZONTAL MODE SWIPE v1 START === */
+
+/*
+  Softer horizontal scenario-mode swipe.
+  Reduced from full 100% travel to 65%, with less blur and less opacity drop.
+*/
+
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.78;
+    transform: translate3d(65%, 0, 0) scale(0.992);
+    filter: blur(3px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.72;
+    transform: translate3d(-24%, 0, 0) scale(0.982);
+    filter: blur(4px);
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.78;
+    transform: translate3d(-65%, 0, 0) scale(0.992);
+    filter: blur(3px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.72;
+    transform: translate3d(24%, 0, 0) scale(0.982);
+    filter: blur(4px);
+  }
+}
+
+/* Softer copy movement during horizontal scenario change */
+@keyframes bosonModeCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(1.15rem, 0, 0);
+  }
+  38% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-0.8rem, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0.8rem, 0, 0);
+  }
+}
+
+/* Slightly shorter than before, still smooth */
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev {
+  animation-duration: 880ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner {
+  animation-duration: 960ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation-duration: 720ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* === BOSONSMART SOFTER HORIZONTAL MODE SWIPE v1 END === */
+
+/* === BOSONSMART SUBTLE HORIZONTAL MODE SWIPE v1 START === */
+
+/*
+  Subtle horizontal scenario-mode swipe.
+  Reduced travel to 30%, with very light blur.
+*/
+
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.88;
+    transform: translate3d(30%, 0, 0) scale(0.996);
+    filter: blur(1.5px);
+  }
+  48% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.82;
+    transform: translate3d(-12%, 0, 0) scale(0.99);
+    filter: blur(2px);
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.88;
+    transform: translate3d(-30%, 0, 0) scale(0.996);
+    filter: blur(1.5px);
+  }
+  48% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.82;
+    transform: translate3d(12%, 0, 0) scale(0.99);
+    filter: blur(2px);
+  }
+}
+
+/* Keep text movement even more controlled */
+@keyframes bosonModeCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0.55rem, 0, 0);
+  }
+  34% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-0.42rem, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0.42rem, 0, 0);
+  }
+}
+
+/* Slightly faster because travel distance is smaller */
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev {
+  animation-duration: 780ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner {
+  animation-duration: 860ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation-duration: 620ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* === BOSONSMART SUBTLE HORIZONTAL MODE SWIPE v1 END === */
+
+/* === BOSONSMART REMOVE HORIZONTAL SWIPE BLUR v1 START === */
+
+/*
+  Remove blur from horizontal scenario mode transitions.
+  Keep the horizontal movement, but make it cleaner/smoother.
+*/
+
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev,
+#root .scenario-motion-mode-next,
+#root .scenario-motion-mode-prev {
+  filter: none !important;
+}
+
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.9;
+    transform: translate3d(30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.9;
+    transform: translate3d(-10%, 0, 0) scale(0.995);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.9;
+    transform: translate3d(-30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.9;
+    transform: translate3d(10%, 0, 0) scale(0.995);
+    filter: none;
+  }
+}
+
+/* Also remove blur from the older mode-motion keyframes, if still active. */
+@keyframes bosonSceneInFromRight {
+  from {
+    opacity: 0.82;
+    transform: translate3d(30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonSceneInFromLeft {
+  from {
+    opacity: 0.82;
+    transform: translate3d(-30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+/* Keep timing smooth but not sluggish. */
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev {
+  animation-duration: 760ms !important;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* === BOSONSMART REMOVE HORIZONTAL SWIPE BLUR v1 END === */
+
+/* === BOSONSMART REMOVE HORIZONTAL PAUSE v1 START === */
+
+/*
+  Remove the perceived pause between horizontal scenario modes.
+  Keep the movement, but do not hide the incoming text for the first third
+  of the transition.
+*/
+
+@keyframes bosonModeCopyIn {
+  from {
+    opacity: 0.88;
+    transform: translate3d(0.22rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.82;
+    transform: translate3d(-0.18rem, 0, 0);
+  }
+}
+
+@keyframes bosonModeCopyOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.82;
+    transform: translate3d(0.18rem, 0, 0);
+  }
+}
+
+/* Keep pages visible throughout the horizontal transition */
+@keyframes bosonModeCarouselInNext {
+  from {
+    opacity: 0.96;
+    transform: translate3d(30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutNext {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.94;
+    transform: translate3d(-10%, 0, 0) scale(0.996);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselInPrev {
+  from {
+    opacity: 0.96;
+    transform: translate3d(-30%, 0, 0) scale(0.998);
+    filter: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bosonModeCarouselOutPrev {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+  to {
+    opacity: 0.94;
+    transform: translate3d(10%, 0, 0) scale(0.996);
+    filter: none;
+  }
+}
+
+/* Faster, continuous app-like movement */
+#root .scenario-mode-in-next,
+#root .scenario-mode-out-next,
+#root .scenario-mode-in-prev,
+#root .scenario-mode-out-prev {
+  animation-duration: 620ms !important;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.35, 1) !important;
+  animation-fill-mode: both !important;
+}
+
+#root .scenario-mode-in-next .scenario-onepage-copy,
+#root .scenario-mode-in-prev .scenario-onepage-copy,
+#root .scenario-mode-in-next .scenario-ending-page__inner,
+#root .scenario-mode-in-prev .scenario-ending-page__inner,
+#root .scenario-mode-out-next .scenario-onepage-copy,
+#root .scenario-mode-out-prev .scenario-onepage-copy,
+#root .scenario-mode-out-next .scenario-ending-page__inner,
+#root .scenario-mode-out-prev .scenario-ending-page__inner {
+  animation-duration: 560ms !important;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.35, 1) !important;
+  animation-fill-mode: both !important;
+}
+
+/* === BOSONSMART REMOVE HORIZONTAL PAUSE v1 END === */
