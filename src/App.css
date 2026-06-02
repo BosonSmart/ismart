@@ -3839,3 +3839,858 @@ footer {
 }
 
 /* === BOSONSMART BALANCED VERTICAL MOTION v1 END === */
+
+/* === BOSONSMART ESTIMATE CONFIGURATOR v1 START === */
+
+/*
+  Estimate page: Apple Store-inspired selectable-card configurator.
+*/
+
+#root .estimate-configurator-page {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 2%, rgba(103, 232, 249, 0.16), transparent 28rem),
+    radial-gradient(circle at 90% 8%, rgba(250, 204, 21, 0.12), transparent 26rem),
+    linear-gradient(145deg, #f7fbfa 0%, #eef7f4 44%, #f8fafc 100%);
+  color: #10201e;
+}
+
+#root .estimate-configurator-hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(4.5rem, 9vw, 7.4rem) clamp(1rem, 4vw, 2rem) clamp(1.4rem, 3vw, 2.4rem);
+}
+
+#root .estimate-configurator-hero > div {
+  max-width: 820px;
+}
+
+#root .estimate-configurator-eyebrow {
+  margin: 0 0 0.85rem;
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 118, 110, 0.14);
+  padding: 0.42rem 0.72rem;
+  background: rgba(255, 255, 255, 0.68);
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 34px rgba(15, 118, 110, 0.08);
+}
+
+#root .estimate-configurator-hero h1 {
+  margin: 0;
+  max-width: 860px;
+  color: #10201e;
+  font-size: clamp(2.45rem, 6vw, 5.7rem);
+  line-height: 0.94;
+  letter-spacing: -0.072em;
+  font-weight: 830;
+}
+
+#root .estimate-configurator-hero p:not(.estimate-configurator-eyebrow) {
+  margin: 1.15rem 0 0;
+  max-width: 720px;
+  color: rgba(15, 23, 42, 0.68);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.65;
+}
+
+#root .estimate-configurator-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem) clamp(4rem, 8vw, 6rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+  align-items: start;
+}
+
+#root .estimate-configurator-steps {
+  display: grid;
+  gap: 1rem;
+}
+
+#root .estimate-configurator-step {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 2rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 22px 60px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(22px) saturate(1.08);
+}
+
+#root .estimate-configurator-step__heading {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+#root .estimate-configurator-step__heading > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #10201e;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+#root .estimate-configurator-step__heading h2 {
+  margin: 0;
+  color: #10201e;
+  font-size: clamp(1.22rem, 2.1vw, 1.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+#root .estimate-configurator-step__heading p {
+  margin: 0.38rem 0 0;
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+#root .estimate-option-grid {
+  display: grid;
+  gap: 0.72rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#root .estimate-option-grid--multi {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#root .estimate-option-card {
+  position: relative;
+  display: flex;
+  gap: 0.78rem;
+  min-height: 6.8rem;
+  width: 100%;
+  border: 1.5px solid rgba(15, 23, 42, 0.12);
+  border-radius: 1.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: #10201e;
+  text-align: left;
+  cursor: pointer;
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 120ms ease;
+}
+
+#root .estimate-option-card:hover {
+  border-color: rgba(15, 118, 110, 0.32);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 16px 34px rgba(15, 118, 110, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+#root .estimate-option-card:active {
+  transform: scale(0.985);
+}
+
+#root .estimate-option-card--selected {
+  border-color: rgba(20, 184, 166, 0.9);
+  background:
+    linear-gradient(145deg, rgba(240, 253, 250, 0.98), rgba(255, 255, 255, 0.88));
+  box-shadow:
+    0 18px 42px rgba(15, 118, 110, 0.14),
+    0 0 0 3px rgba(45, 212, 191, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+#root .estimate-option-card__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+  color: #0f766e;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+#root .estimate-option-card--selected .estimate-option-card__check {
+  border-color: rgba(20, 184, 166, 0.9);
+  background: rgba(20, 184, 166, 0.95);
+  color: #fff;
+}
+
+#root .estimate-option-card__text {
+  display: grid;
+  gap: 0.38rem;
+}
+
+#root .estimate-option-card__text strong {
+  color: #10201e;
+  font-size: 0.98rem;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+#root .estimate-option-card__text small {
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 0.78rem;
+  line-height: 1.38;
+}
+
+#root .estimate-live-summary {
+  position: sticky;
+  top: calc(var(--boson-real-header-h, 68px) + 1rem);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 2rem;
+  padding: clamp(1.1rem, 2vw, 1.35rem);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(103, 232, 249, 0.18), transparent 16rem),
+    linear-gradient(145deg, rgba(16, 32, 30, 0.96), rgba(10, 24, 22, 0.92));
+  color: #fff;
+  box-shadow:
+    0 28px 70px rgba(15, 23, 42, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+#root .estimate-live-summary__eyebrow {
+  margin: 0 0 0.65rem;
+  color: rgba(103, 232, 249, 0.92);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+#root .estimate-live-summary h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  font-weight: 820;
+}
+
+#root .estimate-live-summary > p:not(.estimate-live-summary__eyebrow):not(.estimate-live-summary__note) {
+  margin: 0.8rem 0 0;
+  color: rgba(248, 250, 252, 0.82);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+#root .estimate-live-summary__includes {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+#root .estimate-live-summary__includes > span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#root .estimate-live-summary__includes div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+
+#root .estimate-live-summary__includes em {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.34rem 0.55rem;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.86);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+#root .estimate-live-summary__actions {
+  display: grid;
+  gap: 0.62rem;
+  margin-top: 1.1rem;
+}
+
+#root .estimate-live-summary__actions .btn-primary,
+#root .estimate-live-summary__actions .btn-secondary {
+  width: 100%;
+  justify-content: center;
+}
+
+#root .estimate-live-summary__note {
+  margin: 1rem 0 0;
+  color: rgba(248, 250, 252, 0.54);
+  font-size: 0.74rem;
+  line-height: 1.48;
+}
+
+@media (max-width: 980px) {
+  #root .estimate-configurator-shell {
+    grid-template-columns: 1fr;
+  }
+
+  #root .estimate-live-summary {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .estimate-configurator-hero {
+    padding-top: 4.5rem;
+  }
+
+  #root .estimate-configurator-hero h1 {
+    font-size: clamp(2.15rem, 10vw, 3.55rem);
+  }
+
+  #root .estimate-configurator-shell {
+    padding-left: 0.82rem;
+    padding-right: 0.82rem;
+    padding-bottom: 2.6rem;
+  }
+
+  #root .estimate-configurator-step {
+    border-radius: 1.35rem;
+    padding: 0.92rem;
+  }
+
+  #root .estimate-option-grid,
+  #root .estimate-option-grid--multi {
+    grid-template-columns: 1fr;
+  }
+
+  #root .estimate-option-card {
+    min-height: 5.8rem;
+    border-radius: 1.05rem;
+    padding: 0.92rem;
+  }
+
+  #root .estimate-live-summary {
+    border-radius: 1.35rem;
+  }
+}
+
+/* === BOSONSMART ESTIMATE CONFIGURATOR v1 END === */
+
+/* === BOSONSMART ESTIMATE LIVE RECAP v1 START === */
+
+/*
+  Estimate configurator polish:
+  - Live selection recap
+  - Package direction chip
+  - More tactile selectable cards
+*/
+
+#root .estimate-live-summary__tier {
+  margin-top: 0.9rem;
+}
+
+#root .estimate-live-summary__tier span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(103, 232, 249, 0.28);
+  padding: 0.38rem 0.62rem;
+  background: rgba(103, 232, 249, 0.12);
+  color: rgba(153, 246, 228, 0.94);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#root .estimate-live-summary__recap {
+  display: grid;
+  gap: 0.48rem;
+  margin-top: 0.9rem;
+  border-radius: 1.1rem;
+  padding: 0.78rem;
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.095);
+}
+
+#root .estimate-live-summary__recap div {
+  display: grid;
+  grid-template-columns: 5.4rem minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+}
+
+#root .estimate-live-summary__recap span {
+  color: rgba(248, 250, 252, 0.48);
+  font-size: 0.68rem;
+  line-height: 1.32;
+  font-weight: 780;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#root .estimate-live-summary__recap strong {
+  color: rgba(248, 250, 252, 0.9);
+  font-size: 0.76rem;
+  line-height: 1.35;
+  font-weight: 760;
+}
+
+/* More tactile card selection */
+#root .estimate-option-card {
+  transform-origin: center;
+}
+
+#root .estimate-option-card--selected {
+  transform: translateY(-1px);
+}
+
+#root .estimate-option-card--selected .estimate-option-card__text strong {
+  color: #0f766e;
+}
+
+#root .estimate-option-card__check {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+#root .estimate-option-card--selected .estimate-option-card__check {
+  transform: scale(1.04);
+}
+
+/* Mobile: live summary should feel like the final Apple-style checkout card */
+@media (max-width: 980px) {
+  #root .estimate-live-summary {
+    margin-top: 0.35rem;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .estimate-live-summary__recap {
+    padding: 0.68rem;
+  }
+
+  #root .estimate-live-summary__recap div {
+    grid-template-columns: 4.8rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  #root .estimate-live-summary__recap span {
+    font-size: 0.62rem;
+  }
+
+  #root .estimate-live-summary__recap strong {
+    font-size: 0.7rem;
+  }
+
+  #root .estimate-live-summary__tier span {
+    font-size: 0.64rem;
+    padding: 0.32rem 0.52rem;
+  }
+}
+
+/* === BOSONSMART ESTIMATE LIVE RECAP v1 END === */
+
+/* === BOSONSMART ESTIMATE BUDGET DIRECTION v1 START === */
+
+/*
+  Live estimate confidence block:
+  budget direction, timeline, and best next step.
+*/
+
+#root .estimate-live-summary__budget {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.58rem;
+  margin-top: 0.75rem;
+}
+
+#root .estimate-live-summary__budget div {
+  border-radius: 1rem;
+  padding: 0.78rem;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(255, 255, 255, 0.105);
+}
+
+#root .estimate-live-summary__budget span {
+  display: block;
+  color: rgba(248, 250, 252, 0.48);
+  font-size: 0.66rem;
+  line-height: 1.2;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#root .estimate-live-summary__budget strong {
+  display: block;
+  margin-top: 0.34rem;
+  color: #ffffff;
+  font-size: 0.92rem;
+  line-height: 1.18;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+#root .estimate-live-summary__next-step {
+  margin: 0.72rem 0 0 !important;
+  border-radius: 1rem;
+  padding: 0.78rem;
+  background: rgba(103, 232, 249, 0.09);
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  color: rgba(236, 254, 255, 0.82) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.48 !important;
+}
+
+@media (max-width: 720px) {
+  #root .estimate-live-summary__budget {
+    grid-template-columns: 1fr;
+    gap: 0.46rem;
+  }
+
+  #root .estimate-live-summary__budget div,
+  #root .estimate-live-summary__next-step {
+    border-radius: 0.86rem;
+    padding: 0.68rem;
+  }
+
+  #root .estimate-live-summary__budget strong {
+    font-size: 0.86rem;
+  }
+
+  #root .estimate-live-summary__next-step {
+    font-size: 0.72rem !important;
+  }
+}
+
+/* === BOSONSMART ESTIMATE BUDGET DIRECTION v1 END === */
+
+/* === BOSONSMART ESTIMATE AUTO SCROLL v1 START === */
+
+/*
+  Apple-style guided configurator behavior:
+  selected card confirms, then the page gently advances to the next step.
+*/
+
+#root .estimate-configurator-step,
+#root .estimate-live-summary {
+  scroll-margin-top: calc(var(--boson-real-header-h, 68px) + 1rem);
+}
+
+#root .estimate-configurator-step--active {
+  border-color: rgba(20, 184, 166, 0.22);
+  box-shadow:
+    0 24px 64px rgba(15, 118, 110, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+#root .estimate-option-card--selected {
+  animation: bosonEstimateCardSelected 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bosonEstimateCardSelected {
+  from {
+    transform: scale(0.985);
+  }
+  58% {
+    transform: scale(1.012);
+  }
+  to {
+    transform: translateY(-1px) scale(1);
+  }
+}
+
+/* Make the selected check feel immediate and tactile */
+#root .estimate-option-card--selected .estimate-option-card__check {
+  animation: bosonEstimateCheckPop 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bosonEstimateCheckPop {
+  from {
+    transform: scale(0.72);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+/* Smooth browser-controlled programmatic scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  #root .estimate-option-card--selected,
+  #root .estimate-option-card--selected .estimate-option-card__check {
+    animation: none !important;
+  }
+}
+
+/* === BOSONSMART ESTIMATE AUTO SCROLL v1 END === */
+
+/* === BOSONSMART CONTACT ESTIMATE BRIEF v1 START === */
+
+/*
+  Contact page estimate handoff.
+  Shows the configurator result as a draft brief after clicking from Estimate.
+*/
+
+#root .contact-estimate-brief {
+  max-width: 1080px;
+  margin: -1.2rem auto 2rem;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 2rem;
+  padding: clamp(1rem, 2.5vw, 1.55rem);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(103, 232, 249, 0.16), transparent 20rem),
+    linear-gradient(145deg, rgba(255,255,255,0.9), rgba(248,250,252,0.76));
+  color: #10201e;
+  box-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  backdrop-filter: blur(20px) saturate(1.08);
+}
+
+#root .contact-estimate-brief__header {
+  display: grid;
+  gap: 0.45rem;
+}
+
+#root .contact-estimate-brief__header p {
+  margin: 0;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.34rem 0.62rem;
+  background: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#root .contact-estimate-brief__header h2 {
+  margin: 0;
+  color: #10201e;
+  font-size: clamp(1.65rem, 3.4vw, 3.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  font-weight: 820;
+}
+
+#root .contact-estimate-brief__header span {
+  color: rgba(15, 118, 110, 0.82);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+#root .contact-estimate-brief__body,
+#root .contact-estimate-brief__next {
+  margin: 0.85rem 0 0;
+  max-width: 780px;
+  color: rgba(15, 23, 42, 0.66);
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+#root .contact-estimate-brief__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.72rem;
+  margin-top: 1rem;
+}
+
+#root .contact-estimate-brief__metrics div {
+  border-radius: 1.15rem;
+  padding: 0.9rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+#root .contact-estimate-brief__metrics span,
+#root .contact-estimate-brief__recap span {
+  display: block;
+  color: rgba(15, 23, 42, 0.48);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#root .contact-estimate-brief__metrics strong,
+#root .contact-estimate-brief__recap strong {
+  display: block;
+  margin-top: 0.28rem;
+  color: #10201e;
+  font-size: 0.9rem;
+  line-height: 1.28;
+  font-weight: 820;
+}
+
+#root .contact-estimate-brief__recap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.58rem;
+  margin-top: 0.75rem;
+}
+
+#root .contact-estimate-brief__recap div {
+  border-radius: 1rem;
+  padding: 0.78rem;
+  background: rgba(255,255,255,0.56);
+  border: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+#root .contact-estimate-brief__includes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-top: 0.85rem;
+}
+
+#root .contact-estimate-brief__includes em {
+  border-radius: 999px;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  padding: 0.34rem 0.55rem;
+  background: rgba(240, 253, 250, 0.72);
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 760;
+}
+
+#root .contact-estimate-brief__next {
+  border-radius: 1.05rem;
+  padding: 0.82rem;
+  background: rgba(15, 118, 110, 0.07);
+  border: 1px solid rgba(15, 118, 110, 0.1);
+}
+
+@media (max-width: 760px) {
+  #root .contact-estimate-brief {
+    margin: -0.6rem 0.82rem 1.5rem;
+    border-radius: 1.35rem;
+  }
+
+  #root .contact-estimate-brief__metrics,
+  #root .contact-estimate-brief__recap {
+    grid-template-columns: 1fr;
+  }
+
+  #root .contact-estimate-brief__body,
+  #root .contact-estimate-brief__next {
+    font-size: 0.82rem;
+  }
+}
+
+/* === BOSONSMART CONTACT ESTIMATE BRIEF v1 END === */
+
+/* === BOSONSMART ESTIMATE STICKY MERGE v1 START === */
+
+/*
+  Mobile estimate behavior:
+  The bottom sticky Live Estimate bar is useful while choosing cards,
+  but it should disappear once the full live summary card arrives.
+*/
+
+#root .estimate-configurator-page .estimate-mobile-summary,
+#root .estimate-configurator-page .estimate-sticky-summary,
+#root .estimate-configurator-page .estimate-floating-summary,
+#root .estimate-configurator-page .estimate-bottom-bar,
+#root .estimate-configurator-page .estimate-live-bar,
+#root .estimate-configurator-page .mobile-estimate-bar,
+#root .estimate-configurator-page .floating-estimate-bar,
+#root .estimate-configurator-page [class*="estimate"][class*="sticky"],
+#root .estimate-configurator-page [class*="estimate"][class*="bottom"] {
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease,
+    visibility 260ms ease !important;
+}
+
+@media (max-width: 760px) {
+  /*
+    When the full summary card is visible, remove the bottom bar from view.
+    This prevents it from covering the budget/timeline/recap content.
+  */
+  #root .estimate-summary-is-visible .estimate-mobile-summary,
+  #root .estimate-summary-is-visible .estimate-sticky-summary,
+  #root .estimate-summary-is-visible .estimate-floating-summary,
+  #root .estimate-summary-is-visible .estimate-bottom-bar,
+  #root .estimate-summary-is-visible .estimate-live-bar,
+  #root .estimate-summary-is-visible .mobile-estimate-bar,
+  #root .estimate-summary-is-visible .floating-estimate-bar,
+  #root .estimate-summary-is-visible [class*="estimate"][class*="sticky"],
+  #root .estimate-summary-is-visible [class*="estimate"][class*="bottom"] {
+    opacity: 0 !important;
+    transform: translate3d(0, 120%, 0) !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /*
+    Give the full summary enough bottom breathing room
+    when the sticky bar is hidden/transitioning.
+  */
+  #root .estimate-live-summary {
+    margin-bottom: 1.2rem !important;
+  }
+}
+
+/* Desktop should keep the sticky side summary behavior. */
+@media (min-width: 981px) {
+  #root .estimate-summary-is-visible .estimate-live-summary {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* === BOSONSMART ESTIMATE STICKY MERGE v1 END === */
+
+/* === BOSONSMART FORCE REMOVE OLD STICKY ESTIMATE v1 START === */
+
+/*
+  Defensive removal of old bottom Live Estimate bar.
+  The new Estimate page has its own live summary card.
+*/
+
+#root .old-sticky-estimate,
+#root .legacy-sticky-estimate {
+  display: none !important;
+}
+
+/* === BOSONSMART FORCE REMOVE OLD STICKY ESTIMATE v1 END === */

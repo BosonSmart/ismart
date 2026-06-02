@@ -1494,7 +1494,6 @@ export default function App() {
         {page === "estimate" && <EstimatePage {...shared} />}
         {page === "contact" && <ContactPage {...shared} />}
       </main>
-      <StickyEstimate {...shared} />
 </div>
   );
 }
@@ -2432,13 +2431,505 @@ function SolutionsPage({ t, language, go }) {
 
 function EstimatePage(props) {
   const { t, go } = props;
+
+  const isZh = /[\u3400-\u9fff]/.test(
+    [
+      t?.nav?.home || "",
+      t?.nav?.estimate || "",
+      t?.estimatePage?.title || "",
+      t?.estimatePage?.body || "",
+    ].join(" ")
+  );
+
+  const copy = isZh
+    ? {
+        eyebrow: "\u667a\u80fd\u5bb6\u5c45\u9810\u7b97\u65b9\u5411",
+        title: "\u7528\u9078\u64c7\u5361\u7247\uff0c\u5148\u627e\u5230\u9069\u5408\u4f60\u7684\u667a\u80fd\u751f\u6d3b\u8d77\u6b65\u65b9\u6848\u3002",
+        body: "\u4e0d\u9700\u4e00\u958b\u59cb\u5c31\u78ba\u5b9a\u6240\u6709\u8a2d\u5099\u3002\u5148\u9078\u64c7\u7a7a\u9593\u3001\u751f\u6d3b\u91cd\u9ede\u548c\u652f\u63f4\u7a0b\u5ea6\uff0c\u6211\u5011\u518d\u5c07\u5176\u6574\u7406\u6210\u53ef\u843d\u5730\u7684\u898f\u5283\u65b9\u5411\u3002",
+        steps: [
+          {
+            id: "planning",
+            number: "01",
+            title: "\u4f60\u6b63\u5728\u898f\u5283\u751a\u9ebc\uff1f",
+            helper: "\u9019\u6703\u5f71\u97ff\u6211\u5011\u5efa\u8b70\u7684\u8a2d\u8a08\u6df1\u5ea6\u548c\u5b89\u88dd\u5f48\u6027\u3002",
+            options: [
+              { id: "renovation", title: "\u65b0\u5c45 / \u88dd\u4fee\u524d\u898f\u5283", body: "\u5728\u88dd\u4fee\u6216\u8cfc\u8cb7\u8a2d\u5099\u524d\uff0c\u5148\u5b9a\u4e0b\u623f\u9593\u908f\u8f2f\u548c\u60c5\u5883\u65b9\u5411\u3002" },
+              { id: "upgrade", title: "\u73fe\u6709\u4f4f\u5b85\u5347\u7d1a", body: "\u5728\u4e0d\u5927\u5e45\u6539\u52d5\u88dd\u4fee\u7684\u60c5\u6cc1\u4e0b\uff0c\u52a0\u5165\u751f\u6d3b\u60c5\u5883\u548c\u667a\u80fd\u63a7\u5236\u3002" },
+              { id: "rental", title: "\u79df\u5c4b / \u670d\u52d9\u5f0f\u4f4f\u5b85", body: "\u504f\u5411\u4f4e\u7834\u58de\u3001\u53ef\u79fb\u52d5\u3001\u6613\u9084\u539f\u7684\u667a\u80fd\u914d\u7f6e\u3002" },
+            ],
+          },
+          {
+            id: "space",
+            number: "02",
+            title: "\u4f60\u7684\u7a7a\u9593\u985e\u578b\uff1f",
+            helper: "\u7a7a\u9593\u5927\u5c0f\u6703\u5f71\u97ff\u60c5\u5883\u6578\u91cf\u3001\u63a7\u5236\u5340\u57df\u548c\u9810\u7b97\u7bc4\u570d\u3002",
+            options: [
+              { id: "studio", title: "\u5957\u623f / \u4e00\u623f", body: "\u9069\u5408\u5f9e\u4e3b\u8981\u751f\u6d3b\u5340\u57df\u958b\u59cb\uff0c\u7c21\u6f54\u5feb\u901f\u3002" },
+              { id: "two-bedroom", title: "\u5169\u623f / \u4e09\u623f", body: "\u9069\u5408\u5efa\u7acb\u5ba2\u5ef3\u3001\u4e3b\u4eba\u623f\u548c\u591c\u9593\u60c5\u5883\u908f\u8f2f\u3002" },
+              { id: "family", title: "\u5bb6\u5ead\u578b\u4f4f\u5b85", body: "\u9700\u8003\u616e\u4e0d\u540c\u5bb6\u4eba\u4f7f\u7528\u7fd2\u6163\u3001\u5b89\u5168\u548c\u5099\u7528\u63a7\u5236\u3002" },
+            ],
+          },
+          {
+            id: "priority",
+            number: "03",
+            title: "\u4f60\u6700\u60f3\u512a\u5148\u6539\u5584\u751a\u9ebc\uff1f",
+            helper: "\u53ef\u4ee5\u591a\u9078\u3002\u6211\u5011\u6703\u7528\u9019\u4e9b\u91cd\u9ede\u63a8\u7b97\u9069\u5408\u7684\u60c5\u5883\u548c\u7cfb\u7d71\u7bc4\u570d\u3002",
+            multi: true,
+            options: [
+              { id: "lighting", title: "\u71c8\u5149\u60c5\u5883", body: "\u65e9\u6668\u3001\u591c\u9593\u3001\u805a\u6703\u3001\u95b1\u8b80\u7b49\u5834\u666f\u3002" },
+              { id: "curtains", title: "\u7a97\u7c3e / \u79c1\u96b1", body: "\u65e5\u5149\u3001\u897f\u66ec\u3001\u79c1\u96b1\u548c\u5165\u7761\u914d\u7f6e\u3002" },
+              { id: "comfort", title: "\u8212\u9069\u5ea6", body: "\u51b7\u6c23\u3001\u98a8\u6247\u3001\u6eab\u5ea6\u548c\u4f5c\u606f\u7bc0\u594f\u3002" },
+              { id: "safety", title: "\u5b89\u5168 / \u611f\u61c9", body: "\u9580\u7a97\u3001\u6d74\u5ba4\u3001\u591c\u8d77\u3001\u7c21\u6613\u63d0\u9192\u3002" },
+              { id: "pet-elder", title: "\u5bf5\u7269 / \u9577\u8005\u652f\u63f4", body: "\u7167\u660e\u3001\u901a\u98a8\u3001\u770b\u9867\u548c\u7570\u5e38\u72c0\u614b\u63d0\u793a\u3002" },
+            ],
+          },
+          {
+            id: "support",
+            number: "04",
+            title: "\u4f60\u60f3\u8981\u54ea\u7a2e\u652f\u63f4\u7a0b\u5ea6\uff1f",
+            helper: "\u5f9e\u8a2d\u8a08\u65b9\u5411\u5230\u5168\u5c4b\u898f\u5283\uff0c\u53ef\u4ee5\u5206\u968e\u6bb5\u9032\u884c\u3002",
+            options: [
+              { id: "planning", title: "\u667a\u80fd\u60c5\u5883\u898f\u5283", body: "\u5148\u6574\u7406\u751f\u6d3b\u60c5\u5883\u3001\u623f\u9593\u908f\u8f2f\u3001\u8a2d\u5099\u65b9\u5411\u548c\u521d\u6b65\u9810\u7b97\u3002" },
+              { id: "starter", title: "\u5165\u9580\u667a\u80fd\u8a2d\u7f6e", body: "\u9069\u5408\u4e00\u81f3\u5169\u500b\u91cd\u9ede\u5340\u57df\uff0c\u5982\u5ba2\u5ef3\u52a0\u7761\u623f\u3002" },
+              { id: "full", title: "\u5168\u5c4b\u667a\u80fd\u751f\u6d3b\u8a2d\u8a08", body: "\u9069\u5408\u6574\u500b\u5bb6\u5ead\u7684\u71c8\u5149\u3001\u8212\u9069\u3001\u79c1\u96b1\u3001\u5b89\u5168\u548c\u5099\u7528\u63a7\u5236\u3002" },
+            ],
+          },
+        ],
+        result: {
+          eyebrow: "\u63a8\u85a6\u8d77\u6b65\u65b9\u5411",
+          titlePlanning: "\u667a\u80fd\u60c5\u5883\u898f\u5283\u5165\u9580\u65b9\u6848",
+          titleStarter: "\u5165\u9580\u667a\u80fd\u751f\u6d3b\u8a2d\u7f6e",
+          titleFull: "\u5168\u5c4b\u667a\u80fd\u751f\u6d3b\u8a2d\u8a08",
+          bodyPlanning: "\u9069\u5408\u5728\u88dd\u4fee\u6216\u8cfc\u8cb7\u8a2d\u5099\u524d\uff0c\u5148\u5efa\u7acb\u6e05\u6670\u7684\u8a2d\u8a08\u65b9\u5411\u548c\u9810\u7b97\u53c3\u8003\u3002",
+          bodyStarter: "\u9069\u5408\u5f9e\u4e00\u81f3\u5169\u500b\u751f\u6d3b\u5340\u57df\u958b\u59cb\uff0c\u628a\u71c8\u5149\u3001\u7a97\u7c3e\u6216\u8212\u9069\u63a7\u5236\u9023\u6210\u60c5\u5883\u3002",
+          bodyFull: "\u9069\u5408\u5168\u5c4b\u898f\u5283\u548c\u88dd\u4fee\u914d\u5408\uff0c\u5305\u542b\u623f\u9593\u908f\u8f2f\u3001\u63a7\u5236\u65b9\u5f0f\u548c\u5206\u968e\u6bb5\u9810\u7b97\u65b9\u5411\u3002",
+          includes: "\u53ef\u5305\u542b",
+          cta: "\u8a62\u554f\u521d\u6b65\u9810\u7b97",
+          secondary: "\u5148\u67e5\u770b\u60c5\u5883",
+          note: "\u6b64\u70ba\u65b9\u5411\u6027\u4f30\u7b97\u3002\u5be6\u969b\u9810\u7b97\u6703\u6839\u64da\u7a7a\u9593\u3001\u8a2d\u5099\u54c1\u724c\u3001\u5b89\u88dd\u689d\u4ef6\u548c\u88dd\u4fee\u968e\u6bb5\u8abf\u6574\u3002",
+          items: ["\u751f\u6d3b\u60c5\u5883\u8868", "\u623f\u9593\u63a7\u5236\u908f\u8f2f", "\u8a2d\u5099\u985e\u5225\u65b9\u5411", "\u624b\u52d5\u5099\u7528\u5efa\u8b70", "\u9810\u7b97\u7bc4\u570d\u53c3\u8003"],
+        },
+      }
+    : {
+        eyebrow: "Estimate direction",
+        title: "Start with a smart-living package that fits your home.",
+        body: "You do not need to decide every device first. Choose your space, priorities and support level, then we turn them into a practical planning direction.",
+        steps: [
+          {
+            id: "planning",
+            number: "01",
+            title: "What are you planning?",
+            helper: "This affects how much design depth and installation flexibility we should consider.",
+            options: [
+              { id: "renovation", title: "New home / before renovation", body: "Set the room logic and smart-living direction before buying devices or starting works." },
+              { id: "upgrade", title: "Upgrade an existing home", body: "Add daily scenes and smart controls without major renovation changes." },
+              { id: "rental", title: "Rental / serviced apartment", body: "Focus on low-invasive, removable and easy-to-restore smart configurations." },
+            ],
+          },
+          {
+            id: "space",
+            number: "02",
+            title: "What type of space?",
+            helper: "Space size affects the number of scenes, control zones and budget direction.",
+            options: [
+              { id: "studio", title: "Studio / 1-bedroom", body: "Best for starting with the main living zone and simple daily scenes." },
+              { id: "two-bedroom", title: "2-bedroom / 3-bedroom", body: "Good for living room, bedroom and night comfort logic." },
+              { id: "family", title: "Family home", body: "Considers multiple users, safety, fallback controls and shared routines." },
+            ],
+          },
+          {
+            id: "priority",
+            number: "03",
+            title: "What matters most?",
+            helper: "Select more than one. We use these priorities to shape the recommended scope.",
+            multi: true,
+            options: [
+              { id: "lighting", title: "Lighting scenes", body: "Morning, night, gathering, reading and daily ambience." },
+              { id: "curtains", title: "Curtains / privacy", body: "Daylight, glare, privacy and sleep routines." },
+              { id: "comfort", title: "Comfort control", body: "Air-conditioning, fan, temperature and daily rhythm." },
+              { id: "safety", title: "Safety / sensors", body: "Door, window, bathroom, night path and simple alerts." },
+              { id: "pet-elder", title: "Pet / elder support", body: "Lighting, ventilation, monitoring and abnormal-status reminders." },
+            ],
+          },
+          {
+            id: "support",
+            number: "04",
+            title: "How much support do you need?",
+            helper: "You can start with planning only, then phase into setup or full-home design.",
+            options: [
+              { id: "planning", title: "Smart Scene Planning", body: "Clarify scenarios, room logic, device direction and initial budget reference." },
+              { id: "starter", title: "Starter Smart Living Setup", body: "For one to two priority zones, such as living room plus bedroom." },
+              { id: "full", title: "Full Home Smart Living Design", body: "Whole-home lighting, comfort, privacy, safety and manual fallback planning." },
+            ],
+          },
+        ],
+        result: {
+          eyebrow: "Recommended starting point",
+          titlePlanning: "Smart Scene Planning Package",
+          titleStarter: "Starter Smart Living Setup",
+          titleFull: "Full Home Smart Living Design",
+          bodyPlanning: "Best before renovation or device purchase. We help define the design direction and first budget reference.",
+          bodyStarter: "Best for one to two living zones, connecting lighting, curtains or comfort controls into daily scenes.",
+          bodyFull: "Best for whole-home planning and renovation coordination, including room logic, control methods and phased budget direction.",
+          includes: "Can include",
+          cta: "Ask for a draft estimate",
+          secondary: "View scenarios first",
+          note: "This is an indicative direction. The actual estimate depends on space, device brands, installation conditions and renovation stage.",
+          items: ["Scenario plan", "Room-by-room logic", "Device category direction", "Manual fallback notes", "Budget range reference"],
+        },
+      };
+
+  const stepRefs = useRef({});
+  const summaryRef = useRef(null);
+  const autoScrollTimerRef = useRef(null);
+  const [activeEstimateStep, setActiveEstimateStep] = useState("planning");
+  const [planning, setPlanning] = useState(copy.steps[0].options[0].id);
+  const [space, setSpace] = useState(copy.steps[1].options[1].id);
+  const [priorities, setPriorities] = useState(["lighting", "comfort"]);
+  const [support, setSupport] = useState(copy.steps[3].options[0].id);
+
+  const [summaryInView, setSummaryInView] = useState(false);
+
+  useEffect(() => {
+    const target = summaryRef.current;
+    if (!target || typeof IntersectionObserver === "undefined") return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSummaryInView(Boolean(entry?.isIntersecting));
+      },
+      {
+        root: null,
+        threshold: 0.18,
+        rootMargin: "0px 0px -28% 0px",
+      }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  function scrollToEstimateTarget(targetId) {
+    if (autoScrollTimerRef.current) {
+      window.clearTimeout(autoScrollTimerRef.current);
+    }
+
+    autoScrollTimerRef.current = window.setTimeout(() => {
+      const target =
+        targetId === "summary"
+          ? summaryRef.current
+          : stepRefs.current[targetId];
+
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }, 180);
+  }
+
+  function nextStepId(stepId) {
+    const index = copy.steps.findIndex((item) => item.id === stepId);
+
+    if (index === -1) return "summary";
+
+    return copy.steps[index + 1]?.id || "summary";
+  }
+
+  function togglePriority(id) {
+    setPriorities((current) => {
+      if (current.includes(id)) {
+        const next = current.filter((item) => item !== id);
+        return next.length ? next : current;
+      }
+
+      return [...current, id];
+    });
+  }
+
+  function selectedMapFor(stepId) {
+    if (stepId === "planning") return planning;
+    if (stepId === "space") return space;
+    if (stepId === "priority") return priorities;
+    if (stepId === "support") return support;
+    return "";
+  }
+
+  function handleSelect(step, optionId) {
+    setActiveEstimateStep(step.id);
+
+    if (step.id === "planning") {
+      setPlanning(optionId);
+      scrollToEstimateTarget("space");
+      return;
+    }
+
+    if (step.id === "space") {
+      setSpace(optionId);
+      scrollToEstimateTarget("priority");
+      return;
+    }
+
+    if (step.id === "priority") {
+      togglePriority(optionId);
+
+      /*
+        Apple-style guided flow:
+        the card confirms first, then gently leads to the next decision.
+        This still allows users to scroll back and add more priorities.
+      */
+      scrollToEstimateTarget("support");
+      return;
+    }
+
+    if (step.id === "support") {
+      setSupport(optionId);
+      scrollToEstimateTarget("summary");
+    }
+  }
+
+  function resultTitle() {
+    if (support === "full" || space === "family") return copy.result.titleFull;
+    if (support === "starter" || priorities.length >= 3) return copy.result.titleStarter;
+    return copy.result.titlePlanning;
+  }
+
+  function resultBody() {
+    if (support === "full" || space === "family") return copy.result.bodyFull;
+    if (support === "starter" || priorities.length >= 3) return copy.result.bodyStarter;
+    return copy.result.bodyPlanning;
+  }
+
+  function findOptionLabel(stepId, optionId) {
+    const step = copy.steps.find((item) => item.id === stepId);
+    return step?.options.find((option) => option.id === optionId)?.title || optionId;
+  }
+
+  function selectedPriorityLabels() {
+    const step = copy.steps.find((item) => item.id === "priority");
+    return priorities
+      .map((id) => step?.options.find((option) => option.id === id)?.title)
+      .filter(Boolean);
+  }
+
+  function packageTierLabel() {
+    if (support === "full" || space === "family") {
+      return isZh ? "\u5168\u5c4b\u8a2d\u8a08\u65b9\u5411" : "Full-home direction";
+    }
+
+    if (support === "starter" || priorities.length >= 3) {
+      return isZh ? "\u5165\u9580\u8a2d\u7f6e\u65b9\u5411" : "Starter setup direction";
+    }
+
+    return isZh ? "\u898f\u5283\u5165\u9580\u65b9\u5411" : "Planning-first direction";
+  }
+
+  function packageBudgetDirection() {
+    if (support === "full" || space === "family") {
+      return isZh ? "HK$35,000+" : "HK$35,000+";
+    }
+
+    if (support === "starter" || priorities.length >= 3) {
+      return isZh ? "HK$12,000?45,000" : "HK$12,000?45,000";
+    }
+
+    return isZh ? "HK$2,800?8,800" : "HK$2,800?8,800";
+  }
+
+  function packageTimelineDirection() {
+    if (support === "full" || space === "family") {
+      return isZh ? "\u7d04 2\u20134 \u9031\u8a2d\u8a08\u898f\u5283" : "About 2?4 weeks planning";
+    }
+
+    if (support === "starter" || priorities.length >= 3) {
+      return isZh ? "\u7d04 1\u20132 \u9031\u898f\u5283\u8207\u914d\u7f6e" : "About 1?2 weeks planning/setup";
+    }
+
+    return isZh ? "\u7d04 3\u20137 \u5929\u6574\u7406\u65b9\u5411" : "About 3?7 days direction";
+  }
+
+  function packageNextStep() {
+    if (support === "full" || space === "family") {
+      return isZh
+        ? "\u5efa\u8b70\u5148\u6574\u7406\u5e73\u9762\u5716\u3001\u623f\u9593\u4f7f\u7528\u7fd2\u6163\u548c\u88dd\u4fee\u6642\u9593\u8868\u3002"
+        : "Best next step: prepare plan drawings, room habits and renovation schedule.";
+    }
+
+    if (support === "starter" || priorities.length >= 3) {
+      return isZh
+        ? "\u5efa\u8b70\u5148\u9078\u5b9a\u4e00\u81f3\u5169\u500b\u91cd\u9ede\u5340\u57df\uff0c\u518d\u5b9a\u60c5\u5883\u908f\u8f2f\u548c\u8a2d\u5099\u65b9\u5411\u3002"
+        : "Best next step: choose one to two priority zones, then define scene logic and device direction.";
+    }
+
+    return isZh
+      ? "\u5efa\u8b70\u5148\u9032\u884c\u60c5\u5883\u898f\u5283\uff0c\u78ba\u5b9a\u65b9\u5411\u5f8c\u518d\u8cfc\u8cb7\u8a2d\u5099\u3002"
+      : "Best next step: start with scene planning before buying devices.";
+  }
+
+  const selectedRecap = [
+    {
+      label: isZh ? "\u898f\u5283" : "Planning",
+      value: findOptionLabel("planning", planning),
+    },
+    {
+      label: isZh ? "\u7a7a\u9593" : "Space",
+      value: findOptionLabel("space", space),
+    },
+    {
+      label: isZh ? "\u91cd\u9ede" : "Priorities",
+      value: selectedPriorityLabels().join(isZh ? "\u3001" : ", "),
+    },
+    {
+      label: isZh ? "\u652f\u63f4" : "Support",
+      value: findOptionLabel("support", support),
+    },
+  ];
+
+  function buildEstimateBrief() {
+    return {
+      isZh,
+      packageTitle: resultTitle(),
+      packageBody: resultBody(),
+      packageTier: packageTierLabel(),
+      budget: packageBudgetDirection(),
+      timeline: packageTimelineDirection(),
+      nextStep: packageNextStep(),
+      selectedRecap,
+      includes: copy.result.items,
+      createdAt: new Date().toISOString(),
+    };
+  }
+
+  function openDraftEstimateContact() {
+    const brief = buildEstimateBrief();
+
+    try {
+      window.localStorage.setItem("bosonsmartEstimateBrief", JSON.stringify(brief));
+    } catch (error) {
+      // If storage is blocked, the Contact page still opens normally.
+    }
+
+    if (go) go("contact");
+  }
+
   return (
-    <>
-      <PageHero eyebrow={t.estimatePage.eyebrow} title={t.estimatePage.title} body={t.estimatePage.body} primary={t.common.whatsapp} secondary={t.nav.scenarios} onPrimary={() => document.getElementById("builder")?.scrollIntoView({ behavior: "smooth" })} onSecondary={() => go("scenarios")} />
-      <PackagesSection {...props} />
-      <BuilderSection {...props} />
-      <FinalCta {...props} />
-    </>
+    <main className={summaryInView ? "estimate-configurator-page estimate-summary-is-visible" : "estimate-configurator-page"}>
+      <section className="estimate-configurator-hero">
+        <div>
+          <p className="estimate-configurator-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p>{copy.body}</p>
+        </div>
+      </section>
+
+      <section className="estimate-configurator-shell">
+        <div className="estimate-configurator-steps">
+          {copy.steps.map((step) => {
+            const selected = selectedMapFor(step.id);
+
+            return (
+              <section
+                key={step.id}
+                ref={(node) => {
+                  if (node) stepRefs.current[step.id] = node;
+                }}
+                className={activeEstimateStep === step.id ? "estimate-configurator-step estimate-configurator-step--active" : "estimate-configurator-step"}
+              >
+                <div className="estimate-configurator-step__heading">
+                  <span>{step.number}</span>
+                  <div>
+                    <h2>{step.title}</h2>
+                    <p>{step.helper}</p>
+                  </div>
+                </div>
+
+                <div className={step.multi ? "estimate-option-grid estimate-option-grid--multi" : "estimate-option-grid"}>
+                  {step.options.map((option) => {
+                    const isSelected = Array.isArray(selected)
+                      ? selected.includes(option.id)
+                      : selected === option.id;
+
+                    return (
+                      <button
+                        key={option.id}
+                        type="button"
+                        className={isSelected ? "estimate-option-card estimate-option-card--selected" : "estimate-option-card"}
+                        onClick={() => handleSelect(step, option.id)}
+                        aria-pressed={isSelected}
+                      >
+                        <span className="estimate-option-card__check">{isSelected ? "\u2713" : ""}</span>
+                        <span className="estimate-option-card__text">
+                          <strong>{option.title}</strong>
+                          <small>{option.body}</small>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+            );
+          })}
+        </div>
+
+        <aside ref={summaryRef} className="estimate-live-summary" aria-live="polite">
+          <p className="estimate-live-summary__eyebrow">{copy.result.eyebrow}</p>
+          <h2>{resultTitle()}</h2>
+          <p>{resultBody()}</p>
+
+          <div className="estimate-live-summary__tier">
+            <span>{packageTierLabel()}</span>
+          </div>
+
+          <div className="estimate-live-summary__budget">
+            <div>
+              <span>{isZh ? "\u9810\u7b97\u65b9\u5411" : "Budget direction"}</span>
+              <strong>{packageBudgetDirection()}</strong>
+            </div>
+            <div>
+              <span>{isZh ? "\u6642\u9593\u65b9\u5411" : "Timeline"}</span>
+              <strong>{packageTimelineDirection()}</strong>
+            </div>
+          </div>
+
+          <p className="estimate-live-summary__next-step">{packageNextStep()}</p>
+
+          <div className="estimate-live-summary__recap">
+            {selectedRecap.map((item) => (
+              <div key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div className="estimate-live-summary__includes">
+            <span>{copy.result.includes}</span>
+            <div>
+              {copy.result.items.map((item) => (
+                <em key={item}>{item}</em>
+              ))}
+            </div>
+          </div>
+
+          <div className="estimate-live-summary__actions">
+            <button type="button" className="btn-primary" onClick={openDraftEstimateContact}>
+              {copy.result.cta}
+              <Icon name="arrowRight" className="h-4 w-4" />
+            </button>
+            <button type="button" className="btn-secondary" onClick={() => go && go("scenarios")}>
+              {copy.result.secondary}
+            </button>
+          </div>
+
+          <p className="estimate-live-summary__note">{copy.result.note}</p>
+        </aside>
+      </section>
+    </main>
   );
 }
 
@@ -2446,6 +2937,22 @@ function ContactPage(props) {
   const { t, go } = props;
 
   const isZhContact = /[\u3400-\u9fff]/.test(t?.contactPage?.title || "");
+  const [estimateBrief, setEstimateBrief] = useState(null);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("bosonsmartEstimateBrief");
+      if (!raw) return;
+
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        setEstimateBrief(parsed);
+      }
+    } catch (error) {
+      setEstimateBrief(null);
+    }
+  }, []);
+
   const contactQuickStart = isZhContact
     ? {
         eyebrow: "\u672a\u80af\u5b9a\u9700\u8981\u505a\u751a\u9ebc\uff1f",
@@ -2473,6 +2980,47 @@ function ContactPage(props) {
   return (
     <>
       <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={t.nav.scenarios} secondary={t.nav.solutions} onPrimary={() => go("scenarios")} onSecondary={() => go("solutions")} />
+
+      {estimateBrief && (
+        <section className="contact-estimate-brief">
+          <div className="contact-estimate-brief__header">
+            <p>{estimateBrief.isZh ? "\u9810\u7b97\u9700\u6c42\u6458\u8981" : "Draft estimate brief"}</p>
+            <h2>{estimateBrief.packageTitle}</h2>
+            <span>{estimateBrief.packageTier}</span>
+          </div>
+
+          <p className="contact-estimate-brief__body">{estimateBrief.packageBody}</p>
+
+          <div className="contact-estimate-brief__metrics">
+            <div>
+              <span>{estimateBrief.isZh ? "\u9810\u7b97\u65b9\u5411" : "Budget direction"}</span>
+              <strong>{estimateBrief.budget}</strong>
+            </div>
+            <div>
+              <span>{estimateBrief.isZh ? "\u6642\u9593\u65b9\u5411" : "Timeline"}</span>
+              <strong>{estimateBrief.timeline}</strong>
+            </div>
+          </div>
+
+          <div className="contact-estimate-brief__recap">
+            {estimateBrief.selectedRecap?.map((item) => (
+              <div key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div className="contact-estimate-brief__includes">
+            {estimateBrief.includes?.map((item) => (
+              <em key={item}>{item}</em>
+            ))}
+          </div>
+
+          <p className="contact-estimate-brief__next">{estimateBrief.nextStep}</p>
+        </section>
+      )}
+
       <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader eyebrow={t.nav.contact} title={t.contactPage.detailsTitle} />
@@ -2578,17 +3126,8 @@ function FinalCta({ t, whatsappHref, mailtoHref, noMoney }) {
   );
 }
 
-function StickyEstimate({ t, page, total, whatsappHref, go }) {
-  if (page !== "estimate") return null;
-  return (
-    <>
-      <div className="fixed bottom-3 left-3 right-3 z-50 rounded-2xl border border-white/15 bg-slate-950/88 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden">
-        <button onClick={() => go("estimate", "builder")} className="mb-2 grid w-full grid-cols-[auto_1fr] items-center gap-3 rounded-xl bg-cyan-300 px-4 py-3 text-left text-slate-950"><span className="text-xs font-black uppercase tracking-wider opacity-75">{t.common.live}</span><strong className="justify-self-end text-lg">{formatHKD(total)}</strong></button>
-        <div className="grid grid-cols-2 gap-2"><button onClick={() => go("estimate", "builder")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-3 text-sm font-semibold">{t.common.review}</button><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-3 text-sm font-semibold"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div>
-      </div>
-      <div className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/84 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:flex"><button onClick={() => go("estimate", "builder")} className="grid rounded-xl bg-cyan-300/10 px-4 py-2 text-left"><span className="text-xs font-bold uppercase tracking-wider text-slate-400">{t.common.live}</span><strong className="text-cyan-100">{formatHKD(total)}</strong></button><button onClick={() => go("estimate", "builder")} className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold">{t.common.review}</button><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950"><Icon name="phone" className="h-4 w-4" />WhatsApp</a></div>
-    </>
-  );
+function StickyEstimate() {
+  return null;
 }
 
 function Footer({ t, go }) {
