@@ -4694,3 +4694,97 @@ html {
 }
 
 /* === BOSONSMART FORCE REMOVE OLD STICKY ESTIMATE v1 END === */
+
+/* === BOSONSMART MOBILE LIVE ESTIMATE PILL v1 START === */
+
+/*
+  Small Apple Store-style mobile live estimate pill.
+  It stays visible while choosing cards and disappears when the real summary card arrives.
+*/
+
+#root .estimate-mobile-live-pill {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  #root .estimate-configurator-page {
+    padding-bottom: calc(4.2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  #root .estimate-mobile-live-pill {
+    position: fixed;
+    left: max(0.82rem, env(safe-area-inset-left, 0px));
+    right: max(0.82rem, env(safe-area-inset-right, 0px));
+    bottom: calc(0.72rem + env(safe-area-inset-bottom, 0px));
+    z-index: 58;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+
+    min-height: 3.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.52);
+    border-radius: 999px;
+    padding: 0.5rem 0.72rem 0.5rem 1rem;
+
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(248, 250, 252, 0.78));
+    color: #10201e;
+
+    box-shadow:
+      0 18px 48px rgba(15, 23, 42, 0.16),
+      0 2px 8px rgba(15, 23, 42, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.92);
+
+    backdrop-filter: blur(24px) saturate(1.18);
+    -webkit-backdrop-filter: blur(24px) saturate(1.18);
+
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+      opacity 220ms ease,
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 220ms ease;
+  }
+
+  #root .estimate-mobile-live-pill span {
+    color: rgba(15, 118, 110, 0.78);
+    font-size: 0.68rem;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  #root .estimate-mobile-live-pill strong {
+    color: #10201e;
+    font-size: 0.98rem;
+    line-height: 1;
+    font-weight: 850;
+    letter-spacing: -0.02em;
+  }
+
+  #root .estimate-mobile-live-pill:active {
+    transform: translate3d(0, 1px, 0) scale(0.992);
+  }
+
+  #root .estimate-mobile-live-pill--hidden {
+    opacity: 0;
+    transform: translate3d(0, calc(100% + 1rem), 0) scale(0.985);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /*
+    When the real summary is visible, we no longer need extra bottom space.
+  */
+  #root .estimate-summary-is-visible {
+    padding-bottom: 0;
+  }
+}
+
+/* === BOSONSMART MOBILE LIVE ESTIMATE PILL v1 END === */

@@ -2588,6 +2588,58 @@ function EstimatePage(props) {
   const [priorities, setPriorities] = useState(["lighting", "comfort"]);
   const [support, setSupport] = useState(copy.steps[3].options[0].id);
 
+  const [mobileLiveEstimateHidden, setMobileLiveEstimateHidden] = useState(false);
+
+  useEffect(() => {
+    function getHeaderHeight() {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--boson-real-header-h");
+      const parsed = Number.parseFloat(raw);
+      return Number.isFinite(parsed) ? parsed : 68;
+    }
+
+    let ticking = false;
+
+    function checkSummaryPosition() {
+      const target = summaryRef.current;
+      if (!target) return;
+
+      const top = target.getBoundingClientRect().top;
+      const headerHeight = getHeaderHeight();
+
+      /*
+        Hide the small mobile live estimate pill when the real summary card
+        has visually arrived at the top edge area.
+      */
+      setMobileLiveEstimateHidden(top <= headerHeight + 10);
+    }
+
+    function onScrollOrResize() {
+      if (ticking) return;
+
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        checkSummaryPosition();
+        ticking = false;
+      });
+    }
+
+    checkSummaryPosition();
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    window.addEventListener("orientationchange", onScrollOrResize);
+
+    const delayedCheck = window.setTimeout(checkSummaryPosition, 240);
+
+    return () => {
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      window.removeEventListener("orientationchange", onScrollOrResize);
+      window.clearTimeout(delayedCheck);
+    };
+  }, []);
+
   const [summaryInView, setSummaryInView] = useState(false);
 
   useEffect(() => {
@@ -2689,6 +2741,15 @@ function EstimatePage(props) {
 
     if (step.id === "support") {
       setSupport(optionId);
+
+      /*
+        Apple-style final-step behavior:
+        once the user chooses the final support card, the small mobile live
+        estimate pill disappears immediately while the page scrolls to the
+        full summary card. If the user scrolls back above the summary later,
+        the scroll observer will show the pill again.
+      */
+      setMobileLiveEstimateHidden(true);
       scrollToEstimateTarget("summary");
     }
   }
@@ -2929,7 +2990,25 @@ function EstimatePage(props) {
           <p className="estimate-live-summary__note">{copy.result.note}</p>
         </aside>
       </section>
-    </main>
+    
+      <button
+        type="button"
+        className={mobileLiveEstimateHidden ? "estimate-mobile-live-pill estimate-mobile-live-pill--hidden" : "estimate-mobile-live-pill"}
+        onClick={() => {
+          if (summaryRef.current) {
+            summaryRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
+            });
+          }
+        }}
+        aria-hidden={mobileLiveEstimateHidden}
+      >
+        <span>{isZh ? "\u5373\u6642\u9810\u7b97" : "Live estimate"}</span>
+        <strong>{packageBudgetDirection()}</strong>
+      </button>
+</main>
   );
 }
 
