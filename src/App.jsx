@@ -3330,22 +3330,22 @@ function EstimatePage(props) {
     }
 
     if (support === "starter" || priorities.length >= 3) {
-      return isZh ? "HK$12,000?45,000" : "HK$12,000?45,000";
+      return isZh ? "HK$12,000 to HK$45,000" : "HK$12,000 to HK$45,000";
     }
 
-    return isZh ? "HK$2,800?8,800" : "HK$2,800?8,800";
+    return isZh ? "HK$2,800 to HK$8,800" : "HK$2,800 to HK$8,800";
   }
 
   function packageTimelineDirection() {
     if (support === "full" || space === "family") {
-      return isZh ? "\u7d04 2\u20134 \u9031\u8a2d\u8a08\u898f\u5283" : "About 2?4 weeks planning";
+      return isZh ? "\u7d04 2\u20134 \u9031\u8a2d\u8a08\u898f\u5283" : "About 2 to 4 weeks planning";
     }
 
     if (support === "starter" || priorities.length >= 3) {
-      return isZh ? "\u7d04 1\u20132 \u9031\u898f\u5283\u8207\u914d\u7f6e" : "About 1?2 weeks planning/setup";
+      return isZh ? "\u7d04 1\u20132 \u9031\u898f\u5283\u8207\u914d\u7f6e" : "About 1 to 2 weeks planning/setup";
     }
 
-    return isZh ? "\u7d04 3\u20137 \u5929\u6574\u7406\u65b9\u5411" : "About 3?7 days direction";
+    return isZh ? "\u7d04 3\u20137 \u5929\u6574\u7406\u65b9\u5411" : "About 3 to 7 days direction";
   }
 
   function packageNextStep() {
@@ -3592,7 +3592,7 @@ function ContactPage(props) {
 
   return (
     <>
-      <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={t.nav.scenarios} secondary={t.nav.solutions} onPrimary={() => go("scenarios")} onSecondary={() => go("solutions")} />
+      <PageHero eyebrow={t.contactPage.eyebrow} title={t.contactPage.title} body={t.contactPage.body} primary={isZhContact ? "\u5efa\u7acb\u9810\u7b97\u65b9\u5411" : "Build estimate"} secondary={isZhContact ? "\u67e5\u770b\u65b9\u6848" : "View solutions"} onPrimary={() => go("estimate")} onSecondary={() => go("solutions")} />
 
       {estimateBrief && (
         <section className="contact-estimate-brief">
@@ -3634,29 +3634,33 @@ function ContactPage(props) {
         </section>
       )}
 
-      <section className="mx-auto max-w-6xl px-4 py-14 lg:px-6">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeader eyebrow={t.nav.contact} title={t.contactPage.detailsTitle} />
-          <Card className="p-6"><div className="grid gap-3 sm:grid-cols-2">
-      <section className="contact-photo-brief">
-        <div className="contact-photo-brief__copy">
-          <p className="contact-photo-brief__eyebrow">{contactQuickStart.eyebrow}</p>
-          <h2>{contactQuickStart.title}</h2>
-          <p>{contactQuickStart.body}</p>
-        </div>
+            <section className="contact-details-rebuilt mx-auto max-w-6xl px-4 py-14 lg:px-6">
+        <SectionHeader eyebrow={t.nav.contact} title={t.contactPage.detailsTitle} />
 
-        <div className="contact-photo-brief__items">
-          {contactQuickStart.items.map((item, index) => (
-            <article key={item} className="contact-photo-brief__item">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{item}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+        <Card className="contact-details-rebuilt__card mt-8 p-6">
+          <div className="contact-details-rebuilt__grid">
+            <section className="contact-details-section contact-photo-brief">
+              <div className="contact-photo-brief__copy">
+                <p className="contact-photo-brief__eyebrow">{contactQuickStart.eyebrow}</p>
+                <h2>{contactQuickStart.title}</h2>
+                <p>{contactQuickStart.body}</p>
+              </div>
 
-      {t.contactPage.details.map((item) => <Bullet key={item}>{item}</Bullet>)}</div></Card>
-        </div>
+              <div className="contact-photo-brief__items">
+                {contactQuickStart.items.map((item, index) => (
+                  <article key={item} className="contact-photo-brief__item">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{item}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <div className="contact-details-rebuilt__bullets">
+              {t.contactPage.details.map((item) => <Bullet key={item}>{item}</Bullet>)}
+            </div>
+          </div>
+        </Card>
       </section>
       <InfoGrid eyebrow={t.nav.contact} title={t.contactPage.nextTitle} items={t.contactPage.next} numbered />
       <section className="mx-auto max-w-6xl px-4 pb-32 lg:px-6">

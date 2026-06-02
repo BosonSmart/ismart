@@ -6919,3 +6919,472 @@ html {
 }
 
 /* === BOSONSMART SOLUTIONS MOBILE POLISH v1 END === */
+
+/* === BOSONSMART ESTIMATE CONTRAST RANGE FIX v1 START === */
+
+/*
+  Estimate screenshot review fixes:
+  - Make dark summary card title readable.
+  - Keep budget/timeline/recap text readable.
+*/
+
+#root .estimate-live-summary {
+  color: #ffffff !important;
+}
+
+#root .estimate-live-summary h2,
+#root .estimate-live-summary h3,
+#root .estimate-live-summary strong {
+  color: rgba(255, 255, 255, 0.94) !important;
+  text-shadow: none !important;
+}
+
+#root .estimate-live-summary > p,
+#root .estimate-live-summary p,
+#root .estimate-live-summary__next-step {
+  color: rgba(248, 250, 252, 0.82) !important;
+}
+
+#root .estimate-live-summary__budget strong,
+#root .estimate-live-summary__recap strong {
+  color: rgba(255, 255, 255, 0.94) !important;
+}
+
+#root .estimate-live-summary__budget span,
+#root .estimate-live-summary__recap span {
+  color: rgba(248, 250, 252, 0.55) !important;
+}
+
+#root .estimate-live-summary__includes em,
+#root .estimate-live-summary .smart-thing-chip,
+#root .estimate-live-summary [class*="chip"] {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/*
+  Mobile: summary card should stay highly readable.
+*/
+@media (max-width: 720px) {
+  #root .estimate-live-summary h2,
+  #root .estimate-live-summary h3 {
+    color: rgba(255, 255, 255, 0.96) !important;
+  }
+
+  #root .estimate-live-summary > p,
+  #root .estimate-live-summary p {
+    color: rgba(248, 250, 252, 0.84) !important;
+  }
+}
+
+/* === BOSONSMART ESTIMATE CONTRAST RANGE FIX v1 END === */
+
+/* === BOSONSMART CONTACT CTA POLISH v1 START === */
+
+/*
+  Contact screenshot review:
+  Contact page should feel action-oriented and readable.
+*/
+
+#root .contact-page h1,
+#root .contact-page h2,
+#root .contact-page h3 {
+  text-wrap: balance;
+}
+
+#root .contact-page .btn-primary,
+#root .contact-page .btn-secondary {
+  white-space: nowrap;
+}
+
+/* Defensive contrast for dark CTA/contact panels */
+#root .contact-page [class*="final"] h2,
+#root .contact-page [class*="cta"] h2,
+#root .contact-page [class*="dark"] h2 {
+  text-shadow: none;
+}
+
+@media (min-width: 981px) {
+  /*
+    The desktop contact content currently feels very tall/narrow.
+    This gives it more breathing room and reduces the impression of a cramped tower.
+  */
+  #root .contact-page section {
+    scroll-margin-top: calc(var(--boson-real-header-h, 68px) + 1rem);
+  }
+
+  #root .contact-page [class*="quick"],
+  #root .contact-page [class*="detail"],
+  #root .contact-page [class*="photo"] {
+    max-width: 1120px;
+  }
+}
+
+@media (max-width: 720px) {
+  #root .contact-page .btn-primary,
+  #root .contact-page .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* === BOSONSMART CONTACT CTA POLISH v1 END === */
+
+/* === BOSONSMART CONTACT DETAILS STACK v1 START === */
+
+/*
+  Contact page desktop fix:
+  The "A few details help us give better advice" section should not be
+  forced into a narrow left/right layout. Stack the heading above the
+  full-width guide card on desktop, while keeping mobile unchanged.
+*/
+
+@media (min-width: 981px) {
+  #root .contact-details-section {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: clamp(1.2rem, 2.5vw, 2rem) !important;
+    align-items: start !important;
+    max-width: 1040px !important;
+  }
+
+  #root .contact-details-section > * {
+    min-width: 0 !important;
+  }
+
+  #root .contact-details-section > :first-child {
+    max-width: 720px !important;
+  }
+
+  #root .contact-details-section > :first-child h2 {
+    max-width: 720px !important;
+  }
+
+  #root .contact-details-section > :last-child {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /*
+    The guide card can now breathe horizontally instead of becoming a tower.
+  */
+  #root .contact-details-section > :last-child > * {
+    max-width: none !important;
+  }
+}
+
+@media (min-width: 1180px) {
+  #root .contact-details-section {
+    max-width: 1120px !important;
+  }
+}
+
+/* === BOSONSMART CONTACT DETAILS STACK v1 END === */
+
+/* === BOSONSMART CONTACT FORCE STACK v1 START === */
+
+/*
+  Force the "A few details help us give better advice" section
+  to stack vertically on desktop:
+  title on top, full guide/table underneath.
+*/
+
+@media (min-width: 981px) {
+  #root .contact-details-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(1.2rem, 2vw, 2rem) !important;
+    align-items: stretch !important;
+    max-width: 1120px !important;
+    width: 100% !important;
+  }
+
+  #root .contact-details-section > * {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #root .contact-details-section > :first-child {
+    order: 1 !important;
+  }
+
+  #root .contact-details-section > :last-child {
+    order: 2 !important;
+  }
+
+  /*
+    Neutralize any two-column/grid forcing inside the section wrapper itself.
+  */
+  #root .contact-details-section[class*="grid"],
+  #root .contact-details-section[class*="split"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /*
+    If the immediate children were using basis/column widths, reset them.
+  */
+  #root .contact-details-section > *[class*="col"],
+  #root .contact-details-section > *[class*="basis"],
+  #root .contact-details-section > *[style*="width"] {
+    width: 100% !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+/* === BOSONSMART CONTACT FORCE STACK v1 END === */
+
+/* === BOSONSMART CONTACT REAL GRID STACK v1 START === */
+
+/*
+  Force the actual Contact "A few details..." layout wrapper to one column.
+  This is the real two-column grid parent, not the inner title block.
+*/
+
+#root .contact-details-real-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: clamp(1.2rem, 2.5vw, 2rem) !important;
+  align-items: start !important;
+  max-width: 1120px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#root .contact-details-real-grid > * {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  grid-column: 1 / -1 !important;
+}
+
+#root .contact-details-real-grid > :first-child {
+  max-width: 760px !important;
+}
+
+#root .contact-details-real-grid > :first-child h1,
+#root .contact-details-real-grid > :first-child h2,
+#root .contact-details-real-grid > :first-child h3 {
+  max-width: 760px !important;
+}
+
+#root .contact-details-real-grid > :nth-child(2) {
+  margin-top: 0 !important;
+}
+
+/*
+  Desktop guide/table block should breathe horizontally underneath the title.
+*/
+@media (min-width: 981px) {
+  #root .contact-details-real-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .contact-details-real-grid > :nth-child(2) {
+    max-width: 100% !important;
+  }
+}
+
+/*
+  Safety: neutralize common Tailwind two-column classes when attached to this wrapper.
+*/
+#root .contact-details-real-grid.lg\:grid-cols-2,
+#root .contact-details-real-grid.md\:grid-cols-2,
+#root .contact-details-real-grid[class*="grid-cols"] {
+  grid-template-columns: 1fr !important;
+}
+
+/* === BOSONSMART CONTACT REAL GRID STACK v1 END === */
+
+/* === BOSONSMART CONTACT REBUILT DETAILS SECTION v1 START === */
+
+/*
+  Rebuilt Contact details section:
+  Title is full-width on top.
+  Whole guide/table block sits underneath.
+*/
+
+#root .contact-details-rebuilt {
+  max-width: 1120px !important;
+}
+
+#root .contact-details-rebuilt > .section-header,
+#root .contact-details-rebuilt > div:first-child {
+  max-width: 760px !important;
+}
+
+#root .contact-details-rebuilt__card {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#root .contact-details-rebuilt__grid {
+  display: grid !important;
+  gap: 0.9rem !important;
+  grid-template-columns: minmax(320px, 0.95fr) repeat(2, minmax(220px, 1fr)) !important;
+  align-items: stretch !important;
+}
+
+#root .contact-details-rebuilt__grid .contact-photo-brief {
+  grid-row: span 3;
+  min-height: 100%;
+}
+
+#root .contact-details-rebuilt__grid > * {
+  min-width: 0 !important;
+}
+
+@media (max-width: 980px) {
+  #root .contact-details-rebuilt__grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .contact-details-rebuilt__grid .contact-photo-brief {
+    grid-row: auto;
+  }
+}
+
+/* === BOSONSMART CONTACT REBUILT DETAILS SECTION v1 END === */
+
+/* === BOSONSMART CONTACT BULLET STRETCH FIX v1 START === */
+
+/*
+  Contact details fix:
+  Keep the photo guide and six white detail boxes in separate grids.
+  This prevents the detail boxes from stretching vertically during scroll/render.
+*/
+
+#root .contact-details-rebuilt__grid {
+  display: grid !important;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(440px, 1.35fr) !important;
+  gap: 0.9rem !important;
+  align-items: start !important;
+}
+
+#root .contact-details-rebuilt__grid .contact-photo-brief {
+  grid-row: auto !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+#root .contact-details-rebuilt__bullets {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.9rem !important;
+  align-items: start !important;
+  align-content: start !important;
+}
+
+#root .contact-details-rebuilt__bullets > * {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+/*
+  Defensive rule: do not let card-like Bullet items stretch.
+*/
+#root .contact-details-rebuilt__bullets article,
+#root .contact-details-rebuilt__bullets div {
+  align-self: start !important;
+}
+
+@media (max-width: 980px) {
+  #root .contact-details-rebuilt__grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #root .contact-details-rebuilt__bullets {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === BOSONSMART CONTACT BULLET STRETCH FIX v1 END === */
+
+/* === BOSONSMART CONTACT FINAL WIDTH ALIGN v1 START === */
+
+/*
+  Final Contact alignment:
+  Make the "A few details..." card use the same visual width as
+  the "What happens after..." section and final CTA below.
+*/
+
+#root .contact-aligned-inner,
+#root .contact-details-hard,
+#root .contact-details-rebuilt,
+#root .contact-details-boundary-section,
+#root .contact-details-outer,
+#root .contact-details-rebuilt__card,
+#root .contact-details-hard__card {
+  width: 100% !important;
+  max-width: 72rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#root .contact-details-hard > .contact-aligned-inner,
+#root .contact-details-rebuilt > .contact-aligned-inner {
+  width: 100% !important;
+  max-width: 72rem !important;
+}
+
+/*
+  Title stays readable, but the section boundary remains full width.
+*/
+#root .contact-details-hard .section-header,
+#root .contact-details-rebuilt .section-header,
+#root .contact-details-hard > .contact-aligned-inner > :first-child,
+#root .contact-details-rebuilt > .contact-aligned-inner > :first-child {
+  max-width: 760px !important;
+}
+
+/*
+  The actual card should occupy the full aligned boundary.
+*/
+#root .contact-details-hard__card,
+#root .contact-details-rebuilt__card,
+#root .contact-details-boundary-card {
+  display: block !important;
+  width: 100% !important;
+  max-width: 72rem !important;
+}
+
+/*
+  Give the inside layout more horizontal breathing room.
+*/
+@media (min-width: 981px) {
+  #root .contact-details-hard__layout,
+  #root .contact-details-rebuilt__grid {
+    grid-template-columns: minmax(360px, 0.85fr) minmax(560px, 1.45fr) !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  #root .contact-details-hard__bullets,
+  #root .contact-details-rebuilt__bullets {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+}
+
+/*
+  If the section below uses max-w-6xl internally, match it visually too.
+*/
+#root .contact-next-hard .contact-aligned-inner {
+  width: 100% !important;
+  max-width: 72rem !important;
+}
+
+@media (max-width: 980px) {
+  #root .contact-details-hard__layout,
+  #root .contact-details-rebuilt__grid,
+  #root .contact-details-hard__bullets,
+  #root .contact-details-rebuilt__bullets {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === BOSONSMART CONTACT FINAL WIDTH ALIGN v1 END === */
