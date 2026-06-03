@@ -30,7 +30,7 @@ const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 const content = {
   en: {
     nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
-    brandSub: "Natural smart living for Hong Kong homes",
+    brandSub: "Smart appliance system consultant",
     buildEstimate: "Build Estimate",
     trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
     common: {
@@ -404,129 +404,137 @@ const content = {
           "Reset"
         ],
         steps: [
-          {
-            "time": "Before guests arrive",
-            "title": "Guest Preparation Mode",
-            "room": "Living / Dining",
-            "happens": "Living and dining lights brighten, air-con pre-cools the space, and curtains adjust for privacy and comfort.",
-            "helps": "The home feels ready before guests arrive, even in a compact flat.",
-            "setup": [
-              "Living / dining scene",
-              "AC pre-cool",
-              "Curtain privacy setting"
-            ]
-          },
-          {
-            "time": "Arrival",
-            "title": "Welcome Entry Scene",
-            "room": "Entry",
-            "happens": "Entry lighting turns on warmly, smart doorbell notifies the host, and the entrance area becomes brighter for guests.",
-            "helps": "Guests arrive into a welcoming, clear entrance instead of a dark doorway.",
-            "setup": [
-              "Entry lighting",
-              "Smart doorbell option",
-              "Host notification"
-            ]
-          },
-          {
-            "time": "Arrival",
-            "title": "Host Welcome Setup",
-            "room": "Living Room",
-            "happens": "Background music starts softly, living room lighting becomes inviting, and the main seating area is highlighted.",
-            "helps": "The main social area immediately feels prepared and comfortable.",
-            "setup": [
-              "Background music",
-              "Living room scene",
-              "Seating highlight"
-            ]
-          },
-          {
-            "time": "Dinner",
-            "title": "Dining Scene",
-            "room": "Dining / Kitchen",
-            "happens": "Dining lights focus on the table, kitchen task lights support serving, and selected appliances or ventilation remain active.",
-            "helps": "Serving and eating feel smoother while the dining area becomes the visual focus.",
-            "setup": [
-              "Dining table scene",
-              "Kitchen task lighting",
-              "Ventilation / appliance support"
-            ]
-          },
-          {
-            "time": "After dinner",
-            "title": "Conversation Mode",
-            "room": "Living Room",
-            "happens": "Lighting softens, music volume lowers, and the room shifts to a comfortable social setting.",
-            "helps": "The gathering naturally moves from dining to relaxed conversation.",
-            "setup": [
-              "Soft lighting",
-              "Audio volume control",
-              "Conversation scene"
-            ]
-          },
-          {
-            "time": "Entertainment",
-            "title": "Movie / Music Mode",
-            "room": "Living Room",
-            "happens": "Lights dim, curtains close, glare is reduced, TV or speaker system becomes ready, and the room changes into entertainment mode.",
-            "helps": "The home feels more premium and coordinated for movies, music, or casual entertainment.",
-            "setup": [
-              "Entertainment scene",
-              "Curtain close",
-              "TV / speaker setup",
-              "Glare control"
-            ]
-          },
-          {
-            "time": "During gathering",
-            "title": "Guest Bathroom Assist",
-            "room": "Bathroom",
-            "happens": "Bathroom lights and ventilation activate automatically, helping guests use the space without searching for switches.",
-            "helps": "Guests feel more comfortable and the host has fewer small things to manage.",
-            "setup": [
-              "Bathroom motion light",
-              "Ventilation timer"
-            ]
-          },
-          {
-            "time": "Late evening",
-            "title": "Late Gathering Comfort",
-            "room": "Whole Home",
-            "happens": "Lighting becomes softer, air-con or fan adjusts based on room occupancy, and noise level can be gently reduced.",
-            "helps": "The home stays comfortable as the gathering becomes quieter later in the evening.",
-            "setup": [
-              "Late gathering scene",
-              "Occupancy-based comfort",
-              "Fan / AC adjustment",
-              "Audio volume routine"
-            ]
-          },
-          {
-            "time": "Guests leaving",
-            "title": "Goodbye Scene",
-            "room": "Entry",
-            "happens": "Entry and shoe cabinet lights brighten, the door area becomes clear, and the host receives reminder cues for bags or belongings.",
-            "helps": "The leaving moment is smoother and guests are less likely to forget items.",
-            "setup": [
-              "Entry scene",
-              "Shoe cabinet lighting",
-              "Belongings reminder"
-            ]
-          },
-          {
-            "time": "After gathering",
-            "title": "Cleanup & Reset Mode",
-            "room": "Kitchen / Whole Home",
-            "happens": "Kitchen and dining lights brighten for cleanup, ventilation continues briefly, and the home returns to normal evening or sleep mode.",
-            "helps": "The host can reset the home without manually undoing every scene.",
-            "setup": [
-              "Cleanup lighting",
-              "Ventilation timer",
-              "Reset scene",
-              "Sleep preparation"
-            ]
-          }
+      {
+        time: "17:30",
+        room: "Whole Home",
+        title: "Pre-Guest Preparation",
+        body: "The home starts preparing before guests arrive: lights brighten gently, curtains adjust, and cooling or ventilation starts early.",
+        setup: [
+        "Whole-home preparation",
+        "Soft lighting",
+        "Curtain adjustment",
+        "AC / fan pre-cooling",
+        "Entrance readiness"
         ],
+      },
+      {
+        time: "18:00",
+        room: "Entrance",
+        title: "Welcome Scene",
+        body: "Entry lighting turns on, the door area becomes brighter, background music starts softly, and the living room is prepared.",
+        setup: [
+        "Entrance light",
+        "Welcome lighting",
+        "Soft background music",
+        "Living room ambience",
+        "Guest arrival mode"
+        ],
+      },
+      {
+        time: "18:20",
+        room: "Living Room",
+        title: "First Arrival Mood",
+        body: "Main lighting softens, sofa and side lighting turn warmer, and unnecessary task lighting is reduced.",
+        setup: [
+        "Warm ambient lights",
+        "Sofa-side lighting",
+        "Reduced task lights",
+        "Comfort setting",
+        "Privacy curtain scene"
+        ],
+      },
+      {
+        time: "18:45",
+        room: "Kitchen / Dining",
+        title: "Food & Table Setup",
+        body: "Kitchen task lighting brightens, dining light becomes warmer, ventilation increases, and music stays low.",
+        setup: [
+        "Kitchen task light",
+        "Dining pendant scene",
+        "Ventilation boost",
+        "Low-volume music",
+        "Food preparation mode"
+        ],
+      },
+      {
+        time: "19:15",
+        room: "Dining Area",
+        title: "Dinner Mode",
+        body: "Dining lights become the visual focus, curtains close for privacy, and cooling adjusts for more people in the room.",
+        setup: [
+        "Dining focus light",
+        "Curtain privacy",
+        "Comfort adjustment",
+        "Lower glare",
+        "Guest comfort mode"
+        ],
+      },
+      {
+        time: "20:00",
+        room: "Living Room",
+        title: "Social / Chat Mode",
+        body: "Lighting shifts from dining to living room, background music continues, and comfort settings hold steady.",
+        setup: [
+        "Living room scene",
+        "Playlist continuation",
+        "Fan / AC hold",
+        "Warm side lighting",
+        "Conversation mood"
+        ],
+      },
+      {
+        time: "20:45",
+        room: "Living Room",
+        title: "TV / Game Mode",
+        body: "Glare is reduced, curtains stay closed, TV lighting activates, and main ceiling lights dim.",
+        setup: [
+        "TV backlight",
+        "Glare reduction",
+        "Dimmed ceiling lights",
+        "Closed curtains",
+        "Game / movie mode"
+        ],
+      },
+      {
+        time: "21:30",
+        room: "Kitchen / Bathroom",
+        title: "Cleanup Support",
+        body: "Kitchen and bathroom lights brighten, ventilation increases, and dining or living scenes start returning to normal.",
+        setup: [
+        "Kitchen cleanup light",
+        "Bathroom light",
+        "Ventilation boost",
+        "Dining reset",
+        "Living room restore"
+        ],
+      },
+      {
+        time: "22:15",
+        room: "Entrance / Living Room",
+        title: "Guest Leaving Scene",
+        body: "Entrance light brightens, living room stays warm, and a quick whole-home check is prepared.",
+        setup: [
+        "Entrance brightness",
+        "Warm living light",
+        "Door area visibility",
+        "Quick all-zone check",
+        "Leaving support"
+        ],
+      },
+      {
+        time: "22:45",
+        room: "Whole Home",
+        title: "Reset Home Mode",
+        body: "Lights return to normal evening mode, curtains stay private, cooling returns to daily settings, and unnecessary devices turn off.",
+        setup: [
+        "Evening reset",
+        "Curtain privacy",
+        "AC / fan normal setting",
+        "All-off check",
+        "Manual fallback ready"
+        ],
+      }
+    ],
       },
       {
         id: "pet",
@@ -546,128 +554,137 @@ const content = {
         ],
         disclaimer: "Pet Mode is not a replacement for responsible pet care. Temperature, feeding, water, monitoring and device behaviour should be selected carefully and confirmed before installation.",
         steps: [
-          {
-            "time": "Owner leaves",
-            "title": "Pet Home-Alone Mode",
-            "room": "Entry / Whole Home",
-            "happens": "When the owner leaves, the home avoids becoming fully dark; selected lights stay softly on for pet comfort.",
-            "helps": "The pet’s environment remains more stable and less suddenly empty.",
-            "setup": [
-              "Pet-away routine",
-              "Selected soft lighting",
-              "Away trigger"
-            ]
-          },
-          {
-            "time": "Daytime",
-            "title": "Comfort Lighting",
-            "room": "Living / Pet Zone",
-            "happens": "Soft lighting stays active in the pet’s usual area during selected hours, especially in darker corners or windowless flats.",
-            "helps": "The pet’s familiar area remains visible and comfortable during the day.",
-            "setup": [
-              "Pet zone lighting",
-              "Timed scene",
-              "Low-level light"
-            ]
-          },
-          {
-            "time": "Warm hours",
-            "title": "Temperature Protection",
-            "room": "Living / Pet Zone",
-            "happens": "Air-con, fan, or ventilation follows a safe pet comfort routine, with alerts if the room becomes too hot or humid.",
-            "helps": "Temperature comfort can be managed more responsibly while the owner is away.",
-            "setup": [
-              "AC / fan routine",
-              "Temperature sensor",
-              "Humidity alert"
-            ]
-          },
-          {
-            "time": "Feeding time",
-            "title": "Food & Water Area Support",
-            "room": "Feeding Area",
-            "happens": "A small light near the food or water area turns on, and optional feeder or water fountain status can be monitored.",
-            "helps": "The feeding area remains easy to see and the owner can be aware of selected device status.",
-            "setup": [
-              "Feeding area light",
-              "Feeder option",
-              "Water fountain status option"
-            ]
-          },
-          {
-            "time": "Resting time",
-            "title": "Rest Zone Comfort",
-            "room": "Pet Bed / Sofa Area",
-            "happens": "The pet’s favourite resting area keeps a stable light, temperature, or fan setting to avoid sudden environmental changes.",
-            "helps": "The pet can rest in a more consistent environment.",
-            "setup": [
-              "Rest zone scene",
-              "Fan / AC setting",
-              "Curtain option"
-            ]
-          },
-          {
-            "time": "Noise / Doorbell",
-            "title": "Noise & Visitor Awareness",
-            "room": "Entry",
-            "happens": "Doorbell or unusual entry activity sends a notification to the owner instead of disturbing the pet unnecessarily.",
-            "helps": "The owner stays aware of entry activity without overreacting inside the home.",
-            "setup": [
-              "Video doorbell option",
-              "Entry notification",
-              "Camera option"
-            ]
-          },
-          {
-            "time": "Movement detected",
-            "title": "Pet Activity Check",
-            "room": "Living / Pet Zone",
-            "happens": "Motion sensor or camera confirms the pet is moving normally; owner can receive a simple activity update.",
-            "helps": "The owner gets reassurance without needing to constantly watch the camera.",
-            "setup": [
-              "Motion sensor",
-              "Camera option",
-              "Activity update"
-            ]
-          },
-          {
-            "time": "Owner check-in",
-            "title": "Remote Pet Check-In",
-            "room": "Phone App",
-            "happens": "Owner can check camera view, room temperature, lighting status, and selected device condition from the phone.",
-            "helps": "The owner can check key conditions remotely during the day.",
-            "setup": [
-              "Phone app",
-              "Camera view",
-              "Temperature status",
-              "Device status"
-            ]
-          },
-          {
-            "time": "Before owner returns",
-            "title": "Welcome Back Preparation",
-            "room": "Entry / Living",
-            "happens": "Before the owner arrives, entry and living room lights prepare, air-con adjusts, and the home shifts out of pet-alone mode.",
-            "helps": "The home returns gradually to normal living mode before the owner comes back.",
-            "setup": [
-              "Welcome scene",
-              "Lighting routine",
-              "AC adjustment"
-            ]
-          },
-          {
-            "time": "Owner returns",
-            "title": "Pet Mode Reset",
-            "room": "Whole Home",
-            "happens": "Pet mode ends, normal home mode resumes, and the owner can receive a short summary of temperature, activity, and alerts during the day.",
-            "helps": "The owner quickly understands whether anything important happened while away.",
-            "setup": [
-              "Mode reset",
-              "Daily summary option",
-              "Temperature / activity log"
-            ]
-          }
+      {
+        time: "07:30",
+        room: "Living / Pet Corner",
+        title: "Morning Pet Check",
+        body: "Pet corner light turns on gently, ventilation starts, and feeding or water reminders are prepared.",
+        setup: [
+        "Pet corner light",
+        "Ventilation start",
+        "Feeding reminder",
+        "Water reminder",
+        "Morning comfort check"
         ],
+      },
+      {
+        time: "08:15",
+        room: "Entrance",
+        title: "Leaving Home Check",
+        body: "Away Mode checks doors, windows, lights, cooling, camera view, and pet comfort before the owner leaves.",
+        setup: [
+        "Away Mode",
+        "Door / window check",
+        "Light check",
+        "Camera view",
+        "Pet comfort setting"
+        ],
+      },
+      {
+        time: "09:30",
+        room: "Living Room",
+        title: "Daylight Comfort",
+        body: "Curtains or blinds adjust for soft daylight, avoiding direct heat while keeping the room from feeling gloomy.",
+        setup: [
+        "Curtain daylight scene",
+        "Heat reduction",
+        "Soft daylight",
+        "Living room comfort",
+        "Pet visibility"
+        ],
+      },
+      {
+        time: "11:30",
+        room: "Pet Corner",
+        title: "Comfort Hold",
+        body: "Temperature, fan or AC, and ventilation stay within a comfortable range while the pet area remains calm.",
+        setup: [
+        "Temperature hold",
+        "Fan / AC control",
+        "Ventilation",
+        "Pet corner calm light",
+        "Comfort monitoring"
+        ],
+      },
+      {
+        time: "13:30",
+        room: "Living Room",
+        title: "Midday Remote Check",
+        body: "The owner can check camera, temperature, light and pet zone condition; abnormal status can trigger a reminder.",
+        setup: [
+        "Remote camera check",
+        "Temperature check",
+        "Light status",
+        "Pet zone check",
+        "Abnormal reminder"
+        ],
+      },
+      {
+        time: "15:30",
+        room: "Whole Home",
+        title: "Heat / Air Quality Support",
+        body: "If the room gets too warm or stuffy, fan, AC, ventilation or curtains adjust to protect comfort.",
+        setup: [
+        "Heat alert",
+        "AC / fan adjustment",
+        "Ventilation boost",
+        "Curtain glare reduction",
+        "Air quality support"
+        ],
+      },
+      {
+        time: "18:30",
+        room: "Entrance / Living Room",
+        title: "Owner Returning Scene",
+        body: "Entrance light turns on, the pet corner brightens, camera privacy can switch off, and the home returns from Away Mode.",
+        setup: [
+        "Welcome Mode",
+        "Entrance light",
+        "Pet corner light",
+        "Camera privacy",
+        "Away Mode off"
+        ],
+      },
+      {
+        time: "19:00",
+        room: "Pet Corner",
+        title: "Feeding & Play Time",
+        body: "Pet area light brightens, feeding reminder appears, and the living room becomes more active for play or interaction.",
+        setup: [
+        "Pet feeding reminder",
+        "Play lighting",
+        "Living room active scene",
+        "Comfort setting",
+        "Manual control"
+        ],
+      },
+      {
+        time: "21:30",
+        room: "Living Room",
+        title: "Calm Down Mode",
+        body: "Lights warm down, sound level lowers, curtains close, and the pet zone becomes calmer.",
+        setup: [
+        "Warm dim lighting",
+        "Lower sound level",
+        "Curtain privacy",
+        "Pet calm zone",
+        "Night preparation"
+        ],
+      },
+      {
+        time: "23:30",
+        room: "Pet Corner / Bedroom",
+        title: "Overnight Pet Safety",
+        body: "Pet corner keeps minimal night light, ventilation stays stable, and abnormal movement or temperature reminders remain available.",
+        setup: [
+        "Night light",
+        "Stable ventilation",
+        "Temperature reminder",
+        "Movement alert",
+        "Overnight safety"
+        ],
+      }
+    ],
       },
     ],
     solutionTasks: [
@@ -728,7 +745,7 @@ const content = {
   },
   zh: {
     nav: { home: "主頁", scenarios: "情境", solutions: "方案說明", estimate: "估算", contact: "聯絡" },
-    brandSub: "由生活情境開始的智能家居安裝",
+    brandSub: "智能系統顧問",
     buildEstimate: "建立估算",
     trust: ["包括安裝及設定", "上門了解後確認報價", "保留家人易用控制", "交付時說明帳戶權限"],
     common: {
@@ -1102,129 +1119,137 @@ const content = {
           "還原"
         ],
         steps: [
-          {
-            "time": "客人到達前",
-            "title": "客人準備模式",
-            "room": "客廳 / 飯廳",
-            "happens": "客廳和飯廳燈光變亮，冷氣預冷空間，窗簾因應私隱和舒適調整。",
-            "helps": "即使是小單位，客人到達前也感覺已準備好。",
-            "setup": [
-              "客飯廳情境",
-              "冷氣預冷",
-              "窗簾私隱設定"
-            ]
-          },
-          {
-            "time": "到達",
-            "title": "歡迎玄關情境",
-            "room": "玄關",
-            "happens": "玄關燈光溫暖亮起，智能門鐘通知主人，入口區域為客人變得更明亮。",
-            "helps": "客人進門時感覺清楚、舒服和受歡迎。",
-            "setup": [
-              "玄關燈光",
-              "智能門鐘選項",
-              "主人通知"
-            ]
-          },
-          {
-            "time": "到達",
-            "title": "主人迎客設定",
-            "room": "客廳",
-            "happens": "背景音樂柔和開始，客廳燈光變得親切，主要座位區被突出。",
-            "helps": "主要社交空間立即變得準備好和舒服。",
-            "setup": [
-              "背景音樂",
-              "客廳情境",
-              "座位區突出"
-            ]
-          },
-          {
-            "time": "晚餐",
-            "title": "用餐情境",
-            "room": "飯廳 / 廚房",
-            "happens": "飯廳燈光集中在餐桌，廚房工作燈支援上菜，指定電器或抽風保持運作。",
-            "helps": "上菜和用餐更順，餐桌亦成為視覺焦點。",
-            "setup": [
-              "餐桌情境",
-              "廚房工作燈",
-              "抽風 / 電器支援"
-            ]
-          },
-          {
-            "time": "飯後",
-            "title": "聊天模式",
-            "room": "客廳",
-            "happens": "燈光變柔和，音樂音量降低，房間轉為舒適社交設定。",
-            "helps": "聚會自然由用餐轉到輕鬆聊天。",
-            "setup": [
-              "柔和燈光",
-              "音量控制",
-              "聊天情境"
-            ]
-          },
-          {
-            "time": "娛樂",
-            "title": "電影 / 音樂模式",
-            "room": "客廳",
-            "happens": "燈光調暗，窗簾關上，減少反光，電視或喇叭系統準備好，房間轉為娛樂模式。",
-            "helps": "家中氣氛變得更有質感，適合電影、音樂或輕鬆娛樂。",
-            "setup": [
-              "娛樂情境",
-              "窗簾關閉",
-              "電視 / 喇叭設定",
-              "反光控制"
-            ]
-          },
-          {
-            "time": "聚會期間",
-            "title": "客用浴室輔助",
-            "room": "浴室",
-            "happens": "浴室燈和抽風自動啟動，幫助客人不用找開關。",
-            "helps": "客人使用更方便，主人也少一件小事要處理。",
-            "setup": [
-              "浴室感應燈",
-              "抽風時間制"
-            ]
-          },
-          {
-            "time": "夜深",
-            "title": "晚段聚會舒適",
-            "room": "全屋",
-            "happens": "燈光變柔和，冷氣或風扇按人數或佔用情況調整，音量可逐步降低。",
-            "helps": "聚會到較晚時間時，家中仍保持舒服並慢慢變安靜。",
-            "setup": [
-              "晚段聚會情境",
-              "按佔用調整舒適度",
-              "風扇 / 冷氣調整",
-              "音量流程"
-            ]
-          },
-          {
-            "time": "客人離開",
-            "title": "送客情境",
-            "room": "玄關",
-            "happens": "玄關和鞋櫃燈變亮，門口區域更清晰，主人收到袋或物品提醒。",
-            "helps": "送客過程更順，客人也較不容易遺留物品。",
-            "setup": [
-              "玄關情境",
-              "鞋櫃燈",
-              "物品提醒"
-            ]
-          },
-          {
-            "time": "聚會後",
-            "title": "清理與還原模式",
-            "room": "廚房 / 全屋",
-            "happens": "廚房和飯廳燈變亮方便清理，抽風短暫延續，家中回復正常夜間或睡眠模式。",
-            "helps": "主人不用逐個取消聚會設定，也可以更快開始清理和休息。",
-            "setup": [
-              "清理燈光",
-              "抽風時間制",
-              "還原情境",
-              "睡眠準備"
-            ]
-          }
+      {
+        time: "17:30",
+        room: "全屋",
+        title: "客人到之前準備",
+        body: "客人未到之前，屋企先進入準備狀態：燈光慢慢調亮、窗簾調整，冷氣或風扇預先啟動。",
+        setup: [
+        "全屋準備",
+        "柔和燈光",
+        "窗簾調整",
+        "冷氣 / 風扇預冷",
+        "玄關準備"
         ],
+      },
+      {
+        time: "18:00",
+        room: "玄關",
+        title: "Welcome Scene",
+        body: "門口位置變光，背景音樂輕輕開始，客廳氣氛準備好，讓客人一入屋就感覺舒服。",
+        setup: [
+        "玄關燈",
+        "迎賓燈光",
+        "輕背景音樂",
+        "客廳氣氛",
+        "客人到達模式"
+        ],
+      },
+      {
+        time: "18:20",
+        room: "客廳",
+        title: "初到場氣氛",
+        body: "主燈稍為柔和，梳化旁邊燈光變暖，太強或不需要的工作燈先降低。",
+        setup: [
+        "暖色氣氛燈",
+        "梳化旁燈光",
+        "減少工作燈",
+        "舒適設定",
+        "私隱窗簾"
+        ],
+      },
+      {
+        time: "18:45",
+        room: "廚房 / 飯廳",
+        title: "食物與餐枱準備",
+        body: "廚房工作燈調光，飯枱燈變暖，抽氣或通風加強，音樂維持低音量。",
+        setup: [
+        "廚房工作燈",
+        "飯枱燈光",
+        "通風加強",
+        "低音量音樂",
+        "備餐模式"
+        ],
+      },
+      {
+        time: "19:15",
+        room: "飯廳",
+        title: "Dinner Mode",
+        body: "飯枱成為視覺焦點，窗簾關上保留私隱，冷氣或風扇因應人數微調。",
+        setup: [
+        "飯枱重點燈",
+        "窗簾私隱",
+        "舒適度調整",
+        "減少眩光",
+        "聚餐舒適模式"
+        ],
+      },
+      {
+        time: "20:00",
+        room: "客廳",
+        title: "Social / Chat Mode",
+        body: "燈光焦點由飯廳轉回客廳，背景音樂繼續，舒適設定保持穩定。",
+        setup: [
+        "客廳情境",
+        "播放清單延續",
+        "風扇 / 冷氣維持",
+        "暖色側燈",
+        "聊天氣氛"
+        ],
+      },
+      {
+        time: "20:45",
+        room: "客廳",
+        title: "TV / Game Mode",
+        body: "減少電視反光，窗簾保持關上，TV 燈光情境啟動，主燈調暗。",
+        setup: [
+        "TV 背光",
+        "減少反光",
+        "主燈調暗",
+        "窗簾關上",
+        "遊戲 / 電影模式"
+        ],
+      },
+      {
+        time: "21:30",
+        room: "廚房 / 浴室",
+        title: "清理支援",
+        body: "廚房和浴室燈光變亮，通風加強，飯廳和客廳開始逐步回復日常狀態。",
+        setup: [
+        "廚房清理燈",
+        "浴室燈",
+        "通風加強",
+        "飯廳還原",
+        "客廳還原"
+        ],
+      },
+      {
+        time: "22:15",
+        room: "玄關 / 客廳",
+        title: "客人離開情境",
+        body: "玄關燈變光，客廳保持溫暖氣氛，同時準備快速全屋檢查。",
+        setup: [
+        "玄關亮度",
+        "客廳暖光",
+        "門口可視度",
+        "全屋快速檢查",
+        "離開支援"
+        ],
+      },
+      {
+        time: "22:45",
+        room: "全屋",
+        title: "屋企還原模式",
+        body: "燈光回到日常夜間模式，窗簾保持私隱，冷氣或風扇回復平日設定，不需要的設備關閉。",
+        setup: [
+        "夜間還原",
+        "窗簾私隱",
+        "冷氣 / 風扇日常設定",
+        "全關檢查",
+        "手動備用準備"
+        ],
+      }
+    ],
       },
       {
         id: "pet",
@@ -1244,128 +1269,137 @@ const content = {
         ],
         disclaimer: "寵物模式不能取代負責任的寵物照顧。任何涉及溫度、餵食、飲水、監察或設備自動化的設定，都應謹慎選擇並在安裝前確認。",
         steps: [
-          {
-            "time": "主人離開",
-            "title": "寵物獨自在家模式",
-            "room": "玄關 / 全屋",
-            "happens": "主人離家時，家中避免完全變暗；指定燈光柔和保留，讓寵物更舒服。",
-            "helps": "寵物身處的環境更穩定，不會突然變得漆黑和空蕩。",
-            "setup": [
-              "寵物離家流程",
-              "指定柔和燈光",
-              "離家觸發"
-            ]
-          },
-          {
-            "time": "日間",
-            "title": "舒適燈光",
-            "room": "客廳 / 寵物區",
-            "happens": "寵物常用區域在指定時間保持柔和燈光，特別適合較暗角落或無窗單位。",
-            "helps": "寵物熟悉的區域保持可見和舒適。",
-            "setup": [
-              "寵物區燈光",
-              "時間情境",
-              "低亮度燈"
-            ]
-          },
-          {
-            "time": "炎熱時段",
-            "title": "溫度保護",
-            "room": "客廳 / 寵物區",
-            "happens": "冷氣、風扇或抽風按安全舒適流程運作，當房間過熱或過濕時可發出提醒。",
-            "helps": "主人外出時也可以更負責任地管理溫度舒適。",
-            "setup": [
-              "冷氣 / 風扇流程",
-              "溫度感應",
-              "濕度提醒"
-            ]
-          },
-          {
-            "time": "餵食時間",
-            "title": "食物與飲水區支援",
-            "room": "餵食區",
-            "happens": "食物或飲水位置附近的小燈亮起，並可選擇監察餵食器或飲水機狀態。",
-            "helps": "餵食區保持清楚可見，主人亦可留意指定設備狀態。",
-            "setup": [
-              "餵食區燈光",
-              "餵食器選項",
-              "飲水機狀態選項"
-            ]
-          },
-          {
-            "time": "休息時間",
-            "title": "休息區舒適",
-            "room": "寵物床 / 梳化區",
-            "happens": "寵物喜歡的休息區保持穩定燈光、溫度或風扇設定，避免環境突然變化。",
-            "helps": "寵物可以在較穩定的環境休息。",
-            "setup": [
-              "休息區情境",
-              "風扇 / 冷氣設定",
-              "窗簾選項"
-            ]
-          },
-          {
-            "time": "噪音 / 門鐘",
-            "title": "聲音與訪客感知",
-            "room": "玄關",
-            "happens": "門鐘或異常入門活動改為通知主人，而不是不必要地打擾寵物。",
-            "helps": "主人可以知道門口發生甚麼，而家中反應不會過度複雜。",
-            "setup": [
-              "視像門鐘選項",
-              "玄關通知",
-              "鏡頭選項"
-            ]
-          },
-          {
-            "time": "偵測到活動",
-            "title": "寵物活動檢查",
-            "room": "客廳 / 寵物區",
-            "happens": "動作感應或鏡頭確認寵物正常活動，主人可收到簡單活動更新。",
-            "helps": "主人得到安心感，而不需要一直盯著鏡頭。",
-            "setup": [
-              "動作感應",
-              "鏡頭選項",
-              "活動更新"
-            ]
-          },
-          {
-            "time": "主人查看",
-            "title": "遠端寵物查看",
-            "room": "手機 App",
-            "happens": "主人可在手機查看鏡頭畫面、室溫、燈光狀態和指定設備狀況。",
-            "helps": "主人在日間可遠端確認重要狀況。",
-            "setup": [
-              "手機 App",
-              "鏡頭畫面",
-              "溫度狀態",
-              "設備狀態"
-            ]
-          },
-          {
-            "time": "主人回來前",
-            "title": "歡迎回家準備",
-            "room": "玄關 / 客廳",
-            "happens": "主人到家前，玄關和客廳燈光準備，冷氣調整，家中逐步離開寵物獨自在家模式。",
-            "helps": "主人回來前，家中慢慢回復正常生活模式。",
-            "setup": [
-              "Welcome 情境",
-              "燈光流程",
-              "冷氣調整"
-            ]
-          },
-          {
-            "time": "主人回家",
-            "title": "寵物模式還原",
-            "room": "全屋",
-            "happens": "寵物模式結束，正常家居模式恢復，主人可收到日間溫度、活動和提醒摘要。",
-            "helps": "主人可以快速知道外出期間是否有重要狀況。",
-            "setup": [
-              "模式還原",
-              "日間摘要選項",
-              "溫度 / 活動記錄"
-            ]
-          }
+      {
+        time: "07:30",
+        room: "客廳 / 寵物角",
+        title: "早上寵物檢查",
+        body: "寵物角燈光柔和亮起，通風開始，餵食和水位提醒準備好。",
+        setup: [
+        "寵物角燈光",
+        "通風開始",
+        "餵食提醒",
+        "水位提醒",
+        "早上舒適檢查"
         ],
+      },
+      {
+        time: "08:15",
+        room: "玄關",
+        title: "出門前檢查",
+        body: "Away Mode 檢查門窗、燈光、冷氣或風扇、鏡頭畫面和寵物舒適設定。",
+        setup: [
+        "Away Mode",
+        "門窗檢查",
+        "燈光檢查",
+        "鏡頭畫面",
+        "寵物舒適設定"
+        ],
+      },
+      {
+        time: "09:30",
+        room: "客廳",
+        title: "日光舒適模式",
+        body: "窗簾調整至柔和日光，避免直曬過熱，同時令屋企不會太暗。",
+        setup: [
+        "窗簾日光情境",
+        "減少熱力",
+        "柔和日光",
+        "客廳舒適",
+        "寵物可視度"
+        ],
+      },
+      {
+        time: "11:30",
+        room: "寵物角",
+        title: "舒適維持",
+        body: "溫度、風扇或冷氣和通風維持在舒適範圍，寵物角保持安靜。",
+        setup: [
+        "溫度維持",
+        "風扇 / 冷氣控制",
+        "通風",
+        "寵物角柔和燈",
+        "舒適監察"
+        ],
+      },
+      {
+        time: "13:30",
+        room: "客廳",
+        title: "中午遙距查看",
+        body: "主人可以遙距查看鏡頭、溫度、燈光和寵物區狀態；有異常時可提示。",
+        setup: [
+        "遙距鏡頭查看",
+        "溫度查看",
+        "燈光狀態",
+        "寵物區檢查",
+        "異常提醒"
+        ],
+      },
+      {
+        time: "15:30",
+        room: "全屋",
+        title: "熱力 / 空氣支援",
+        body: "如果室內太熱或太悶，風扇、冷氣、通風或窗簾會作出調整，維持舒適。",
+        setup: [
+        "熱力提醒",
+        "冷氣 / 風扇調整",
+        "通風加強",
+        "窗簾減少眩光",
+        "空氣質素支援"
+        ],
+      },
+      {
+        time: "18:30",
+        room: "玄關 / 客廳",
+        title: "主人回家情境",
+        body: "玄關燈亮起，寵物角變光，鏡頭私隱可關閉，屋企由 Away Mode 回到日常模式。",
+        setup: [
+        "Welcome Mode",
+        "玄關燈",
+        "寵物角燈光",
+        "鏡頭私隱",
+        "Away Mode 關閉"
+        ],
+      },
+      {
+        time: "19:00",
+        room: "寵物角",
+        title: "餵食與玩耍時間",
+        body: "寵物區燈光變亮，餵食提醒出現，客廳變得更適合互動或玩耍。",
+        setup: [
+        "餵食提醒",
+        "玩耍燈光",
+        "客廳活躍情境",
+        "舒適設定",
+        "手動控制"
+        ],
+      },
+      {
+        time: "21:30",
+        room: "客廳",
+        title: "冷靜下來模式",
+        body: "燈光逐步變暖變暗，聲量降低，窗簾關上，寵物區變得更安靜。",
+        setup: [
+        "暖色調暗",
+        "降低聲量",
+        "窗簾私隱",
+        "寵物安靜區",
+        "夜間準備"
+        ],
+      },
+      {
+        time: "23:30",
+        room: "寵物角 / 睡房",
+        title: "夜間寵物安全",
+        body: "寵物角保留最低限度夜燈，通風穩定，異常活動或溫度提示繼續保留。",
+        setup: [
+        "夜燈",
+        "穩定通風",
+        "溫度提示",
+        "活動提醒",
+        "夜間安全"
+        ],
+      }
+    ],
       },
     ],
     solutionTasks: [
@@ -1520,7 +1554,14 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 lg:px-6">
         <button onClick={() => go("home")} className="flex items-center gap-3 text-left">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-400/20"><Icon name="bolt" className="h-5 w-5" /></span>
+          <span className="flex h-10 w-10 items-center justify-center">
+            <img
+              src={`${import.meta.env.BASE_URL}bosonsmart-logo-mark.png`}
+              alt=""
+              aria-hidden="true"
+              className="h-10 w-10 object-contain"
+            />
+          </span>
           <span>
             <span className="block text-base font-semibold tracking-tight">BosonSmart</span>
             <span className="hidden text-xs text-slate-400 sm:block">{t.brandSub}</span>
@@ -1575,9 +1616,9 @@ function HomePage(props) {
 
   const copy = isZh
     ? {
-        heroEyebrow: "\u667a\u80fd\u5bb6\u5c45\u8a2d\u8a08\u5de5\u4f5c\u5ba4",
-        heroTitle: "\u7576\u4f60\u7684\u5bb6\uff0c\u958b\u59cb\u7406\u89e3\u4f60\u7684\u751f\u6d3b\u7bc0\u594f\u3002",
-        heroBody: "BosonSmart \u70ba\u9999\u6e2f\u5bb6\u5ead\u898f\u5283\u751f\u6d3b\u60c5\u5883\u3001\u8212\u9069\u63a7\u5236\u3001\u79c1\u96b1\u3001\u5b89\u5168\u548c\u624b\u52d5\u5099\u7528\u7cfb\u7d71\uff0c\u8b93\u667a\u80fd\u5bb6\u5c45\u4e0d\u518d\u662f\u96f6\u6563\u8a2d\u5099\u3002",
+        heroEyebrow: "BosonSmart 2026",
+        heroTitle: "智能啲，好住啲。",
+        heroBody: "BosonSmart 為屋企規劃生活情境、舒適控制、私隱、安全和手動備用系統，令智能家居唔再係一堆分散設備，而係一套真正配合日常的系統。",
         primary: "\u5efa\u7acb\u9810\u7b97\u65b9\u5411",
         secondary: "\u67e5\u770b\u751f\u6d3b\u60c5\u5883",
         philosophyTitle: "\u79d1\u6280\u61c9\u8a72\u8b93\u5bb6\u66f4\u8212\u9069\uff0c\u4e0d\u662f\u8b93\u751f\u6d3b\u66f4\u8907\u96dc\u3002",
