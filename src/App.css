@@ -7388,3 +7388,243 @@ html {
 }
 
 /* === BOSONSMART CONTACT FINAL WIDTH ALIGN v1 END === */
+
+/* === BOSONSMART SCENARIO VIDEO RENDERPAGE v1 START === */
+
+#root .scenario-onepage-slide {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+#root .scenario-onepage-video {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  background: #000 !important;
+}
+
+#root .scenario-onepage-shade {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.62), rgba(2, 6, 23, 0.24) 48%, rgba(2, 6, 23, 0.52)),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.48)) !important;
+}
+
+#root .scenario-onepage-glow {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+#root .scenario-onepage-copy {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+@media (max-width: 720px) {
+  #root .scenario-onepage-shade {
+    background:
+      linear-gradient(180deg, rgba(2, 6, 23, 0.42), rgba(2, 6, 23, 0.74)),
+      linear-gradient(90deg, rgba(2, 6, 23, 0.5), rgba(2, 6, 23, 0.2)) !important;
+  }
+}
+
+/* === BOSONSMART SCENARIO VIDEO RENDERPAGE v1 END === */
+
+/* === BOSONSMART SCENARIO COPY POSITION FIX v1 START === */
+
+/*
+  Fix after adding scenario video backgrounds:
+  The video patch made .scenario-onepage-copy position: relative,
+  which pushed the text into the top of the slide.
+  Restore it as an overlay block above the video/shade.
+*/
+
+#root .scenario-onepage-slide {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+
+#root .scenario-onepage-video {
+  z-index: 1 !important;
+}
+
+#root .scenario-onepage-shade {
+  z-index: 2 !important;
+}
+
+#root .scenario-onepage-glow {
+  z-index: 3 !important;
+}
+
+#root .scenario-onepage-copy {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: clamp(1.25rem, 5vw, 5rem) !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: clamp(4.5rem, 11vh, 7.5rem) !important;
+  width: min(48rem, calc(100vw - 2.5rem)) !important;
+  max-width: min(48rem, calc(100vw - 2.5rem)) !important;
+  transform: none !important;
+}
+
+#root .scenario-onepage-meta {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+#root .scenario-onepage-dots,
+#root .scenario-time-overlay,
+#root .floating-mode-selector,
+#root .scenario-mode-selector,
+#root .scenario-onepage-shell > nav {
+  position: relative;
+  z-index: 8;
+}
+
+/*
+  Mobile: keep text readable and away from top nav / mode chips.
+*/
+@media (max-width: 720px) {
+  #root .scenario-onepage-copy {
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: clamp(4.25rem, 10vh, 6rem) !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  #root .scenario-onepage-copy h1 {
+    max-width: 11ch;
+  }
+
+  #root .scenario-onepage-copy p {
+    max-width: 92%;
+  }
+}
+
+/* === BOSONSMART SCENARIO COPY POSITION FIX v1 END === */
+
+/* === BOSONSMART SCENARIO OVERLAY CONTROLS FIX v1 START === */
+
+/*
+  Fix after video-background integration:
+  The scenario controls were accidentally forced into normal document flow.
+  Restore mode selector + progress dots as overlays.
+*/
+
+#root .scenario-onepage-shell {
+  position: relative !important;
+  min-height: calc(100svh - var(--boson-real-header-h, 72px)) !important;
+  overflow: hidden !important;
+}
+
+/* Mode selector should float over the video, not push the slide down. */
+#root .floating-mode-selector {
+  position: fixed !important;
+  top: calc(var(--boson-real-header-h, 72px) + 1rem) !important;
+  left: clamp(0.85rem, 2vw, 1.25rem) !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 30 !important;
+}
+
+/* Progress dots should be a compact vertical rail on the right. */
+#root .scenario-onepage-dots {
+  position: fixed !important;
+  top: 50% !important;
+  right: clamp(0.65rem, 1.6vw, 1.3rem) !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: translateY(-50%) !important;
+  z-index: 30 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.38rem !important;
+
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  padding: 0.45rem 0.32rem !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+}
+
+/* Prevent the nav from becoming a huge horizontal pill. */
+#root .scenario-onepage-shell > nav.scenario-onepage-dots {
+  position: fixed !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* Keep slide directly under header, with no large spacer above. */
+#root .scenario-onepage-slide {
+  min-height: calc(100svh - var(--boson-real-header-h, 72px)) !important;
+}
+
+/* Keep scenario copy as overlay above video. */
+#root .scenario-onepage-copy {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: clamp(1.25rem, 5vw, 5rem) !important;
+  bottom: clamp(4.5rem, 11vh, 7.5rem) !important;
+  width: min(48rem, calc(100vw - 2.5rem)) !important;
+  max-width: min(48rem, calc(100vw - 2.5rem)) !important;
+}
+
+@media (max-width: 720px) {
+  #root .floating-mode-selector {
+    top: calc(var(--boson-real-header-h, 76px) + 0.75rem) !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+
+  #root .floating-mode-selector::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #root .scenario-onepage-dots {
+    right: 0.45rem !important;
+    padding: 0.38rem 0.26rem !important;
+    gap: 0.32rem !important;
+  }
+
+  #root .scenario-onepage-copy {
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: clamp(4.25rem, 10vh, 6rem) !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
+/* === BOSONSMART SCENARIO OVERLAY CONTROLS FIX v1 END === */

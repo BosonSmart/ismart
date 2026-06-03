@@ -1921,6 +1921,30 @@ function ScenariosPage(props) {
   );
 }
 
+
+function scenarioVideo(modeId, stepIndex) {
+  const videos = {
+    night: [
+      "scenario-videos/night/night-01.mp4",
+      "scenario-videos/night/night-02.mp4",
+      "scenario-videos/night/night-03.mp4",
+      "scenario-videos/night/night-04.mp4",
+      "scenario-videos/night/night-05.mp4",
+      "scenario-videos/night/night-06.mp4",
+      "scenario-videos/night/night-07.mp4",
+      "scenario-videos/night/night-08.mp4",
+      "scenario-videos/night/night-09.mp4",
+      "scenario-videos/night/night-10.mp4",
+    ],
+  };
+
+  const list = videos[modeId];
+  if (!list) return "";
+
+  const file = list[stepIndex];
+  return file ? `${import.meta.env.BASE_URL}${file}` : "";
+}
+
 function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeStep, setActiveStep, go }) {
   const wheelLockRef = useRef(false);
   const touchStartYRef = useRef(0);
@@ -2149,12 +2173,28 @@ function FullPageScenario({ t, modes, activeMode, setActiveMode, mode, activeSte
       );
     }
 
+    const sceneVideo = scenarioVideo(sceneMode.id, sceneStepIndex);
+
     return (
       <section
         key={sceneMode.id + "-" + sceneStep.title + "-" + sceneStepIndex + "-" + className}
         className={"scenario-onepage-slide " + className}
         style={{ backgroundImage: sceneBackground(sceneMode.id, sceneStepIndex) }}
       >
+        {sceneVideo && (
+          <video
+            key={`${sceneMode.id}-${sceneStepIndex}-video`}
+            className="scenario-onepage-video"
+            src={sceneVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          />
+        )}
+
         <div className="scenario-onepage-shade" />
         <div className="scenario-onepage-glow" />
 
