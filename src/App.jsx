@@ -29,7 +29,7 @@ const formatHKD = (value) => `HK$${value.toLocaleString("en-HK")}`;
 
 const content = {
   en: {
-    nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", estimate: "Estimate", contact: "Contact" },
+    nav: { home: "Home", scenarios: "Scenarios", solutions: "Solutions", services: "Services", estimate: "Estimate", contact: "Contact" },
     brandSub: "Smart appliance system consultant",
     buildEstimate: "Build Estimate",
     trust: ["Installed and configured", "Final quote after home check", "Family-friendly controls", "Account handover explained"],
@@ -744,7 +744,7 @@ const content = {
     ],
   },
   zh: {
-    nav: { home: "主頁", scenarios: "情境", solutions: "方案說明", estimate: "估算", contact: "聯絡" },
+    nav: { home: "主頁", scenarios: "情境", solutions: "方案說明", services: "服務", estimate: "估算", contact: "聯絡" },
     brandSub: "智能系統顧問",
     buildEstimate: "建立估算",
     trust: ["包括安裝及設定", "上門了解後確認報價", "保留家人易用控制", "交付時說明帳戶權限"],
@@ -1460,7 +1460,7 @@ const content = {
   },
 };
 
-const pageIds = ["home", "scenarios", "solutions", "estimate", "contact"];
+const pageIds = ["home", "scenarios", "solutions", "services", "estimate", "contact"];
 function getPage() {
   const hash = window.location.hash.replace("#", "").split("?")[0].split("/")[0];
   return pageIds.includes(hash) ? hash : "home";
@@ -1525,6 +1525,7 @@ export default function App() {
         {page === "home" && <HomePage {...shared} />}
         {page === "scenarios" && <ScenariosPage {...shared} />}
         {page === "solutions" && <SolutionsPage {...shared} />}
+        {page === "services" && <ServicesPage {...shared} />}
         {page === "estimate" && <EstimatePage {...shared} />}
         {page === "contact" && <ContactPage {...shared} />}
       </main>
@@ -1546,6 +1547,7 @@ function Header({ t, language, setLanguage, page, go, menuOpen, setMenuOpen }) {
     ["home", t.nav.home],
     ["scenarios", t.nav.scenarios],
     ["solutions", t.nav.solutions],
+    ["services", t.nav.services],
     ["estimate", t.nav.estimate],
     ["contact", t.nav.contact],
   ];
@@ -3041,6 +3043,344 @@ function SolutionsPage(props) {
         </button>
       </section>
     </main>
+  );
+}
+
+
+function ServicesPage({ language, go }) {
+  const isZh = language === "zh";
+
+  const copy = isZh
+    ? {
+        eyebrow: "服務範圍",
+        title: "由生活情境到系統設定，幫屋企建立真正啱用的智能生活。",
+        body: "BosonSmart 的核心服務不是單純賣設備或做工程，而是幫你理解需要、規劃系統、選擇合適產品、設定自動化情境，並在需要時協調安裝伙伴完成現場工作。",
+        primary: "建立預算方向",
+        secondary: "聯絡我們",
+        providesTitle: "BosonSmart 可以提供甚麼？",
+        providesBody: "我們由生活流程開始，將燈光、窗簾、舒適控制、私隱、安全、感應器、App、Hub 和手動備用控制整理成一套可理解、可使用、可分階段實行的系統。",
+        provides: [
+          "智能家居諮詢",
+          "智能生活系統設計",
+          "設備選型及兼容性檢查",
+          "自動化情境規劃",
+          "App / Hub / 裝置設定",
+          "安裝協調",
+          "可選配合作伙伴現場安裝",
+          "測試、交付及使用說明",
+          "售後支援及調整",
+        ],
+        packageEyebrow: "服務套餐",
+        packageTitle: "按不同階段選擇合適服務。",
+        packages: [
+          {
+            title: "Smart Living Consultation",
+            tag: "起步諮詢",
+            body: "了解生活習慣、預算方向、單位狀態和智能家居目標，整理第一步升級方向。",
+            includes: ["需求討論", "初步方向", "預算概念", "下一步建議"],
+          },
+          {
+            title: "Smart Living Design Proposal",
+            tag: "設計建議書",
+            body: "上門或根據圖則了解空間，提供房間分區規劃、產品方向、自動化清單、預算估算及安裝備註。",
+            includes: ["房間規劃", "系統方向", "情境清單", "安裝備註"],
+          },
+          {
+            title: "Smart Living Setup Package",
+            tag: "設定套裝",
+            body: "協助 App、Hub、裝置連接、自動化情境設定、測試及交付。實體安裝不預設包括。",
+            includes: ["App 設定", "Hub 設定", "情境設定", "測試交付"],
+          },
+          {
+            title: "Optional Partner Installation",
+            tag: "可選安裝",
+            body: "如需要現場工程，可透過合作承辦商、電工或木工另行安排報價及施工。",
+            includes: ["智能開關", "窗簾摩打", "智能門鎖", "感應器 / 控制面板"],
+          },
+          {
+            title: "Full Smart Living Package",
+            tag: "完整方案",
+            body: "由諮詢、設計、產品規劃、安裝協調、系統設定、測試至交付，整合成完整流程。",
+            includes: ["諮詢", "設計", "協調", "設定交付"],
+          },
+          {
+            title: "Aftercare / Maintenance",
+            tag: "售後支援",
+            body: "協助疑難排解、自動化調整、App / Hub 支援、韌體更新、新裝置整合及年度系統檢查。",
+            includes: ["疑難排解", "情境調整", "新設備整合", "系統健康檢查"],
+          },
+        ],
+        processEyebrow: "服務流程",
+        processTitle: "由查詢到交付，過程清楚分階段。",
+        process: [
+          "查詢 / 初步諮詢",
+          "現場或圖則了解",
+          "智能生活規劃",
+          "產品及系統建議",
+          "方案及報價",
+          "可選安裝協調",
+          "App / Hub / 自動化設定",
+          "測試、交付及售後支援",
+        ],
+        installTitle: "實體安裝不是預設核心服務，但可以另行安排。",
+        installBody: "BosonSmart 的核心是智能生活諮詢、系統設計、產品選型、自動化設定和項目協調。如涉及拉線、智能開關、窗簾摩打、門鎖、燈具、木工或其他現場工程，可按需要透過合作承辦商、電工或木工另行報價及安排。",
+        rolesEyebrow: "團隊角色",
+        rolesTitle: "以設計、施工和產品系統三個角度合作。",
+        roles: [
+          { name: "你", title: "智能生活設計及業務統籌", body: "負責品牌定位、客戶旅程、智能生活方案方向、網站及市場溝通。" },
+          { name: "Bao", title: "室內設計及施工協調顧問", body: "提供室內設計、現場條件、施工協調、電工及木工配合建議。" },
+          { name: "Ming", title: "智能系統及產品顧問", body: "負責產品選型、系統限制、兼容性、Hub / App / 自動化邏輯建議。" },
+        ],
+        pricingEyebrow: "收費邏輯",
+        pricingTitle: "以混合報價模式，清楚分開服務、產品和安裝。",
+        pricing: [
+          "諮詢費",
+          "設計費",
+          "設定費",
+          "產品成本或產品處理費",
+          "可選安裝費",
+          "售後 / 維護費",
+        ],
+        faqEyebrow: "FAQ",
+        faqTitle: "常見問題",
+        faqs: [
+          { q: "你們會提供安裝嗎？", a: "BosonSmart 的核心服務不是預設包安裝。如需要現場安裝，可透過合作承辦商、電工或木工另行安排。" },
+          { q: "可以用我自己的裝修師傅嗎？", a: "可以。我們可以提供系統和安裝注意事項，讓你的師傅按現場條件配合。" },
+          { q: "一定要裝修才可以做智能家居嗎？", a: "不一定。現有單位可以先做較低侵入式方案；裝修中或準備裝修的單位則有更多預留和整合空間。" },
+          { q: "支援哪些智能家居品牌？", a: "我們會按 Apple Home、Google、Alexa、Matter、Zigbee、Wi-Fi、Hub 需要、穩定性和手動備用方式作建議。" },
+          { q: "如果 Wi-Fi 不穩定怎麼辦？", a: "我們會先了解網絡狀態，必要時建議改善 Wi-Fi / Mesh / Hub 位置，再規劃自動化。" },
+          { q: "售後是否包括？", a: "基本交付會包括測試和使用說明；長期調整、故障排查或新增裝置可作售後支援或維護方案。" },
+          { q: "只做住宅單位嗎？", a: "現階段重點是香港住宅單位，之後會逐步延伸至其他空間類型。" },
+          { q: "之後會做學校、長者中心或商業空間嗎？", a: "這些是長期發展方向。現階段會先集中做好住宅智能生活方案。" },
+        ],
+        roadmapEyebrow: "長遠發展",
+        roadmapTitle: "先專注住宅，再逐步延伸到不同生活和公共空間。",
+        roadmap: [
+          "Phase 1：住宅單位",
+          "Phase 2：學校 / 大學 / 中小學",
+          "Phase 3：零售及辦公室",
+          "Phase 4：長者護理中心",
+          "Phase 5：新建設施前期規劃",
+          "Phase 6：戶外、公共及農業相關系統",
+        ],
+        finalTitle: "想知道你的屋企可以怎樣開始？",
+        finalBody: "先建立一個智能生活預算方向，或者直接聯絡我們討論你的單位情況。",
+      }
+    : {
+        eyebrow: "Services",
+        title: "Smart appliance system consultancy for Hong Kong homes.",
+        body: "BosonSmart is not just a device seller or installation team. We help you understand your needs, design the system, choose suitable products, configure automation scenes, and coordinate installation partners when site works are needed.",
+        primary: "Build estimate",
+        secondary: "Contact us",
+        providesTitle: "What BosonSmart provides",
+        providesBody: "We start from daily routines, then connect lighting, curtains, comfort control, privacy, safety, sensors, apps, hubs and manual fallback into a system that can be understood, used and implemented in phases.",
+        provides: [
+          "Smart home consultation",
+          "Smart living system design",
+          "Device selection and compatibility checking",
+          "Automation scene planning",
+          "App / hub / device setup",
+          "Installation coordination",
+          "Optional physical installation through partners",
+          "Testing, handover and user explanation",
+          "Aftercare and support",
+        ],
+        packageEyebrow: "Service packages",
+        packageTitle: "Choose the right level for your current stage.",
+        packages: [
+          {
+            title: "Smart Living Consultation",
+            tag: "Entry consultation",
+            body: "Understand lifestyle needs, budget direction, apartment condition and smart-home goals before deciding what to buy.",
+            includes: ["Needs review", "Upgrade direction", "Budget logic", "Next-step advice"],
+          },
+          {
+            title: "Smart Living Design Proposal",
+            tag: "Design proposal",
+            body: "Site or plan review with room-by-room smart-living direction, product logic, automation scene list, budget estimate and installation notes.",
+            includes: ["Room planning", "System direction", "Scene list", "Installation notes"],
+          },
+          {
+            title: "Smart Living Setup Package",
+            tag: "Setup package",
+            body: "App, hub and device setup, automation scene configuration, testing and handover. Physical installation is excluded unless arranged separately.",
+            includes: ["App setup", "Hub setup", "Scene setup", "Testing handover"],
+          },
+          {
+            title: "Optional Partner Installation",
+            tag: "Optional site works",
+            body: "Physical installation can be arranged through contractor, electrician or carpenter partners as a separately quoted package.",
+            includes: ["Smart switches", "Curtain motors", "Smart locks", "Sensors / panels"],
+          },
+          {
+            title: "Full Smart Living Package",
+            tag: "Full package",
+            body: "Consultation, design, product planning, installation coordination, setup, testing and handover in one managed process.",
+            includes: ["Consultation", "Design", "Coordination", "Setup handover"],
+          },
+          {
+            title: "Aftercare / Maintenance",
+            tag: "Support",
+            body: "Troubleshooting, automation adjustment, app / hub support, firmware update support, new device integration and annual system checks.",
+            includes: ["Troubleshooting", "Scene adjustment", "New device integration", "Health check"],
+          },
+        ],
+        processEyebrow: "Process",
+        processTitle: "A clear step-by-step workflow from enquiry to handover.",
+        process: [
+          "Enquiry / consultation",
+          "Site survey or plan review",
+          "Smart-living planning",
+          "Product and system recommendation",
+          "Proposal and quotation",
+          "Optional installation coordination",
+          "App / hub / automation setup",
+          "Testing, handover and aftercare",
+        ],
+        installTitle: "Physical installation is optional, not included by default.",
+        installBody: "BosonSmart’s core service is consultancy, system design, device selection, automation setup and coordination. Electrical works, carpentry, curtain motors, smart locks, lighting or other site works can be quoted separately through contractor partners when needed.",
+        rolesEyebrow: "Team roles",
+        rolesTitle: "Design, site coordination and product-system thinking work together.",
+        roles: [
+          { name: "You", title: "Smart Living Design & Business Coordination", body: "Brand positioning, client journey, smart-living direction, website and market communication." },
+          { name: "Bao", title: "Interior Design & Construction Coordination Advisor", body: "Interior design, site conditions, construction coordination, electrician and carpenter coordination advice." },
+          { name: "Ming", title: "Smart System & Product Advisor", body: "Product selection, system limitations, compatibility, hub / app / automation logic advice." },
+        ],
+        pricingEyebrow: "Pricing logic",
+        pricingTitle: "Hybrid quotation: service, product and installation are separated clearly.",
+        pricing: [
+          "Consultation fee",
+          "Design fee",
+          "Setup fee",
+          "Product cost or handling fee",
+          "Optional installation fee",
+          "Aftercare / maintenance fee",
+        ],
+        faqEyebrow: "FAQ",
+        faqTitle: "Common questions",
+        faqs: [
+          { q: "Do you provide installation?", a: "Installation is not included by default. When site works are needed, they can be arranged through contractor, electrician or carpenter partners." },
+          { q: "Can I use my own contractor?", a: "Yes. We can provide system planning and installation notes so your own contractor can coordinate with the smart-living direction." },
+          { q: "Do I need renovation first?", a: "No. Existing apartments can start with lower-invasive setups. Renovation-stage homes allow more integrated planning." },
+          { q: "What smart-home brands do you support?", a: "We consider Apple Home, Google, Alexa, Matter, Zigbee, Wi-Fi, hub requirements, stability and manual fallback needs." },
+          { q: "What if my Wi-Fi is unstable?", a: "We review network conditions first. Mesh Wi-Fi, hub position or network improvement may be recommended before automation." },
+          { q: "Is aftercare included?", a: "Testing and handover are included in setup. Long-term adjustment, troubleshooting or new device integration can be handled as aftercare support." },
+          { q: "Do you only support apartments?", a: "The current focus is Hong Kong residential apartments. Other spaces are part of the longer-term roadmap." },
+          { q: "Will you support schools or elderly care later?", a: "Yes, they are long-term development directions. For now, the priority is doing residential smart-living well." },
+        ],
+        roadmapEyebrow: "Roadmap",
+        roadmapTitle: "Residential first, then wider living and public-space systems.",
+        roadmap: [
+          "Phase 1: Domestic apartments",
+          "Phase 2: Schools / universities / primary and secondary schools",
+          "Phase 3: Retail and office",
+          "Phase 4: Elderly care centres",
+          "Phase 5: New-build facility planning",
+          "Phase 6: Outdoor, public and agriculture-adjacent systems",
+        ],
+        finalTitle: "Want to understand where your apartment should start?",
+        finalBody: "Build a smart-living estimate direction, or contact us to discuss your home condition first.",
+      };
+
+  return (
+    <section className="services-page">
+      <section className="services-hero">
+        <div className="services-hero__inner">
+          <p className="services-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p>{copy.body}</p>
+          <div className="services-actions">
+            <button type="button" className="services-btn services-btn-primary" onClick={() => go && go("estimate")}>
+              {copy.primary}
+              <Icon name="arrowRight" className="h-4 w-4" />
+            </button>
+            <button type="button" className="services-btn services-btn-secondary" onClick={() => go && go("contact")}>
+              {copy.secondary}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="services-section services-split">
+        <div>
+          <p className="services-eyebrow">{isZh ? "服務內容" : "Scope"}</p>
+          <h2>{copy.providesTitle}</h2>
+          <p>{copy.providesBody}</p>
+        </div>
+        <div className="services-chip-grid">
+          {copy.provides.map((item) => (
+            <article key={item} className="services-chip-card">
+              <span className="services-checkmark">✓</span>
+              <span>{item}</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="services-section">
+        <p className="services-eyebrow">{copy.packageEyebrow}</p>
+        <h2>{copy.packageTitle}</h2>
+        <div className="services-package-grid">
+          {copy.packages.map((pkg) => (
+            <article key={pkg.title} className="services-package-card">
+              <span>{pkg.tag}</span>
+              <h3>{pkg.title}</h3>
+              <p>{pkg.body}</p>
+              <div>
+                {pkg.includes.map((item) => (
+                  <em key={item}>{item}</em>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="services-section services-process">
+        <div>
+          <p className="services-eyebrow">{copy.processEyebrow}</p>
+          <h2>{copy.processTitle}</h2>
+        </div>
+        <div className="services-process-grid">
+          {copy.process.map((step, index) => (
+            <article key={step} className="services-process-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="services-section services-install-note">
+        <div>
+          <p className="services-eyebrow">{isZh ? "安裝說明" : "Installation note"}</p>
+          <h2>{copy.installTitle}</h2>
+        </div>
+        <p>{copy.installBody}</p>
+      </section>
+<section className="services-section">
+        <p className="services-eyebrow">{copy.faqEyebrow}</p>
+        <h2>{copy.faqTitle}</h2>
+        <div className="services-faq-grid">
+          {copy.faqs.map((faq) => (
+            <article key={faq.q} className="services-faq-card">
+              <h3>{faq.q}</h3>
+              <p>{faq.a}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+<section className="services-final">
+        <div>
+          <h2>{copy.finalTitle}</h2>
+          <p>{copy.finalBody}</p>
+        </div>
+        <button type="button" className="services-btn services-btn-primary" onClick={() => go && go("estimate")}>
+          {copy.primary}
+          <Icon name="arrowRight" className="h-4 w-4" />
+        </button>
+      </section>
+    </section>
   );
 }
 
